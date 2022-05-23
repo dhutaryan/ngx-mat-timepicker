@@ -23,6 +23,9 @@
       "dom"
     ]
   },
+  "paths": {
+    "mat-timepicker": ["projects/mat-timepicker/src/public-api.ts"]
+  },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
