@@ -1,3 +1,11 @@
 <mat-toolbar class="mat-elevation-z4" color="primary">
   <span>NgxMatTimepicker</span>
 </mat-toolbar>
+
+<main>
+  <mat-form-field appearance="fill">
+    <input type="text" matInput />
+    <mat-timepicker-toggle matSuffix [for]="timepicker"></mat-timepicker-toggle>
+    <mat-timepicker #timepicker></mat-timepicker>
+  </mat-form-field>
+</main>

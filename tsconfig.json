@@ -10,6 +10,7 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "strictPropertyInitialization": false,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -21,10 +22,10 @@
     "lib": [
       "es2020",
       "dom"
-    ]
-  },
-  "paths": {
-    "mat-timepicker": ["projects/mat-timepicker/src/public-api.ts"]
+    ],
+    "paths": {
+      "mat-timepicker": ["projects/mat-timepicker/src/public-api.ts"]
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

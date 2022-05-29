@@ -120,7 +120,7 @@
       },
       "root": "projects/mat-timepicker",
       "sourceRoot": "projects/mat-timepicker/src",
-      "prefix": "lib",
+      "prefix": "mat",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
