@@ -1,1 +1,34 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "sass:map";
+@use "@angular/material" as mat;
+
+@use "./styles/theme";
+
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.core-theme(theme.$ngx-mat-timepicker-theme);
+@include mat.toolbar-theme(theme.$ngx-mat-timepicker-theme);
+@include mat.form-field-theme(theme.$ngx-mat-timepicker-theme);
+@include mat.input-theme(theme.$ngx-mat-timepicker-theme);
+@include mat.button-theme(theme.$ngx-mat-timepicker-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
