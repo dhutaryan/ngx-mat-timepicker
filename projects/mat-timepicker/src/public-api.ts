@@ -5,3 +5,5 @@
 export * from './lib/timepicker.module';
 export * from './lib/timepicker';
 export * from './lib/timepicker-toggle';
+export * from './lib/timepicker-content';
+export * from './lib/timepicker-input';

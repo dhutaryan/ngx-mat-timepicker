@@ -1,0 +1,23 @@
+@use "sass:color";
+@use "sass:map";
+@use "@angular/material" as mat;
+
+@mixin color($config-or-theme) {
+  $config: mat.get-color-config($config-or-theme);
+  $foreground: map.get($config, foreground);
+  $background: map.get($config, background);
+
+  .mat-timepicker-content {
+    @include mat.elevation(4);
+    background-color: mat.get-color-from-palette($background, card);
+    color: mat.get-color-from-palette($foreground, text);
+  }
+}
+
+@mixin theme($theme-or-color-config) {
+  $color: mat.get-color-config($theme-or-color-config);
+
+  @if $color != null {
+    @include color($color);
+  }
+}

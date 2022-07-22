@@ -3,5 +3,6 @@
   "dest": "../../dist/mat-timepicker",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": ["_index.scss", "_timepicker-theme.scss"]
 }
