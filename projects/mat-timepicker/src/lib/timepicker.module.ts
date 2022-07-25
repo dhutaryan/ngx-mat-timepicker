@@ -5,6 +5,7 @@ import { PortalModule } from '@angular/cdk/portal';
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
 import { MatButtonModule } from '@angular/material/button';
 
+import { MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER } from './timepicker-scroll-strategy';
 import {
   MatTimepickerToggle,
   MatTimepickerToggleIcon,
@@ -12,7 +13,8 @@ import {
 import { MatTimepicker } from './timepicker';
 import { MatTimepickerContent } from './timepicker-content';
 import { MatTimepickerInput } from './timepicker-input';
-import { MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER } from './timepicker-scroll-strategy';
+import { MatTimeInputsComponent } from './time-inputs';
+import { MatClockDialComponent } from './clock-dial';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER } from './timepicker-sc
     MatTimepicker,
     MatTimepickerContent,
     MatTimepickerInput,
+    MatTimeInputsComponent,
+    MatClockDialComponent,
   ],
   imports: [CommonModule, MatButtonModule, OverlayModule, PortalModule],
   exports: [

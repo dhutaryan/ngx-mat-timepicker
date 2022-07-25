@@ -10,7 +10,7 @@ import { mixinColor } from '@angular/material/core';
 import { Subject } from 'rxjs';
 
 import { matTimepickerAnimations } from './timepicker-animations';
-import { MatTimepickerBase } from './timepicker-base';
+import { MatTimepickerBase, TimepickerMode } from './timepicker-base';
 
 // Boilerplate for applying mixins to MatTimepickerContent.
 const _MatTimepickerContentBase = mixinColor(
@@ -42,6 +42,9 @@ export class MatTimepickerContent
 {
   /** Reference to the timepicker that created the overlay. */
   timepicker: MatTimepickerBase;
+
+  /** Display mode. */
+  mode: TimepickerMode;
 
   /** Current state of the animation. */
   _animationState: 'enter-dropdown' | 'enter-dialog' | 'void';

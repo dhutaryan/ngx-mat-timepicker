@@ -1,3 +1,10 @@
 <div class="mat-timepicker-content-container" cdkTrapFocus>
-  timepicker-content works!
+  <ng-container [ngSwitch]="mode">
+    <ng-template ngSwitchCase="input">
+      <mat-time-inputs></mat-time-inputs>
+    </ng-template>
+    <ng-template ngSwitchCase="dial">
+      <mat-clock-dial></mat-clock-dial>
+    </ng-template>
+  </ng-container>
 </div>

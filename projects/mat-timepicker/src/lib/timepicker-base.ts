@@ -45,6 +45,9 @@ export type TimepickerDropdownPositionX = 'start' | 'end';
 /** Possible positions for the timepicker dropdown along the Y axis. */
 export type TimepickerDropdownPositionY = 'above' | 'below';
 
+/** Possible options for the timepicker to display. */
+export type TimepickerMode = 'input' | 'dial';
+
 /** Used to generate a unique ID for each timepicker instance. */
 let timepickerUid = 0;
 
@@ -98,6 +101,16 @@ export abstract class MatTimepickerBase implements OnChanges {
     this._color = value;
   }
   private _color: ThemePalette;
+
+  /** Timepicker display mode. */
+  @Input()
+  get mode(): TimepickerMode {
+    return this._mode;
+  }
+  set mode(value: TimepickerMode) {
+    this._mode = value || 'input';
+  }
+  private _mode: TimepickerMode = 'input';
 
   /** Preferred position of the timepicker in the X axis. */
   @Input()
@@ -215,6 +228,7 @@ export abstract class MatTimepickerBase implements OnChanges {
   protected _forwardContentValues(instance: MatTimepickerContent): void {
     instance.timepicker = this;
     instance.color = this.color;
+    instance.mode = this.mode;
   }
 
   /** Opens the overlay with the timepicker. */
