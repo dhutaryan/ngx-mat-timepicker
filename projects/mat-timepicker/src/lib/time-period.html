@@ -1,0 +1,17 @@
+<div
+  class="mat-time-period-item"
+  matRipple
+  [class.mat-time-period-item-active]="period === 'am'"
+  (click)="setPeriod('am')"
+>
+  AM
+</div>
+<mat-divider></mat-divider>
+<div
+  class="mat-time-period-item"
+  matRipple
+  [class.mat-time-period-item-active]="period === 'pm'"
+  (click)="setPeriod('pm')"
+>
+  PM
+</div>

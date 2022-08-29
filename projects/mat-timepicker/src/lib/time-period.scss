@@ -1,0 +1,28 @@
+.mat-time-period {
+  display: flex;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+}
+
+.mat-time-period-vertical {
+  flex-direction: column;
+  width: 2.75rem;
+  height: 4.375rem;
+}
+
+.mat-time-period-horizontal {
+  flex-direction: row;
+  width: 100%;
+}
+
+.mat-time-period-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  height: 100%;
+  cursor: pointer;
+}

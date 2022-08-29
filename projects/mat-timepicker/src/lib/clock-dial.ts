@@ -6,7 +6,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./clock-dial.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MatClockDialComponent implements OnInit {
+export class MatClockDial implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}

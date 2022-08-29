@@ -2,8 +2,14 @@
 @use "sass:map";
 @use "@angular/material" as mat;
 
+$timepicker-content-title-font-size: 10px !default;
+$input-font-size: 2rem !default;
+$inputs-separator-font-size: 3rem !default;
+$inputs-separator-line-height: 1.25rem;
+
 @mixin color($config-or-theme) {
   $config: mat.get-color-config($config-or-theme);
+  $primary: map.get($config, primary);
   $foreground: map.get($config, foreground);
   $background: map.get($config, background);
 
@@ -12,12 +18,59 @@
     background-color: mat.get-color-from-palette($background, card);
     color: mat.get-color-from-palette($foreground, text);
   }
+
+  .mat-time-inputs-title {
+    color: mat.get-color-from-palette($foreground, secondary-text);
+  }
+
+  .mat-time-toggle-mode-button svg {
+    fill: mat.get-color-from-palette($foreground, secondary-text);
+  }
+
+  .mat-time-period {
+    border-color: mat.get-color-from-palette($foreground, divider);
+  }
+
+  .mat-time-period-item-active {
+    background-color: mat.get-color-from-palette($primary, 0.3);
+  }
+}
+
+@mixin typography($config-or-theme) {
+  $config: mat.get-typography-config($config-or-theme);
+
+  h6.mat-time-inputs-title {
+    font: {
+      size: $timepicker-content-title-font-size;
+      weight: mat.font-weight($config, body-2);
+    }
+  }
+
+  .mat-time-inputs-field {
+    input.mat-input-element {
+      font-size: $input-font-size;
+      line-height: normal;
+    }
+  }
+
+  .mat-time-inputs-fields-separator {
+    font-size: $inputs-separator-font-size;
+    line-height: $inputs-separator-line-height;
+  }
 }
 
 @mixin theme($theme-or-color-config) {
   $color: mat.get-color-config($theme-or-color-config);
+  $typography: mat.get-typography-config($theme-or-color-config);
 
   @if $color != null {
     @include color($color);
+  }
+
+  @if $typography != null {
+    @include typography($typography);
+  } @else {
+    $typography: mat.define-typography-config();
+    @include typography($typography);
   }
 }

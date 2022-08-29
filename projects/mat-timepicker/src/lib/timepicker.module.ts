@@ -3,7 +3,13 @@ import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
+import { A11yModule } from '@angular/cdk/a11y';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatRippleModule } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER } from './timepicker-scroll-strategy';
 import {
@@ -13,8 +19,9 @@ import {
 import { MatTimepicker } from './timepicker';
 import { MatTimepickerContent } from './timepicker-content';
 import { MatTimepickerInput } from './timepicker-input';
-import { MatTimeInputsComponent } from './time-inputs';
-import { MatClockDialComponent } from './clock-dial';
+import { MatTimeInputs } from './time-inputs';
+import { MatClockDial } from './clock-dial';
+import { MatTimePeriod } from './time-period';
 
 @NgModule({
   declarations: [
@@ -23,10 +30,22 @@ import { MatClockDialComponent } from './clock-dial';
     MatTimepicker,
     MatTimepickerContent,
     MatTimepickerInput,
-    MatTimeInputsComponent,
-    MatClockDialComponent,
+    MatTimeInputs,
+    MatClockDial,
+    MatTimePeriod,
   ],
-  imports: [CommonModule, MatButtonModule, OverlayModule, PortalModule],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatRippleModule,
+    MatDividerModule,
+    OverlayModule,
+    PortalModule,
+    A11yModule,
+  ],
   exports: [
     CdkScrollableModule,
     MatTimepickerToggle,
