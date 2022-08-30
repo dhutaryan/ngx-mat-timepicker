@@ -6,4 +6,11 @@
 .mat-timepicker-content-container {
   display: flex;
   flex-direction: column;
+  padding: 0.5rem 1.5rem;
+}
+
+.mat-timepicker-content-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-right: -1rem;
 }
