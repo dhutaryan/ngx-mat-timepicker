@@ -69,4 +69,8 @@ export class MatTimepickerContent
     this._animationState = 'void';
     this._changeDetectorRef.markForCheck();
   }
+
+  onToggleMode(mode: TimepickerMode): void {
+    this.mode = mode;
+  }
 }
