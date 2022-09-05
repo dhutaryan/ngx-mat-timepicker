@@ -19,7 +19,7 @@ $inputs-separator-line-height: 1.25rem;
     color: mat.get-color-from-palette($foreground, text);
   }
 
-  .mat-time-inputs-title {
+  .mat-timepicker-content-skeleton-title {
     color: mat.get-color-from-palette($foreground, secondary-text);
   }
 
@@ -39,7 +39,7 @@ $inputs-separator-line-height: 1.25rem;
 @mixin typography($config-or-theme) {
   $config: mat.get-typography-config($config-or-theme);
 
-  h6.mat-time-inputs-title {
+  h6.mat-timepicker-content-skeleton-title {
     font: {
       size: $timepicker-content-title-font-size;
       weight: mat.font-weight($config, body-2);
@@ -53,7 +53,7 @@ $inputs-separator-line-height: 1.25rem;
     }
   }
 
-  .mat-time-inputs-fields-separator {
+  .mat-timepicker-content-skeleton-separator {
     font-size: $inputs-separator-font-size;
     line-height: $inputs-separator-line-height;
   }

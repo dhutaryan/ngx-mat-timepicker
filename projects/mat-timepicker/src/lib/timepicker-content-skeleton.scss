@@ -1,0 +1,29 @@
+h6.mat-timepicker-content-skeleton-title {
+  margin-top: 0.3125rem;
+  margin-bottom: 1.1875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.mat-timepicker-content-skeleton-values {
+  display: flex;
+  margin-bottom: 1.5rem;
+}
+
+.mat-timepicker-content-skeleton-hours,
+.mat-timepicker-content-skeleton-minutes {
+  width: 6rem;
+}
+
+.mat-timepicker-content-skeleton-separator {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 1.5rem;
+  height: 1.75rem;
+  font-weight: 500;
+}
+
+.mat-time-period {
+  margin-left: 0.75rem;
+}

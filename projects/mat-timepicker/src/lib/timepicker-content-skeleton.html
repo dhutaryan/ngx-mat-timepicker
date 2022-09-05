@@ -1,0 +1,13 @@
+<h6 class="mat-timepicker-content-skeleton-title">{{ title }}</h6>
+
+<div class="mat-timepicker-content-skeleton-values">
+  <div class="mat-timepicker-content-skeleton-hours">
+    <ng-content select="[hours]"></ng-content>
+  </div>
+  <span class="mat-timepicker-content-skeleton-separator">&#58;</span>
+  <div class="mat-timepicker-content-skeleton-minutes">
+    <ng-content select="[minutes]"></ng-content>
+  </div>
+
+  <ng-content select="mat-time-period"></ng-content>
+</div>
