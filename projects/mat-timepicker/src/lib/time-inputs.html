@@ -1,14 +1,12 @@
-<h6 class="mat-time-inputs-title">Enter time</h6>
-
-<div class="mat-time-inputs-fields">
-  <mat-form-field class="mat-time-inputs-field" appearance="outline">
+<mat-timepicker-content-skeleton title="Enter time">
+  <mat-form-field class="mat-time-inputs-field" appearance="outline" hours>
     <input type="text" matInput />
     <mat-hint>Hour</mat-hint>
   </mat-form-field>
-  <span class="mat-time-inputs-fields-separator">&#58;</span>
-  <mat-form-field class="mat-time-inputs-field" appearance="outline">
+  <mat-form-field class="mat-time-inputs-field" appearance="outline" minutes>
     <input type="text" matInput />
     <mat-hint>Minute</mat-hint>
   </mat-form-field>
+
   <mat-time-period></mat-time-period>
-</div>
+</mat-timepicker-content-skeleton>

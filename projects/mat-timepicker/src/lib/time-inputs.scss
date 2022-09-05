@@ -1,24 +1,11 @@
 $form-field-padding: 1.25rem;
-$button-icon-size: 3.25rem;
 
 .mat-time-inputs {
   display: block;
 }
 
-h6.mat-time-inputs-title {
-  margin-top: 0.3125rem;
-  margin-bottom: 1.1875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05rem;
-}
-
-.mat-time-inputs-fields {
-  display: flex;
-  margin-bottom: 1.5rem;
-}
-
 .mat-time-inputs-field {
-  width: 6rem;
+  display: block;
 
   &.mat-form-field-appearance-outline {
     .mat-form-field-flex {
@@ -58,28 +45,6 @@ h6.mat-time-inputs-title {
   }
 }
 
-.mat-time-inputs-fields-separator {
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  width: 1.5rem;
-  height: 1.75rem;
+.mat-timepicker-content-skeleton-separator {
   margin-top: -$form-field-padding;
-  font-weight: 500;
-}
-
-.mat-time-period {
-  margin-left: 0.75rem;
-}
-
-.mat-time-inputs-action-buttons {
-  margin-top: 0.5rem;
-}
-
-.mat-time-toggle-mode-button {
-  width: $button-icon-size;
-  height: $button-icon-size;
-  margin-left: -0.75rem;
-  margin-bottom: -0.25rem;
-  line-height: $button-icon-size;
 }

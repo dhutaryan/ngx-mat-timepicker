@@ -18,6 +18,7 @@ import {
 } from './timepicker-toggle';
 import { MatTimepicker } from './timepicker';
 import { MatTimepickerContent } from './timepicker-content';
+import { MatTimepickerContentSkeleton } from './timepicker-content-skeleton';
 import { MatTimepickerInput } from './timepicker-input';
 import { MatTimeInputs } from './time-inputs';
 import { MatClockDial } from './clock-dial';
@@ -29,6 +30,7 @@ import { MatTimePeriod } from './time-period';
     MatTimepickerToggleIcon,
     MatTimepicker,
     MatTimepickerContent,
+    MatTimepickerContentSkeleton,
     MatTimepickerInput,
     MatTimeInputs,
     MatClockDial,
