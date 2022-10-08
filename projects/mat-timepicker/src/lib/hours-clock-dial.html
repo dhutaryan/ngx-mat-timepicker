@@ -1,0 +1,13 @@
+<div class="mat-clock-dial-hand" [ngStyle]="_handStyles()"></div>
+<ng-template ngFor let-hour [ngForOf]="hours">
+  <button
+    class="mat-hour-cell mat-elevation-z0"
+    mat-mini-fab
+    disableRipple
+    [style.left.px]="hour.left"
+    [style.top.px]="hour.top"
+    [color]="selectedHour === hour.value ? 'primary' : undefined"
+  >
+    {{ hour.displayValue }}
+  </button>
+</ng-template>

@@ -1,0 +1,32 @@
+<mat-timepicker-content-skeleton title="Select time">
+  <div
+    class="mat-clock-dial-value"
+    hours
+    [class.mat-clock-dial-value-active]="isHoursView"
+    (click)="onViewChange('hours')"
+  >
+    {{ selectedHour }}
+  </div>
+  <div
+    class="mat-clock-dial-value"
+    minutes
+    [class.mat-clock-dial-value-active]="!isHoursView"
+    (click)="onViewChange('minutes')"
+  >
+    00
+  </div>
+
+  <mat-time-period></mat-time-period>
+
+  <div class="mat-clock-dial-faces">
+    <ng-template [ngIf]="isHoursView">
+      <mat-hours-clock-dial
+        [selectedHour]="selectedHour"
+        (selectedChange)="_onHourSelected($event)"
+      ></mat-hours-clock-dial>
+    </ng-template>
+    <ng-template [ngIf]="!isHoursView">
+      <mat-minutes-clock-dial></mat-minutes-clock-dial>
+    </ng-template>
+  </div>
+</mat-timepicker-content-skeleton>

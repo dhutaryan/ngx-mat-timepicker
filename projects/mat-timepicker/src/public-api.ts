@@ -8,4 +8,4 @@ export * from './lib/timepicker-toggle';
 export * from './lib/timepicker-content';
 export * from './lib/timepicker-input';
 export * from './lib/time-inputs';
-export * from './lib/clock-dial';
+export * from './lib/clock-dials';
