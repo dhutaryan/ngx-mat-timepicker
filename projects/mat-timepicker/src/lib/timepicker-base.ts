@@ -110,7 +110,7 @@ export abstract class MatTimepickerBase implements OnChanges {
   set mode(value: TimepickerMode) {
     this._mode = value || 'input';
   }
-  private _mode: TimepickerMode = 'input';
+  private _mode: TimepickerMode = 'dial';
 
   /** Preferred position of the timepicker in the X axis. */
   @Input()

@@ -1,0 +1,57 @@
+$clock-dial-hand-width: 1px;
+$clock-dial-hand-dot-size: 0.5rem;
+
+.mat-hours-clock-dial {
+  position: relative;
+  display: block;
+  width: 16rem;
+  height: 16rem;
+  margin: 0 auto;
+  border-radius: 50%;
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.4375rem;
+    height: 0.4375rem;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    content: "";
+  }
+
+  [mat-mini-fab] {
+    box-shadow: none;
+  }
+}
+
+.mat-hour-cell {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+
+.mat-clock-dial-hand {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  margin: 0 auto;
+  transform-origin: bottom;
+
+  &::before {
+    position: absolute;
+    top: calc($clock-dial-hand-dot-size / -2);
+    left: calc($clock-dial-hand-dot-size / -2);
+    width: calc($clock-dial-hand-dot-size + $clock-dial-hand-width);
+    height: calc($clock-dial-hand-dot-size + $clock-dial-hand-width);
+    border-radius: 50%;
+    content: "";
+  }
+}

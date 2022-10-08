@@ -2,6 +2,10 @@ $form-field-padding: 1.25rem;
 
 .mat-time-inputs {
   display: block;
+
+  .mat-timepicker-content-skeleton-separator {
+    margin-top: -$form-field-padding;
+  }
 }
 
 .mat-time-inputs-field {
@@ -43,8 +47,4 @@ $form-field-padding: 1.25rem;
     margin-top: 0;
     line-height: normal;
   }
-}
-
-.mat-timepicker-content-skeleton-separator {
-  margin-top: -$form-field-padding;
 }

@@ -21,7 +21,9 @@ import { MatTimepickerContent } from './timepicker-content';
 import { MatTimepickerContentSkeleton } from './timepicker-content-skeleton';
 import { MatTimepickerInput } from './timepicker-input';
 import { MatTimeInputs } from './time-inputs';
-import { MatClockDial } from './clock-dial';
+import { MatClockDials } from './clock-dials';
+import { MatHoursClockDial } from './hours-clock-dial';
+import { MatMinutesClockDial } from './minutes-clock-dial';
 import { MatTimePeriod } from './time-period';
 
 @NgModule({
@@ -33,7 +35,9 @@ import { MatTimePeriod } from './time-period';
     MatTimepickerContentSkeleton,
     MatTimepickerInput,
     MatTimeInputs,
-    MatClockDial,
+    MatClockDials,
+    MatHoursClockDial,
+    MatMinutesClockDial,
     MatTimePeriod,
   ],
   imports: [
@@ -56,6 +60,9 @@ import { MatTimePeriod } from './time-period';
     MatTimepickerContent,
     MatTimepickerInput,
   ],
-  providers: [MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER],
+  providers: [
+    MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER,
+    { provide: Window, useValue: window },
+  ],
 })
 export class MatTimepickerModule {}
