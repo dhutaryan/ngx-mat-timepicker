@@ -23,6 +23,7 @@ export type MatDialView = 'hours' | 'minutes';
 export class MatClockDials implements OnInit, OnDestroy {
   isHoursView = true;
   selectedHour = 0;
+  selectedMinute = 0;
 
   /** Specifies the view of clock dial. */
   private readonly _view = new BehaviorSubject<MatDialView>('hours');
@@ -48,5 +49,10 @@ export class MatClockDials implements OnInit, OnDestroy {
   _onHourSelected(hour: number): void {
     this._view.next('minutes');
     this.selectedHour = hour;
+  }
+
+  /** Handles minute selection. */
+  _onMinuteSelected(minute: number): void {
+    this.selectedMinute = minute;
   }
 }

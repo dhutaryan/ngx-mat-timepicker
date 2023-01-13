@@ -40,11 +40,11 @@ $primary-opacity: 0.15;
   }
 
   .mat-clock-dial-value,
-  .mat-hours-clock-dial {
+  .mat-clock-dial {
     background-color: mat.get-color-from-palette($background, background);
   }
 
-  .mat-hours-clock-dial::before {
+  .mat-clock-dial::before {
     background-color: mat.get-color-from-palette($primary);
   }
 

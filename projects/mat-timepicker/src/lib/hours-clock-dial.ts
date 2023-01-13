@@ -13,9 +13,9 @@ import {
 } from '@angular/core';
 import { debounceTime, fromEvent, merge, Subject, takeUntil } from 'rxjs';
 
-interface HourViewCell {
+export interface ClockDialViewCell {
   value: number;
-  displayValue: number;
+  displayValue: string;
   left: number;
   top: number;
 }
@@ -31,12 +31,12 @@ const CLOCK_OUTER_RADIUS = 100;
 @Component({
   selector: 'mat-hours-clock-dial',
   templateUrl: 'hours-clock-dial.html',
-  styleUrls: ['hours-clock-dial.scss'],
+  styleUrls: ['clock-dial.scss'],
   exportAs: 'matHoursClockDial',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'mat-hours-clock-dial',
+    class: 'mat-clock-dial',
     '(mousedown)': '_onMouseDown($event)',
   },
 })
@@ -54,7 +54,7 @@ export class MatHoursClockDial implements OnInit {
   /** Emits selected hour. */
   @Output() selectedChange = new EventEmitter<number>();
 
-  public hours: HourViewCell[] = [];
+  public hours: ClockDialViewCell[] = [];
 
   constructor(
     private _element: ElementRef<HTMLElement>,
@@ -142,7 +142,7 @@ export class MatHoursClockDial implements OnInit {
 
       return {
         value: hour,
-        displayValue: hour,
+        displayValue: String(hour),
         left: CLOCK_CORRECTED_RADIUS + Math.sin(radian) * CLOCK_OUTER_RADIUS,
         top: CLOCK_CORRECTED_RADIUS - Math.cos(radian) * CLOCK_OUTER_RADIUS,
       };
