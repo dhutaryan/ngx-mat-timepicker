@@ -13,7 +13,7 @@
     [class.mat-clock-dial-value-active]="!isHoursView"
     (click)="onViewChange('minutes')"
   >
-    00
+    {{ selectedMinute }}
   </div>
 
   <mat-time-period></mat-time-period>
@@ -26,7 +26,10 @@
       ></mat-hours-clock-dial>
     </ng-template>
     <ng-template [ngIf]="!isHoursView">
-      <mat-minutes-clock-dial></mat-minutes-clock-dial>
+      <mat-minutes-clock-dial
+        [selectedMinute]="selectedMinute"
+        (selectedChange)="_onMinuteSelected($event)"
+      ></mat-minutes-clock-dial>
     </ng-template>
   </div>
 </mat-timepicker-content-layout>

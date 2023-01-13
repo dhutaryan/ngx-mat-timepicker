@@ -1,1 +1,13 @@
-minutes clock dial
+<div class="mat-clock-dial-hand" [ngStyle]="_handStyles()"></div>
+<ng-template ngFor let-minute [ngForOf]="minutes">
+  <button
+    class="mat-clock-dial-cell mat-elevation-z0"
+    mat-mini-fab
+    disableRipple
+    [style.left.px]="minute.left"
+    [style.top.px]="minute.top"
+    [color]="selectedMinute === minute.value ? 'primary' : undefined"
+  >
+    {{ minute.displayValue }}
+  </button>
+</ng-template>
