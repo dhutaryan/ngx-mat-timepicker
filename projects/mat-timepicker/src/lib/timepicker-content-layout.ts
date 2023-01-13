@@ -6,17 +6,17 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'mat-timepicker-content-skeleton',
-  templateUrl: './timepicker-content-skeleton.html',
-  styleUrls: ['./timepicker-content-skeleton.scss'],
+  selector: 'mat-timepicker-content-layout',
+  templateUrl: './timepicker-content-layout.html',
+  styleUrls: ['./timepicker-content-layout.scss'],
   exportAs: 'matTimepickerContent',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'mat-timepicker-content-skeleton',
+    class: 'mat-timepicker-content-layout',
   },
 })
-export class MatTimepickerContentSkeleton {
+export class MatTimepickerContentLayout {
   /** Content title. */
   @Input() title: string;
 }
