@@ -8,5 +8,7 @@
     <mat-hint>Minute</mat-hint>
   </mat-form-field>
 
-  <mat-time-period></mat-time-period>
+  <ng-template mat-time-period [ngIf]="isMeridiem">
+    <mat-time-period></mat-time-period>
+  </ng-template>
 </mat-timepicker-content-layout>

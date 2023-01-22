@@ -48,6 +48,9 @@ export type TimepickerDropdownPositionY = 'above' | 'below';
 /** Possible options for the timepicker to display. */
 export type TimepickerMode = 'input' | 'dial';
 
+/** Possible options for the timepicker period format. */
+export type TimepickerFormat = '12' | '24';
+
 /** Used to generate a unique ID for each timepicker instance. */
 let timepickerUid = 0;
 
@@ -111,6 +114,16 @@ export abstract class MatTimepickerBase implements OnChanges {
     this._mode = value || 'input';
   }
   private _mode: TimepickerMode = 'dial';
+
+  /** Timepicker period format. */
+  @Input()
+  get format(): TimepickerFormat {
+    return this._format;
+  }
+  set format(value: TimepickerFormat) {
+    this._format = value;
+  }
+  private _format: TimepickerFormat = '12';
 
   /** Preferred position of the timepicker in the X axis. */
   @Input()
@@ -229,6 +242,7 @@ export abstract class MatTimepickerBase implements OnChanges {
     instance.timepicker = this;
     instance.color = this.color;
     instance.mode = this.mode;
+    instance.isMeridiem = this.format === '12';
   }
 
   /** Opens the overlay with the timepicker. */

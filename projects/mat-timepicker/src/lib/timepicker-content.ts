@@ -49,6 +49,9 @@ export class MatTimepickerContent
   /** Current state of the animation. */
   _animationState: 'enter-dropdown' | 'enter-dialog' | 'void';
 
+  /** Whether the clock uses 12 hour format. */
+  isMeridiem: boolean;
+
   /** Emits when an animation has finished. */
   readonly _animationDone = new Subject<void>();
 
