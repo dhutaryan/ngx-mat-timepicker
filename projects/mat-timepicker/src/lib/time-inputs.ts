@@ -3,6 +3,7 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   ViewEncapsulation,
+  Input,
 } from '@angular/core';
 
 @Component({
@@ -16,6 +17,9 @@ import {
   },
 })
 export class MatTimeInputs implements OnInit {
+  /** Whether the clock uses 12 hour format. */
+  @Input() isMeridiem: boolean;
+
   constructor() {}
 
   ngOnInit(): void {}

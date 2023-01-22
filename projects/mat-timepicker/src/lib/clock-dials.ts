@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   OnInit,
   OnDestroy,
+  Input,
 } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
@@ -21,6 +22,9 @@ export type MatDialView = 'hours' | 'minutes';
   },
 })
 export class MatClockDials implements OnInit, OnDestroy {
+  /** Whether the clock uses 12 hour format. */
+  @Input() isMeridiem: boolean;
+
   isHoursView = true;
   selectedHour = 0;
   selectedMinute = 0;

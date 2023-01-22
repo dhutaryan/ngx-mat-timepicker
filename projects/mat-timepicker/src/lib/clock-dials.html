@@ -16,12 +16,15 @@
     {{ selectedMinute }}
   </div>
 
-  <mat-time-period></mat-time-period>
+  <ng-template mat-time-period [ngIf]="isMeridiem">
+    <mat-time-period></mat-time-period>
+  </ng-template>
 
   <div class="mat-clock-dial-faces">
     <ng-template [ngIf]="isHoursView">
       <mat-hours-clock-dial
         [selectedHour]="selectedHour"
+        [isMeridiem]="isMeridiem"
         (selectedChange)="_onHourSelected($event)"
       ></mat-hours-clock-dial>
     </ng-template>

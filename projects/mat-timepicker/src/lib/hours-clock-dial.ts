@@ -11,7 +11,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { debounceTime, fromEvent, merge, Subject, takeUntil } from 'rxjs';
+import { debounceTime, fromEvent, merge, take } from 'rxjs';
 
 export interface ClockDialViewCell {
   value: number;
@@ -20,13 +20,14 @@ export interface ClockDialViewCell {
   top: number;
 }
 
-const HOURS = Array(12)
+const HOURS = Array(24)
   .fill(null)
-  .map((_, i) => i + 1);
+  .map((_, i) => i);
 const CLOCK_RADIUS = 128;
 const CLOCK_TICK_RADIUS = 16;
 const CLOCK_CORRECTED_RADIUS = CLOCK_RADIUS - CLOCK_TICK_RADIUS;
 const CLOCK_OUTER_RADIUS = 100;
+const CLOCK_INNER_RADIUS = CLOCK_OUTER_RADIUS - CLOCK_TICK_RADIUS * 2;
 
 @Component({
   selector: 'mat-hours-clock-dial',
@@ -47,9 +48,23 @@ export class MatHoursClockDial implements OnInit {
     return this._selectedHour;
   }
   set selectedHour(value: number) {
-    this._selectedHour = value === 0 ? 12 : value;
+    const edgeValue = this.isMeridiem ? 12 : 0;
+    this._selectedHour = value === 0 ? edgeValue : value;
   }
-  private _selectedHour = 0;
+  private _selectedHour: number;
+
+  /** Whether the clock uses 12 hour format. */
+  @Input()
+  get isMeridiem(): boolean {
+    return this._isMeridiem;
+  }
+  set isMeridiem(value: boolean) {
+    this._isMeridiem = value;
+    const edgeValue = value ? 12 : 0;
+    this._selectedHour =
+      this._selectedHour === 0 ? edgeValue : this._selectedHour;
+  }
+  private _isMeridiem: boolean;
 
   /** Emits selected hour. */
   @Output() selectedChange = new EventEmitter<number>();
@@ -69,9 +84,10 @@ export class MatHoursClockDial implements OnInit {
 
   /** Hand styles based on selected hour. */
   _handStyles(): any {
-    const deg = Math.round(this._selectedHour * (360 / (24 / 2)));
-    const height = CLOCK_OUTER_RADIUS;
-    const marginTop = CLOCK_RADIUS - CLOCK_OUTER_RADIUS;
+    const deg = Math.round(this.selectedHour * (360 / (24 / 2)));
+    const radius = this._getRadius(this.selectedHour);
+    const height = radius;
+    const marginTop = CLOCK_RADIUS - radius;
 
     return {
       transform: `rotate(${deg}deg)`,
@@ -83,7 +99,6 @@ export class MatHoursClockDial implements OnInit {
   /** Handles mouse and touch events on dial and document. */
   _onMouseDown(event: MouseEvent | TouchEvent): void {
     this._setHour(event);
-    const destroy = new Subject();
 
     const eventsSubscription = merge(
       fromEvent<MouseEvent>(this._document, 'mousemove'),
@@ -95,21 +110,17 @@ export class MatHoursClockDial implements OnInit {
           event.preventDefault();
           this._setHour(event);
         },
-        complete: () => {
-          destroy.next(true);
-          destroy.complete();
-        },
       });
 
     merge(
       fromEvent<MouseEvent>(this._document, 'mouseup'),
       fromEvent<TouchEvent>(this._document, 'touchend')
     )
-      .pipe(takeUntil(destroy))
+      .pipe(take(1))
       .subscribe({
         next: () => {
           eventsSubscription.unsubscribe();
-          this.selectedChange.emit(this._selectedHour);
+          this.selectedChange.emit(this.selectedHour);
         },
       });
   }
@@ -130,22 +141,50 @@ export class MatHoursClockDial implements OnInit {
     const atan2 = Math.atan2(-x, y);
     const radian = atan2 < 0 ? Math.PI * 2 + atan2 : atan2;
     const initialValue = Math.round(radian / unit);
-    const value = initialValue === 0 ? 12 : initialValue;
-    this._selectedHour = value;
+    const z = Math.sqrt(x * x + y * y);
+    const outer = z > CLOCK_OUTER_RADIUS - CLOCK_TICK_RADIUS;
+    const value = this._getHourValue(initialValue, outer);
+    this.selectedHour = value;
     this._cdr.detectChanges();
+  }
+
+  /** Return value of hour. */
+  private _getHourValue(value: number, outer: boolean): number {
+    const edgeValue = value === 0 || value === 12;
+
+    if (outer || this.isMeridiem) {
+      return edgeValue ? 0 : value;
+    }
+
+    return edgeValue ? 12 : value + 12;
   }
 
   /** Creates list of hours. */
   private _initHours(): void {
-    this.hours = HOURS.map((hour) => {
+    const initialHours = this.isMeridiem ? HOURS.slice(1, 13) : HOURS;
+
+    this.hours = initialHours.map((hour) => {
       const radian = (hour / 6) * Math.PI;
+      const radius = this._getRadius(hour);
 
       return {
         value: hour,
-        displayValue: String(hour),
-        left: CLOCK_CORRECTED_RADIUS + Math.sin(radian) * CLOCK_OUTER_RADIUS,
-        top: CLOCK_CORRECTED_RADIUS - Math.cos(radian) * CLOCK_OUTER_RADIUS,
+        displayValue: hour === 0 ? '00' : String(hour),
+        left: CLOCK_CORRECTED_RADIUS + Math.sin(radian) * radius,
+        top: CLOCK_CORRECTED_RADIUS - Math.cos(radian) * radius,
       };
     });
+  }
+
+  /** Returns radius based on hour */
+  private _getRadius(hour: number): number {
+    if (this.isMeridiem) {
+      return CLOCK_OUTER_RADIUS;
+    }
+
+    const outer = hour >= 0 && hour < 12;
+    const radius = outer ? CLOCK_OUTER_RADIUS : CLOCK_INNER_RADIUS;
+
+    return radius;
   }
 }
