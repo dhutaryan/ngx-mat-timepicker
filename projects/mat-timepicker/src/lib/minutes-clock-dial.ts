@@ -11,7 +11,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { debounceTime, fromEvent, merge, Subject, takeUntil } from 'rxjs';
+import { debounceTime, fromEvent, merge, Subject, take, takeUntil } from 'rxjs';
 
 import { ClockDialViewCell } from './hours-clock-dial';
 
@@ -79,7 +79,6 @@ export class MatMinutesClockDial implements OnInit {
   /** Handles mouse and touch events on dial and document. */
   _onMouseDown(event: MouseEvent | TouchEvent): void {
     this._setMinute(event);
-    const destroy = new Subject();
 
     const eventsSubscription = merge(
       fromEvent<MouseEvent>(this._document, 'mousemove'),
@@ -91,17 +90,13 @@ export class MatMinutesClockDial implements OnInit {
           event.preventDefault();
           this._setMinute(event);
         },
-        complete: () => {
-          destroy.next(true);
-          destroy.complete();
-        },
       });
 
     merge(
       fromEvent<MouseEvent>(this._document, 'mouseup'),
       fromEvent<TouchEvent>(this._document, 'touchend')
     )
-      .pipe(takeUntil(destroy))
+      .pipe(take(1))
       .subscribe({
         next: () => {
           eventsSubscription.unsubscribe();
