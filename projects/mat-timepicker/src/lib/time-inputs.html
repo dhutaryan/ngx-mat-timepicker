@@ -1,10 +1,24 @@
 <mat-timepicker-content-layout title="Enter time">
   <mat-form-field class="mat-time-inputs-field" appearance="outline" hours>
-    <input type="text" matInput />
+    <input
+      type="text"
+      inputmode="numeric"
+      maxlength="2"
+      matInput
+      [min]="isMeridiem ? 1 : 0"
+      [max]="isMeridiem ? 12 : 24"
+    />
     <mat-hint>Hour</mat-hint>
   </mat-form-field>
   <mat-form-field class="mat-time-inputs-field" appearance="outline" minutes>
-    <input type="text" matInput />
+    <input
+      type="text"
+      inputmode="numeric"
+      maxlength="2"
+      matInput
+      [min]="0"
+      [max]="59"
+    />
     <mat-hint>Minute</mat-hint>
   </mat-form-field>
 
