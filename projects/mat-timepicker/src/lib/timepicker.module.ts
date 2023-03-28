@@ -25,6 +25,7 @@ import { MatClockDials } from './clock-dials';
 import { MatHoursClockDial } from './hours-clock-dial';
 import { MatMinutesClockDial } from './minutes-clock-dial';
 import { MatTimePeriod } from './time-period';
+import { NativeDateTimeAdapter, TimeAdapter } from './adapter';
 
 @NgModule({
   declarations: [

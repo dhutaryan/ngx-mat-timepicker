@@ -4,13 +4,18 @@
 
 <main>
   <mat-form-field appearance="fill">
-    <input type="text" matInput [matTimepicker]="timepicker" />
+    <input type="text" matInput [matTimepicker]="timepicker" [value]="date" />
     <mat-timepicker-toggle matSuffix [for]="timepicker"></mat-timepicker-toggle>
     <mat-timepicker #timepicker></mat-timepicker>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
-    <input type="text" matInput [matTimepicker]="timepicker2" />
+    <input
+      type="text"
+      matInput
+      [matTimepicker]="timepicker2"
+      [formControl]="timeControl"
+    />
     <mat-timepicker-toggle
       matSuffix
       [for]="timepicker2"

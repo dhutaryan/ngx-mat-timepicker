@@ -4,7 +4,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { MatTimepickerBase } from './timepicker-base';
+import { MatTimepickerBase, MatTimepickerControl } from './timepicker-base';
+import { MAT_SINGLE_TIME_SELECTION_MODEL_PROVIDER } from './time-selection-model';
 
 @Component({
   selector: 'mat-timepicker',
@@ -12,6 +13,13 @@ import { MatTimepickerBase } from './timepicker-base';
   exportAs: 'matTimepicker',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  providers: [{ provide: MatTimepickerBase, useExisting: MatTimepicker }],
+  providers: [
+    MAT_SINGLE_TIME_SELECTION_MODEL_PROVIDER,
+    { provide: MatTimepickerBase, useExisting: MatTimepicker },
+  ],
 })
-export class MatTimepicker extends MatTimepickerBase {}
+export class MatTimepicker<T> extends MatTimepickerBase<
+  MatTimepickerControl<T>,
+  T | null,
+  T
+> {}

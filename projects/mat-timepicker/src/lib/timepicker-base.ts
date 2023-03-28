@@ -9,6 +9,7 @@ import {
   EventEmitter,
   OnChanges,
   SimpleChanges,
+  ElementRef,
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -35,6 +36,10 @@ import { filter, first, merge, Observable } from 'rxjs';
 import { MatTimepickerContent } from './timepicker-content';
 import { MAT_TIMEPICKER_SCROLL_STRATEGY } from './timepicker-scroll-strategy';
 import { MatTimepickerInput } from './timepicker-input';
+import {
+  ExtractTimeTypeFromSelection,
+  MatTimeSelectionModel,
+} from './time-selection-model';
 
 /** Possible options for the timepicker to open. */
 export type TimepickerOpenAs = 'dialog' | 'popup';
@@ -51,11 +56,33 @@ export type TimepickerMode = 'input' | 'dial';
 /** Possible options for the timepicker period format. */
 export type TimepickerFormat = '12' | '24';
 
+/** Form control that can be associated with a timepicker. */
+export interface MatTimepickerControl<T> {
+  disabled: boolean;
+  getThemePalette(): ThemePalette;
+  getConnectedOverlayOrigin(): ElementRef;
+}
+
+/** A timepicker that can be attached to a {@link MatTimepickerControl}. */
+export interface MatTimepickerPanel<
+  C extends MatTimepickerControl<T>,
+  S,
+  T = ExtractTimeTypeFromSelection<S>
+> {
+  /** Register an input with the timeepicker. */
+  registerInput(input: C): MatTimeSelectionModel<S, T>;
+}
+
 /** Used to generate a unique ID for each timepicker instance. */
 let timepickerUid = 0;
 
 @Directive()
-export abstract class MatTimepickerBase implements OnChanges {
+export abstract class MatTimepickerBase<
+  C extends MatTimepickerControl<T>,
+  S,
+  T = ExtractTimeTypeFromSelection<S>
+> implements OnChanges
+{
   /** Whether the timepicker pop-up should be disabled. */
   @Input()
   get disabled(): boolean {
@@ -140,13 +167,13 @@ export abstract class MatTimepickerBase implements OnChanges {
   id: string = `mat-timepicker-${timepickerUid++}`;
 
   /** The input element this timepicker is associated with. */
-  timepickerInput!: MatTimepickerInput;
+  timepickerInput!: C;
 
   /** A reference to the overlay into which we've rendered the timepicker. */
   private _overlayRef: OverlayRef | null;
 
   /** Reference to the component instance rendered in the overlay. */
-  private _componentRef!: ComponentRef<MatTimepickerContent> | null;
+  private _componentRef!: ComponentRef<MatTimepickerContent<S, T>> | null;
 
   /** Unique class that will be added to the backdrop so that the test harnesses can look it up. */
   private _backdropHarnessClass = `${this.id}-backdrop`;
@@ -158,7 +185,8 @@ export abstract class MatTimepickerBase implements OnChanges {
     private _viewContainerRef: ViewContainerRef,
     private _overlay: Overlay,
     private _ngZone: NgZone,
-    @Inject(MAT_TIMEPICKER_SCROLL_STRATEGY) scrollStrategy: any
+    @Inject(MAT_TIMEPICKER_SCROLL_STRATEGY) scrollStrategy: any,
+    private _model: MatTimeSelectionModel<S, T>
   ) {
     this._scrollStrategy = scrollStrategy;
   }
@@ -227,7 +255,7 @@ export abstract class MatTimepickerBase implements OnChanges {
    * @param input The timepicker input to register with this timepicker.
    * @returns Selection model that the input should hook itself up to.
    */
-  registerInput(input: MatTimepickerInput): void {
+  registerInput(input: C): MatTimeSelectionModel<S, T> {
     if (this.timepickerInput) {
       throw Error(
         'A MatTimepicker can only be associated with a single input.'
@@ -235,10 +263,11 @@ export abstract class MatTimepickerBase implements OnChanges {
     }
 
     this.timepickerInput = input;
+    return this._model;
   }
 
   /** Forwards relevant values from the timepicker to the timepicker content inside the overlay. */
-  protected _forwardContentValues(instance: MatTimepickerContent): void {
+  protected _forwardContentValues(instance: MatTimepickerContent<S, T>): void {
     instance.timepicker = this;
     instance.color = this.color;
     instance.mode = this.mode;
@@ -250,7 +279,7 @@ export abstract class MatTimepickerBase implements OnChanges {
     this._destroyOverlay();
 
     const isDialog = this.openAs === 'dialog';
-    const portal = new ComponentPortal<MatTimepickerContent>(
+    const portal = new ComponentPortal<MatTimepickerContent<S, T>>(
       MatTimepickerContent,
       this._viewContainerRef
     );
