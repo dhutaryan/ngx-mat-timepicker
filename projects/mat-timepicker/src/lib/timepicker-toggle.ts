@@ -27,9 +27,9 @@ export class MatTimepickerToggleIcon {}
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MatTimepickerToggle {
+export class MatTimepickerToggle<T> {
   /** Timepicker instance. */
-  @Input('for') timepicker: MatTimepicker;
+  @Input('for') timepicker: MatTimepicker<T>;
 
   /** Whether the toggle button is disabled. */
   @Input()

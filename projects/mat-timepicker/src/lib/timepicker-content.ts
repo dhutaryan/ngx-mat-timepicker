@@ -8,6 +8,10 @@ import {
 } from '@angular/core';
 import { mixinColor } from '@angular/material/core';
 import { Subject } from 'rxjs';
+import {
+  ExtractTimeTypeFromSelection,
+  MatTimeSelectionModel,
+} from './time-selection-model';
 
 import { matTimepickerAnimations } from './timepicker-animations';
 import { MatTimepickerBase, TimepickerMode } from './timepicker-base';
@@ -36,12 +40,12 @@ const _MatTimepickerContentBase = mixinColor(
     matTimepickerAnimations.fadeInTimepicker,
   ],
 })
-export class MatTimepickerContent
+export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
   extends _MatTimepickerContentBase
   implements OnInit
 {
   /** Reference to the timepicker that created the overlay. */
-  timepicker: MatTimepickerBase;
+  timepicker: MatTimepickerBase<any, S, T>;
 
   /** Display mode. */
   mode: TimepickerMode;
