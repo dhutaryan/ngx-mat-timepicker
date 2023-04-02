@@ -32,7 +32,7 @@ const CLOCK_OUTER_RADIUS = 100;
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'mat-clock-dial',
+    class: 'mat-clock-dial mat-clock-dial-minutes',
     '(mousedown)': '_onMouseDown($event)',
   },
 })

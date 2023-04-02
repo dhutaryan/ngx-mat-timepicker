@@ -25,7 +25,12 @@ import { MatClockDials } from './clock-dials';
 import { MatHoursClockDial } from './hours-clock-dial';
 import { MatMinutesClockDial } from './minutes-clock-dial';
 import { MatTimePeriod } from './time-period';
-import { NativeDateTimeAdapter, TimeAdapter } from './adapter';
+import {
+  MatTimepickerActions,
+  MatTimepickerApply,
+  MatTimepickerCancel,
+  MatTimepickerDefaultActions,
+} from './timepicker-actions';
 
 @NgModule({
   declarations: [
@@ -40,6 +45,10 @@ import { NativeDateTimeAdapter, TimeAdapter } from './adapter';
     MatHoursClockDial,
     MatMinutesClockDial,
     MatTimePeriod,
+    MatTimepickerActions,
+    MatTimepickerDefaultActions,
+    MatTimepickerApply,
+    MatTimepickerCancel,
   ],
   imports: [
     CommonModule,
@@ -59,7 +68,15 @@ import { NativeDateTimeAdapter, TimeAdapter } from './adapter';
     MatTimepickerToggleIcon,
     MatTimepicker,
     MatTimepickerContent,
+    MatTimepickerContentLayout,
     MatTimepickerInput,
+    MatClockDials,
+    MatHoursClockDial,
+    MatMinutesClockDial,
+    MatTimepickerActions,
+    MatTimepickerDefaultActions,
+    MatTimepickerApply,
+    MatTimepickerCancel,
   ],
   providers: [
     MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER,

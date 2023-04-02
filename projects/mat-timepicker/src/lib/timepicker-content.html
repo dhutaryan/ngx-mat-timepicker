@@ -21,7 +21,7 @@
           </svg>
         </button>
 
-        <ng-tempalte [ngTemplateOutlet]="actionButtons"></ng-tempalte>
+        <ng-template [cdkPortalOutlet]="_actionsPortal"></ng-template>
       </div>
     </ng-template>
     <ng-template ngSwitchCase="dial">
@@ -45,15 +45,8 @@
           </svg>
         </button>
 
-        <ng-tempalte [ngTemplateOutlet]="actionButtons"></ng-tempalte>
+        <ng-template [cdkPortalOutlet]="_actionsPortal"></ng-template>
       </div>
     </ng-template>
   </ng-container>
 </div>
-
-<ng-template #actionButtons>
-  <div class="mat-timepicker-content-action-buttons">
-    <button color="primary" mat-button>Cancel</button>
-    <button color="primary" mat-button>OK</button>
-  </div>
-</ng-template>
