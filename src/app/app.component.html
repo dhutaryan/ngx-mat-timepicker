@@ -20,6 +20,11 @@
       matSuffix
       [for]="timepicker2"
     ></mat-timepicker-toggle>
-    <mat-timepicker #timepicker2 format="24"></mat-timepicker>
+    <mat-timepicker #timepicker2 format="24">
+      <mat-timepicker-actions>
+        <button color="accent" mat-button matTimepickerCancel>Cancel</button>
+        <button color="accent" mat-button matTimepickerApply>OK</button>
+      </mat-timepicker-actions>
+    </mat-timepicker>
   </mat-form-field>
 </main>

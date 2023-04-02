@@ -20,7 +20,7 @@ import {
   OverlayRef,
   ScrollStrategy,
 } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
+import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import {
   DOWN_ARROW,
   ESCAPE,
@@ -169,6 +169,9 @@ export abstract class MatTimepickerBase<
   /** The input element this timepicker is associated with. */
   timepickerInput!: C;
 
+  /** Portal with projected action buttons. */
+  _actionsPortal: TemplatePortal | null = null;
+
   /** A reference to the overlay into which we've rendered the timepicker. */
   private _overlayRef: OverlayRef | null;
 
@@ -266,12 +269,43 @@ export abstract class MatTimepickerBase<
     return this._model;
   }
 
+  /**
+   * Registers a portal containing action buttons with the timepicker.
+   * @param portal Portal to be registered.
+   */
+  registerActions(portal: TemplatePortal): void {
+    if (this._actionsPortal) {
+      throw Error(
+        'A MatTimepicker can only be associated with a single actions row.'
+      );
+    }
+    this._actionsPortal = portal;
+    this._componentRef?.instance._assignActions(portal, true);
+  }
+
+  /**
+   * Removes a portal containing action buttons from the timepicker.
+   * @param portal Portal to be removed.
+   */
+  removeActions(portal: TemplatePortal): void {
+    if (portal === this._actionsPortal) {
+      this._actionsPortal = null;
+      this._componentRef?.instance._assignActions(null, true);
+    }
+  }
+
+  /** Applies the current pending selection on the overlay to the model. */
+  _applyPendingSelection() {
+    this._componentRef?.instance?._applyPendingSelection();
+  }
+
   /** Forwards relevant values from the timepicker to the timepicker content inside the overlay. */
   protected _forwardContentValues(instance: MatTimepickerContent<S, T>): void {
     instance.timepicker = this;
     instance.color = this.color;
     instance.mode = this.mode;
     instance.isMeridiem = this.format === '12';
+    instance._assignActions(this._actionsPortal, false);
   }
 
   /** Opens the overlay with the timepicker. */

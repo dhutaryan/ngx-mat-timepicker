@@ -64,6 +64,9 @@ export abstract class MatTimeSelectionModel<
   ngOnDestroy(): void {
     this._selectionChanged.complete();
   }
+
+  /** Clones the selection model. */
+  abstract clone(): MatTimeSelectionModel<S, T>;
 }
 
 /**
@@ -83,7 +86,14 @@ export class MatSingleTimeSelectionModel<T> extends MatTimeSelectionModel<
    * simply overwrites the previous selection
    */
   add(time: T | null) {
-    // super.updateSelection(time, this);
+    super.updateSelection(time, this);
+  }
+
+  /** Clones the selection model. */
+  clone() {
+    const clone = new MatSingleTimeSelectionModel<T>(this._adapter);
+    clone.updateSelection(this.selection, this);
+    return clone;
   }
 }
 

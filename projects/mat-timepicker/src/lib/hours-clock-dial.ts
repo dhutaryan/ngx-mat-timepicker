@@ -37,7 +37,7 @@ const CLOCK_INNER_RADIUS = CLOCK_OUTER_RADIUS - CLOCK_TICK_RADIUS * 2;
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'mat-clock-dial',
+    class: 'mat-clock-dial mat-clock-dial-hours',
     '(mousedown)': '_onMouseDown($event)',
   },
 })
