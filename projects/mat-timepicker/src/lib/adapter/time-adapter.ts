@@ -1,4 +1,5 @@
 import { InjectionToken, LOCALE_ID } from '@angular/core';
+import { MatTimePeriodType } from '../time-period';
 
 /** InjectionToken for timepicker that can be used to override default locale code. */
 export const MAT_TIME_LOCALE = new InjectionToken<string>('MAT_TIME_LOCALE');
@@ -14,6 +15,12 @@ export abstract class TimeAdapter<T, L = any> {
   protected locale: L;
 
   /**
+   * Gets now's time.
+   * @returns Now's time.
+   */
+  abstract now(): T;
+
+  /**
    * Parses a time from a user-provided value.
    * @param value The value to parse.
    * @param parseFormat The expected format of the value being parsed
@@ -21,6 +28,18 @@ export abstract class TimeAdapter<T, L = any> {
    * @returns The parsed time.
    */
   abstract parse(value: any, parseFormat: any): T | null;
+
+  abstract getHour(time: T): number;
+
+  abstract getMinute(time: T): number;
+
+  abstract updateHour(time: T, hour: number): T;
+
+  abstract updateMinute(time: T, minute: number): T;
+
+  abstract updateHourAndMinute(time: T, hour: number, minute: number): T;
+
+  abstract getPeriod(time: T): MatTimePeriodType;
 
   /**
    * Formats a time as a string according to the given format.

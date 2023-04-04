@@ -5,7 +5,7 @@
     [class.mat-clock-dial-value-active]="isHoursView"
     (click)="onViewChange('hours')"
   >
-    {{ selectedHour }}
+    {{ _withZeroPrefix(selectedHour) }}
   </div>
   <div
     class="mat-clock-dial-value"
@@ -13,11 +13,14 @@
     [class.mat-clock-dial-value-active]="!isHoursView"
     (click)="onViewChange('minutes')"
   >
-    {{ selectedMinute }}
+    {{ _withZeroPrefix(selectedMinute) }}
   </div>
 
   <ng-template mat-time-period [ngIf]="isMeridiem">
-    <mat-time-period></mat-time-period>
+    <mat-time-period
+      [period]="period"
+      (periodChanged)="_onPeriodChanged($event)"
+    ></mat-time-period>
   </ng-template>
 
   <div class="mat-clock-dial-faces">

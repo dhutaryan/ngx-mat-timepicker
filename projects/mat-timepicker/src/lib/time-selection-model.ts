@@ -65,6 +65,9 @@ export abstract class MatTimeSelectionModel<
     this._selectionChanged.complete();
   }
 
+  /** Adds a time to the current selection. */
+  abstract add(time: T | null): void;
+
   /** Clones the selection model. */
   abstract clone(): MatTimeSelectionModel<S, T>;
 }
