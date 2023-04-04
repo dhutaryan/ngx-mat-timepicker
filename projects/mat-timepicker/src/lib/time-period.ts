@@ -4,6 +4,8 @@ import {
   ChangeDetectionStrategy,
   ViewEncapsulation,
   Input,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
@@ -42,11 +44,14 @@ export class MatTimePeriod implements OnInit {
   }
   private _period: MatTimePeriodType = 'am';
 
+  @Output() periodChanged = new EventEmitter<MatTimePeriodType>();
+
   constructor() {}
 
   ngOnInit(): void {}
 
   setPeriod(period: MatTimePeriodType): void {
     this.period = period;
+    this.periodChanged.emit(period);
   }
 }

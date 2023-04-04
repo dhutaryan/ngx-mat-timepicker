@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { mixinColor } from '@angular/material/core';
 import { Subject } from 'rxjs';
+import { TimeAdapter } from './adapter';
 
 import {
   ExtractTimeTypeFromSelection,
@@ -72,7 +73,8 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
   constructor(
     elementRef: ElementRef,
     private _globalModel: MatTimeSelectionModel<S, T>,
-    private _changeDetectorRef: ChangeDetectorRef
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _timeAdapter: TimeAdapter<T>
   ) {
     super(elementRef);
   }
@@ -111,15 +113,26 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
    * added at a later point.
    */
   _assignActions(portal: TemplatePortal<any> | null, forceRerender: boolean) {
-    // If we have actions, clone the model so that we have the ability to cancel the selection,
-    // otherwise update the global model directly. Note that we want to assign this as soon as
-    // possible, but `_actionsPortal` isn't available in the constructor so we do it in `ngOnInit`.
-    this._model = portal ? this._globalModel.clone() : this._globalModel;
+    // As we have actions, clone the model so that we have the ability to cancel the selection.
+    // Note that we want to assign this as soon as possible,
+    // but `_actionsPortal` isn't available in the constructor so we do it in `ngOnInit`.
+    this._model = this._globalModel.clone();
+
+    // If no value in input set default as now
+    if (!this._getSelected()) {
+      this._model.add(this._timeAdapter.now());
+    }
+
     const defaultPortal = new ComponentPortal(MatTimepickerDefaultActions);
     this._actionsPortal = portal || defaultPortal;
 
     if (forceRerender) {
       this._changeDetectorRef.detectChanges();
     }
+  }
+
+  _handleUserSelection(event: T) {
+    const value = event;
+    this._model.add(value);
   }
 }

@@ -1,6 +1,7 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 
 import { MAT_TIME_LOCALE, TimeAdapter } from './time-adapter';
+import { MatTimePeriodType } from '../time-period';
 
 /**
  * Matches strings that have the form of a valid RFC 3339 string
@@ -16,6 +17,10 @@ export class NativeDateTimeAdapter extends TimeAdapter<Date> {
   constructor(@Optional() @Inject(MAT_TIME_LOCALE) matTimeLocale: string) {
     super();
     super.setLocale(matTimeLocale);
+  }
+
+  now(): Date {
+    return new Date();
   }
 
   parse(value: any, parseFormat?: any): Date | null {
@@ -39,6 +44,40 @@ export class NativeDateTimeAdapter extends TimeAdapter<Date> {
       .split(':');
 
     return { hour, minute };
+  }
+
+  getHour(date: Date): number {
+    return date.getHours();
+  }
+
+  getMinute(date: Date): number {
+    return date.getMinutes();
+  }
+
+  updateHour(date: Date, hour: number): Date {
+    const copy = new Date(date.getTime());
+    copy.setHours(hour);
+
+    return copy;
+  }
+
+  updateMinute(date: Date, minute: number): Date {
+    const copy = new Date(date.getTime());
+    copy.setMinutes(minute);
+
+    return copy;
+  }
+
+  updateHourAndMinute(date: Date, hour: number, minute: number): Date {
+    const copy = new Date(date.getTime());
+    copy.setHours(hour);
+    copy.setMinutes(minute);
+
+    return copy;
+  }
+
+  getPeriod(date: Date): MatTimePeriodType {
+    return date.getHours() < 12 ? 'am' : 'pm';
   }
 
   format(date: Date, displayFormat: Object): string {
