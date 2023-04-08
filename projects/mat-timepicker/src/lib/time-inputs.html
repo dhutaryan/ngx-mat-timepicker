@@ -5,8 +5,12 @@
       inputmode="numeric"
       maxlength="2"
       matInput
+      matTimeInput
+      [isMeridiem]="isMeridiem"
+      [value]="selectedHour"
       [min]="isMeridiem ? 1 : 0"
-      [max]="isMeridiem ? 12 : 24"
+      [max]="isMeridiem ? 12 : 23"
+      (timeChanged)="_onHourSelected($event)"
     />
     <mat-hint>Hour</mat-hint>
   </mat-form-field>
@@ -16,13 +20,19 @@
       inputmode="numeric"
       maxlength="2"
       matInput
+      matTimeInput
+      [value]="selectedMinute"
       [min]="0"
       [max]="59"
+      (timeChanged)="_onMinuteSelected($event)"
     />
     <mat-hint>Minute</mat-hint>
   </mat-form-field>
 
   <ng-template mat-time-period [ngIf]="isMeridiem">
-    <mat-time-period></mat-time-period>
+    <mat-time-period
+      [period]="period"
+      (periodChanged)="_onPeriodChanged($event)"
+    ></mat-time-period>
   </ng-template>
 </mat-timepicker-content-layout>
