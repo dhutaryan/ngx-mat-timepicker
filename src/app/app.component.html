@@ -4,9 +4,14 @@
 
 <main>
   <mat-form-field appearance="fill">
-    <input type="text" matInput [matTimepicker]="timepicker" />
+    <input
+      type="text"
+      matInput
+      [matTimepicker]="timepicker"
+      [value]="newDate"
+    />
     <mat-timepicker-toggle matSuffix [for]="timepicker"></mat-timepicker-toggle>
-    <mat-timepicker #timepicker></mat-timepicker>
+    <mat-timepicker #timepicker format="24" mode="input"></mat-timepicker>
   </mat-form-field>
 
   <mat-form-field appearance="fill">

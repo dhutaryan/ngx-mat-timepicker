@@ -1,7 +1,11 @@
 <div class="mat-timepicker-content-container" cdkTrapFocus>
   <ng-container [ngSwitch]="mode">
     <ng-template ngSwitchCase="input">
-      <mat-time-inputs [isMeridiem]="isMeridiem"></mat-time-inputs>
+      <mat-time-inputs
+        [isMeridiem]="isMeridiem"
+        [selected]="_getSelected()"
+        (_userSelection)="_handleUserSelection($event)"
+      ></mat-time-inputs>
 
       <div class="mat-timepicker-content-actions">
         <button

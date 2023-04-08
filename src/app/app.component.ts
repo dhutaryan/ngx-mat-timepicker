@@ -9,6 +9,7 @@ import { FormControl } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   date = new Date();
+  newDate = new Date(2023, 3, 5, 14, 25);
   timeControl = new FormControl(this.date);
 
   ngOnInit() {
