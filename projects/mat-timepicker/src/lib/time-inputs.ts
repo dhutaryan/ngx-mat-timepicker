@@ -104,7 +104,9 @@ export class MatTimeInput {
   }
 
   _withZeroPrefix(value: number): string {
-    return value < 10 ? `0${value}` : `${value}`;
+    const newValue = this.isMeridiem && value === 0 ? 12 : value;
+
+    return newValue < 10 ? `0${newValue}` : `${newValue}`;
   }
 
   private _formatValue(value: number): number {
@@ -201,9 +203,14 @@ export class MatTimeInputs<T> {
   /** Gets a correct hours based on meridiem and period. */
   private _getHourBasedOnPeriod(hour: number): number {
     const afterNoon = this.isMeridiem && this.period === 'pm';
+    const beforeNoon = this.isMeridiem && this.period === 'am';
 
     if (afterNoon) {
       return hour === 12 ? hour : hour + 12;
+    }
+
+    if (beforeNoon) {
+      return hour === 12 ? 0 : hour;
     }
 
     return hour;
