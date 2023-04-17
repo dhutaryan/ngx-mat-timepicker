@@ -16,6 +16,7 @@ import { MatTimepickerModule } from './timepicker.module';
 import { MatTimepicker } from './timepicker';
 import { TimepickerOpenAs } from './timepicker-base';
 import { MatNativeDateTimeModule } from './adapter';
+import { clickDialCell, getDialCell } from './clock-dials.spec';
 
 describe('MatTimepickerActions', () => {
   function createComponent<T>(component: Type<T>): ComponentFixture<T> {
@@ -108,7 +109,7 @@ describe('MatTimepickerActions', () => {
     expect(onTimeChange).not.toHaveBeenCalled();
     expect(hourCell.classList).not.toContain('mat-primary');
 
-    clickDialCell(hourCell, hoursDial);
+    clickDialCell(hourCell);
     fixture.detectChanges();
     flush();
 
@@ -155,7 +156,7 @@ describe('MatTimepickerActions', () => {
     expect(onTimeChange).not.toHaveBeenCalled();
     expect(hourCell.classList).not.toContain('mat-primary');
 
-    clickDialCell(hourCell, hoursDial);
+    clickDialCell(hourCell);
     fixture.detectChanges();
     tick();
     flush();
@@ -205,7 +206,7 @@ describe('MatTimepickerActions', () => {
     expect(control.value).toBe(value);
     expect(onTimeChange).not.toHaveBeenCalled();
 
-    clickDialCell(hourCell, hoursDial);
+    clickDialCell(hourCell);
     fixture.detectChanges();
     tick();
     flush();
@@ -254,7 +255,7 @@ describe('MatTimepickerActions', () => {
     expect(onTimeChange).not.toHaveBeenCalled();
     expect(hourCell.classList).not.toContain('mat-primary');
 
-    clickDialCell(hourCell, hoursDial);
+    clickDialCell(hourCell);
     fixture.detectChanges();
     tick();
     flush();
@@ -302,21 +303,6 @@ describe('MatTimepickerActions', () => {
     expect(content.querySelector('.apply')).toBeFalsy();
   }));
 });
-
-function getDialCell(cellIndex: number): HTMLElement {
-  const content = document.querySelector('.mat-timepicker-content')!;
-  const cells = content.querySelectorAll<HTMLElement>('.mat-clock-dial-cell');
-  return cells[cellIndex];
-}
-
-function clickDialCell(cell: HTMLElement, dial: HTMLElement) {
-  const { x, y } = cell.getBoundingClientRect();
-  const mousedown = new MouseEvent('mousedown', { clientX: x, clientY: y });
-  const mouseup = new MouseEvent('mouseup', { clientX: x, clientY: y });
-  dial.dispatchEvent(mousedown);
-  dial.dispatchEvent(mouseup);
-  cell.click();
-}
 
 @Component({
   template: `
