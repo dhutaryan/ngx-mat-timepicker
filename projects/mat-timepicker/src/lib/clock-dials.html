@@ -28,7 +28,7 @@
       <mat-hours-clock-dial
         [selectedHour]="selectedHour"
         [isMeridiem]="isMeridiem"
-        (selectedChange)="_onHourSelected($event)"
+        (selectedChange)="_onHourChanged($event)"
       ></mat-hours-clock-dial>
     </ng-template>
     <ng-template [ngIf]="!isHoursView">
