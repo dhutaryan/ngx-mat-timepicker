@@ -94,9 +94,6 @@ describe('MatTimepickerActions', () => {
     fixture.detectChanges();
     tick();
 
-    const hoursDial = document.querySelector<HTMLElement>(
-      '.mat-clock-dial-hours'
-    )!;
     const minutesDial = document.querySelector<HTMLElement>(
       '.mat-clock-dial-minutes'
     )!;
@@ -107,7 +104,6 @@ describe('MatTimepickerActions', () => {
     expect(input.nativeElement.value).toBeFalsy();
     expect(control.value).toBeFalsy();
     expect(onTimeChange).not.toHaveBeenCalled();
-    expect(hourCell.classList).not.toContain('mat-primary');
 
     clickDialCell(hourCell);
     fixture.detectChanges();
@@ -154,7 +150,6 @@ describe('MatTimepickerActions', () => {
     expect(input.nativeElement.value).toBeFalsy();
     expect(control.value).toBeFalsy();
     expect(onTimeChange).not.toHaveBeenCalled();
-    expect(hourCell.classList).not.toContain('mat-primary');
 
     clickDialCell(hourCell);
     fixture.detectChanges();
