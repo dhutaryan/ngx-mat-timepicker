@@ -29,16 +29,41 @@ export abstract class TimeAdapter<T, L = any> {
    */
   abstract parse(value: any, parseFormat: any): T | null;
 
+  /**
+   * Gets the hour component of the given time.
+   * @param time The time to extract the hour from.
+   * @returns The hour component.
+   */
   abstract getHour(time: T): number;
 
+  /**
+   * Gets the minute component of the given time.
+   * @param time The time to extract the minute from.
+   * @returns The minute component.
+   */
   abstract getMinute(time: T): number;
 
+  /**
+   * Update the hour component of the given time.
+   * @param time The time to update the hour.
+   * @param hour The new hour to update given time.
+   * @returns The new time with updated hour component.
+   */
   abstract updateHour(time: T, hour: number): T;
 
+  /**
+   * Update the minute component of the given time.
+   * @param time The time to update the minute.
+   * @param minute The new minute to update given time.
+   * @returns The new time with updated minute component.
+   */
   abstract updateMinute(time: T, minute: number): T;
 
-  abstract updateHourAndMinute(time: T, hour: number, minute: number): T;
-
+  /**
+   * Gets the period component of the given time.
+   * @param time The time to extract the period from.
+   * @returns The period component.
+   */
   abstract getPeriod(time: T): MatTimePeriodType;
 
   /**
@@ -81,6 +106,15 @@ export abstract class TimeAdapter<T, L = any> {
       : null;
   }
 
+  /**
+   * Attempts to deserialize a value to a valid time object. The `<mat-timepicker>` will call this
+   * method on all of its `@Input()` properties that accept time. It is therefore possible to
+   * support passing values from your backend directly to these properties by overriding this method
+   * to also deserialize the format used by your backend.
+   * @param value The value to be deserialized into a time object.
+   * @returns The deserialized time object, either a valid time, null if the value can be
+   *     deserialized into a null time (e.g. the empty string), or an invalid date.
+   */
   deserialize(value: any): T | null {
     if (value == null || (this.isTimeInstance(value) && this.isValid(value))) {
       return value;
@@ -103,14 +137,7 @@ export abstract class TimeAdapter<T, L = any> {
    * @returns 0 if the time are equal, a number less than 0 if the first time is earlier,
    *     a number greater than 0 if the first time is later.
    */
-  compareDate(first: T, second: T): number {
-    return 1;
-    // return (
-    //   this.getYear(first) - this.getYear(second) ||
-    //   this.getMonth(first) - this.getMonth(second) ||
-    //   this.getDate(first) - this.getDate(second)
-    // );
-  }
+  abstract compareTime(first: T, second: T): number;
 
   /**
    * Checks if two time are equal.
@@ -124,7 +151,7 @@ export abstract class TimeAdapter<T, L = any> {
       let firstValid = this.isValid(first);
       let secondValid = this.isValid(second);
       if (firstValid && secondValid) {
-        return !this.compareDate(first, second);
+        return !this.compareTime(first, second);
       }
       return firstValid == secondValid;
     }

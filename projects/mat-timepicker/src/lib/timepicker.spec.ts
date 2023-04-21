@@ -816,7 +816,7 @@ describe('MatTimepicker', () => {
         expect(testComponent.onTimeInput).toHaveBeenCalled();
       }));
 
-      xit('should not fire the dateInput event if the value has not changed', () => {
+      it('should not fire the timeInput event if the value has not changed', () => {
         expect(testComponent.onTimeInput).not.toHaveBeenCalled();
 
         inputEl.value = '10:29';

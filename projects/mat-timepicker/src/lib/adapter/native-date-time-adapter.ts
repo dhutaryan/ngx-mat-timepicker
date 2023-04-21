@@ -68,14 +68,6 @@ export class NativeDateTimeAdapter extends TimeAdapter<Date> {
     return copy;
   }
 
-  updateHourAndMinute(date: Date, hour: number, minute: number): Date {
-    const copy = new Date(date.getTime());
-    copy.setHours(hour);
-    copy.setMinutes(minute);
-
-    return copy;
-  }
-
   getPeriod(date: Date): MatTimePeriodType {
     return date.getHours() < 12 ? 'am' : 'pm';
   }
@@ -125,6 +117,16 @@ export class NativeDateTimeAdapter extends TimeAdapter<Date> {
 
   invalid(): Date {
     return new Date(NaN);
+  }
+
+  compareTime(first: Date, second: Date): number {
+    return (
+      first.getFullYear() - second.getFullYear() ||
+      first.getMonth() - second.getMonth() ||
+      first.getDate() - second.getDate() ||
+      first.getHours() - second.getHours() ||
+      first.getMinutes() - first.getMinutes()
+    );
   }
 
   /**
