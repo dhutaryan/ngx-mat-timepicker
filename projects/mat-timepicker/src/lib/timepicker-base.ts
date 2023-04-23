@@ -20,7 +20,11 @@ import {
   OverlayRef,
   ScrollStrategy,
 } from '@angular/cdk/overlay';
-import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
+import {
+  ComponentPortal,
+  ComponentType,
+  TemplatePortal,
+} from '@angular/cdk/portal';
 import {
   DOWN_ARROW,
   ESCAPE,
@@ -35,11 +39,11 @@ import { filter, first, merge, Observable } from 'rxjs';
 
 import { MatTimepickerContent } from './timepicker-content';
 import { MAT_TIMEPICKER_SCROLL_STRATEGY } from './timepicker-scroll-strategy';
-import { MatTimepickerInput } from './timepicker-input';
 import {
   ExtractTimeTypeFromSelection,
   MatTimeSelectionModel,
 } from './time-selection-model';
+import { MAT_DEFAULT_ACITONS } from './timepicker-actions-default';
 
 /** Possible options for the timepicker to open. */
 export type TimepickerOpenAs = 'dialog' | 'popup';
@@ -189,6 +193,8 @@ export abstract class MatTimepickerBase<
     private _overlay: Overlay,
     private _ngZone: NgZone,
     @Inject(MAT_TIMEPICKER_SCROLL_STRATEGY) scrollStrategy: any,
+    @Inject(MAT_DEFAULT_ACITONS)
+    private _defaultActionsComponent: ComponentType<any>,
     private _model: MatTimeSelectionModel<S, T>
   ) {
     this._scrollStrategy = scrollStrategy;
@@ -301,11 +307,13 @@ export abstract class MatTimepickerBase<
 
   /** Forwards relevant values from the timepicker to the timepicker content inside the overlay. */
   protected _forwardContentValues(instance: MatTimepickerContent<S, T>): void {
+    const defaultPortal = new ComponentPortal(this._defaultActionsComponent);
+
     instance.timepicker = this;
     instance.color = this.color;
     instance.mode = this.mode;
     instance.isMeridiem = this.format === '12';
-    instance._assignActions(this._actionsPortal, false);
+    instance._assignActions(this._actionsPortal || defaultPortal, false);
   }
 
   /** Opens the overlay with the timepicker. */

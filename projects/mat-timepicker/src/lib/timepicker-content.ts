@@ -6,6 +6,7 @@ import {
   ViewEncapsulation,
   ElementRef,
   OnInit,
+  forwardRef,
 } from '@angular/core';
 import { mixinColor } from '@angular/material/core';
 import { Subject } from 'rxjs';
@@ -15,7 +16,6 @@ import {
   ExtractTimeTypeFromSelection,
   MatTimeSelectionModel,
 } from './time-selection-model';
-import { MatTimepickerDefaultActions } from './timepicker-actions';
 import { matTimepickerAnimations } from './timepicker-animations';
 import { MatTimepickerBase, TimepickerMode } from './timepicker-base';
 
@@ -60,10 +60,7 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
   isMeridiem: boolean;
 
   /** Portal with projected action buttons. */
-  _actionsPortal:
-    | TemplatePortal
-    | ComponentPortal<MatTimepickerDefaultActions>
-    | null = null;
+  _actionsPortal: TemplatePortal | ComponentPortal<any> | null = null;
 
   /** Emits when an animation has finished. */
   readonly _animationDone = new Subject<void>();
@@ -112,7 +109,10 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
    * necessary if the portal is assigned during initialization, but it may be required if it's
    * added at a later point.
    */
-  _assignActions(portal: TemplatePortal<any> | null, forceRerender: boolean) {
+  _assignActions(
+    portal: TemplatePortal<any> | ComponentPortal<any> | null,
+    forceRerender: boolean
+  ) {
     // As we have actions, clone the model so that we have the ability to cancel the selection.
     // Note that we want to assign this as soon as possible,
     // but `_actionsPortal` isn't available in the constructor so we do it in `ngOnInit`.
@@ -122,9 +122,7 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
     if (!this._getSelected()) {
       this._model.add(this._timeAdapter.now());
     }
-
-    const defaultPortal = new ComponentPortal(MatTimepickerDefaultActions);
-    this._actionsPortal = portal || defaultPortal;
+    this._actionsPortal = portal;
 
     if (forceRerender) {
       this._changeDetectorRef.detectChanges();

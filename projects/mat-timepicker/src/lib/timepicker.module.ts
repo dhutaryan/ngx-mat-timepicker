@@ -31,6 +31,7 @@ import {
   MatTimepickerCancel,
   MatTimepickerDefaultActions,
 } from './timepicker-actions';
+import { MAT_DEFAULT_ACITONS } from './timepicker-actions-default';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import {
   providers: [
     MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER,
     { provide: Window, useValue: window },
+    { provide: MAT_DEFAULT_ACITONS, useValue: MatTimepickerDefaultActions },
   ],
 })
 export class MatTimepickerModule {}
