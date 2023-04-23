@@ -85,6 +85,16 @@ Then you have to define a theme. [More details about theming](https://material.a
 @include mat-timepicker.timepicker-theme($theme);
 ```
 
+## Usage
+
+```html
+<mat-form-field>
+  <input type="text" matInput [matTimepicker]="timepicker" />
+  <mat-timepicker-toggle matSuffix [for]="timepicker"></mat-timepicker-toggle>
+  <mat-timepicker #timepicker></mat-timepicker>
+</mat-form-field>
+```
+
 ## License
 
 MIT
