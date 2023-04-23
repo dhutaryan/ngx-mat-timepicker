@@ -3,7 +3,6 @@
   "description": "Angular imepicker to add time which is based on material design and Angular material.",
   "version": "0.0.1",
   "license": "MIT",
-  "private": true,
   "author": {
     "name": "Dzmitry Hutaryan"
   },
