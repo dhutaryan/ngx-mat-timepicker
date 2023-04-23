@@ -47,10 +47,10 @@ $clock-dial-hand-dot-size: 0.5rem;
 
   &::before {
     position: absolute;
-    top: calc($clock-dial-hand-dot-size / -2);
-    left: calc($clock-dial-hand-dot-size / -2);
-    width: calc($clock-dial-hand-dot-size + $clock-dial-hand-width);
-    height: calc($clock-dial-hand-dot-size + $clock-dial-hand-width);
+    top: calc(#{$clock-dial-hand-dot-size} / -2);
+    left: calc(#{$clock-dial-hand-dot-size} / -2);
+    width: calc(#{$clock-dial-hand-dot-size} + #{$clock-dial-hand-width});
+    height: calc(#{$clock-dial-hand-dot-size} + #{$clock-dial-hand-width});
     border-radius: 50%;
     content: "";
   }
