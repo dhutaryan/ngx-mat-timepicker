@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build:lib": "ng build mat-timepicker --configuration production",
-    "test:lib": "ng test mat-timepicker"
+    "test:lib": "ng test mat-timepicker --code-coverage"
   },
   "private": true,
   "dependencies": {
