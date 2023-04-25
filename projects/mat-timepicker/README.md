@@ -1,24 +1,100 @@
-# MatTimepicker
+**It's a beta version. Don't use it in production till major version release.**
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
+# mat-timepicker
 
-## Code scaffolding
+[![npm](https://img.shields.io/npm/v/dgutoryan/ngx-timepicker.svg)](https://www.npmjs.com/package/ngx-timepicker)
+[![code factor](https://img.shields.io/codefactor/grade/github/dgutoryan/ngx-timepicker)](https://www.codefactor.io/repository/github/dgutoryan/ngx-timepicker)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dgutoryan/ngx-timepicker/blob/master/LICENSE)
 
-Run `ng generate component component-name --project mat-timepicker` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project mat-timepicker`.
-> Note: Don't forget to add `--project mat-timepicker` or else it will be added to the default project in your `angular.json` file. 
+The timepicker module using Angular material.
 
-## Build
+## Installation
 
-Run `ng build mat-timepicker` to build the project. The build artifacts will be stored in the `dist/` directory.
+You have to install the Angular Material and set it up. [Learn more about the setup](https://material.angular.io/guide/getting-started).
 
-## Publishing
+Install the library:
 
-After building your library with `ng build mat-timepicker`, go to the dist folder `cd dist/mat-timepicker` and run `npm publish`.
+```bash
+$ npm install --save @dhutaryan/mat-timepicker
+```
 
-## Running unit tests
+or
 
-Run `ng test mat-timepicker` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+$ yarn add @dhutaryan/mat-timepicker
+```
 
-## Further help
+## Getting started
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Import `MatTimepickerModule` to your project.
+
+```typescript
+import { MatTimepickerModule } from "@dhutaryan/mat-timepicker";
+
+@NgModule({
+  imports: [
+    // ...
+    MatTimepickerModule,
+    // ...
+  ],
+})
+export class MyModule {}
+```
+
+## Adapter
+
+Add a timepicker adapter.
+
+```typescript
+import { MatNativeDateTimeModule, MatTimepickerModule } from "@dhutaryan/mat-timepicker";
+
+@NgModule({
+  imports: [
+    // ...
+    MatTimepickerModule,
+    MatNativeDateTimeModule,
+    // ...
+  ],
+})
+export class MyModule {}
+```
+
+or create your own
+
+```typescript
+import { MatTimepickerModule } from "@dhutaryan/mat-timepicker";
+
+@NgModule({
+  imports: [
+    // ...
+    MatTimepickerModule,
+    // ...
+  ],
+  providers: [{ provide: TimeAdapter, useClass: MyTimeAdapter }],
+})
+export class MyModule {}
+```
+
+## Theming
+
+Then you have to define a theme. [More details about theming](https://material.angular.io/guide/theming).
+
+```scss
+@use "@dhutaryan/mat-timepicker" as mat-timepicker;
+
+@include mat-timepicker.timepicker-theme($theme);
+```
+
+## Usage
+
+```html
+<mat-form-field>
+  <input type="text" matInput [matTimepicker]="timepicker" />
+  <mat-timepicker-toggle matSuffix [for]="timepicker"></mat-timepicker-toggle>
+  <mat-timepicker #timepicker></mat-timepicker>
+</mat-form-field>
+```
+
+## License
+
+MIT
