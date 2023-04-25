@@ -12,5 +12,8 @@ export * from './lib/hours-clock-dial';
 export * from './lib/minutes-clock-dial';
 export * from './lib/time-inputs';
 export * from './lib/clock-dials';
+export * from './lib/time-period';
 export * from './lib/timepicker-actions';
+export * from './lib/timepicker-actions-default';
 export * from './lib/adapter';
+export * from './lib/timepicker-scroll-strategy';

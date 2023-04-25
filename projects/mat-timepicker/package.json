@@ -1,10 +1,13 @@
 {
-  "name": "mat-timepicker",
+  "name": "@dhutaryan/mat-timepicker",
   "description": "Angular imepicker to add time which is based on material design and Angular material.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "author": {
     "name": "Dzmitry Hutaryan"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "angular",
@@ -23,7 +26,9 @@
   "peerDependencies": {
     "@angular/common": ">=12.0.0",
     "@angular/core": ">=12.0.0",
-    "@angular/material": ">=12.0.0",
+    "@angular/material": ">=12.0.0"
+  },
+  "dependencies": {
     "tslib": ">=2.0.0"
   }
 }
