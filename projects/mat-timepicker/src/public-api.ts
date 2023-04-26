@@ -17,3 +17,4 @@ export * from './lib/timepicker-actions';
 export * from './lib/timepicker-actions-default';
 export * from './lib/adapter';
 export * from './lib/timepicker-scroll-strategy';
+export * from './lib/timepicker-intl';

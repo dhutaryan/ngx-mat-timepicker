@@ -15,6 +15,7 @@ import {
 
 import { TimeAdapter } from './adapter';
 import { MatTimeFaceBase } from './time-face-base';
+import { MatTimepickerIntl } from './timepicker-intl';
 
 export function withZeroPrefix(value: number, isMeridiem: boolean): string {
   const newValue = isMeridiem && value === 0 ? 12 : value;
@@ -77,7 +78,7 @@ export class MatTimeInput {
 
   constructor(
     private element: ElementRef<HTMLInputElement>,
-    private cdr: ChangeDetectorRef,
+    private _cdr: ChangeDetectorRef,
     @Inject(DOCUMENT) private _document: Document
   ) {}
 
@@ -101,12 +102,12 @@ export class MatTimeInput {
       this.inputElement.value = '';
     }
 
-    this.cdr.markForCheck();
+    this._cdr.markForCheck();
   }
 
   setInputPlaceholder(value: number) {
     this.inputElement.placeholder = this._withZeroPrefix(value);
-    this.cdr.markForCheck();
+    this._cdr.markForCheck();
   }
 
   _withZeroPrefix(value: number): string {
@@ -141,7 +142,10 @@ export class MatTimeInput {
   },
 })
 export class MatTimeInputs<T> extends MatTimeFaceBase<T> {
-  constructor(@Optional() _timeAdapter: TimeAdapter<T>) {
+  constructor(
+    public _intl: MatTimepickerIntl,
+    @Optional() _timeAdapter: TimeAdapter<T>
+  ) {
     super(_timeAdapter);
   }
 }

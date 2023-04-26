@@ -1,4 +1,4 @@
-<mat-timepicker-content-layout title="Enter time">
+<mat-timepicker-content-layout [title]="_intl.inputsTitle">
   <mat-form-field class="mat-time-inputs-field" appearance="outline" hours>
     <input
       type="text"
@@ -12,7 +12,7 @@
       [max]="isMeridiem ? 12 : 23"
       (timeChanged)="_onHourSelected($event)"
     />
-    <mat-hint>Hour</mat-hint>
+    <mat-hint>{{_intl.hourInputHint}}</mat-hint>
   </mat-form-field>
   <mat-form-field class="mat-time-inputs-field" appearance="outline" minutes>
     <input
@@ -26,7 +26,7 @@
       [max]="59"
       (timeChanged)="_onMinuteSelected($event)"
     />
-    <mat-hint>Minute</mat-hint>
+    <mat-hint>{{_intl.minuteInputHint}}</mat-hint>
   </mat-form-field>
 
   <ng-template mat-time-period [ngIf]="isMeridiem">
