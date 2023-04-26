@@ -1,8 +1,8 @@
 **It's a beta version. Don't use it in production till major version release.**
 
-# mat-timepicker
+# ngx-mat-timepicker
 
-[![npm](https://img.shields.io/npm/v/dgutoryan/ngx-timepicker.svg)](https://www.npmjs.com/package/ngx-timepicker)
+[![npm](https://img.shields.io/npm/v/@dhutaryan/ngx-mat-timepicker.svg)](https://www.npmjs.com/package/@dhutaryan/ngx-mat-timepicker)
 [![code factor](https://img.shields.io/codefactor/grade/github/dgutoryan/ngx-timepicker)](https://www.codefactor.io/repository/github/dgutoryan/ngx-timepicker)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dgutoryan/ngx-timepicker/blob/master/LICENSE)
 
@@ -15,13 +15,13 @@ You have to install the Angular Material and set it up. [Learn more about the se
 Install the library:
 
 ```bash
-$ npm install --save @dhutaryan/mat-timepicker
+$ npm install --save @dhutaryan/ngx-mat-timepicker
 ```
 
 or
 
 ```bash
-$ yarn add @dhutaryan/mat-timepicker
+$ yarn add @dhutaryan/ngx-mat-timepicker
 ```
 
 ## Getting started
@@ -29,7 +29,7 @@ $ yarn add @dhutaryan/mat-timepicker
 Import `MatTimepickerModule` to your project.
 
 ```typescript
-import { MatTimepickerModule } from "@dhutaryan/mat-timepicker";
+import { MatTimepickerModule } from "@dhutaryan/ngx-mat-timepicker";
 
 @NgModule({
   imports: [
@@ -46,7 +46,7 @@ export class MyModule {}
 Add a timepicker adapter.
 
 ```typescript
-import { MatNativeDateTimeModule, MatTimepickerModule } from "@dhutaryan/mat-timepicker";
+import { MatNativeDateTimeModule, MatTimepickerModule } from "@dhutaryan/ngx-mat-timepicker";
 
 @NgModule({
   imports: [
@@ -62,7 +62,7 @@ export class MyModule {}
 or create your own
 
 ```typescript
-import { MatTimepickerModule } from "@dhutaryan/mat-timepicker";
+import { MatTimepickerModule } from "@dhutaryan/ngx-mat-timepicker";
 
 @NgModule({
   imports: [
@@ -80,7 +80,7 @@ export class MyModule {}
 Then you have to define a theme. [More details about theming](https://material.angular.io/guide/theming).
 
 ```scss
-@use "@dhutaryan/mat-timepicker" as mat-timepicker;
+@use "@dhutaryan/ngx-mat-timepicker" as mat-timepicker;
 
 @include mat-timepicker.timepicker-theme($theme);
 ```
