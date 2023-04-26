@@ -3,7 +3,7 @@
 # ngx-mat-timepicker
 
 [![npm](https://img.shields.io/npm/v/@dhutaryan/ngx-mat-timepicker.svg)](https://www.npmjs.com/package/@dhutaryan/ngx-mat-timepicker)
-[![code factor](https://img.shields.io/codefactor/grade/github/dgutoryan/ngx-timepicker)](https://www.codefactor.io/repository/github/dgutoryan/ngx-timepicker)
+[![code factor](https://img.shields.io/codefactor/grade/github/dgutoryan/ngx-mat-timepicker)](https://www.codefactor.io/repository/github/dgutoryan/ngx-mat-timepicker)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dgutoryan/ngx-timepicker/blob/master/LICENSE)
 
 The timepicker module using Angular material.
@@ -93,6 +93,22 @@ Then you have to define a theme. [More details about theming](https://material.a
   <mat-timepicker-toggle matSuffix [for]="timepicker"></mat-timepicker-toggle>
   <mat-timepicker #timepicker></mat-timepicker>
 </mat-form-field>
+```
+
+## Locale
+
+Default locale is `en-US`. You can set your locale as:
+
+```typescript
+import { MAT_TIME_LOCALE } from "@dhutaryan/ngx-mat-timepicker";
+
+@NgModule({
+  imports: [
+    // ...
+  ],
+  providers: [{ provide: MAT_TIME_LOCALE, useValue: "en-GB" }],
+})
+export class MyModule {}
 ```
 
 ## License
