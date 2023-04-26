@@ -4,17 +4,14 @@ import {
   ViewEncapsulation,
   OnInit,
   OnDestroy,
-  Input,
   Optional,
-  Output,
-  EventEmitter,
 } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { TimeAdapter } from './adapter';
-import { MatTimePeriodType } from './time-period';
 import { MatTimeFaceBase } from './time-face-base';
 import { withZeroPrefix } from './time-inputs';
+import { MatTimepickerIntl } from './timepicker-intl';
 
 export type MatDialView = 'hours' | 'minutes';
 
@@ -39,7 +36,10 @@ export class MatClockDials<T>
   private readonly _view = new BehaviorSubject<MatDialView>('hours');
   private _viewSubscription: Subscription | null = Subscription.EMPTY;
 
-  constructor(@Optional() _timeAdapter: TimeAdapter<T>) {
+  constructor(
+    public _intl: MatTimepickerIntl,
+    @Optional() _timeAdapter: TimeAdapter<T>
+  ) {
     super(_timeAdapter);
   }
 
