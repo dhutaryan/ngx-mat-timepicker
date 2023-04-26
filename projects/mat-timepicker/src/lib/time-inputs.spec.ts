@@ -1,18 +1,5 @@
-import {
-  Component,
-  DebugElement,
-  QueryList,
-  ViewChild,
-  ViewChildren,
-} from '@angular/core';
-import {
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-  flush,
-  tick,
-  waitForAsync,
-} from '@angular/core/testing';
+import { Component, QueryList, ViewChildren } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -37,7 +24,6 @@ describe('MatInputs', () => {
   let fixture: ComponentFixture<StandardTimeInputs>;
   let testComponent: StandardTimeInputs;
   let hostElement: HTMLElement;
-  // let timeInputElements: DebugElement[];
   let hourInput: HTMLInputElement;
   let minuteInput: HTMLInputElement;
 
@@ -292,6 +278,23 @@ describe('MatInputs', () => {
 
     expect(hourInput.value).toBe('07');
     expect(minuteInput.value).toBe('02');
+  });
+
+  it('should have intl strings', () => {
+    expect(
+      hostElement.querySelector('.mat-timepicker-content-layout-title')
+        ?.textContent
+    ).toBe('Enter time');
+    expect(
+      hostElement.querySelector(
+        '.mat-timepicker-content-layout-hours .mat-hint'
+      )?.textContent
+    ).toBe('Hour');
+    expect(
+      hostElement.querySelector(
+        '.mat-timepicker-content-layout-minutes .mat-hint'
+      )?.textContent
+    ).toBe('Minute');
   });
 });
 

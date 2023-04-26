@@ -151,6 +151,13 @@ describe('MatClockDials', () => {
     expect(minuteElement.textContent?.trim()).toBe(`${minuteCellIndex * 5}`); // 5 - is a step
     expect(getDialCell(8).classList).toContain('mat-primary');
   });
+
+  it('should have intl string', () => {
+    expect(
+      hostElement.querySelector('.mat-timepicker-content-layout-title')
+        ?.textContent
+    ).toBe('Select time');
+  });
 });
 
 type DialClass = '.mat-clock-dial-hours' | '.mat-clock-dial-minutes';
