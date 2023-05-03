@@ -58,7 +58,7 @@ export type TimepickerDropdownPositionY = 'above' | 'below';
 export type TimepickerMode = 'input' | 'dial';
 
 /** Possible options for the timepicker period format. */
-export type TimepickerFormat = '12' | '24';
+export type TimepickerFormat = '12h' | '24h';
 
 /** Form control that can be associated with a timepicker. */
 export interface MatTimepickerControl<T> {
@@ -154,7 +154,7 @@ export abstract class MatTimepickerBase<
   set format(value: TimepickerFormat) {
     this._format = value;
   }
-  private _format: TimepickerFormat = '12';
+  private _format: TimepickerFormat = '12h';
 
   /** Preferred position of the timepicker in the X axis. */
   @Input()
@@ -312,7 +312,7 @@ export abstract class MatTimepickerBase<
     instance.timepicker = this;
     instance.color = this.color;
     instance.mode = this.mode;
-    instance.isMeridiem = this.format === '12';
+    instance.isMeridiem = this.format === '12h';
     instance._assignActions(this._actionsPortal || defaultPortal, false);
   }
 
