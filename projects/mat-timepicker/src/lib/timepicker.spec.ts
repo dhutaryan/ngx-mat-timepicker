@@ -162,7 +162,7 @@ describe('MatTimepicker', () => {
         expect(document.querySelector('.mat-timepicker-content')).toBeNull();
       }));
 
-      it('open in disabled mode should not open the calendar', fakeAsync(() => {
+      it('open in disabled mode should not open the timepicker content', fakeAsync(() => {
         testComponent.disabled = true;
         fixture.detectChanges();
 
@@ -178,7 +178,7 @@ describe('MatTimepicker', () => {
         expect(document.querySelector('.mat-timepicker-popup')).toBeNull();
       }));
 
-      it('disabled timepicker input should open the calendar if timepicker is enabled', fakeAsync(() => {
+      it('disabled timepicker input should open the timepicker content if timepicker is enabled', fakeAsync(() => {
         testComponent.timepicker.disabled = false;
         testComponent.timepickerInput.disabled = true;
         fixture.detectChanges();
@@ -302,6 +302,60 @@ describe('MatTimepicker', () => {
         flush();
 
         expect(document.querySelector('.mat-timepicker-dialog')).toBeNull();
+      }));
+
+      it('should show period buttons by default for inputs view', fakeAsync(() => {
+        testComponent.timepicker.mode = 'input';
+        fixture.detectChanges();
+
+        testComponent.timepicker.open();
+        tick();
+        fixture.detectChanges();
+        flush();
+
+        expect(document.querySelector('.mat-time-period')).not.toBeNull();
+        expect(document.querySelector('.mat-time-input')).not.toBeNull();
+      }));
+
+      it('should show period buttons by default for dial view', fakeAsync(() => {
+        testComponent.timepicker.mode = 'dial';
+        fixture.detectChanges();
+
+        testComponent.timepicker.open();
+        tick();
+        fixture.detectChanges();
+        flush();
+
+        expect(document.querySelector('.mat-time-period')).not.toBeNull();
+        expect(document.querySelector('.mat-clock-dials')).not.toBeNull();
+      }));
+
+      it('should hide period buttons for inputs view if format is 24h', fakeAsync(() => {
+        testComponent.timepicker.mode = 'input';
+        testComponent.timepicker.format = '24h';
+        fixture.detectChanges();
+
+        testComponent.timepicker.open();
+        tick();
+        fixture.detectChanges();
+        flush();
+
+        expect(document.querySelector('.mat-time-period')).toBeNull();
+        expect(document.querySelector('.mat-time-input')).not.toBeNull();
+      }));
+
+      it('should show period buttons by default for dial view', fakeAsync(() => {
+        testComponent.timepicker.mode = 'dial';
+        testComponent.timepicker.format = '24h';
+        fixture.detectChanges();
+
+        testComponent.timepicker.open();
+        tick();
+        fixture.detectChanges();
+        flush();
+
+        expect(document.querySelector('.mat-time-period')).toBeNull();
+        expect(document.querySelector('.mat-clock-dials')).not.toBeNull();
       }));
 
       xit('setting selected via click should update input and close timepicker', fakeAsync(() => {}));
@@ -1083,6 +1137,8 @@ describe('MatTimepicker', () => {
       [openAs]="openAs"
       [opened]="opened"
       [disabled]="disabled"
+      [format]="format"
+      [mode]="mode"
     ></mat-timepicker>
   `,
 })
@@ -1091,6 +1147,8 @@ class StandardTimepicker {
   opened = false;
   disabled = false;
   date = new Date(2021, 6, 6, 5);
+  format = '12h';
+  mode = 'dials';
   @ViewChild('t') timepicker: MatTimepicker<Date>;
   @ViewChild(MatTimepickerInput) timepickerInput: MatTimepickerInput<Date>;
 }

@@ -11,7 +11,7 @@
       [value]="newDate"
     />
     <mat-timepicker-toggle matSuffix [for]="timepicker"></mat-timepicker-toggle>
-    <mat-timepicker #timepicker format="24" mode="input"></mat-timepicker>
+    <mat-timepicker #timepicker format="24h" mode="input"></mat-timepicker>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
@@ -25,7 +25,7 @@
       matSuffix
       [for]="timepicker2"
     ></mat-timepicker-toggle>
-    <mat-timepicker #timepicker2 format="24">
+    <mat-timepicker #timepicker2 format="24h">
       <mat-timepicker-actions>
         <button color="accent" mat-button matTimepickerCancel>Cancel</button>
         <button color="accent" mat-button matTimepickerApply>OK</button>
