@@ -24,7 +24,10 @@ import { Subject } from 'rxjs';
 
 import { MatTimepickerModule } from './timepicker.module';
 import { MatTimepicker } from './timepicker';
-import { TimepickerOpenAs } from './timepicker-base';
+import {
+  MAT_TIMEPICKER_DEFAULT_OPTIONS,
+  TimepickerOpenAs,
+} from './timepicker-base';
 import { MatTimepickerInput } from './timepicker-input';
 import { MAT_TIMEPICKER_SCROLL_STRATEGY } from './timepicker-scroll-strategy';
 import { MatNativeDateTimeModule } from './adapter';
@@ -673,11 +676,11 @@ describe('MatTimepicker', () => {
     });
 
     describe('timepicker inside mat-form-field', () => {
-      let fixture: ComponentFixture<FormFieldDatepicker>;
-      let testComponent: FormFieldDatepicker;
+      let fixture: ComponentFixture<FormFieldTimepicker>;
+      let testComponent: FormFieldTimepicker;
 
       beforeEach(fakeAsync(() => {
-        fixture = createComponent(FormFieldDatepicker, [
+        fixture = createComponent(FormFieldTimepicker, [
           MatNativeDateTimeModule,
         ]);
         fixture.detectChanges();
@@ -1126,6 +1129,91 @@ describe('MatTimepicker', () => {
         expect(overlay.getAttribute('dir')).toBe('rtl');
       }));
     });
+
+    describe('timepicker default options', () => {
+      it('should be able to change the default color', fakeAsync(() => {
+        const fixture = createComponent(
+          FormFieldTimepicker,
+          [MatNativeDateTimeModule],
+          [
+            {
+              provide: MAT_TIMEPICKER_DEFAULT_OPTIONS,
+              useValue: { color: 'accent' },
+            },
+          ]
+        );
+        fixture.detectChanges();
+
+        fixture.componentInstance.timepicker.open();
+        fixture.detectChanges();
+        tick();
+
+        const timepicker = document.querySelector('.mat-timepicker');
+        expect(timepicker?.classList).toContain('mat-accent');
+      }));
+
+      it('should be able to change the default mode', fakeAsync(() => {
+        const fixture = createComponent(
+          FormFieldTimepicker,
+          [MatNativeDateTimeModule],
+          [
+            {
+              provide: MAT_TIMEPICKER_DEFAULT_OPTIONS,
+              useValue: { mode: 'input' },
+            },
+          ]
+        );
+        fixture.detectChanges();
+
+        fixture.componentInstance.timepicker.open();
+        fixture.detectChanges();
+        tick();
+
+        expect(document?.querySelector('.mat-time-inputs')).not.toBe(null);
+      }));
+
+      it('should be able to open timepicker as dialog by default', fakeAsync(() => {
+        const fixture = createComponent(
+          FormFieldTimepicker,
+          [MatNativeDateTimeModule],
+          [
+            {
+              provide: MAT_TIMEPICKER_DEFAULT_OPTIONS,
+              useValue: { openAs: 'dialog' },
+            },
+          ]
+        );
+        fixture.detectChanges();
+
+        fixture.componentInstance.timepicker.open();
+        fixture.detectChanges();
+        tick();
+
+        expect(
+          document?.querySelector('.cdk-overlay-pane.mat-timepicker-dialog')
+        ).not.toBe(null);
+      }));
+
+      it('should be able to change the default format', fakeAsync(() => {
+        const fixture = createComponent(
+          FormFieldTimepicker,
+          [MatNativeDateTimeModule],
+          [
+            {
+              provide: MAT_TIMEPICKER_DEFAULT_OPTIONS,
+              useValue: { format: '24h' },
+            },
+          ]
+        );
+        fixture.detectChanges();
+
+        fixture.componentInstance.timepicker.open();
+        fixture.detectChanges();
+        tick();
+
+        expect(document?.querySelector('.mat-time-period')).toBe(null);
+      }));
+    });
   });
 });
 
@@ -1191,7 +1279,7 @@ class NoInputTimepicker {
     </mat-form-field>
   `,
 })
-class FormFieldDatepicker {
+class FormFieldTimepicker {
   @ViewChild('t') timepicker: MatTimepicker<Date>;
   @ViewChild(MatTimepickerInput) timepickerInput: MatTimepickerInput<Date>;
   @ViewChild(MatFormField) formField: MatFormField;
