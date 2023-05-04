@@ -10,6 +10,8 @@ import {
   OnChanges,
   SimpleChanges,
   ElementRef,
+  InjectionToken,
+  Optional,
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -77,6 +79,39 @@ export interface MatTimepickerPanel<
   registerInput(input: C): MatTimeSelectionModel<S, T>;
 }
 
+/**
+ * Represents the default options for the form field that can be configured
+ * using the `MAT_TIMEPICKER_DEFAULT_OPTIONS` injection token.
+ */
+export interface MatTimepickerDefaultOptions {
+  /** Default color of the timepicker. */
+  color?: ThemePalette;
+  /** Default timepicker mode. */
+  mode: TimepickerMode;
+  /** Defines how timepicker will be appeared. */
+  openAs: TimepickerOpenAs;
+  /** Default timepicker format. */
+  format: TimepickerFormat;
+}
+
+/**
+ * Injection token that can be used to configure the
+ * default options for all timepickers within an app.
+ */
+export const MAT_TIMEPICKER_DEFAULT_OPTIONS =
+  new InjectionToken<MatTimepickerDefaultOptions>(
+    'MAT_TIMEPICKER_DEFAULT_OPTIONS'
+  );
+
+/** Default open as used by the timepicker. */
+const DEFAULT_OPEN_AS: TimepickerOpenAs = 'popup';
+
+/** Default mode used by the timepicker. */
+const DEFAULT_MODE: TimepickerMode = 'dial';
+
+/** Default format used by the timepicker. */
+const DEFAULT_FORMAT: TimepickerFormat = '12h';
+
 /** Used to generate a unique ID for each timepicker instance. */
 let timepickerUid = 0;
 
@@ -114,18 +149,19 @@ export abstract class MatTimepickerBase<
   /** Whether the timepicker mode which determines what the timepicker will be opened as. */
   @Input()
   get openAs(): TimepickerOpenAs {
-    return this._openAs;
+    return this._openAs || this._defaults?.openAs || DEFAULT_OPEN_AS;
   }
   set openAs(value: TimepickerOpenAs) {
-    this._openAs = value || 'popup';
+    this._openAs = value;
   }
-  private _openAs: TimepickerOpenAs = 'popup';
+  private _openAs: TimepickerOpenAs;
 
   /** Color palette to use on the timepicker's content. */
   @Input()
   get color(): ThemePalette {
     return (
       this._color ||
+      this._defaults?.color ||
       (this.timepickerInput
         ? this.timepickerInput.getThemePalette()
         : undefined)
@@ -139,22 +175,22 @@ export abstract class MatTimepickerBase<
   /** Timepicker display mode. */
   @Input()
   get mode(): TimepickerMode {
-    return this._mode;
+    return this._mode || this._defaults?.mode || DEFAULT_MODE;
   }
   set mode(value: TimepickerMode) {
-    this._mode = value || 'input';
+    this._mode = value;
   }
-  private _mode: TimepickerMode = 'dial';
+  private _mode: TimepickerMode;
 
   /** Timepicker period format. */
   @Input()
   get format(): TimepickerFormat {
-    return this._format;
+    return this._format || this._defaults?.format || DEFAULT_FORMAT;
   }
   set format(value: TimepickerFormat) {
     this._format = value;
   }
-  private _format: TimepickerFormat = '12h';
+  private _format: TimepickerFormat;
 
   /** Preferred position of the timepicker in the X axis. */
   @Input()
@@ -195,7 +231,10 @@ export abstract class MatTimepickerBase<
     @Inject(MAT_TIMEPICKER_SCROLL_STRATEGY) scrollStrategy: any,
     @Inject(MAT_DEFAULT_ACITONS)
     private _defaultActionsComponent: ComponentType<any>,
-    private _model: MatTimeSelectionModel<S, T>
+    private _model: MatTimeSelectionModel<S, T>,
+    @Optional()
+    @Inject(MAT_TIMEPICKER_DEFAULT_OPTIONS)
+    private _defaults?: MatTimepickerDefaultOptions
   ) {
     this._scrollStrategy = scrollStrategy;
   }
