@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   ChangeDetectionStrategy,
   ViewEncapsulation,
   Input,
@@ -24,7 +23,7 @@ export type MatTimePeriodType = 'am' | 'pm';
     '[attr.aria-orientation]': 'vertical ? "vertical" : "horizontal"',
   },
 })
-export class MatTimePeriod implements OnInit {
+export class MatTimePeriod {
   /** Whether the time period is vertically aligned. */
   @Input()
   get vertical(): boolean {
@@ -44,14 +43,27 @@ export class MatTimePeriod implements OnInit {
   }
   private _period: MatTimePeriodType = 'am';
 
+  @Input()
+  get disabledPeriod(): MatTimePeriodType | null {
+    return this._disabledPeriod;
+  }
+  set disabledPeriod(value: MatTimePeriodType | null) {
+    this._disabledPeriod = value;
+  }
+  private _disabledPeriod: MatTimePeriodType | null = null;
+
   @Output() periodChanged = new EventEmitter<MatTimePeriodType>();
-
-  constructor() {}
-
-  ngOnInit(): void {}
 
   setPeriod(period: MatTimePeriodType): void {
     this.period = period;
     this.periodChanged.emit(period);
+  }
+
+  _isPeriodDisabled(period: MatTimePeriodType): boolean {
+    if (!this.disabledPeriod) {
+      return false;
+    }
+
+    return this.disabledPeriod === period;
   }
 }

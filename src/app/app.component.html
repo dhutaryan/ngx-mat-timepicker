@@ -8,7 +8,7 @@
       type="text"
       matInput
       [matTimepicker]="timepicker"
-      [value]="newDate"
+      [(ngModel)]="date"
     />
     <mat-timepicker-toggle matSuffix [for]="timepicker"></mat-timepicker-toggle>
     <mat-timepicker #timepicker format="24h" mode="input"></mat-timepicker>
@@ -20,12 +20,14 @@
       matInput
       [matTimepicker]="timepicker2"
       [formControl]="timeControl"
+      [min]="min"
+      [max]="max"
     />
     <mat-timepicker-toggle
       matSuffix
       [for]="timepicker2"
     ></mat-timepicker-toggle>
-    <mat-timepicker #timepicker2 format="24h">
+    <mat-timepicker #timepicker2 format="24h" color="accent">
       <mat-timepicker-actions>
         <button color="accent" mat-button matTimepickerCancel>Cancel</button>
         <button color="accent" mat-button matTimepickerApply>OK</button>

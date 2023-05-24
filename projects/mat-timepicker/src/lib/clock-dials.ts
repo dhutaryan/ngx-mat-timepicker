@@ -10,7 +10,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { TimeAdapter } from './adapter';
 import { MatTimeFaceBase } from './time-face-base';
-import { withZeroPrefix } from './time-inputs';
+import { withZeroPrefixMeridiem } from './time-input-base';
 import { MatTimepickerIntl } from './timepicker-intl';
 
 export type MatDialView = 'hours' | 'minutes';
@@ -60,7 +60,11 @@ export class MatClockDials<T>
   }
 
   _withZeroPrefix(value: number): string {
-    return withZeroPrefix(value, this.isMeridiem);
+    if (value === 0) {
+      return '00';
+    }
+
+    return withZeroPrefixMeridiem(value, this.isMeridiem);
   }
 
   /** Handles hour selection. */

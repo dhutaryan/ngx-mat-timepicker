@@ -18,6 +18,7 @@ export interface ClockDialViewCell {
   displayValue: string;
   left: number;
   top: number;
+  disabled: boolean;
 }
 
 const HOURS = Array(24)
@@ -48,8 +49,7 @@ export class MatHoursClockDial implements OnInit {
     return this._selectedHour;
   }
   set selectedHour(value: number) {
-    const edgeValue = this.isMeridiem ? 12 : 0;
-    this._selectedHour = value === 0 ? edgeValue : value;
+    this._selectedHour = value;
   }
   private _selectedHour: number;
 
@@ -60,16 +60,67 @@ export class MatHoursClockDial implements OnInit {
   }
   set isMeridiem(value: boolean) {
     this._isMeridiem = value;
-    const edgeValue = value ? 12 : 0;
-    this._selectedHour =
-      this._selectedHour === 0 ? edgeValue : this._selectedHour;
   }
   private _isMeridiem: boolean;
+
+  /** Min hour value. */
+  @Input()
+  get minHour(): number {
+    return this._minHour;
+  }
+  set minHour(value: number) {
+    this._minHour = value;
+    this._initHours();
+  }
+  private _minHour: number;
+
+  /** Max hour value. */
+  @Input()
+  get maxHour(): number {
+    return this._maxHour;
+  }
+  set maxHour(value: number) {
+    this._maxHour = value;
+    this._initHours();
+  }
+  private _maxHour: number;
+
+  @Input()
+  get include12Hour(): boolean {
+    return this._include12Hour;
+  }
+  set include12Hour(value: boolean) {
+    this._include12Hour = value;
+    this._initHours();
+  }
+  private _include12Hour: boolean;
+
+  @Input()
+  get exclude12Hour(): boolean {
+    return this._exclude12Hour;
+  }
+  set exclude12Hour(value: boolean) {
+    this._exclude12Hour = value;
+    this._initHours();
+  }
+  private _exclude12Hour: boolean;
 
   /** Emits selected hour. */
   @Output() selectedChange = new EventEmitter<number>();
 
-  public hours: ClockDialViewCell[] = [];
+  hours: ClockDialViewCell[] = [];
+
+  get disabledHand(): boolean {
+    if (this.selectedHour === 12 && this.include12Hour) {
+      return false;
+    }
+
+    return this.selectedHour < this.minHour || this.selectedHour > this.maxHour;
+  }
+
+  get isHour(): boolean {
+    return !!this.hours.find((hour) => hour.value === this.selectedHour);
+  }
 
   constructor(
     private _element: ElementRef<HTMLElement>,
@@ -144,7 +195,20 @@ export class MatHoursClockDial implements OnInit {
     const z = Math.sqrt(x * x + y * y);
     const outer = z > CLOCK_OUTER_RADIUS - CLOCK_TICK_RADIUS;
     const value = this._getHourValue(initialValue, outer);
-    this.selectedHour = value;
+
+    const isValue12 = value === 12;
+    const moreMin = value >= this.minHour || isNaN(Number(this.minHour));
+    const lessMax = value <= this.maxHour || isNaN(Number(this.maxHour));
+    const hasMinHour12 = isValue12 && this.include12Hour;
+    const hasMaxHour12 = isValue12 && !this.exclude12Hour;
+
+    if (
+      ((moreMin && !isValue12) || hasMaxHour12) &&
+      (lessMax || hasMinHour12)
+    ) {
+      this.selectedHour = value;
+    }
+
     this._cdr.detectChanges();
   }
 
@@ -152,7 +216,11 @@ export class MatHoursClockDial implements OnInit {
   private _getHourValue(value: number, outer: boolean): number {
     const edgeValue = value === 0 || value === 12;
 
-    if (outer || this.isMeridiem) {
+    if (this.isMeridiem) {
+      return edgeValue ? 12 : value;
+    }
+
+    if (outer) {
       return edgeValue ? 0 : value;
     }
 
@@ -166,12 +234,18 @@ export class MatHoursClockDial implements OnInit {
     this.hours = initialHours.map((hour) => {
       const radian = (hour / 6) * Math.PI;
       const radius = this._getRadius(hour);
+      const lessMinHour = !isNaN(Number(this.minHour)) && hour < this.minHour;
+      const moreMaxHour = !isNaN(Number(this.maxHour)) && hour > this.maxHour;
+      const isHour12 = hour === 12;
+      const hasMinHour12 = isHour12 && this.include12Hour;
+      const hasMaxHour12 = isHour12 && this.exclude12Hour;
 
       return {
         value: hour,
         displayValue: hour === 0 ? '00' : String(hour),
         left: CLOCK_CORRECTED_RADIUS + Math.sin(radian) * radius,
         top: CLOCK_CORRECTED_RADIUS - Math.cos(radian) * radius,
+        disabled: lessMinHour || (moreMaxHour && !hasMinHour12) || hasMaxHour12,
       };
     });
   }

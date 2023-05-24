@@ -3,11 +3,9 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewEncapsulation,
-  Input,
   Optional,
-  Output,
-  EventEmitter,
   Directive,
+  Input,
   ElementRef,
   ChangeDetectorRef,
   Inject,
@@ -16,15 +14,14 @@ import {
 import { TimeAdapter } from './adapter';
 import { MatTimeFaceBase } from './time-face-base';
 import { MatTimepickerIntl } from './timepicker-intl';
-
-export function withZeroPrefix(value: number, isMeridiem: boolean): string {
-  const newValue = isMeridiem && value === 0 ? 12 : value;
-
-  return newValue < 10 ? `0${newValue}` : `${newValue}`;
-}
+import {
+  MatTimeInputBase,
+  withZeroPrefix,
+  withZeroPrefixMeridiem,
+} from './time-input-base';
 
 @Directive({
-  selector: 'input[matTimeInput]',
+  selector: 'input[matHourInput]',
   exportAs: 'matTimeInput',
   host: {
     class: 'mat-time-input',
@@ -32,102 +29,90 @@ export function withZeroPrefix(value: number, isMeridiem: boolean): string {
     '(blur)': 'blur($event)',
   },
 })
-export class MatTimeInput {
-  @Input()
-  get min(): number {
-    return this._min;
-  }
-  set min(value: number) {
-    this._min = value;
-  }
-  private _min = 0;
-
-  @Input()
-  get max(): number {
-    return this._max;
-  }
-  set max(value: number) {
-    this._max = value;
-  }
-  private _max = Infinity;
-
-  @Input()
-  get value(): number {
-    return this._value;
-  }
-  set value(value: number) {
-    this._value = value;
-    if (!this.hasFocus) {
-      this.setInputValue(this._value);
-    }
-    this.setInputPlaceholder(this._value);
-  }
-  private _value: number;
-
+export class MatHourInput extends MatTimeInputBase {
   @Input() isMeridiem: boolean;
-
-  @Output() timeChanged = new EventEmitter<number>();
-
-  get inputElement() {
-    return this.element.nativeElement as HTMLInputElement;
-  }
-
-  get hasFocus() {
-    return this.element?.nativeElement === this._document.activeElement;
-  }
+  @Input() include12Hour: boolean;
+  @Input() exclude12Hour: boolean;
 
   constructor(
-    private element: ElementRef<HTMLInputElement>,
-    private _cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) private _document: Document
-  ) {}
-
-  focus() {
-    this.setInputValue(null);
-  }
-
-  blur() {
-    const value = this._formatValue(
-      Number(this.inputElement.value || this._value)
-    );
-    this.setInputValue(value);
-    this.setInputPlaceholder(value);
-    this.timeChanged.emit(value);
-  }
-
-  setInputValue(value: number | null) {
-    if (value !== null) {
-      this.inputElement.value = this._withZeroPrefix(value);
-    } else {
-      this.inputElement.value = '';
-    }
-
-    this._cdr.markForCheck();
-  }
-
-  setInputPlaceholder(value: number) {
-    this.inputElement.placeholder = this._withZeroPrefix(value);
-    this._cdr.markForCheck();
+    element: ElementRef<HTMLInputElement>,
+    _cdr: ChangeDetectorRef,
+    @Inject(DOCUMENT) _document: Document
+  ) {
+    super(element, _cdr, _document);
   }
 
   _withZeroPrefix(value: number): string {
-    return withZeroPrefix(value, this.isMeridiem);
+    return withZeroPrefixMeridiem(value, this.isMeridiem);
   }
 
-  private _formatValue(value: number): number {
-    if (this.isMeridiem && (value === 0 || value === 24)) {
-      return 12;
+  _formatValue(hour: number): number {
+    const getValue = () => {
+      if (this.isMeridiem) {
+        if (hour === 0 || hour === 24) {
+          return 12;
+        }
+      }
+
+      if (hour === 24) {
+        return 0;
+      }
+
+      return this.isMeridiem && hour > 12 ? hour - 12 : hour;
+    };
+
+    const value = getValue();
+
+    if (this.isMeridiem) {
+      if (this.min > 12 || (this.max < 1 && !this.include12Hour)) {
+        return this.value;
+      }
+
+      if (value === 12 && this.include12Hour) {
+        return 12;
+      }
+
+      if (value === 12 && this.exclude12Hour) {
+        return this.min;
+      }
+
+      if (value >= 1 && value < 12) {
+        return Math.min(Math.max(value, this.min), this.max);
+      }
     }
 
-    if (this.isMeridiem && value > 12 && value < 24) {
-      return value - 12;
+    return Math.min(Math.max(value, this.min), this.max);
+  }
+}
+
+@Directive({
+  selector: 'input[matMinuteInput]',
+  exportAs: 'matTimeInput',
+  host: {
+    class: 'mat-time-input',
+    '(focus)': 'focus($event)',
+    '(blur)': 'blur($event)',
+  },
+})
+export class MatMinuteInput extends MatTimeInputBase {
+  constructor(
+    element: ElementRef<HTMLInputElement>,
+    _cdr: ChangeDetectorRef,
+    @Inject(DOCUMENT) _document: Document
+  ) {
+    super(element, _cdr, _document);
+  }
+
+  _withZeroPrefix(value: number): string {
+    return withZeroPrefix(value);
+  }
+
+  _formatValue(value: number): number {
+    if (this.min > 59 || this.max < 0) {
+      return this.value;
     }
 
-    if (!this.isMeridiem && value === 24) {
-      return 0;
-    }
-
-    return Math.min(Math.max(value, this._min), this._max);
+    return Math.min(Math.max(value, this.min), this.max);
   }
 }
 
@@ -147,5 +132,22 @@ export class MatTimeInputs<T> extends MatTimeFaceBase<T> {
     @Optional() _timeAdapter: TimeAdapter<T>
   ) {
     super(_timeAdapter);
+  }
+
+  isMinHour12: boolean;
+
+  _getMinHour() {
+    if (!isNaN(Number(this.minHour))) {
+      this.isMinHour12 = this.minHour === 0;
+      return this.minHour;
+    }
+    return this.isMeridiem ? 1 : 0;
+  }
+
+  _getMaxHour() {
+    if (!isNaN(Number(this.maxHour))) {
+      return this.maxHour;
+    }
+    return this.isMeridiem ? 12 : 23;
   }
 }

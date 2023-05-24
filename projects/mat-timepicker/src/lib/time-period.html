@@ -2,6 +2,7 @@
   class="mat-time-period-item"
   matRipple
   [class.mat-time-period-item-active]="period === 'am'"
+  [class.mat-time-period-item-disabled]="_isPeriodDisabled('am')"
   (click)="setPeriod('am')"
 >
   AM
@@ -11,6 +12,7 @@
   class="mat-time-period-item"
   matRipple
   [class.mat-time-period-item-active]="period === 'pm'"
+  [class.mat-time-period-item-disabled]="_isPeriodDisabled('pm')"
   (click)="setPeriod('pm')"
 >
   PM

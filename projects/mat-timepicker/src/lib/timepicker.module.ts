@@ -20,7 +20,7 @@ import { MatTimepicker } from './timepicker';
 import { MatTimepickerContent } from './timepicker-content';
 import { MatTimepickerContentLayout } from './timepicker-content-layout';
 import { MatTimepickerInput } from './timepicker-input';
-import { MatTimeInput, MatTimeInputs } from './time-inputs';
+import { MatHourInput, MatMinuteInput, MatTimeInputs } from './time-inputs';
 import { MatClockDials } from './clock-dials';
 import { MatHoursClockDial } from './hours-clock-dial';
 import { MatMinutesClockDial } from './minutes-clock-dial';
@@ -43,7 +43,8 @@ import { MatTimepickerIntl } from './timepicker-intl';
     MatTimepickerContentLayout,
     MatTimepickerInput,
     MatTimeInputs,
-    MatTimeInput,
+    MatHourInput,
+    MatMinuteInput,
     MatClockDials,
     MatHoursClockDial,
     MatMinutesClockDial,
@@ -74,7 +75,8 @@ import { MatTimepickerIntl } from './timepicker-intl';
     MatTimepickerContentLayout,
     MatTimepickerInput,
     MatTimeInputs,
-    MatTimeInput,
+    MatHourInput,
+    MatMinuteInput,
     MatClockDials,
     MatHoursClockDial,
     MatMinutesClockDial,
