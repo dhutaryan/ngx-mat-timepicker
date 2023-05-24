@@ -1,4 +1,9 @@
-<div class="mat-clock-dial-hand" [ngStyle]="_handStyles()"></div>
+<div
+  class="mat-clock-dial-hand"
+  [class.mat-clock-dial-hand-pointless]="isMinutePoint"
+  [class.mat-clock-dial-hand-disabled]="disabled"
+  [ngStyle]="_handStyles()"
+></div>
 <ng-template ngFor let-minute [ngForOf]="minutes">
   <button
     class="mat-clock-dial-cell mat-elevation-z0"
@@ -7,6 +12,7 @@
     [style.left.px]="minute.left"
     [style.top.px]="minute.top"
     [color]="selectedMinute === minute.value ? 'primary' : undefined"
+    [disabled]="minute.disabled"
   >
     {{ minute.displayValue }}
   </button>

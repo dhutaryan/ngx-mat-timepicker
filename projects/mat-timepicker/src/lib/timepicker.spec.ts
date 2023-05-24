@@ -16,7 +16,7 @@ import {
   TestBed,
   tick,
 } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -767,11 +767,171 @@ describe('MatTimepicker', () => {
       }));
     });
 
-    xdescribe('timepicker with min and max dates and validation', () => {});
+    describe('timepicker with min and max dates and validation', () => {
+      let fixture: ComponentFixture<TimepickerWithMinAndMaxValidation>;
+      let testComponent: TimepickerWithMinAndMaxValidation;
 
-    xdescribe('datepicker with filter and validation', () => {});
+      beforeEach(fakeAsync(() => {
+        fixture = createComponent(TimepickerWithMinAndMaxValidation, [
+          MatNativeDateTimeModule,
+        ]);
+        fixture.detectChanges();
 
-    describe('timeepicker with change and input events', () => {
+        testComponent = fixture.componentInstance;
+      }));
+
+      function revalidate() {
+        fixture.detectChanges();
+        flush();
+        fixture.detectChanges();
+      }
+
+      afterEach(fakeAsync(() => {
+        testComponent.timepicker.close();
+        fixture.detectChanges();
+        flush();
+      }));
+
+      it('should use min and max time specified by the input', () => {
+        expect(testComponent.timepicker._getMinTime()).toEqual(
+          new Date(2023, 4, 18, 3, 45)
+        );
+        expect(testComponent.timepicker._getMaxTime()).toEqual(
+          new Date(2023, 4, 18, 20, 10)
+        );
+      });
+
+      it('should mark invalid when value is before min', fakeAsync(() => {
+        testComponent.time = new Date(2023, 4, 18, 2, 0);
+        revalidate();
+
+        expect(
+          fixture.debugElement.query(By.css('input'))!.nativeElement.classList
+        ).toContain('ng-invalid');
+      }));
+
+      it('should mark invalid when value is after max', fakeAsync(() => {
+        testComponent.time = new Date(2023, 4, 18, 21, 30);
+        revalidate();
+
+        expect(
+          fixture.debugElement.query(By.css('input'))!.nativeElement.classList
+        ).toContain('ng-invalid');
+      }));
+
+      it('should not mark invalid when value equals min', fakeAsync(() => {
+        testComponent.time = testComponent.timepicker._getMinTime();
+        revalidate();
+
+        expect(
+          fixture.debugElement.query(By.css('input'))!.nativeElement.classList
+        ).not.toContain('ng-invalid');
+      }));
+
+      it('should not mark invalid when value equals max', fakeAsync(() => {
+        testComponent.time = testComponent.timepicker._getMaxTime();
+        revalidate();
+
+        expect(
+          fixture.debugElement.query(By.css('input'))!.nativeElement.classList
+        ).not.toContain('ng-invalid');
+      }));
+
+      it('should not mark invalid when value is between min and max', fakeAsync(() => {
+        testComponent.time = new Date(2023, 4, 18, 15, 55);
+        revalidate();
+
+        expect(
+          fixture.debugElement.query(By.css('input'))!.nativeElement.classList
+        ).not.toContain('ng-invalid');
+      }));
+
+      it('should update validity when switching between null and invalid', fakeAsync(() => {
+        const inputEl = fixture.debugElement.query(
+          By.css('input')
+        )!.nativeElement;
+        inputEl.value = '';
+        inputEl.dispatchEvent(new Event('input'));
+        revalidate();
+
+        expect(testComponent.model.valid).toBe(true);
+
+        inputEl.value = 'abcdefg';
+        inputEl.dispatchEvent(new Event('input'));
+        revalidate();
+
+        expect(testComponent.model.valid).toBe(false);
+
+        inputEl.value = '';
+        inputEl.dispatchEvent(new Event('input'));
+        revalidate();
+
+        expect(testComponent.model.valid).toBe(true);
+      }));
+
+      it('should update validity when a value is assigned', fakeAsync(() => {
+        const inputEl = fixture.debugElement.query(
+          By.css('input')
+        )!.nativeElement;
+        inputEl.value = '';
+        inputEl.dispatchEvent(new Event('input'));
+        revalidate();
+
+        expect(testComponent.model.valid).toBe(true);
+
+        inputEl.value = 'abcdefg';
+        inputEl.dispatchEvent(new Event('input'));
+        revalidate();
+
+        expect(testComponent.model.valid).toBe(false);
+
+        const validTime = new Date(2023, 4, 18, 12, 5);
+
+        // Assigning through the selection model simulates the user doing it via the calendar.
+        const model = fixture.debugElement
+          .query(By.directive(MatTimepicker))
+          .injector.get<MatTimeSelectionModel<Date>>(MatTimeSelectionModel);
+        model.updateSelection(validTime, null);
+        revalidate();
+
+        expect(testComponent.model.valid).toBe(true);
+        expect(testComponent.time).toBe(validTime);
+      }));
+
+      xit('should update the calendar when the min/max dates change', fakeAsync(() => {
+        const getDisabledCells = () => {
+          return document.querySelectorAll('.mat-button-disabled').length;
+        };
+
+        testComponent.time = new Date(2023, 4, 18, 6, 35);
+        fixture.detectChanges();
+
+        testComponent.minTime = new Date(2023, 4, 18, 1, 0);
+        testComponent.maxTime = new Date(2023, 4, 18, 16, 20);
+        fixture.detectChanges();
+
+        testComponent.timepicker.open();
+        fixture.detectChanges();
+        tick();
+        flush();
+
+        let disabledCellCount = getDisabledCells();
+        expect(disabledCellCount).not.toBe(0);
+
+        testComponent.minTime = new Date(2023, 4, 18, 3, 35);
+        fixture.detectChanges();
+
+        expect(getDisabledCells()).not.toBe(disabledCellCount);
+        disabledCellCount = getDisabledCells();
+
+        testComponent.maxTime = new Date(2023, 4, 18, 21, 55);
+        fixture.detectChanges();
+
+        expect(getDisabledCells()).not.toBe(disabledCellCount);
+      }));
+    });
+
+    describe('timepicker with change and input events', () => {
       let fixture: ComponentFixture<TimepickerWithChangeAndInputEvents>;
       let testComponent: TimepickerWithChangeAndInputEvents;
       let inputEl: HTMLInputElement;
@@ -1348,4 +1508,24 @@ class TimepickerWithEvents {
 })
 class TimepickerOpeningOnFocus {
   @ViewChild(MatTimepicker) timepicker: MatTimepicker<Date>;
+}
+
+@Component({
+  template: `
+    <input
+      [matTimepicker]="t"
+      [(ngModel)]="time"
+      [min]="minTime"
+      [max]="maxTime"
+    />
+    <mat-timepicker-toggle [for]="t"></mat-timepicker-toggle>
+    <mat-timepicker #t></mat-timepicker>
+  `,
+})
+class TimepickerWithMinAndMaxValidation {
+  @ViewChild('t') timepicker: MatTimepicker<Date>;
+  @ViewChild(NgModel) model: NgModel;
+  time: Date | null;
+  minTime = new Date(2023, 4, 18, 3, 45);
+  maxTime = new Date(2023, 4, 18, 20, 10);
 }

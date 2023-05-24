@@ -39,6 +39,11 @@ $primary-opacity: 0.15;
     background-color: mat.get-color-from-palette($primary, $primary-opacity);
   }
 
+  .mat-time-period-item-disabled {
+    color: mat.get-color-from-palette($foreground, disabled-button);
+    background-color: mat.get-color-from-palette($background, disabled-button);
+  }
+
   .mat-clock-dial-value,
   .mat-clock-dial {
     background-color: mat.get-color-from-palette($background, background);
@@ -56,12 +61,30 @@ $primary-opacity: 0.15;
     }
   }
 
+  .mat-clock-dial-hand.mat-clock-dial-hand-disabled {
+    background-color: transparent;
+
+    &::before {
+      background-color: color.adjust(
+        mat.get-color-from-palette($primary),
+        $alpha: -0.6
+      );
+    }
+  }
+
   [mat-mini-fab]:not(.mat-primary):not(.mat-accent):not(.mat-warn) {
     background: transparent;
 
     &:hover {
       background-color: mat.get-color-from-palette($background, hover);
     }
+  }
+
+  [mat-mini-fab].mat-clock-dial-cell.mat-button-disabled {
+    background-color: color.adjust(
+      mat.get-color-from-palette($primary),
+      $alpha: -0.6
+    );
   }
 }
 

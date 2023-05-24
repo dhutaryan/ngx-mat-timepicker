@@ -33,6 +33,10 @@ $clock-dial-hand-dot-size: 0.5rem;
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
+
+  &:disabled {
+    pointer-events: none;
+  }
 }
 
 .mat-clock-dial-hand {
@@ -53,5 +57,11 @@ $clock-dial-hand-dot-size: 0.5rem;
     height: calc(#{$clock-dial-hand-dot-size} + #{$clock-dial-hand-width});
     border-radius: 50%;
     content: "";
+  }
+}
+
+.mat-clock-dial-hand.mat-clock-dial-hand-pointless {
+  &::before {
+    content: none;
   }
 }

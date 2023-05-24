@@ -157,4 +157,22 @@ export abstract class TimeAdapter<T, L = any> {
     }
     return first == second;
   }
+
+  /**
+   * Clamp the given time between min and max time.
+   * @param time The time to clamp.
+   * @param min The minimum value to allow. If null or omitted no min is enforced.
+   * @param max The maximum value to allow. If null or omitted no max is enforced.
+   * @returns `min` if `time` is less than `min`, `max` if time is greater than `max`,
+   *     otherwise `time`.
+   */
+  clampTime(time: T, min?: T | null, max?: T | null): T {
+    if (min && this.compareTime(time, min) < 0) {
+      return min;
+    }
+    if (max && this.compareTime(time, max) > 0) {
+      return max;
+    }
+    return time;
+  }
 }

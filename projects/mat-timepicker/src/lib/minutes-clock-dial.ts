@@ -47,10 +47,41 @@ export class MatMinutesClockDial implements OnInit {
   }
   private _selectedMinute = 0;
 
+  @Input()
+  get minMinute(): number {
+    return this._minMinute;
+  }
+  set minMinute(value: number) {
+    this._minMinute = value;
+    this._initMinutes();
+  }
+  private _minMinute: number;
+
+  @Input()
+  get maxMinute(): number {
+    return this._maxMinute;
+  }
+  set maxMinute(value: number) {
+    this._maxMinute = value;
+    this._initMinutes();
+  }
+  private _maxMinute: number;
+
   /** Emits selected minute. */
   @Output() selectedChange = new EventEmitter<number>();
 
-  public minutes: ClockDialViewCell[] = [];
+  minutes: ClockDialViewCell[] = [];
+
+  get disabled(): boolean {
+    return (
+      this.selectedMinute < this.minMinute ||
+      this.selectedMinute > this.maxMinute
+    );
+  }
+
+  get isMinutePoint(): boolean {
+    return !!this.minutes.find((hour) => hour.value === this.selectedMinute);
+  }
 
   constructor(
     private _element: ElementRef<HTMLElement>,
@@ -100,7 +131,7 @@ export class MatMinutesClockDial implements OnInit {
       .subscribe({
         next: () => {
           eventsSubscription.unsubscribe();
-          this.selectedChange.emit(this._selectedMinute);
+          this.selectedChange.emit(this.selectedMinute);
         },
       });
   }
@@ -121,7 +152,14 @@ export class MatMinutesClockDial implements OnInit {
     const radian = atan2 < 0 ? Math.PI * 2 + atan2 : atan2;
     const initialValue = Math.round(radian / unit);
     const value = initialValue === 60 ? 0 : initialValue;
-    this._selectedMinute = value;
+
+    if (
+      (value >= this.minMinute || isNaN(Number(this.minMinute))) &&
+      (value <= this.maxMinute || isNaN(Number(this.maxMinute)))
+    ) {
+      this.selectedMinute = value;
+    }
+
     this._cdr.detectChanges();
   }
 
@@ -131,12 +169,17 @@ export class MatMinutesClockDial implements OnInit {
       (minute) => {
         const radian = (minute / 30) * Math.PI;
         const displayValue = minute === 0 ? '00' : String(minute);
+        const lessMinMinute =
+          !isNaN(Number(this.minMinute)) && minute < this.minMinute;
+        const moreMaxMinute =
+          !isNaN(Number(this.maxMinute)) && minute > this.maxMinute;
 
         return {
           value: minute,
           displayValue,
           left: CLOCK_CORRECTED_RADIUS + Math.sin(radian) * CLOCK_OUTER_RADIUS,
           top: CLOCK_CORRECTED_RADIUS - Math.cos(radian) * CLOCK_OUTER_RADIUS,
+          disabled: lessMinMinute || moreMaxMinute,
         };
       }
     );

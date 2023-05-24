@@ -5,11 +5,13 @@
       inputmode="numeric"
       maxlength="2"
       matInput
-      matTimeInput
+      matHourInput
       [isMeridiem]="isMeridiem"
       [value]="selectedHour"
-      [min]="isMeridiem ? 1 : 0"
-      [max]="isMeridiem ? 12 : 23"
+      [min]="_getMinHour()"
+      [max]="_getMaxHour()"
+      [include12Hour]="include12Hour"
+      [exclude12Hour]="exclude12Hour"
       (timeChanged)="_onHourSelected($event)"
     />
     <mat-hint>{{_intl.hourInputHint}}</mat-hint>
@@ -20,10 +22,10 @@
       inputmode="numeric"
       maxlength="2"
       matInput
-      matTimeInput
+      matMinuteInput
       [value]="selectedMinute"
-      [min]="0"
-      [max]="59"
+      [min]="minMinute || 0"
+      [max]="maxMinute || 59"
       (timeChanged)="_onMinuteSelected($event)"
     />
     <mat-hint>{{_intl.minuteInputHint}}</mat-hint>
@@ -32,6 +34,7 @@
   <ng-template mat-time-period [ngIf]="isMeridiem">
     <mat-time-period
       [period]="period"
+      [disabledPeriod]="disabledPeriod"
       (periodChanged)="_onPeriodChanged($event)"
     ></mat-time-period>
   </ng-template>

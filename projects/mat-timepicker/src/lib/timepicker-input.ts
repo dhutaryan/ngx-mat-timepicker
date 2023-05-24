@@ -70,6 +70,40 @@ export class MatTimepickerInput<T>
   /** The combined form control validator for this input. */
   protected _validator: ValidatorFn | null;
 
+  /** The minimum valid date. */
+  @Input()
+  get min(): T | null {
+    return this._min;
+  }
+  set min(value: T | null) {
+    const validValue = this._timeAdapter.getValidTimeOrNull(
+      this._timeAdapter.deserialize(value)
+    );
+
+    if (!this._timeAdapter.sameTime(validValue, this._min)) {
+      this._min = validValue;
+      this._validatorOnChange();
+    }
+  }
+  private _min: T | null;
+
+  /** The maximum valid date. */
+  @Input()
+  get max(): T | null {
+    return this._max;
+  }
+  set max(value: T | null) {
+    const validValue = this._timeAdapter.getValidTimeOrNull(
+      this._timeAdapter.deserialize(value)
+    );
+
+    if (!this._timeAdapter.sameTime(validValue, this._max)) {
+      this._max = validValue;
+      this._validatorOnChange();
+    }
+  }
+  private _max: T | null;
+
   constructor(
     elementRef: ElementRef<HTMLInputElement>,
     @Optional() timeAdapter: TimeAdapter<T>,
@@ -92,6 +126,16 @@ export class MatTimepickerInput<T>
   /** Returns the palette used by the input's form field, if any. */
   getThemePalette(): ThemePalette {
     return this._formField ? this._formField.color : undefined;
+  }
+
+  /** Gets the input's minimum time. */
+  _getMinTime() {
+    return this._min;
+  }
+
+  /** Gets the input's maximum time. */
+  _getMaxTime() {
+    return this._max;
   }
 
   protected _assignValueToModel(value: T | null): void {

@@ -19,6 +19,7 @@
   <ng-template mat-time-period [ngIf]="isMeridiem">
     <mat-time-period
       [period]="period"
+      [disabledPeriod]="disabledPeriod"
       (periodChanged)="_onPeriodChanged($event)"
     ></mat-time-period>
   </ng-template>
@@ -28,12 +29,18 @@
       <mat-hours-clock-dial
         [selectedHour]="selectedHour"
         [isMeridiem]="isMeridiem"
+        [minHour]="minHour"
+        [maxHour]="maxHour"
+        [include12Hour]="include12Hour"
+        [exclude12Hour]="exclude12Hour"
         (selectedChange)="_onHourChanged($event)"
       ></mat-hours-clock-dial>
     </ng-template>
     <ng-template [ngIf]="!isHoursView">
       <mat-minutes-clock-dial
         [selectedMinute]="selectedMinute"
+        [minMinute]="minMinute"
+        [maxMinute]="maxMinute"
         (selectedChange)="_onMinuteSelected($event)"
       ></mat-minutes-clock-dial>
     </ng-template>

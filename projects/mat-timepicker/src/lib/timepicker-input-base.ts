@@ -97,6 +97,12 @@ export abstract class MatTimepickerInputBase<
   @Output() readonly timeInput: EventEmitter<MatTimepickerInputEvent<T, S>> =
     new EventEmitter<MatTimepickerInputEvent<T, S>>();
 
+  /** Gets the minimum time for the input. Used for validation. */
+  abstract _getMinTime(): T | null;
+
+  /** Gets the maximum time for the input. Used for validation. */
+  abstract _getMaxTime(): T | null;
+
   /** Combined form control validator for this input. */
   protected abstract _validator: ValidatorFn | null;
 
@@ -256,7 +262,7 @@ export abstract class MatTimepickerInputBase<
 
   /** Gets the base validator functions. */
   protected _getValidators(): ValidatorFn[] {
-    return [this._parseValidator];
+    return [this._parseValidator, this._minValidator, this._maxValidator];
   }
 
   /** Whether a value is considered valid. */
@@ -281,5 +287,35 @@ export abstract class MatTimepickerInputBase<
     return this._lastValueValid
       ? null
       : { matTimepickerParse: { text: this._elementRef.nativeElement.value } };
+  };
+
+  /** The form control validator for the min time. */
+  private _minValidator: ValidatorFn = (
+    control: AbstractControl
+  ): ValidationErrors | null => {
+    const controlValue = this._timeAdapter.getValidTimeOrNull(
+      this._timeAdapter.deserialize(control.value)
+    );
+    const min = this._getMinTime();
+    return !min ||
+      !controlValue ||
+      this._timeAdapter.compareTime(min, controlValue) <= 0
+      ? null
+      : { matTimepickerMin: { min, actual: controlValue } };
+  };
+
+  /** The form control validator for the max time. */
+  private _maxValidator: ValidatorFn = (
+    control: AbstractControl
+  ): ValidationErrors | null => {
+    const controlValue = this._timeAdapter.getValidTimeOrNull(
+      this._timeAdapter.deserialize(control.value)
+    );
+    const max = this._getMaxTime();
+    return !max ||
+      !controlValue ||
+      this._timeAdapter.compareTime(max, controlValue) >= 0
+      ? null
+      : { matTimepickerMax: { max, actual: controlValue } };
   };
 }

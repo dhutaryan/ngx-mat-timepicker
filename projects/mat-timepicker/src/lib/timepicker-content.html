@@ -4,6 +4,8 @@
       <mat-time-inputs
         [isMeridiem]="isMeridiem"
         [selected]="_getSelected()"
+        [minTime]="timepicker._getMinTime()"
+        [maxTime]="timepicker._getMaxTime()"
         (_userSelection)="_handleUserSelection($event)"
       ></mat-time-inputs>
 
@@ -32,6 +34,8 @@
       <mat-clock-dials
         [isMeridiem]="isMeridiem"
         [selected]="_getSelected()"
+        [minTime]="timepicker._getMinTime()"
+        [maxTime]="timepicker._getMaxTime()"
         (_userSelection)="_handleUserSelection($event)"
       ></mat-clock-dials>
 

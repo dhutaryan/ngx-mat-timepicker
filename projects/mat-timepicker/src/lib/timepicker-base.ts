@@ -65,6 +65,8 @@ export type TimepickerFormat = '12h' | '24h';
 /** Form control that can be associated with a timepicker. */
 export interface MatTimepickerControl<T> {
   disabled: boolean;
+  min: T | null;
+  max: T | null;
   getThemePalette(): ThemePalette;
   getConnectedOverlayOrigin(): ElementRef;
 }
@@ -223,6 +225,16 @@ export abstract class MatTimepickerBase<
 
   /** Scroll strategy. */
   private _scrollStrategy: () => ScrollStrategy;
+
+  /** The minimum selectable time. */
+  _getMinTime(): T | null {
+    return this.timepickerInput && this.timepickerInput.min;
+  }
+
+  /** The maximum selectable time. */
+  _getMaxTime(): T | null {
+    return this.timepickerInput && this.timepickerInput.max;
+  }
 
   constructor(
     private _viewContainerRef: ViewContainerRef,

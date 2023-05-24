@@ -125,7 +125,7 @@ export class NativeDateTimeAdapter extends TimeAdapter<Date> {
       first.getMonth() - second.getMonth() ||
       first.getDate() - second.getDate() ||
       first.getHours() - second.getHours() ||
-      first.getMinutes() - first.getMinutes()
+      first.getMinutes() - second.getMinutes()
     );
   }
 

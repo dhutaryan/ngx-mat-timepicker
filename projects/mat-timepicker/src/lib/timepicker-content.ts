@@ -118,10 +118,6 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
     // but `_actionsPortal` isn't available in the constructor so we do it in `ngOnInit`.
     this._model = this._globalModel.clone();
 
-    // If no value in input set default as now
-    if (!this._getSelected()) {
-      this._model.add(this._timeAdapter.now());
-    }
     this._actionsPortal = portal;
 
     if (forceRerender) {
