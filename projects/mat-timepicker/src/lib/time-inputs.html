@@ -1,5 +1,10 @@
 <mat-timepicker-content-layout [title]="_intl.inputsTitle">
-  <mat-form-field class="mat-time-inputs-field" appearance="outline" hours>
+  <mat-form-field
+    class="mat-time-inputs-field"
+    appearance="outline"
+    hours
+    [color]="color"
+  >
     <input
       type="text"
       inputmode="numeric"
@@ -16,7 +21,12 @@
     />
     <mat-hint>{{_intl.hourInputHint}}</mat-hint>
   </mat-form-field>
-  <mat-form-field class="mat-time-inputs-field" appearance="outline" minutes>
+  <mat-form-field
+    class="mat-time-inputs-field"
+    appearance="outline"
+    minutes
+    [color]="color"
+  >
     <input
       type="text"
       inputmode="numeric"

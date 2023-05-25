@@ -4,7 +4,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   Directive,
+  ElementRef,
   OnDestroy,
+  OnInit,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
@@ -12,6 +14,7 @@ import {
 } from '@angular/core';
 
 import { MatTimepickerBase, MatTimepickerControl } from './timepicker-base';
+import { mixinColor } from '@angular/material/core';
 
 /** Button that will close the timepicker and assign the current selection to the data model. */
 @Directive({
@@ -90,6 +93,13 @@ export class MatTimepickerActions implements AfterViewInit, OnDestroy {
   }
 }
 
+// Boilerplate for applying mixins to MatTimepickerDefaultActions.
+const _MatTimepickerDefaultActions = mixinColor(
+  class {
+    constructor(public _elementRef: ElementRef) {}
+  }
+);
+
 /**
  * Default action buttons to the bottom of a timepicker.
  */
@@ -99,11 +109,25 @@ export class MatTimepickerActions implements AfterViewInit, OnDestroy {
   template: `
     <div class="mat-timepicker-actions">
       <ng-content></ng-content>
-      <button color="primary" mat-button matTimepickerCancel>Cancel</button>
-      <button color="primary" mat-button matTimepickerApply>OK</button>
+      <button [color]="color" mat-button matTimepickerCancel>Cancel</button>
+      <button [color]="color" mat-button matTimepickerApply>OK</button>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class MatTimepickerDefaultActions {}
+export class MatTimepickerDefaultActions
+  extends _MatTimepickerDefaultActions
+  implements OnInit
+{
+  constructor(
+    elementRef: ElementRef,
+    private _timepicker: MatTimepickerBase<MatTimepickerControl<any>, unknown>
+  ) {
+    super(elementRef);
+  }
+
+  ngOnInit() {
+    this.color = this._timepicker.color;
+  }
+}

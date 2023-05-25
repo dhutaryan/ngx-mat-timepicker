@@ -27,6 +27,7 @@
   <div class="mat-clock-dial-faces">
     <ng-template [ngIf]="isHoursView">
       <mat-hours-clock-dial
+        [color]="color"
         [selectedHour]="selectedHour"
         [isMeridiem]="isMeridiem"
         [minHour]="minHour"
@@ -38,6 +39,7 @@
     </ng-template>
     <ng-template [ngIf]="!isHoursView">
       <mat-minutes-clock-dial
+        [color]="color"
         [selectedMinute]="selectedMinute"
         [minMinute]="minMinute"
         [maxMinute]="maxMinute"

@@ -2,6 +2,7 @@
   <ng-container [ngSwitch]="mode">
     <ng-template ngSwitchCase="input">
       <mat-time-inputs
+        [color]="color"
         [isMeridiem]="isMeridiem"
         [selected]="_getSelected()"
         [minTime]="timepicker._getMinTime()"
@@ -32,6 +33,7 @@
     </ng-template>
     <ng-template ngSwitchCase="dial">
       <mat-clock-dials
+        [color]="color"
         [isMeridiem]="isMeridiem"
         [selected]="_getSelected()"
         [minTime]="timepicker._getMinTime()"

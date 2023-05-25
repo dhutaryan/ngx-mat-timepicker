@@ -11,9 +11,10 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { debounceTime, fromEvent, merge, Subject, take, takeUntil } from 'rxjs';
+import { debounceTime, fromEvent, merge, take } from 'rxjs';
 
 import { ClockDialViewCell } from './hours-clock-dial';
+import { ThemePalette } from '@angular/material/core';
 
 const MINUTES = Array(60)
   .fill(null)
@@ -66,6 +67,9 @@ export class MatMinutesClockDial implements OnInit {
     this._initMinutes();
   }
   private _maxMinute: number;
+
+  /** Color palette. */
+  @Input() color: ThemePalette;
 
   /** Emits selected minute. */
   @Output() selectedChange = new EventEmitter<number>();
