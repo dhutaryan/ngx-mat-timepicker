@@ -5,6 +5,8 @@ import {
   Optional,
   Output,
 } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
+
 import { TimeAdapter } from './adapter';
 import { MatTimePeriodType } from './time-period';
 
@@ -80,6 +82,9 @@ export abstract class MatTimeFaceBase<T> {
 
   /** Whether the clock uses 12 hour format. */
   @Input() isMeridiem: boolean;
+
+  /** Color palette. */
+  @Input() color: ThemePalette;
 
   /** Emits when any hour, minute or period is selected. */
   @Output() _userSelection = new EventEmitter<T>();

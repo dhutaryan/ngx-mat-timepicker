@@ -8,17 +8,65 @@ $inputs-separator-font-size: 3rem !default;
 $inputs-separator-line-height: 1.25rem;
 $primary-opacity: 0.15;
 
+@mixin _color($palette) {
+  .mat-time-period-item-active,
+  .mat-clock-dial-value.mat-clock-dial-value-active {
+    color: mat.get-color-from-palette($palette);
+    background-color: mat.get-color-from-palette($palette, $primary-opacity);
+  }
+
+  .mat-clock-dial::before {
+    background-color: mat.get-color-from-palette($palette);
+  }
+
+  .mat-clock-dial-hand {
+    background-color: mat.get-color-from-palette($palette);
+
+    &::before {
+      background-color: mat.get-color-from-palette($palette);
+    }
+  }
+
+  .mat-clock-dial-hand.mat-clock-dial-hand-disabled {
+    &::before {
+      background-color: color.adjust(
+        mat.get-color-from-palette($palette),
+        $alpha: -0.6
+      );
+    }
+  }
+
+  [mat-mini-fab].mat-clock-dial-cell.mat-button-disabled {
+    background-color: color.adjust(
+      mat.get-color-from-palette($palette),
+      $alpha: -0.6
+    );
+  }
+}
+
 @mixin color($config-or-theme) {
   $config: mat.get-color-config($config-or-theme);
   $is-dark-theme: map.get($config, is-dark);
   $primary: map.get($config, primary);
+  $accent: map.get($config, accent);
+  $warn: map.get($config, warn);
   $foreground: map.get($config, foreground);
   $background: map.get($config, background);
+
+  @include _color(map.get($config, primary));
 
   .mat-timepicker-content {
     @include mat.elevation(4);
     background-color: mat.get-color-from-palette($background, card);
     color: mat.get-color-from-palette($foreground, text);
+
+    &.mat-accent {
+      @include _color(map.get($config, accent));
+    }
+
+    &.mat-warn {
+      @include _color(map.get($config, warn));
+    }
   }
 
   .mat-timepicker-content-layout-title {
@@ -33,12 +81,6 @@ $primary-opacity: 0.15;
     border-color: mat.get-color-from-palette($foreground, divider);
   }
 
-  .mat-time-period-item-active,
-  .mat-clock-dial-value.mat-clock-dial-value-active {
-    color: mat.get-color-from-palette($primary);
-    background-color: mat.get-color-from-palette($primary, $primary-opacity);
-  }
-
   .mat-time-period-item-disabled {
     color: mat.get-color-from-palette($foreground, disabled-button);
     background-color: mat.get-color-from-palette($background, disabled-button);
@@ -49,27 +91,8 @@ $primary-opacity: 0.15;
     background-color: mat.get-color-from-palette($background, background);
   }
 
-  .mat-clock-dial::before {
-    background-color: mat.get-color-from-palette($primary);
-  }
-
-  .mat-clock-dial-hand {
-    background-color: mat.get-color-from-palette($primary);
-
-    &::before {
-      background-color: mat.get-color-from-palette($primary);
-    }
-  }
-
   .mat-clock-dial-hand.mat-clock-dial-hand-disabled {
     background-color: transparent;
-
-    &::before {
-      background-color: color.adjust(
-        mat.get-color-from-palette($primary),
-        $alpha: -0.6
-      );
-    }
   }
 
   [mat-mini-fab]:not(.mat-primary):not(.mat-accent):not(.mat-warn) {
@@ -78,13 +101,6 @@ $primary-opacity: 0.15;
     &:hover {
       background-color: mat.get-color-from-palette($background, hover);
     }
-  }
-
-  [mat-mini-fab].mat-clock-dial-cell.mat-button-disabled {
-    background-color: color.adjust(
-      mat.get-color-from-palette($primary),
-      $alpha: -0.6
-    );
   }
 }
 

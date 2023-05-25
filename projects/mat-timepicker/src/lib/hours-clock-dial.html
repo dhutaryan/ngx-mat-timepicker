@@ -11,7 +11,7 @@
     disableRipple
     [style.left.px]="hour.left"
     [style.top.px]="hour.top"
-    [color]="selectedHour === hour.value ? 'primary' : undefined"
+    [color]="selectedHour === hour.value ? color : undefined"
     [disabled]="hour.disabled"
   >
     {{ hour.displayValue }}

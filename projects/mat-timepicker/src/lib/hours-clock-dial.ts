@@ -11,6 +11,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 import { debounceTime, fromEvent, merge, take } from 'rxjs';
 
 export interface ClockDialViewCell {
@@ -104,6 +105,9 @@ export class MatHoursClockDial implements OnInit {
     this._initHours();
   }
   private _exclude12Hour: boolean;
+
+  /** Color palette. */
+  @Input() color: ThemePalette;
 
   /** Emits selected hour. */
   @Output() selectedChange = new EventEmitter<number>();
