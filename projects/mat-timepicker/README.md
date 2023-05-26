@@ -1,5 +1,3 @@
-**It's a beta version. Don't use it in production till major version release.**
-
 # ngx-mat-timepicker
 
 [![npm](https://img.shields.io/npm/v/@dhutaryan/ngx-mat-timepicker.svg)](https://www.npmjs.com/package/@dhutaryan/ngx-mat-timepicker)
@@ -7,6 +5,12 @@
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dgutoryan/ngx-timepicker/blob/master/LICENSE)
 
 The timepicker module using Angular material.
+
+### Versions
+
+| mat-timepicker | Angular             |
+| -------------- | ------------------- |
+| 12.x.x         | >=12.0.0 && <15.0.0 |
 
 ## Installation
 
