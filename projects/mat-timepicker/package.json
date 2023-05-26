@@ -1,13 +1,20 @@
 {
   "name": "@dhutaryan/ngx-mat-timepicker",
   "description": "Angular imepicker to add time which is based on material design and Angular material.",
-  "version": "0.0.2",
+  "version": "12.0.0",
   "license": "MIT",
   "author": {
     "name": "Dzmitry Hutaryan"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dhutaryan/ngx-mat-timepicker"
+  },
+  "bugs": {
+    "url": "https://github.com/dhutaryan/ngx-mat-timepicker/issues"
   },
   "keywords": [
     "angular",
