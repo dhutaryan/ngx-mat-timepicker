@@ -11,6 +11,7 @@
     disableRipple
     [style.left.px]="hour.left"
     [style.top.px]="hour.top"
+    [class.mat-clock-dial-cell-active]="selectedHour === hour.value"
     [color]="selectedHour === hour.value ? color : undefined"
     [disabled]="hour.disabled"
   >
