@@ -1,3 +1,7 @@
+# 12.0.1
+
+- fix(dials): remove unnecessary color for disabled buttons ([#50](https://github.com/dhutaryan/ngx-mat-timepicker/pull/50))
+
 # 12.0.0
 
 - feat(clock-dial): select time from dials
