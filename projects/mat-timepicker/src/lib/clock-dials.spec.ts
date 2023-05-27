@@ -161,6 +161,20 @@ describe('MatClockDials', () => {
           ?.textContent
       ).toBe('Select time');
     });
+
+    it('should have active class for hours and minutes', () => {
+      testComponent.selected = new Date(2023, 4, 27, 22, 20);
+      fixture.detectChanges();
+
+      expect(getDialCell(22).classList).toContain('mat-clock-dial-cell-active');
+
+      minuteElement.click();
+      fixture.detectChanges();
+
+      expect(getDialCell(20 / 5).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+    });
   });
 
   describe('with min/max', () => {

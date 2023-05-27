@@ -19,7 +19,7 @@ $primary-opacity: 0.15;
     background-color: mat.get-color-from-palette($palette);
   }
 
-  .mat-clock-dial-hand {
+  .mat-clock-dial-hand:not(.mat-clock-dial-hand-disabled) {
     background-color: mat.get-color-from-palette($palette);
 
     &::before {
@@ -36,7 +36,7 @@ $primary-opacity: 0.15;
     }
   }
 
-  [mat-mini-fab].mat-clock-dial-cell.mat-button-disabled {
+  [mat-mini-fab].mat-clock-dial-cell.mat-button-disabled.mat-clock-dial-cell-active {
     background-color: color.adjust(
       mat.get-color-from-palette($palette),
       $alpha: -0.6
