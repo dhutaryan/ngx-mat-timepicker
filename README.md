@@ -1,7 +1,7 @@
 # ngx-mat-timepicker
 
 [![npm](https://img.shields.io/npm/v/@dhutaryan/ngx-mat-timepicker.svg)](https://www.npmjs.com/package/@dhutaryan/ngx-mat-timepicker)
-[![code factor](https://img.shields.io/codefactor/grade/github/dgutoryan/ngx-mat-timepicker)](https://www.codefactor.io/repository/github/dgutoryan/ngx-mat-timepicker)
+[![code factor](https://img.shields.io/codefactor/grade/github/dhutaryan/ngx-mat-timepicker)](https://www.codefactor.io/repository/github/dhutaryan/ngx-mat-timepicker)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dgutoryan/ngx-timepicker/blob/master/LICENSE)
 
 The timepicker module using Angular material.
