@@ -1,0 +1,240 @@
+<demo-navbar></demo-navbar>
+
+<main gdColumns="1fr 1fr" gdColumns.lt-md="1fr" gdGap="1rem">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Dial timepicker (12h format)</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <input
+          type="text"
+          matInput
+          [matTimepicker]="dialpicker12"
+          [(ngModel)]="date"
+        />
+        <mat-timepicker-toggle
+          matSuffix
+          [for]="dialpicker12"
+        ></mat-timepicker-toggle>
+        <mat-timepicker #dialpicker12></mat-timepicker>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Dial timepicker (24h format)</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <input
+          type="text"
+          matInput
+          [matTimepicker]="dialpicker24"
+          [(ngModel)]="date"
+        />
+        <mat-timepicker-toggle
+          matSuffix
+          [for]="dialpicker24"
+        ></mat-timepicker-toggle>
+        <mat-timepicker format="24h" #dialpicker24></mat-timepicker>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Input timepicker (12h format)</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <input
+          type="text"
+          matInput
+          [matTimepicker]="inputpicker12"
+          [(ngModel)]="date"
+        />
+        <mat-timepicker-toggle
+          matSuffix
+          [for]="inputpicker12"
+        ></mat-timepicker-toggle>
+        <mat-timepicker mode="input" #inputpicker12></mat-timepicker>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Input timepicker (24h format)</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <input
+          type="text"
+          matInput
+          [matTimepicker]="inputpicker24"
+          [(ngModel)]="date"
+        />
+        <mat-timepicker-toggle
+          matSuffix
+          [for]="inputpicker24"
+        ></mat-timepicker-toggle>
+        <mat-timepicker
+          format="24h"
+          mode="input"
+          #inputpicker24
+        ></mat-timepicker>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Dial timepicker with min/max</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <input
+          type="text"
+          matInput
+          [matTimepicker]="dialpickerminmax"
+          [(ngModel)]="date"
+          [min]="min"
+          [max]="max"
+        />
+        <mat-timepicker-toggle
+          matSuffix
+          [for]="dialpickerminmax"
+        ></mat-timepicker-toggle>
+        <mat-timepicker #dialpickerminmax></mat-timepicker>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Input timepicker with min/max</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <input
+          type="text"
+          matInput
+          [matTimepicker]="inputpickerminmax"
+          [(ngModel)]="date"
+          [min]="min"
+          [max]="max"
+        />
+        <mat-timepicker-toggle
+          matSuffix
+          [for]="inputpickerminmax"
+        ></mat-timepicker-toggle>
+        <mat-timepicker
+          format="24h"
+          mode="input"
+          #inputpickerminmax
+        ></mat-timepicker>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Dial timepicker as dialog</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <input
+          type="text"
+          matInput
+          [matTimepicker]="dialpickerdialog"
+          [(ngModel)]="date"
+        />
+        <mat-timepicker-toggle
+          matSuffix
+          [for]="dialpickerdialog"
+        ></mat-timepicker-toggle>
+        <mat-timepicker openAs="dialog" #dialpickerdialog></mat-timepicker>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Input timepicker as dialog</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <input
+          type="text"
+          matInput
+          [matTimepicker]="inputpickerdialog"
+          [(ngModel)]="date"
+        />
+        <mat-timepicker-toggle
+          matSuffix
+          [for]="inputpickerdialog"
+        ></mat-timepicker-toggle>
+        <mat-timepicker openAs="dialog" #inputpickerdialog></mat-timepicker>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Timepicker with accent palette</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <input
+          type="text"
+          matInput
+          [matTimepicker]="pickeraccent"
+          [(ngModel)]="date"
+        />
+        <mat-timepicker-toggle
+          matSuffix
+          [for]="pickeraccent"
+        ></mat-timepicker-toggle>
+        <mat-timepicker color="accent" #pickeraccent> </mat-timepicker>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Timepicker with custom action buttons</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <input
+          type="text"
+          matInput
+          [matTimepicker]="pickeractions"
+          [(ngModel)]="date"
+        />
+        <mat-timepicker-toggle
+          matSuffix
+          [for]="pickeractions"
+        ></mat-timepicker-toggle>
+        <mat-timepicker #pickeractions>
+          <mat-timepicker-actions>
+            <button matTimepickerCancel>Cancel</button>
+            <button matTimepickerApply>OK</button>
+          </mat-timepicker-actions>
+        </mat-timepicker>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+</main>

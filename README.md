@@ -12,6 +12,10 @@ The timepicker module using Angular material.
 | -------------- | ------------------- |
 | 12.x.x         | >=12.0.0 && <15.0.0 |
 
+## Documentation
+
+Check out the [demo](https://dhutaryan.github.io/ngx-mat-timepicker/) and [API](https://github.com/dhutaryan/ngx-mat-timepicker/wiki/API).
+
 ## Installation
 
 You have to install the Angular Material and set it up. [Learn more about the setup](https://material.angular.io/guide/getting-started).
