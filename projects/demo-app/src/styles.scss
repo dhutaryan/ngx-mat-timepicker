@@ -22,6 +22,7 @@
 @include mat.input-theme(theme.$ngx-mat-timepicker-theme);
 @include mat.button-theme(theme.$ngx-mat-timepicker-theme);
 @include mat.divider-theme(theme.$ngx-mat-timepicker-theme);
+@include mat.card-theme(theme.$ngx-mat-timepicker-theme);
 @include mat-timepicker.timepicker-theme(theme.$ngx-mat-timepicker-theme);
 
 /* You can add global styles to this file, and also import other style files */
