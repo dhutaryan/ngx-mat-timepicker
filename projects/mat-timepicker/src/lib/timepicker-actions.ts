@@ -67,6 +67,9 @@ export class MatTimepickerCancel {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  host: {
+    class: 'mat-timepicker-actions-container',
+  },
 })
 export class MatTimepickerActions implements AfterViewInit, OnDestroy {
   @ViewChild(TemplateRef) _template: TemplateRef<unknown>;
@@ -115,6 +118,9 @@ const _MatTimepickerDefaultActions = mixinColor(
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  host: {
+    class: 'mat-timepicker-actions-container',
+  },
 })
 export class MatTimepickerDefaultActions
   extends _MatTimepickerDefaultActions

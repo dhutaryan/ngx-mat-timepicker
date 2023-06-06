@@ -59,6 +59,9 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
   /** Whether the clock uses 12 hour format. */
   isMeridiem: boolean;
 
+  /** Whether should toggle face button be shown. */
+  showToggleModeButton: boolean;
+
   /** Portal with projected action buttons. */
   _actionsPortal: TemplatePortal | ComponentPortal<any> | null = null;
 
