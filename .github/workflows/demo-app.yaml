@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     # We only want to build and deploy the dev-app if the `dev-app preview` label has been
     # added, or if the label is already applied and new changes have been made in the PR.
-    if: contains(github.event.pull_request.*.name, 'demo-app')
+    if: contains(github.event.pull_request.labels.*.name, 'demo-app')
     steps:
       - name: Checkout
         uses: actions/checkout@v3
