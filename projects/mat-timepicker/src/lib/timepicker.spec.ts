@@ -1373,6 +1373,28 @@ describe('MatTimepicker', () => {
 
         expect(document?.querySelector('.mat-time-period')).toBe(null);
       }));
+
+      it('should be able to change the default showToggleFaceButton', fakeAsync(() => {
+        const fixture = createComponent(
+          FormFieldTimepicker,
+          [MatNativeDateTimeModule],
+          [
+            {
+              provide: MAT_TIMEPICKER_DEFAULT_OPTIONS,
+              useValue: { showToggleFaceButton: false },
+            },
+          ]
+        );
+        fixture.detectChanges();
+
+        fixture.componentInstance.timepicker.open();
+        fixture.detectChanges();
+        tick();
+
+        expect(document?.querySelector('.mat-time-toggle-mode-button')).toBe(
+          null
+        );
+      }));
     });
   });
 });

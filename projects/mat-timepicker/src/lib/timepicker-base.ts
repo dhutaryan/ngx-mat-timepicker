@@ -94,6 +94,8 @@ export interface MatTimepickerDefaultOptions {
   openAs: TimepickerOpenAs;
   /** Default timepicker format. */
   format: TimepickerFormat;
+  /** Should toggle face button be visible. */
+  showToggleModeButton: boolean;
 }
 
 /**
@@ -194,6 +196,16 @@ export abstract class MatTimepickerBase<
   }
   private _format: TimepickerFormat;
 
+  /** Show or hide toggle button between dial and input. */
+  @Input()
+  get showToggleModeButton(): boolean {
+    return this._showToggleModeButton;
+  }
+  set showToggleModeButton(value: boolean) {
+    this._showToggleModeButton = value;
+  }
+  private _showToggleModeButton: boolean = true;
+
   /** Preferred position of the timepicker in the X axis. */
   @Input()
   xPosition: TimepickerDropdownPositionX = 'start';
@@ -249,6 +261,10 @@ export abstract class MatTimepickerBase<
     private _defaults?: MatTimepickerDefaultOptions
   ) {
     this._scrollStrategy = scrollStrategy;
+
+    if (_defaults) {
+      this.showToggleModeButton = _defaults.showToggleModeButton;
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -364,6 +380,7 @@ export abstract class MatTimepickerBase<
     instance.color = this.color;
     instance.mode = this.mode;
     instance.isMeridiem = this.format === '12h';
+    instance.showToggleModeButton = this.showToggleModeButton;
     instance._assignActions(this._actionsPortal || defaultPortal, false);
   }
 
