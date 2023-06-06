@@ -3,7 +3,6 @@ name: demo app
 on:
   push:
     branches: ["master"]
-    types: [labeled]
 
 jobs:
   build:
