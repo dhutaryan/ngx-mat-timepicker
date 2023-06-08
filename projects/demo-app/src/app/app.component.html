@@ -237,4 +237,19 @@
       </mat-form-field>
     </mat-card-content>
   </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Timepicker inline input mode</mat-card-title>
+    </mat-card-header>
+    <mat-time-inputs [(selected)]="date"></mat-time-inputs>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Timepicker inline dial mode</mat-card-title>
+    </mat-card-header>
+
+    <mat-clock-dials [selected]="date"></mat-clock-dials>
+  </mat-card>
 </main>
