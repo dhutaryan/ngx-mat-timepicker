@@ -89,6 +89,8 @@ export abstract class MatTimeFaceBase<T> {
   /** Emits when any hour, minute or period is selected. */
   @Output() _userSelection = new EventEmitter<T>();
 
+  @Output() selectedChange = new EventEmitter<T>();
+
   selectedHour: number = 0;
   selectedMinute: number = 0;
   period: MatTimePeriodType;
@@ -121,14 +123,14 @@ export abstract class MatTimeFaceBase<T> {
       this.selected!,
       this._getHourBasedOnPeriod(hour)
     );
-    this._emitUserSelection(selected);
+    this._timeSelected(selected);
   }
 
   /** Handles minute selection. */
   _onMinuteSelected(minute: number): void {
     this.selectedMinute = minute;
     const selected = this._timeAdapter.updateMinute(this.selected!, minute);
-    this._emitUserSelection(selected);
+    this._timeSelected(selected);
   }
 
   /** Handles period changing. */
@@ -138,7 +140,7 @@ export abstract class MatTimeFaceBase<T> {
       this.selected!,
       this._getHourBasedOnPeriod(this.selectedHour)
     );
-    this._emitUserSelection(selected);
+    this._timeSelected(selected);
   }
 
   /** Gets a correct hours based on meridiem and period. */
@@ -157,7 +159,11 @@ export abstract class MatTimeFaceBase<T> {
     return hour;
   }
 
-  private _emitUserSelection(value: T): void {
+  private _timeSelected(value: T): void {
+    if (value && !this._timeAdapter.sameTime(value, this.selected)) {
+      this.selectedChange.emit(value);
+    }
+
     this._userSelection.emit(value);
   }
 
