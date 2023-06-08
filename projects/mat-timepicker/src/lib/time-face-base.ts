@@ -84,7 +84,7 @@ export abstract class MatTimeFaceBase<T> {
   @Input() isMeridiem: boolean;
 
   /** Color palette. */
-  @Input() color: ThemePalette;
+  @Input() color: ThemePalette = 'primary';
 
   /** Emits when any hour, minute or period is selected. */
   @Output() _userSelection = new EventEmitter<T>();
