@@ -69,6 +69,7 @@ export interface MatTimepickerControl<T> {
   max: T | null;
   getThemePalette(): ThemePalette;
   getConnectedOverlayOrigin(): ElementRef;
+  getOverlayLabelId(): string | null;
 }
 
 /** A timepicker that can be attached to a {@link MatTimepickerControl}. */
@@ -381,6 +382,7 @@ export abstract class MatTimepickerBase<
     instance.mode = this.mode;
     instance.isMeridiem = this.format === '12h';
     instance.showToggleModeButton = this.showToggleModeButton;
+    instance._dialogLabelId = this.timepickerInput.getOverlayLabelId();
     instance._assignActions(this._actionsPortal || defaultPortal, false);
   }
 

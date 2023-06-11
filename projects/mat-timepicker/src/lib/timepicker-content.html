@@ -1,7 +1,14 @@
-<div class="mat-timepicker-content-container" cdkTrapFocus>
+<div
+  cdkTrapFocus
+  role="dialog"
+  class="mat-timepicker-content-container"
+  [attr.aria-modal]="true"
+  [attr.aria-labelledby]="_dialogLabelId ?? undefined"
+>
   <ng-container [ngSwitch]="mode">
     <ng-template ngSwitchCase="input">
       <mat-time-inputs
+        [id]="timepicker.id"
         [color]="color"
         [isMeridiem]="isMeridiem"
         [selected]="_getSelected()"
@@ -34,6 +41,7 @@
     </ng-template>
     <ng-template ngSwitchCase="dial">
       <mat-clock-dials
+        [id]="timepicker.id"
         [color]="color"
         [isMeridiem]="isMeridiem"
         [selected]="_getSelected()"
@@ -65,4 +73,18 @@
       </div>
     </ng-template>
   </ng-container>
+
+  <!-- Invisible close button for screen reader users. -->
+  <button
+    type="button"
+    mat-raised-button
+    [color]="color || 'primary'"
+    class="mat-timepicker-close-button"
+    [class.cdk-visually-hidden]="!_closeButtonFocused"
+    (focus)="_closeButtonFocused = true"
+    (blur)="_closeButtonFocused = false"
+    (click)="timepicker.close()"
+  >
+    {{ _closeButtonText }}
+  </button>
 </div>

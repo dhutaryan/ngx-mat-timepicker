@@ -10,6 +10,7 @@ import {
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 import { MatTimepicker } from './timepicker';
+import { MatTimepickerIntl } from './timepicker-intl';
 
 @Directive({ selector: '[matTimepickerToggleIcon]' })
 export class MatTimepickerToggleIcon {}
@@ -54,7 +55,13 @@ export class MatTimepickerToggle<T> {
   /** Custom icon set by the consumer. */
   @ContentChild(MatTimepickerToggleIcon) customIcon: MatTimepickerToggleIcon;
 
-  constructor(@Attribute('tabindex') defaultTabIndex: string) {
+  /** Screen-reader label for the button. */
+  @Input('aria-label') ariaLabel: string;
+
+  constructor(
+    @Attribute('tabindex') defaultTabIndex: string,
+    public _intl: MatTimepickerIntl
+  ) {
     const parsedTabIndex = Number(defaultTabIndex);
     this.tabIndex =
       parsedTabIndex || parsedTabIndex === 0 ? parsedTabIndex : null;

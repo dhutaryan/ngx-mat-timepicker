@@ -3,6 +3,7 @@
   #button
   mat-icon-button
   [attr.aria-haspopup]="timepicker ? 'dialog' : null"
+  [attr.aria-label]="ariaLabel || _intl.openTimepickerLabel"
   [attr.tabindex]="disabled ? -1 : tabIndex"
   [disabled]="disabled"
   [disableRipple]="disableRipple"

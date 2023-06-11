@@ -1,17 +1,21 @@
 <mat-timepicker-content-layout [title]="_intl.dialsTitle">
   <div
+    tabindex="0"
     class="mat-clock-dial-value"
     hours
     [class.mat-clock-dial-value-active]="isHoursView"
     (click)="onViewChange('hours')"
+    (keyup.enter)="onViewChange('hours')"
   >
     {{ _withZeroPrefix(selectedHour) }}
   </div>
   <div
+    tabindex="0"
     class="mat-clock-dial-value"
     minutes
     [class.mat-clock-dial-value-active]="!isHoursView"
     (click)="onViewChange('minutes')"
+    (keyup.enter)="onViewChange('minutes')"
   >
     {{ _withZeroPrefix(selectedMinute) }}
   </div>

@@ -14,4 +14,10 @@ export class MatTimepickerIntl {
 
   /** A label for minute input hint. */
   minuteInputHint = 'Minute';
+
+  /** Label for the button used to open the timepicker popup (used by screen readers). */
+  openTimepickerLabel = 'Open timepicker';
+
+  /** Label for the button used to close the timepicker popup (used by screen readers). */
+  closeTimepickerLabel = 'Close timepicker';
 }
