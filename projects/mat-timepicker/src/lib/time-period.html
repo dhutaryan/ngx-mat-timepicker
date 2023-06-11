@@ -1,19 +1,23 @@
 <div
+  tabindex="0"
   class="mat-time-period-item"
   matRipple
   [class.mat-time-period-item-active]="period === 'am'"
   [class.mat-time-period-item-disabled]="_isPeriodDisabled('am')"
   (click)="setPeriod('am')"
+  (keyup.enter)="setPeriod('am')"
 >
   AM
 </div>
 <mat-divider></mat-divider>
 <div
+  tabindex="0"
   class="mat-time-period-item"
   matRipple
   [class.mat-time-period-item-active]="period === 'pm'"
   [class.mat-time-period-item-disabled]="_isPeriodDisabled('pm')"
   (click)="setPeriod('pm')"
+  (keyup.enter)="setPeriod('pm')"
 >
   PM
 </div>

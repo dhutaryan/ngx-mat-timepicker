@@ -45,6 +45,8 @@ export const MAT_TIMEPICKER_VALIDATORS: any = {
   ],
   host: {
     class: 'mat-timepicker-input',
+    '[attr.aria-haspopup]': '_timepicker ? "dialog" : null',
+    '[attr.aria-owns]': '(_timepicker?.opened && _timepicker.id) || null',
     '[disabled]': 'disabled',
     '(input)': '_onInput($event.target.value)',
     '(change)': '_onChange()',
@@ -65,7 +67,7 @@ export class MatTimepickerInput<T>
       this._registerModel(timepicker.registerInput(this));
     }
   }
-  private _timepicker: MatTimepickerPanel<MatTimepickerControl<T>, T | null, T>;
+  _timepicker: MatTimepickerPanel<MatTimepickerControl<T>, T | null, T>;
 
   /** The combined form control validator for this input. */
   protected _validator: ValidatorFn | null;
@@ -126,6 +128,15 @@ export class MatTimepickerInput<T>
   /** Returns the palette used by the input's form field, if any. */
   getThemePalette(): ThemePalette {
     return this._formField ? this._formField.color : undefined;
+  }
+
+  /** Gets the ID of an element that should be used a description for the timepicker overlay. */
+  getOverlayLabelId(): string | null {
+    if (this._formField) {
+      return this._formField.getLabelId();
+    }
+
+    return this._elementRef.nativeElement.getAttribute('aria-labelledby');
   }
 
   /** Gets the input's minimum time. */

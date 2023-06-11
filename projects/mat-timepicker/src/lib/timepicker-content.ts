@@ -6,11 +6,11 @@ import {
   ViewEncapsulation,
   ElementRef,
   OnInit,
-  forwardRef,
+  AfterViewInit,
+  ViewChild,
 } from '@angular/core';
 import { mixinColor } from '@angular/material/core';
 import { Subject } from 'rxjs';
-import { TimeAdapter } from './adapter';
 
 import {
   ExtractTimeTypeFromSelection,
@@ -18,6 +18,9 @@ import {
 } from './time-selection-model';
 import { matTimepickerAnimations } from './timepicker-animations';
 import { MatTimepickerBase, TimepickerMode } from './timepicker-base';
+import { MatTimepickerIntl } from './timepicker-intl';
+import { MatClockDials } from './clock-dials';
+import { MatTimeInputs } from './time-inputs';
 
 // Boilerplate for applying mixins to MatTimepickerContent.
 const _MatTimepickerContentBase = mixinColor(
@@ -45,8 +48,14 @@ const _MatTimepickerContentBase = mixinColor(
 })
 export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
   extends _MatTimepickerContentBase
-  implements OnInit
+  implements OnInit, AfterViewInit
 {
+  /** Reference to the internal clock dials component. */
+  @ViewChild(MatClockDials) _dials: MatClockDials<T> | undefined;
+
+  /** Reference to the internal time inputs component. */
+  @ViewChild(MatTimeInputs) _inputs: MatTimeInputs<T> | undefined;
+
   /** Reference to the timepicker that created the overlay. */
   timepicker: MatTimepickerBase<any, S, T>;
 
@@ -65,6 +74,15 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
   /** Portal with projected action buttons. */
   _actionsPortal: TemplatePortal | ComponentPortal<any> | null = null;
 
+  /** Id of the label for the `role="dialog"` element. */
+  _dialogLabelId: string | null;
+
+  /** Text for the close button. */
+  _closeButtonText: string;
+
+  /** Whether the close button currently has focus. */
+  _closeButtonFocused: boolean;
+
   /** Emits when an animation has finished. */
   readonly _animationDone = new Subject<void>();
 
@@ -72,16 +90,21 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
 
   constructor(
     elementRef: ElementRef,
+    intl: MatTimepickerIntl,
     private _globalModel: MatTimeSelectionModel<S, T>,
-    private _changeDetectorRef: ChangeDetectorRef,
-    private _timeAdapter: TimeAdapter<T>
+    private _changeDetectorRef: ChangeDetectorRef
   ) {
     super(elementRef);
+    this._closeButtonText = intl.closeTimepickerLabel;
   }
 
   ngOnInit() {
     this._animationState =
       this.timepicker.openAs === 'dialog' ? 'enter-dialog' : 'enter-dropdown';
+  }
+
+  ngAfterViewInit() {
+    (this._dials || this._inputs)?.focusActiveCell();
   }
 
   /** Changes animation state while closing timepicker content. */

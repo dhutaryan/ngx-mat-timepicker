@@ -256,7 +256,7 @@ describe('MatTimepicker', () => {
         expect(event.defaultPrevented).toBe(false);
       }));
 
-      xit('should set the proper role on the popup', fakeAsync(() => {
+      it('should set the proper role on the popup', fakeAsync(() => {
         testComponent.timepicker.open();
         fixture.detectChanges();
         tick();
@@ -269,7 +269,7 @@ describe('MatTimepicker', () => {
         expect(popup.getAttribute('role')).toBe('dialog');
       }));
 
-      xit('should set aria-labelledby to the one from the input, if not placed inside a mat-form-field', fakeAsync(() => {
+      it('should set aria-labelledby to the one from the input, if not placed inside a mat-form-field', fakeAsync(() => {
         expect(
           fixture.nativeElement.querySelector('mat-form-field')
         ).toBeFalsy();
@@ -365,8 +365,51 @@ describe('MatTimepicker', () => {
       xit('setting selected via enter press should update input and close popup', fakeAsync(() => {}));
       xit('clicking the currently selected time should close the timepicker without firing selectedChanged', fakeAsync(() => {}));
       xit('pressing enter on the currently selected time should close the popup without firing selectedChanged', fakeAsync(() => {}));
-      xit('input should aria-owns timepicker after opened in popup mode', fakeAsync(() => {}));
-      xit('input should aria-owns timepicker after opened in dialog mode', fakeAsync(() => {}));
+
+      it('input should aria-owns timepicker after opened in popup mode', fakeAsync(() => {
+        const inputEl = fixture.debugElement.query(
+          By.css('input')
+        )!.nativeElement;
+        expect(inputEl.getAttribute('aria-owns')).toBeNull();
+
+        testComponent.timepicker.open();
+        fixture.detectChanges();
+        tick();
+        flush();
+
+        const ownedElementId = inputEl.getAttribute('aria-owns');
+        expect(ownedElementId).not.toBeNull();
+
+        const ownedElement = document.getElementById(ownedElementId);
+        expect(ownedElement).not.toBeNull();
+        expect((ownedElement as Element).tagName.toLowerCase()).toBe(
+          'mat-clock-dials'
+        );
+      }));
+
+      it('input should aria-owns timepicker after opened in dialog mode', fakeAsync(() => {
+        testComponent.openAs = 'dialog';
+        fixture.detectChanges();
+
+        const inputEl = fixture.debugElement.query(
+          By.css('input')
+        )!.nativeElement;
+        expect(inputEl.getAttribute('aria-owns')).toBeNull();
+
+        testComponent.timepicker.open();
+        fixture.detectChanges();
+        tick();
+        flush();
+
+        const ownedElementId = inputEl.getAttribute('aria-owns');
+        expect(ownedElementId).not.toBeNull();
+
+        const ownedElement = document.getElementById(ownedElementId);
+        expect(ownedElement).not.toBeNull();
+        expect((ownedElement as Element).tagName.toLowerCase()).toBe(
+          'mat-clock-dials'
+        );
+      }));
 
       it('should not throw when given wrong data type', () => {
         testComponent.date = '1/1/2017' as any;
@@ -523,7 +566,7 @@ describe('MatTimepicker', () => {
         expect(event.defaultPrevented).toBe(false);
       }));
 
-      xit('should show the invisible close button on focus', fakeAsync(() => {
+      it('should show the invisible close button on focus', fakeAsync(() => {
         testComponent.opened = true;
         fixture.detectChanges();
         tick();
@@ -545,7 +588,7 @@ describe('MatTimepicker', () => {
         expect(button.classList).toContain('cdk-visually-hidden');
       }));
 
-      xit('should close the overlay when clicking on the invisible close button', fakeAsync(() => {
+      it('should close the overlay when clicking on the invisible close button', fakeAsync(() => {
         testComponent.opened = true;
         fixture.detectChanges();
         tick();
@@ -746,7 +789,7 @@ describe('MatTimepicker', () => {
         expect(contentEl.classList).not.toContain('mat-warn');
       }));
 
-      xit('should set aria-labelledby of the overlay to the form field label', fakeAsync(() => {
+      it('should set aria-labelledby of the overlay to the form field label', fakeAsync(() => {
         const label: HTMLElement = fixture.nativeElement.querySelector('label');
 
         expect(label).toBeTruthy();
@@ -887,7 +930,7 @@ describe('MatTimepicker', () => {
 
         const validTime = new Date(2023, 4, 18, 12, 5);
 
-        // Assigning through the selection model simulates the user doing it via the calendar.
+        // Assigning through the selection model simulates the user doing it via the timepicker.
         const model = fixture.debugElement
           .query(By.directive(MatTimepicker))
           .injector.get<MatTimeSelectionModel<Date>>(MatTimeSelectionModel);
@@ -898,7 +941,7 @@ describe('MatTimepicker', () => {
         expect(testComponent.time).toBe(validTime);
       }));
 
-      xit('should update the calendar when the min/max dates change', fakeAsync(() => {
+      xit('should update the timepicker when the min/max dates change', fakeAsync(() => {
         const getDisabledCells = () => {
           return document.querySelectorAll('.mat-button-disabled').length;
         };
@@ -1418,7 +1461,7 @@ class StandardTimepicker {
   disabled = false;
   date = new Date(2021, 6, 6, 5);
   format = '12h';
-  mode = 'dials';
+  mode = 'dial';
   @ViewChild('t') timepicker: MatTimepicker<Date>;
   @ViewChild(MatTimepickerInput) timepickerInput: MatTimepickerInput<Date>;
 }

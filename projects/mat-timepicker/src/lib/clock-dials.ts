@@ -5,8 +5,10 @@ import {
   OnInit,
   OnDestroy,
   Optional,
+  NgZone,
+  ElementRef,
 } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, take } from 'rxjs';
 
 import { TimeAdapter } from './adapter';
 import { MatTimeFaceBase } from './time-face-base';
@@ -23,6 +25,7 @@ export type MatDialView = 'hours' | 'minutes';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
+    role: 'dial',
     class: 'mat-clock-dials',
   },
 })
@@ -38,7 +41,9 @@ export class MatClockDials<T>
 
   constructor(
     public _intl: MatTimepickerIntl,
-    @Optional() _timeAdapter: TimeAdapter<T>
+    @Optional() _timeAdapter: TimeAdapter<T>,
+    private _ngZone: NgZone,
+    private _elementRef: ElementRef
   ) {
     super(_timeAdapter);
   }
@@ -57,6 +62,23 @@ export class MatClockDials<T>
   /** Changes clock dial view. */
   onViewChange(view: MatDialView): void {
     this._view.next(view);
+  }
+
+  focusActiveCell(): void {
+    this._ngZone.runOutsideAngular(() => {
+      this._ngZone.onStable.pipe(take(1)).subscribe(() => {
+        setTimeout(() => {
+          const activeCell: HTMLElement | null =
+            this._elementRef.nativeElement.querySelector(
+              '.mat-clock-dial-cell-active'
+            );
+
+          if (activeCell) {
+            activeCell.focus();
+          }
+        });
+      });
+    });
   }
 
   _withZeroPrefix(value: number): string {
