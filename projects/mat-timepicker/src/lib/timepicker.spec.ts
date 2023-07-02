@@ -1422,14 +1422,14 @@ describe('MatTimepicker', () => {
         expect(document?.querySelector('.mat-time-period')).toBe(null);
       }));
 
-      it('should be able to change the default showToggleFaceButton', fakeAsync(() => {
+      it('should be able to change the default showToggleModeButton', fakeAsync(() => {
         const fixture = createComponent(
           FormFieldTimepicker,
           [MatNativeDateTimeModule],
           [
             {
               provide: MAT_TIMEPICKER_DEFAULT_OPTIONS,
-              useValue: { showToggleFaceButton: false },
+              useValue: { showToggleModeButton: false },
             },
           ]
         );

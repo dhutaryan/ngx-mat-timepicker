@@ -280,7 +280,10 @@ export abstract class MatTimepickerBase<
     this._scrollStrategy = scrollStrategy;
 
     if (_defaults) {
-      this.showToggleModeButton = _defaults.showToggleModeButton;
+      this.showToggleModeButton =
+        _defaults.showToggleModeButton !== undefined
+          ? _defaults.showToggleModeButton
+          : true;
     }
   }
 
