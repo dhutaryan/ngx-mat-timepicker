@@ -20,6 +20,8 @@ import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { By } from '@angular/platform-browser';
+import { Directionality } from '@angular/cdk/bidi';
 import { Subject } from 'rxjs';
 
 import { MatTimepickerModule } from './timepicker.module';
@@ -31,9 +33,12 @@ import {
 import { MatTimepickerInput } from './timepicker-input';
 import { MAT_TIMEPICKER_SCROLL_STRATEGY } from './timepicker-scroll-strategy';
 import { MatNativeDateTimeModule } from './adapter';
-import { By } from '@angular/platform-browser';
 import { MatTimeSelectionModel } from './time-selection-model';
-import { Directionality } from '@angular/cdk/bidi';
+import {
+  clickDialCell,
+  getDialCell,
+  getMinuteCellIndex,
+} from './clock-dials.spec';
 
 describe('MatTimepicker', () => {
   const SUPPORTS_INTL = typeof Intl != 'undefined';
@@ -1436,6 +1441,37 @@ describe('MatTimepicker', () => {
 
         expect(document?.querySelector('.mat-time-toggle-mode-button')).toBe(
           null
+        );
+      }));
+
+      it('should be able to change the default minutes interval', fakeAsync(() => {
+        const fixture = createComponent(
+          StandardTimepicker,
+          [MatNativeDateTimeModule],
+          [
+            {
+              provide: MAT_TIMEPICKER_DEFAULT_OPTIONS,
+              useValue: { minuteInterval: 15 },
+            },
+          ]
+        );
+        fixture.detectChanges();
+
+        fixture.componentInstance.timepicker.open();
+        fixture.detectChanges();
+        tick();
+        const minuteElement = document.querySelectorAll(
+          '.mat-clock-dial-value'
+        )[1] as HTMLDivElement;
+        minuteElement?.click();
+        fixture.detectChanges();
+        clickDialCell(getDialCell(getMinuteCellIndex(25)));
+        fixture.detectChanges();
+        tick();
+        flush();
+
+        expect(getDialCell(getMinuteCellIndex(30)).classList).toContain(
+          'mat-clock-dial-cell-active'
         );
       }));
     });

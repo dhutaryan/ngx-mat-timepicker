@@ -275,6 +275,15 @@ describe('MatInputs', () => {
         )?.textContent
       ).toBe('Minute');
     });
+
+    it('should change minutes if interval has set', () => {
+      testComponent.minuteInterval = 15;
+      minuteInput.value = '35';
+      fixture.detectChanges();
+      dispatchInputEvent(minuteInput, 'blur');
+
+      expect(Number(minuteInput.value)).toBe(30);
+    });
   });
 
   describe('with meridiem', () => {
@@ -1011,6 +1020,7 @@ function dispatchInputEvent(input: HTMLInputElement, type: 'focus' | 'blur') {
     <mat-time-inputs
       [isMeridiem]="isMeridiem"
       [selected]="selected"
+      [minuteInterval]="minuteInterval"
       (_userSelection)="onSelect($event)"
     ></mat-time-inputs>
   `,
@@ -1022,6 +1032,7 @@ class StandardTimeInputs {
 
   isMeridiem = false;
   selected: Date | null = null;
+  minuteInterval = 1;
   onSelect(value: Date) {}
 }
 
