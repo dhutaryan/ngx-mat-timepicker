@@ -6,6 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 
 import { TimeAdapter } from './adapter';
 import { MatTimePeriodType } from './time-period';
@@ -79,6 +80,16 @@ export abstract class MatTimeFaceBase<T> {
     }
   }
   private _maxTime: T | null;
+
+  /** Step over minutes. */
+  @Input()
+  get minuteInterval(): number {
+    return this._minuteInterval;
+  }
+  set minuteInterval(value: number) {
+    this._minuteInterval = coerceNumberProperty(value) || 1;
+  }
+  private _minuteInterval: number = 1;
 
   /** Whether the clock uses 12 hour format. */
   @Input() isMeridiem: boolean;

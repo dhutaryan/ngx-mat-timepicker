@@ -36,6 +36,7 @@
       [value]="selectedMinute"
       [min]="minMinute || 0"
       [max]="maxMinute || 59"
+      [interval]="minuteInterval"
       (timeChanged)="_onMinuteSelected($event)"
     />
     <mat-hint>{{_intl.minuteInputHint}}</mat-hint>

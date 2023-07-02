@@ -14,7 +14,11 @@ import {
   Optional,
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import {
+  BooleanInput,
+  coerceBooleanProperty,
+  coerceNumberProperty,
+} from '@angular/cdk/coercion';
 import {
   FlexibleConnectedPositionStrategy,
   Overlay,
@@ -97,6 +101,8 @@ export interface MatTimepickerDefaultOptions {
   format: TimepickerFormat;
   /** Should toggle face button be visible. */
   showToggleModeButton: boolean;
+  /** Step for minutes. */
+  minuteInterval: number;
 }
 
 /**
@@ -206,6 +212,16 @@ export abstract class MatTimepickerBase<
     this._showToggleModeButton = value;
   }
   private _showToggleModeButton: boolean = true;
+
+  /** Step for minutes. */
+  @Input()
+  get minuteInterval(): number {
+    return this._minuteInterval || this._defaults?.minuteInterval || 1;
+  }
+  set minuteInterval(value: number) {
+    this._minuteInterval = coerceNumberProperty(value);
+  }
+  private _minuteInterval: number;
 
   /** Preferred position of the timepicker in the X axis. */
   @Input()
@@ -382,6 +398,7 @@ export abstract class MatTimepickerBase<
     instance.mode = this.mode;
     instance.isMeridiem = this.format === '12h';
     instance.showToggleModeButton = this.showToggleModeButton;
+    instance.minuteInterval = this.minuteInterval;
     instance._dialogLabelId = this.timepickerInput.getOverlayLabelId();
     instance._assignActions(this._actionsPortal || defaultPortal, false);
   }

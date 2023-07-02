@@ -11,6 +11,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { debounceTime, fromEvent, merge, take } from 'rxjs';
 
 import { ClockDialViewCell } from './hours-clock-dial';
@@ -67,6 +68,16 @@ export class MatMinutesClockDial implements OnInit {
     this._initMinutes();
   }
   private _maxMinute: number;
+
+  /** Step over minutes. */
+  @Input()
+  get interval(): number {
+    return this._interval;
+  }
+  set interval(value: number) {
+    this._interval = coerceNumberProperty(value) || 1;
+  }
+  private _interval: number = 1;
 
   /** Color palette. */
   @Input() color: ThemePalette;
@@ -151,10 +162,10 @@ export class MatMinutesClockDial implements OnInit {
       event instanceof MouseEvent ? event.pageY : event.touches[0].pageY;
     const x = width / 2 - (pageX - elementRect.left - this._window.scrollX);
     const y = height / 2 - (pageY - elementRect.top - this._window.scrollY);
-    const unit = Math.PI / 30;
+    const unit = Math.PI / (30 / this.interval);
     const atan2 = Math.atan2(-x, y);
     const radian = atan2 < 0 ? Math.PI * 2 + atan2 : atan2;
-    const initialValue = Math.round(radian / unit);
+    const initialValue = Math.round(radian / unit) * this.interval;
     const value = initialValue === 60 ? 0 : initialValue;
 
     if (

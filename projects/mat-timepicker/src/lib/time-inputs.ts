@@ -11,6 +11,7 @@ import {
   Inject,
   NgZone,
 } from '@angular/core';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { take } from 'rxjs';
 
 import { TimeAdapter } from './adapter';
@@ -97,6 +98,16 @@ export class MatHourInput extends MatTimeInputBase {
   },
 })
 export class MatMinuteInput extends MatTimeInputBase {
+  /** Step over minutes. */
+  @Input()
+  get interval(): number {
+    return this._interval;
+  }
+  set interval(value: number) {
+    this._interval = coerceNumberProperty(value) || 1;
+  }
+  private _interval: number = 1;
+
   constructor(
     element: ElementRef<HTMLInputElement>,
     _cdr: ChangeDetectorRef,
@@ -114,7 +125,9 @@ export class MatMinuteInput extends MatTimeInputBase {
       return this.value;
     }
 
-    return Math.min(Math.max(value, this.min), this.max);
+    const roundedValue = Math.round(value / this.interval) * this.interval;
+
+    return Math.min(Math.max(roundedValue, this.min), this.max);
   }
 }
 

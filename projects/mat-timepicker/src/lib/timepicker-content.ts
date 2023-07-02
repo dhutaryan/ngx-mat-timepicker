@@ -71,6 +71,9 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
   /** Whether should toggle face button be shown. */
   showToggleModeButton: boolean;
 
+  /** Step for minutes. */
+  minuteInterval: number;
+
   /** Portal with projected action buttons. */
   _actionsPortal: TemplatePortal | ComponentPortal<any> | null = null;
 
