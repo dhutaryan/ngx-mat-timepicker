@@ -66,6 +66,9 @@ export type TimepickerMode = 'input' | 'dial';
 /** Possible options for the timepicker period format. */
 export type TimepickerFormat = '12h' | '24h';
 
+/** Possible options for the timepicker orientation (dial mode only). */
+export type TimepickerOrientation = 'horizontal' | 'vertical';
+
 /** Form control that can be associated with a timepicker. */
 export interface MatTimepickerControl<T> {
   disabled: boolean;
@@ -103,6 +106,8 @@ export interface MatTimepickerDefaultOptions {
   showToggleModeButton: boolean;
   /** Step for minutes. */
   minuteInterval: number;
+  /** Orientation for dial mode. */
+  orientation: TimepickerOrientation;
 }
 
 /**
@@ -222,6 +227,16 @@ export abstract class MatTimepickerBase<
     this._minuteInterval = coerceNumberProperty(value);
   }
   private _minuteInterval: number;
+
+  /** Orientation for dial mode. */
+  @Input()
+  get orientation(): TimepickerOrientation {
+    return this._orientation || this._defaults?.orientation || 'vertical';
+  }
+  set orientation(value: TimepickerOrientation) {
+    this._orientation = value;
+  }
+  private _orientation: TimepickerOrientation;
 
   /** Preferred position of the timepicker in the X axis. */
   @Input()
@@ -402,6 +417,7 @@ export abstract class MatTimepickerBase<
     instance.isMeridiem = this.format === '12h';
     instance.showToggleModeButton = this.showToggleModeButton;
     instance.minuteInterval = this.minuteInterval;
+    instance.orientation = this.orientation;
     instance._dialogLabelId = this.timepickerInput.getOverlayLabelId();
     instance._assignActions(this._actionsPortal || defaultPortal, false);
   }

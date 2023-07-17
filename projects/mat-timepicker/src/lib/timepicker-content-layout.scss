@@ -10,6 +10,31 @@ h6.mat-timepicker-content-layout-title {
   justify-content: center;
 }
 
+.mat-time-period {
+  margin-left: 0.75rem;
+}
+
+.mat-timepicker-content-layout-horizontal {
+  h6.mat-timepicker-content-layout-title {
+    margin-bottom: 0;
+  }
+
+  .mat-timepicker-content-layout-container {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .mat-timepicker-content-layout-values {
+    flex-wrap: wrap;
+  }
+
+  .mat-time-period {
+    margin-top: 0.75rem;
+    margin-left: 0;
+  }
+}
+
 .mat-timepicker-content-layout-hours,
 .mat-timepicker-content-layout-minutes {
   width: 6rem;
@@ -22,8 +47,4 @@ h6.mat-timepicker-content-layout-title {
   width: 1.5rem;
   height: 1.75rem;
   font-weight: 500;
-}
-
-.mat-time-period {
-  margin-left: 0.75rem;
 }
