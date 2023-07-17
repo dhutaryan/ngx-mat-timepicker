@@ -1,15 +1,17 @@
 <h6 class="mat-timepicker-content-layout-title">{{ title }}</h6>
 
-<div class="mat-timepicker-content-layout-values">
-  <div class="mat-timepicker-content-layout-hours">
-    <ng-content select="[hours]"></ng-content>
-  </div>
-  <span class="mat-timepicker-content-layout-separator">&#58;</span>
-  <div class="mat-timepicker-content-layout-minutes">
-    <ng-content select="[minutes]"></ng-content>
+<div class="mat-timepicker-content-layout-container">
+  <div class="mat-timepicker-content-layout-values">
+    <div class="mat-timepicker-content-layout-hours">
+      <ng-content select="[hours]"></ng-content>
+    </div>
+    <span class="mat-timepicker-content-layout-separator">&#58;</span>
+    <div class="mat-timepicker-content-layout-minutes">
+      <ng-content select="[minutes]"></ng-content>
+    </div>
+
+    <ng-content select="[mat-time-period]"></ng-content>
   </div>
 
-  <ng-content select="[mat-time-period]"></ng-content>
+  <ng-content></ng-content>
 </div>
-
-<ng-content></ng-content>

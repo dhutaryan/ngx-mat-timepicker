@@ -14,4 +14,8 @@
 
 .mat-clock-dial-faces {
   margin-top: 2.25rem;
+
+  &.mat-clock-dial-faces-horizontal {
+    margin-top: 0;
+  }
 }

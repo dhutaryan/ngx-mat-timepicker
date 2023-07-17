@@ -1,4 +1,7 @@
-<mat-timepicker-content-layout [title]="_intl.dialsTitle">
+<mat-timepicker-content-layout
+  [title]="_intl.dialsTitle"
+  [orientation]="orientation"
+>
   <div
     tabindex="0"
     class="mat-clock-dial-value"
@@ -24,11 +27,15 @@
     <mat-time-period
       [period]="period"
       [disabledPeriod]="disabledPeriod"
+      [vertical]="orientation === 'vertical'"
       (periodChanged)="_onPeriodChanged($event)"
     ></mat-time-period>
   </ng-template>
 
-  <div class="mat-clock-dial-faces">
+  <div
+    class="mat-clock-dial-faces"
+    [class.mat-clock-dial-faces-horizontal]="orientation === 'horizontal'"
+  >
     <ng-template [ngIf]="isHoursView">
       <mat-hours-clock-dial
         [color]="color"

@@ -7,6 +7,7 @@ import {
   Optional,
   NgZone,
   ElementRef,
+  Input,
 } from '@angular/core';
 import { BehaviorSubject, Subscription, take } from 'rxjs';
 
@@ -14,6 +15,7 @@ import { TimeAdapter } from './adapter';
 import { MatTimeFaceBase } from './time-face-base';
 import { withZeroPrefixMeridiem } from './time-input-base';
 import { MatTimepickerIntl } from './timepicker-intl';
+import { TimepickerOrientation } from './timepicker-base';
 
 export type MatDialView = 'hours' | 'minutes';
 
@@ -33,6 +35,9 @@ export class MatClockDials<T>
   extends MatTimeFaceBase<T>
   implements OnInit, OnDestroy
 {
+  /** Layout orientation. */
+  @Input() orientation: TimepickerOrientation;
+
   isHoursView = true;
 
   /** Specifies the view of clock dial. */

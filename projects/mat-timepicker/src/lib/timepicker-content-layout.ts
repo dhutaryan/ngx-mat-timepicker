@@ -5,6 +5,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
+import { TimepickerOrientation } from './timepicker-base';
+
 @Component({
   selector: 'mat-timepicker-content-layout',
   templateUrl: './timepicker-content-layout.html',
@@ -14,9 +16,16 @@ import {
   encapsulation: ViewEncapsulation.None,
   host: {
     class: 'mat-timepicker-content-layout',
+    '[class.mat-timepicker-content-layout-horizontal]':
+      'orientation === "horizontal"',
+    '[class.mat-timepicker-content-layout-vertical]':
+      'orientation === "vertical"',
   },
 })
 export class MatTimepickerContentLayout {
   /** Content title. */
   @Input() title: string;
+
+  /** Layout orientation. */
+  @Input() orientation: TimepickerOrientation = 'vertical';
 }

@@ -17,7 +17,11 @@ import {
   MatTimeSelectionModel,
 } from './time-selection-model';
 import { matTimepickerAnimations } from './timepicker-animations';
-import { MatTimepickerBase, TimepickerMode } from './timepicker-base';
+import {
+  MatTimepickerBase,
+  TimepickerMode,
+  TimepickerOrientation,
+} from './timepicker-base';
 import { MatTimepickerIntl } from './timepicker-intl';
 import { MatClockDials } from './clock-dials';
 import { MatTimeInputs } from './time-inputs';
@@ -73,6 +77,9 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
 
   /** Step for minutes. */
   minuteInterval: number;
+
+  /** Orientation for dial mode. */
+  orientation: TimepickerOrientation;
 
   /** Portal with projected action buttons. */
   _actionsPortal: TemplatePortal | ComponentPortal<any> | null = null;

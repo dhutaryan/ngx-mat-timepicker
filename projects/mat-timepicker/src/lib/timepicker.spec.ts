@@ -29,6 +29,7 @@ import { MatTimepicker } from './timepicker';
 import {
   MAT_TIMEPICKER_DEFAULT_OPTIONS,
   TimepickerOpenAs,
+  TimepickerOrientation,
 } from './timepicker-base';
 import { MatTimepickerInput } from './timepicker-input';
 import { MAT_TIMEPICKER_SCROLL_STRATEGY } from './timepicker-scroll-strategy';
@@ -640,6 +641,44 @@ describe('MatTimepicker', () => {
 
         tick();
         flush();
+      }));
+
+      it('should have vertical class by default', fakeAsync(() => {
+        expect(
+          document.querySelector('.cdk-overlay-pane.mat-timepicker-popup')
+        ).toBeNull();
+
+        testComponent.timepicker.open();
+        fixture.detectChanges();
+        tick();
+        flush();
+
+        expect(
+          document.querySelector('.mat-timepicker-content-layout-vertical')
+        ).not.toBeNull();
+        expect(
+          document.querySelector('.mat-time-period-vertical')
+        ).not.toBeNull();
+      }));
+
+      it('should change orientation', fakeAsync(() => {
+        testComponent.orientation = 'horizontal';
+        fixture.detectChanges();
+        expect(
+          document.querySelector('.cdk-overlay-pane.mat-timepicker-popup')
+        ).toBeNull();
+
+        testComponent.timepicker.open();
+        fixture.detectChanges();
+        tick();
+        flush();
+
+        expect(
+          document.querySelector('.mat-timepicker-content-layout-horizontal')
+        ).not.toBeNull();
+        expect(
+          document.querySelector('.mat-time-period-horizontal')
+        ).not.toBeNull();
       }));
     });
 
@@ -1474,6 +1513,32 @@ describe('MatTimepicker', () => {
           'mat-clock-dial-cell-active'
         );
       }));
+
+      it('should be able to change the default orientation', fakeAsync(() => {
+        const fixture = createComponent(
+          StandardTimepicker,
+          [MatNativeDateTimeModule],
+          [
+            {
+              provide: MAT_TIMEPICKER_DEFAULT_OPTIONS,
+              useValue: { orientation: 'horizontal' },
+            },
+          ]
+        );
+        fixture.detectChanges();
+
+        fixture.componentInstance.timepicker.open();
+        fixture.detectChanges();
+        tick();
+        flush();
+
+        expect(
+          document.querySelector('.mat-timepicker-content-layout-horizontal')
+        ).not.toBeNull();
+        expect(
+          document.querySelector('.mat-time-period-horizontal')
+        ).not.toBeNull();
+      }));
     });
   });
 });
@@ -1488,6 +1553,7 @@ describe('MatTimepicker', () => {
       [disabled]="disabled"
       [format]="format"
       [mode]="mode"
+      [orientation]="orientation"
     ></mat-timepicker>
   `,
 })
@@ -1498,6 +1564,7 @@ class StandardTimepicker {
   date = new Date(2021, 6, 6, 5);
   format = '12h';
   mode = 'dial';
+  orientation: TimepickerOrientation | null = null;
   @ViewChild('t') timepicker: MatTimepicker<Date>;
   @ViewChild(MatTimepickerInput) timepickerInput: MatTimepickerInput<Date>;
 }
