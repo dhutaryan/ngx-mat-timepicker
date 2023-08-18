@@ -1,3 +1,8 @@
+# 12.2.0
+
+- feat(timepicker): add orientation for dial ([#74](https://github.com/dhutaryan/ngx-mat-timepicker/pull/74))
+- feat(timepicker): add minute interval option ([#73](https://github.com/dhutaryan/ngx-mat-timepicker/pull/73))
+
 # 12.1.0
 
 - feat(timepicker): add accessibility features ([#65](https://github.com/dhutaryan/ngx-mat-timepicker/pull/65))
