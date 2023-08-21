@@ -29,7 +29,6 @@ import { MatTimepicker } from './timepicker';
 import {
   MAT_TIMEPICKER_DEFAULT_OPTIONS,
   TimepickerOpenAs,
-  TimepickerOrientation,
 } from './timepicker-base';
 import { MatTimepickerInput } from './timepicker-input';
 import { MAT_TIMEPICKER_SCROLL_STRATEGY } from './timepicker-scroll-strategy';
@@ -40,6 +39,7 @@ import {
   getDialCell,
   getMinuteCellIndex,
 } from './clock-dials.spec';
+import { TimepickerOrientation } from './orientation';
 
 describe('MatTimepicker', () => {
   const SUPPORTS_INTL = typeof Intl != 'undefined';

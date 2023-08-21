@@ -15,7 +15,7 @@ import { TimeAdapter } from './adapter';
 import { MatTimeFaceBase } from './time-face-base';
 import { withZeroPrefixMeridiem } from './time-input-base';
 import { MatTimepickerIntl } from './timepicker-intl';
-import { TimepickerOrientation } from './timepicker-base';
+import { TimepickerOrientation } from './orientation';
 
 export type MatDialView = 'hours' | 'minutes';
 
