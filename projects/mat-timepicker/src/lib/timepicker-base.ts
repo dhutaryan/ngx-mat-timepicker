@@ -50,6 +50,7 @@ import {
   MatTimeSelectionModel,
 } from './time-selection-model';
 import { MAT_DEFAULT_ACITONS } from './timepicker-actions-default';
+import { TimepickerOrientation } from './orientation';
 
 /** Possible options for the timepicker to open. */
 export type TimepickerOpenAs = 'dialog' | 'popup';
@@ -65,9 +66,6 @@ export type TimepickerMode = 'input' | 'dial';
 
 /** Possible options for the timepicker period format. */
 export type TimepickerFormat = '12h' | '24h';
-
-/** Possible options for the timepicker orientation (dial mode only). */
-export type TimepickerOrientation = 'horizontal' | 'vertical';
 
 /** Form control that can be associated with a timepicker. */
 export interface MatTimepickerControl<T> {

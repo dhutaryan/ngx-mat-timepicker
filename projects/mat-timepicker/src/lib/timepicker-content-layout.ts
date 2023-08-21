@@ -5,7 +5,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { TimepickerOrientation } from './timepicker-base';
+import { TimepickerOrientation } from './orientation';
 
 @Component({
   selector: 'mat-timepicker-content-layout',
