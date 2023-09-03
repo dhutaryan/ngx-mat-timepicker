@@ -39,7 +39,6 @@ export class MatHourInput extends MatTimeInputBase {
   }
   set availableHours(value: number[]) {
     this._availableHours = value;
-    console.log(this.availableHours);
   }
   private _availableHours: number[] = [];
 

@@ -78,7 +78,10 @@ export class MatHoursClockDial implements OnInit {
   @Input() color: ThemePalette;
 
   /** Emits selected hour. */
-  @Output() selectedChange = new EventEmitter<number>();
+  @Output() selectedChange = new EventEmitter<{
+    hour: number;
+    changeView?: boolean;
+  }>();
 
   hours: ClockDialViewCell[] = [];
 
@@ -139,7 +142,10 @@ export class MatHoursClockDial implements OnInit {
       .subscribe({
         next: () => {
           eventsSubscription.unsubscribe();
-          this.selectedChange.emit(this.selectedHour);
+          this.selectedChange.emit({
+            hour: this.selectedHour,
+            changeView: true,
+          });
         },
       });
   }
@@ -166,6 +172,9 @@ export class MatHoursClockDial implements OnInit {
 
     if (this.availableHours.includes(value)) {
       this.selectedHour = value;
+      this.selectedChange.emit({
+        hour: this.selectedHour,
+      });
     }
 
     this._cdr.detectChanges();
