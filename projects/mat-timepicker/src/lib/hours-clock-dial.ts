@@ -22,7 +22,7 @@ export interface ClockDialViewCell {
   disabled: boolean;
 }
 
-const HOURS = Array(24)
+export const ALL_HOURS = Array(24)
   .fill(null)
   .map((_, i) => i);
 const CLOCK_RADIUS = 128;
@@ -64,47 +64,15 @@ export class MatHoursClockDial implements OnInit {
   }
   private _isMeridiem: boolean;
 
-  /** Min hour value. */
   @Input()
-  get minHour(): number {
-    return this._minHour;
+  get availableHours(): number[] {
+    return this._availableHours;
   }
-  set minHour(value: number) {
-    this._minHour = value;
+  set availableHours(value: number[]) {
+    this._availableHours = value;
     this._initHours();
   }
-  private _minHour: number;
-
-  /** Max hour value. */
-  @Input()
-  get maxHour(): number {
-    return this._maxHour;
-  }
-  set maxHour(value: number) {
-    this._maxHour = value;
-    this._initHours();
-  }
-  private _maxHour: number;
-
-  @Input()
-  get include12Hour(): boolean {
-    return this._include12Hour;
-  }
-  set include12Hour(value: boolean) {
-    this._include12Hour = value;
-    this._initHours();
-  }
-  private _include12Hour: boolean;
-
-  @Input()
-  get exclude12Hour(): boolean {
-    return this._exclude12Hour;
-  }
-  set exclude12Hour(value: boolean) {
-    this._exclude12Hour = value;
-    this._initHours();
-  }
-  private _exclude12Hour: boolean;
+  private _availableHours: number[] = [];
 
   /** Color palette. */
   @Input() color: ThemePalette;
@@ -115,11 +83,7 @@ export class MatHoursClockDial implements OnInit {
   hours: ClockDialViewCell[] = [];
 
   get disabledHand(): boolean {
-    if (this.selectedHour === 12 && this.include12Hour) {
-      return false;
-    }
-
-    return this.selectedHour < this.minHour || this.selectedHour > this.maxHour;
+    return !this.availableHours.includes(this.selectedHour);
   }
 
   get isHour(): boolean {
@@ -200,16 +164,7 @@ export class MatHoursClockDial implements OnInit {
     const outer = z > CLOCK_OUTER_RADIUS - CLOCK_TICK_RADIUS;
     const value = this._getHourValue(initialValue, outer);
 
-    const isValue12 = value === 12;
-    const moreMin = value >= this.minHour || isNaN(Number(this.minHour));
-    const lessMax = value <= this.maxHour || isNaN(Number(this.maxHour));
-    const hasMinHour12 = isValue12 && this.include12Hour;
-    const hasMaxHour12 = isValue12 && !this.exclude12Hour;
-
-    if (
-      ((moreMin && !isValue12) || hasMaxHour12) &&
-      (lessMax || hasMinHour12)
-    ) {
+    if (this.availableHours.includes(value)) {
       this.selectedHour = value;
     }
 
@@ -233,23 +188,18 @@ export class MatHoursClockDial implements OnInit {
 
   /** Creates list of hours. */
   private _initHours(): void {
-    const initialHours = this.isMeridiem ? HOURS.slice(1, 13) : HOURS;
+    const initialHours = this.isMeridiem ? ALL_HOURS.slice(1, 13) : ALL_HOURS;
 
     this.hours = initialHours.map((hour) => {
       const radian = (hour / 6) * Math.PI;
       const radius = this._getRadius(hour);
-      const lessMinHour = !isNaN(Number(this.minHour)) && hour < this.minHour;
-      const moreMaxHour = !isNaN(Number(this.maxHour)) && hour > this.maxHour;
-      const isHour12 = hour === 12;
-      const hasMinHour12 = isHour12 && this.include12Hour;
-      const hasMaxHour12 = isHour12 && this.exclude12Hour;
 
       return {
         value: hour,
         displayValue: hour === 0 ? '00' : String(hour),
         left: CLOCK_CORRECTED_RADIUS + Math.sin(radian) * radius,
         top: CLOCK_CORRECTED_RADIUS - Math.cos(radian) * radius,
-        disabled: lessMinHour || (moreMaxHour && !hasMinHour12) || hasMaxHour12,
+        disabled: !this.availableHours.includes(hour),
       };
     });
   }

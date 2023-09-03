@@ -33,9 +33,17 @@ import {
   },
 })
 export class MatHourInput extends MatTimeInputBase {
+  @Input()
+  get availableHours(): number[] {
+    return this._availableHours;
+  }
+  set availableHours(value: number[]) {
+    this._availableHours = value;
+    console.log(this.availableHours);
+  }
+  private _availableHours: number[] = [];
+
   @Input() isMeridiem: boolean;
-  @Input() include12Hour: boolean;
-  @Input() exclude12Hour: boolean;
 
   constructor(
     element: ElementRef<HTMLInputElement>,
@@ -67,24 +75,33 @@ export class MatHourInput extends MatTimeInputBase {
     const value = getValue();
 
     if (this.isMeridiem) {
-      if (this.min > 12 || (this.max < 1 && !this.include12Hour)) {
+      if (!this.availableHours.length) {
         return this.value;
       }
 
-      if (value === 12 && this.include12Hour) {
+      if (value === 12 && this.availableHours.includes(12)) {
         return 12;
       }
 
-      if (value === 12 && this.exclude12Hour) {
-        return this.min;
+      if (value === 12 && !this.availableHours.includes(12)) {
+        return Math.min(...this.availableHours);
       }
 
       if (value >= 1 && value < 12) {
-        return Math.min(Math.max(value, this.min), this.max);
+        // the last item is max becuase 12 at the beginning is kinda "min"
+        const maxHour = this.availableHours[this.availableHours.length - 1];
+
+        return Math.min(
+          Math.max(value, Math.min(...this.availableHours)),
+          maxHour
+        );
       }
     }
 
-    return Math.min(Math.max(value, this.min), this.max);
+    return Math.min(
+      Math.max(value, Math.min(...this.availableHours)),
+      Math.max(...this.availableHours)
+    );
   }
 }
 
@@ -108,6 +125,15 @@ export class MatMinuteInput extends MatTimeInputBase {
   }
   private _interval: number = 1;
 
+  @Input()
+  get availableMinutes(): number[] {
+    return this._availableMinutes;
+  }
+  set availableMinutes(value: number[]) {
+    this._availableMinutes = value;
+  }
+  private _availableMinutes: number[] = [];
+
   constructor(
     element: ElementRef<HTMLInputElement>,
     _cdr: ChangeDetectorRef,
@@ -121,13 +147,16 @@ export class MatMinuteInput extends MatTimeInputBase {
   }
 
   _formatValue(value: number): number {
-    if (this.min > 59 || this.max < 0) {
+    if (!this.availableMinutes.length) {
       return this.value;
     }
 
     const roundedValue = Math.round(value / this.interval) * this.interval;
 
-    return Math.min(Math.max(roundedValue, this.min), this.max);
+    return Math.min(
+      Math.max(roundedValue, Math.min(...this.availableMinutes)),
+      Math.max(...this.availableMinutes)
+    );
   }
 }
 
@@ -166,20 +195,5 @@ export class MatTimeInputs<T> extends MatTimeFaceBase<T> {
         });
       });
     });
-  }
-
-  _getMinHour() {
-    if (!isNaN(Number(this.minHour))) {
-      this.isMinHour12 = this.minHour === 0;
-      return this.minHour;
-    }
-    return this.isMeridiem ? 1 : 0;
-  }
-
-  _getMaxHour() {
-    if (!isNaN(Number(this.maxHour))) {
-      return this.maxHour;
-    }
-    return this.isMeridiem ? 12 : 23;
   }
 }

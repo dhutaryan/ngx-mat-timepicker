@@ -41,10 +41,7 @@
         [color]="color"
         [selectedHour]="selectedHour"
         [isMeridiem]="isMeridiem"
-        [minHour]="minHour"
-        [maxHour]="maxHour"
-        [include12Hour]="include12Hour"
-        [exclude12Hour]="exclude12Hour"
+        [availableHours]="_getAvailableHours()"
         (selectedChange)="_onHourChanged($event)"
       ></mat-hours-clock-dial>
     </ng-template>
@@ -52,9 +49,8 @@
       <mat-minutes-clock-dial
         [color]="color"
         [selectedMinute]="selectedMinute"
-        [minMinute]="minMinute"
-        [maxMinute]="maxMinute"
         [interval]="minuteInterval"
+        [availableMinutes]="availableMinutes"
         (selectedChange)="_onMinuteSelected($event)"
       ></mat-minutes-clock-dial>
     </ng-template>

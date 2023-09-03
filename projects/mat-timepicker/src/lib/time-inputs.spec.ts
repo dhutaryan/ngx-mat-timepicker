@@ -62,30 +62,6 @@ describe('MatInputs', () => {
       expect(testComponent.onSelect).not.toHaveBeenCalled();
     });
 
-    // TODO: doesn't work
-    xit('should set correct min and max values for inputs', () => {
-      const inputDirectives = fixture.debugElement.queryAll(
-        By.directive(MatHourInput)
-      );
-      const hourDirective = inputDirectives[0]
-        .componentInstance as MatHourInput;
-      const minuteDirective = inputDirectives[0]
-        .componentInstance as MatMinuteInput;
-
-      expect(hourDirective.min).toBe(0);
-      expect(hourDirective.max).toBe(23);
-      expect(minuteDirective.min).toBe(0);
-      expect(minuteDirective.max).toBe(59);
-
-      testComponent.isMeridiem = true;
-      fixture.detectChanges();
-
-      expect(hourDirective.min).toBe(1);
-      expect(hourDirective.max).toBe(12);
-      expect(minuteDirective.min).toBe(0);
-      expect(minuteDirective.max).toBe(59);
-    });
-
     it('should call _userSelection when period has changed', () => {
       testComponent.isMeridiem = true;
       testComponent.selected = new Date(2023, 4, 8, 23, 16);
