@@ -133,7 +133,6 @@ export class MatMinutesClockDial implements OnInit {
       .subscribe({
         next: () => {
           eventsSubscription.unsubscribe();
-          this.selectedChange.emit(this.selectedMinute);
         },
       });
   }
@@ -160,6 +159,7 @@ export class MatMinutesClockDial implements OnInit {
       this.availableMinutes.includes(value)
     ) {
       this.selectedMinute = value;
+      this.selectedChange.emit(this.selectedMinute);
     }
 
     this._cdr.detectChanges();

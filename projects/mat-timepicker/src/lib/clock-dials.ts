@@ -95,8 +95,16 @@ export class MatClockDials<T>
   }
 
   /** Handles hour selection. */
-  _onHourChanged(hour: number): void {
-    this._view.next('minutes');
+  _onHourChanged({
+    hour,
+    changeView = false,
+  }: {
+    hour: number;
+    changeView?: boolean;
+  }): void {
+    if (changeView) {
+      this._view.next('minutes');
+    }
     this._onHourSelected(hour);
   }
 }
