@@ -17,7 +17,7 @@ import { debounceTime, fromEvent, merge, take } from 'rxjs';
 import { ClockDialViewCell } from './hours-clock-dial';
 import { ThemePalette } from '@angular/material/core';
 
-const MINUTES = Array(60)
+export const ALL_MINUTES = Array(60)
   .fill(null)
   .map((_, i) => i);
 
@@ -49,26 +49,6 @@ export class MatMinutesClockDial implements OnInit {
   }
   private _selectedMinute = 0;
 
-  @Input()
-  get minMinute(): number {
-    return this._minMinute;
-  }
-  set minMinute(value: number) {
-    this._minMinute = value;
-    this._initMinutes();
-  }
-  private _minMinute: number;
-
-  @Input()
-  get maxMinute(): number {
-    return this._maxMinute;
-  }
-  set maxMinute(value: number) {
-    this._maxMinute = value;
-    this._initMinutes();
-  }
-  private _maxMinute: number;
-
   /** Step over minutes. */
   @Input()
   get interval(): number {
@@ -79,6 +59,16 @@ export class MatMinutesClockDial implements OnInit {
   }
   private _interval: number = 1;
 
+  @Input()
+  get availableMinutes(): number[] {
+    return this._availableMinutes;
+  }
+  set availableMinutes(value: number[]) {
+    this._availableMinutes = value;
+    this._initMinutes();
+  }
+  private _availableMinutes: number[] = [];
+
   /** Color palette. */
   @Input() color: ThemePalette;
 
@@ -88,10 +78,7 @@ export class MatMinutesClockDial implements OnInit {
   minutes: ClockDialViewCell[] = [];
 
   get disabled(): boolean {
-    return (
-      this.selectedMinute < this.minMinute ||
-      this.selectedMinute > this.maxMinute
-    );
+    return !this.availableMinutes.includes(this.selectedMinute);
   }
 
   get isMinutePoint(): boolean {
@@ -169,8 +156,8 @@ export class MatMinutesClockDial implements OnInit {
     const value = initialValue === 60 ? 0 : initialValue;
 
     if (
-      (value >= this.minMinute || isNaN(Number(this.minMinute))) &&
-      (value <= this.maxMinute || isNaN(Number(this.maxMinute)))
+      this.availableMinutes.includes(value) &&
+      this.availableMinutes.includes(value)
     ) {
       this.selectedMinute = value;
     }
@@ -180,21 +167,17 @@ export class MatMinutesClockDial implements OnInit {
 
   /** Creates list of minutes. */
   private _initMinutes(): void {
-    this.minutes = MINUTES.filter((minute) => minute % 5 === 0).map(
+    this.minutes = ALL_MINUTES.filter((minute) => minute % 5 === 0).map(
       (minute) => {
         const radian = (minute / 30) * Math.PI;
         const displayValue = minute === 0 ? '00' : String(minute);
-        const lessMinMinute =
-          !isNaN(Number(this.minMinute)) && minute < this.minMinute;
-        const moreMaxMinute =
-          !isNaN(Number(this.maxMinute)) && minute > this.maxMinute;
 
         return {
           value: minute,
           displayValue,
           left: CLOCK_CORRECTED_RADIUS + Math.sin(radian) * CLOCK_OUTER_RADIUS,
           top: CLOCK_CORRECTED_RADIUS - Math.cos(radian) * CLOCK_OUTER_RADIUS,
-          disabled: lessMinMinute || moreMaxMinute,
+          disabled: !this.availableMinutes.includes(minute),
         };
       }
     );

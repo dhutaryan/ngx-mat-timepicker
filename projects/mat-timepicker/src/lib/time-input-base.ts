@@ -25,24 +25,6 @@ export function withZeroPrefixMeridiem(
 @Directive()
 export abstract class MatTimeInputBase {
   @Input()
-  get min(): number {
-    return this._min;
-  }
-  set min(value: number) {
-    this._min = value;
-  }
-  private _min: number;
-
-  @Input()
-  get max(): number {
-    return this._max;
-  }
-  set max(value: number) {
-    this._max = value;
-  }
-  private _max: number;
-
-  @Input()
   get value(): number {
     return this._value;
   }

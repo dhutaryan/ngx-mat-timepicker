@@ -10,6 +10,8 @@ import { coerceNumberProperty } from '@angular/cdk/coercion';
 
 import { TimeAdapter } from './adapter';
 import { MatTimePeriodType } from './time-period';
+import { ALL_MINUTES } from './minutes-clock-dial';
+import { ALL_HOURS } from './hours-clock-dial';
 
 @Directive()
 export abstract class MatTimeFaceBase<T> {
@@ -33,11 +35,13 @@ export abstract class MatTimeFaceBase<T> {
       this.selectedHour = 12;
     }
     this.selectedMinute = this._timeAdapter.getMinute(this._selected);
+    this.availableHours = ALL_HOURS;
 
     if (this.isMeridiem) {
       this.period = this._timeAdapter.getPeriod(this._selected);
     }
 
+    this.availableMinutes = ALL_MINUTES;
     this._setMinHour();
     this._setMaxHour();
     this._setMinMinute();
@@ -105,15 +109,9 @@ export abstract class MatTimeFaceBase<T> {
   selectedHour: number = 0;
   selectedMinute: number = 0;
   period: MatTimePeriodType;
-  minHour: number;
-  maxHour: number;
-  minMinute: number;
-  maxMinute: number;
   disabledPeriod: MatTimePeriodType | null = null;
-  /** Used for am to include 00:00. */
-  include12Hour: boolean = false;
-  /** Used for pm to exclude 12:00 if min > 12:00. */
-  exclude12Hour: boolean = false;
+  availableMinutes = ALL_MINUTES;
+  availableHours = ALL_HOURS;
 
   constructor(@Optional() protected _timeAdapter: TimeAdapter<T>) {}
 
@@ -177,6 +175,36 @@ export abstract class MatTimeFaceBase<T> {
     this._timeSelected(selected);
   }
 
+  _getAvailableHours(): number[] {
+    if (this.isMeridiem) {
+      return this.availableHours
+        .filter((h) => {
+          if (this.period === 'am') {
+            return h < 12;
+          }
+
+          if (this.period === 'pm') {
+            return h >= 12;
+          }
+
+          return h;
+        })
+        .map((h) => {
+          if (h > 12) {
+            return h - 12;
+          }
+
+          if (h === 0) {
+            return 12;
+          }
+
+          return h;
+        });
+    }
+
+    return this.availableHours;
+  }
+
   /** Gets a correct hours based on meridiem and period. */
   private _getHourBasedOnPeriod(hour: number): number {
     const afterNoon = this.isMeridiem && this.period === 'pm';
@@ -204,39 +232,11 @@ export abstract class MatTimeFaceBase<T> {
   /** Sets min hour. */
   private _setMinHour(): void {
     if (!this.minTime) {
-      this.include12Hour = this.isMeridiem;
       return;
     }
 
-    const hour = this._timeAdapter.getHour(this.minTime);
-    this.minHour = hour > 12 && this.isMeridiem ? hour - 12 : hour;
-    this.include12Hour = false;
-    this.exclude12Hour = false;
-
-    if (this.period === 'pm') {
-      if (hour === 12 || hour < 12) {
-        this.include12Hour = true;
-        this.minHour = 1; // because 12pm more than 1pm by numeric
-      }
-
-      if (hour > 12) {
-        this.exclude12Hour = true;
-      }
-    }
-
-    if (this.period === 'am') {
-      if (hour >= 12) {
-        this.minHour = 13; // any number which is more than 12
-      }
-
-      if (hour > 0) {
-        this.exclude12Hour = true; // to exclude 12am
-      }
-
-      if (hour === 0) {
-        this.include12Hour = true;
-      }
-    }
+    const minHour = this._timeAdapter.getHour(this.minTime);
+    this.availableHours = this.availableHours.filter((h) => h >= minHour);
   }
 
   /** Sets max hour. */
@@ -245,33 +245,8 @@ export abstract class MatTimeFaceBase<T> {
       return;
     }
 
-    const hour = this._timeAdapter.getHour(this.maxTime);
-    this.maxHour = hour > 12 && this.isMeridiem ? hour - 12 : hour;
-
-    if (this.period === 'am') {
-      if (this.minHour > 0) {
-        this.exclude12Hour = true; // to exclude 12am
-      }
-
-      if (hour >= 12) {
-        this.maxHour = 11;
-      }
-    }
-
-    if (this.period === 'pm') {
-      if (hour < 12) {
-        this.include12Hour = false; // to disable 12:00 if no min time
-        this.maxHour = 0; // should less than 1 (13:00)
-      }
-
-      if (this._getHourBasedOnPeriod(this.minHour) < 12 && hour >= 12) {
-        this.include12Hour = true;
-      }
-
-      if (hour === 12) {
-        this.minHour = 12;
-      }
-    }
+    const maxHour = this._timeAdapter.getHour(this.maxTime);
+    this.availableHours = this.availableHours.filter((h) => h <= maxHour);
   }
 
   /** Sets min minute. */
@@ -283,11 +258,15 @@ export abstract class MatTimeFaceBase<T> {
     const selectedHour = this._timeAdapter.getHour(this.selected);
     const minHour = this._timeAdapter.getHour(this.minTime);
 
-    this.minMinute =
+    const minMinute =
       selectedHour > minHour ? 0 : this._timeAdapter.getMinute(this.minTime);
 
+    this.availableMinutes = this.availableMinutes.filter(
+      (minute) => minute >= minMinute
+    );
+
     if (selectedHour < minHour) {
-      this.minMinute = 60; // any number more than 59
+      this.availableMinutes = [];
     }
   }
 
@@ -298,14 +277,17 @@ export abstract class MatTimeFaceBase<T> {
     }
 
     const selectedHour = this._timeAdapter.getHour(this.selected);
-    const minHour = this._timeAdapter.getHour(this.maxTime);
     const maxHour = this._timeAdapter.getHour(this.maxTime);
 
-    this.maxMinute =
+    const maxMinute =
       selectedHour < maxHour ? 59 : this._timeAdapter.getMinute(this.maxTime);
 
+    this.availableMinutes = this.availableMinutes.filter(
+      (minute) => minute <= maxMinute
+    );
+
     if (selectedHour > maxHour) {
-      this.maxMinute = -1; // any number less than 0
+      this.availableMinutes = [];
     }
   }
 

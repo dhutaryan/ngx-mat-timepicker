@@ -13,10 +13,7 @@
       matHourInput
       [isMeridiem]="isMeridiem"
       [value]="selectedHour"
-      [min]="_getMinHour()"
-      [max]="_getMaxHour()"
-      [include12Hour]="include12Hour"
-      [exclude12Hour]="exclude12Hour"
+      [availableHours]="_getAvailableHours()"
       (timeChanged)="_onHourSelected($event)"
     />
     <mat-hint>{{_intl.hourInputHint}}</mat-hint>
@@ -34,9 +31,8 @@
       matInput
       matMinuteInput
       [value]="selectedMinute"
-      [min]="minMinute || 0"
-      [max]="maxMinute || 59"
       [interval]="minuteInterval"
+      [availableMinutes]="availableMinutes"
       (timeChanged)="_onMinuteSelected($event)"
     />
     <mat-hint>{{_intl.minuteInputHint}}</mat-hint>
