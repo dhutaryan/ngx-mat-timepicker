@@ -9,11 +9,13 @@
     class="mat-clock-dial-cell mat-elevation-z0"
     mat-mini-fab
     disableRipple
+    [tabIndex]="_isActiveCell(minute.value) ? 0 : -1"
     [style.left.px]="minute.left"
     [style.top.px]="minute.top"
-    [class.mat-clock-dial-cell-active]="selectedMinute === minute.value"
-    [color]="selectedMinute === minute.value ? color : undefined"
-    [disabled]="minute.disabled"
+    [class.mat-clock-dial-cell-active]="_isActiveCell(minute.value)"
+    [class.mat-clock-dial-cell-disabled]="minute.disabled"
+    [color]="_isActiveCell(minute.value) ? color : undefined"
+    [attr.aria-disabled]="minute.disabled || null"
   >
     {{ minute.displayValue }}
   </button>

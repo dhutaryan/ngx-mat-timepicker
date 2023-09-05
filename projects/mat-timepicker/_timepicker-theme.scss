@@ -42,14 +42,18 @@ $primary-opacity: 0.15;
       $alpha: -0.6
     );
   }
+
+  [mat-mini-fab].mat-clock-dial-cell.mat-clock-dial-cell-disabled.mat-clock-dial-cell-active {
+    background-color: color.adjust(
+      mat.get-color-from-palette($palette),
+      $alpha: -0.6
+    );
+  }
 }
 
 @mixin color($config-or-theme) {
   $config: mat.get-color-config($config-or-theme);
   $is-dark-theme: map.get($config, is-dark);
-  $primary: map.get($config, primary);
-  $accent: map.get($config, accent);
-  $warn: map.get($config, warn);
   $foreground: map.get($config, foreground);
   $background: map.get($config, background);
 
@@ -98,9 +102,17 @@ $primary-opacity: 0.15;
   [mat-mini-fab]:not(.mat-primary):not(.mat-accent):not(.mat-warn) {
     background: transparent;
 
-    &:hover {
+    &:not(.mat-clock-dial-cell-disabled):hover {
       background-color: mat.get-color-from-palette($background, hover);
     }
+  }
+
+  [mat-mini-fab].mat-clock-dial-cell-disabled:hover {
+    cursor: default;
+  }
+
+  [mat-mini-fab].mat-clock-dial-cell.mat-clock-dial-cell-disabled {
+    color: mat.get-color-from-palette($foreground, disabled-button);
   }
 }
 
