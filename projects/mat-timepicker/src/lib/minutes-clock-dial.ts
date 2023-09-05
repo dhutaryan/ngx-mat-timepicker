@@ -137,6 +137,10 @@ export class MatMinutesClockDial implements OnInit {
       });
   }
 
+  _isActiveCell(minute: number): boolean {
+    return this.selectedMinute === minute;
+  }
+
   private _setMinute(event: MouseEvent | TouchEvent): void {
     const element = this._element.nativeElement;
     const elementRect = element.getBoundingClientRect();

@@ -150,6 +150,10 @@ export class MatHoursClockDial implements OnInit {
       });
   }
 
+  _isActiveCell(hour: number): boolean {
+    return this.selectedHour === hour;
+  }
+
   /** Changes selected hour based on coordinates. */
   private _setHour(event: MouseEvent | TouchEvent): void {
     const element = this._element.nativeElement;
