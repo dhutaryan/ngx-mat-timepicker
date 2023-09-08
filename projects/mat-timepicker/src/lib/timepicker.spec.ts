@@ -1504,6 +1504,8 @@ describe('MatTimepicker', () => {
         )[1] as HTMLDivElement;
         minuteElement?.click();
         fixture.detectChanges();
+        tick();
+        flush();
         clickDialCell(getDialCell(getMinuteCellIndex(25)));
         fixture.detectChanges();
         tick();
