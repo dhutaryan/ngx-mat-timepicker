@@ -1,4 +1,6 @@
 import {
+  AfterContentInit,
+  AfterViewChecked,
   Directive,
   EventEmitter,
   Input,
@@ -12,9 +14,12 @@ import { TimeAdapter } from './adapter';
 import { MatTimePeriodType } from './time-period';
 import { ALL_MINUTES } from './minutes-clock-dial';
 import { ALL_HOURS } from './hours-clock-dial';
+import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 
 @Directive()
-export abstract class MatTimeFaceBase<T> {
+export abstract class MatTimeFaceBase<T>
+  implements AfterContentInit, AfterViewChecked
+{
   /** The currently selected time. */
   @Input()
   get selected(): T | null {
@@ -46,6 +51,7 @@ export abstract class MatTimeFaceBase<T> {
     this._setMaxHour();
     this._setMinMinute();
     this._setMaxMinute();
+    this._moveFocusOnNextTick = true;
   }
   private _selected: T | null;
 
@@ -113,6 +119,13 @@ export abstract class MatTimeFaceBase<T> {
   availableMinutes = ALL_MINUTES;
   availableHours = ALL_HOURS;
 
+  /**
+   * Used for scheduling that focus should be moved to the active cell on the next tick.
+   * We need to schedule it, rather than do it immediately, because we have to wait
+   * for Angular to re-evaluate the view children.
+   */
+  private _moveFocusOnNextTick = false;
+
   constructor(@Optional() protected _timeAdapter: TimeAdapter<T>) {}
 
   ngAfterContentInit() {
@@ -122,6 +135,13 @@ export abstract class MatTimeFaceBase<T> {
         this.minTime,
         this.maxTime
       );
+    }
+  }
+
+  ngAfterViewChecked() {
+    if (this._moveFocusOnNextTick) {
+      this._moveFocusOnNextTick = false;
+      this.focusActiveCell();
     }
   }
 
@@ -203,6 +223,103 @@ export abstract class MatTimeFaceBase<T> {
     }
 
     return this.availableHours;
+  }
+
+  _onKeydown(event: KeyboardEvent, view: 'hour' | 'minute'): void {
+    switch (view) {
+      case 'hour':
+        this._handleHourKeydown(event);
+        break;
+      case 'minute':
+        this._handleMinuteKeydown(event);
+        break;
+    }
+  }
+
+  private _handleHourKeydown(event: KeyboardEvent): void {
+    const hours = this._getAvailableHours();
+    const selectedHourIndex = hours.findIndex(
+      (hour) => hour === this.selectedHour
+    );
+
+    if (!hours.length) {
+      return;
+    }
+
+    switch (event.keyCode) {
+      case UP_ARROW:
+        if (selectedHourIndex + 1 >= hours.length || selectedHourIndex < 0) {
+          this._onHourSelected(hours[0]);
+        } else {
+          this._onHourSelected(hours[selectedHourIndex + 1]);
+        }
+        break;
+      case DOWN_ARROW:
+        if (selectedHourIndex - 1 < 0 || selectedHourIndex < 0) {
+          this._onHourSelected(hours[hours.length - 1]);
+        } else {
+          this._onHourSelected(hours[selectedHourIndex - 1]);
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  private _handleMinuteKeydown(event: KeyboardEvent): void {
+    const minutes = this.availableMinutes;
+    const selectedMinuteIndex = minutes.findIndex(
+      (minute) => minute === this.selectedMinute
+    );
+
+    if (!minutes.length) {
+      return;
+    }
+
+    switch (event.keyCode) {
+      case UP_ARROW:
+        if (
+          selectedMinuteIndex + this.minuteInterval >= minutes.length ||
+          selectedMinuteIndex < 0
+        ) {
+          const difference =
+            60 - this.selectedMinute + Math.min(...this.availableMinutes);
+          const count = Math.ceil(difference / this.minuteInterval);
+          const differenceForValid = count * this.minuteInterval;
+          const nextValidValue = this.selectedMinute + differenceForValid;
+          const correctIndex = minutes.findIndex(
+            (minute) => minute === nextValidValue - 60 // amount of mins
+          );
+          this._onMinuteSelected(minutes[correctIndex]);
+        } else {
+          this._onMinuteSelected(
+            minutes[selectedMinuteIndex + this.minuteInterval]
+          );
+        }
+        break;
+      case DOWN_ARROW:
+        if (
+          selectedMinuteIndex - this.minuteInterval < 0 ||
+          selectedMinuteIndex < 0
+        ) {
+          const difference =
+            60 + this.selectedMinute - Math.max(...this.availableMinutes);
+          const count = Math.ceil(difference / this.minuteInterval);
+          const differenceForValid = count * this.minuteInterval;
+          const nextValidValue = this.selectedMinute - differenceForValid;
+          const correctIndex = minutes.findIndex(
+            (minute) => minute === nextValidValue + 60 // amount of mins
+          );
+          this._onMinuteSelected(minutes[correctIndex]);
+        } else {
+          this._onMinuteSelected(
+            minutes[selectedMinuteIndex - this.minuteInterval]
+          );
+        }
+        break;
+      default:
+        break;
+    }
   }
 
   /** Gets a correct hours based on meridiem and period. */

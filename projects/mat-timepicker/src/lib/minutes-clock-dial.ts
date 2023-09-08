@@ -141,6 +141,10 @@ export class MatMinutesClockDial implements OnInit {
     return this.selectedMinute === minute;
   }
 
+  _trackBy(index: number, cell: ClockDialViewCell): number {
+    return cell.value;
+  }
+
   private _setMinute(event: MouseEvent | TouchEvent): void {
     const element = this._element.nativeElement;
     const elementRect = element.getBoundingClientRect();

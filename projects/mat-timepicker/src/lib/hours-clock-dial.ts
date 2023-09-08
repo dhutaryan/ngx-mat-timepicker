@@ -154,6 +154,10 @@ export class MatHoursClockDial implements OnInit {
     return this.selectedHour === hour;
   }
 
+  _trackBy(index: number, cell: ClockDialViewCell): number {
+    return cell.value;
+  }
+
   /** Changes selected hour based on coordinates. */
   private _setHour(event: MouseEvent | TouchEvent): void {
     const element = this._element.nativeElement;

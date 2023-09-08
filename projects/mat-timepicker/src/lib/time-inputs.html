@@ -15,6 +15,7 @@
       [value]="selectedHour"
       [availableHours]="_getAvailableHours()"
       (timeChanged)="_onHourSelected($event)"
+      (keydown)="_onKeydown($event, 'hour')"
     />
     <mat-hint>{{_intl.hourInputHint}}</mat-hint>
   </mat-form-field>
@@ -34,6 +35,7 @@
       [interval]="minuteInterval"
       [availableMinutes]="availableMinutes"
       (timeChanged)="_onMinuteSelected($event)"
+      (keydown)="_onKeydown($event, 'minute')"
     />
     <mat-hint>{{_intl.minuteInputHint}}</mat-hint>
   </mat-form-field>

@@ -8,6 +8,12 @@ import {
   waitForAsync,
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import {
+  DOWN_ARROW,
+  NUMPAD_EIGHT,
+  NUMPAD_TWO,
+  UP_ARROW,
+} from '@angular/cdk/keycodes';
 
 import { MatNativeDateTimeModule } from './adapter';
 import { MatTimepickerModule } from './timepicker.module';
@@ -175,6 +181,77 @@ describe('MatClockDials', () => {
         'mat-clock-dial-cell-active'
       );
     });
+
+    it('should change hours using arrows', () => {
+      testComponent.selected = new Date(2023, 4, 27, 22, 20);
+      fixture.detectChanges();
+
+      expect(getDialCell(22).classList).toContain('mat-clock-dial-cell-active');
+
+      pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-hours');
+      fixture.detectChanges();
+
+      expect(getDialCell(21).classList).toContain('mat-clock-dial-cell-active');
+
+      pressArrowOnDial(UP_ARROW, '.mat-clock-dial-hours');
+      pressArrowOnDial(UP_ARROW, '.mat-clock-dial-hours');
+      fixture.detectChanges();
+
+      expect(getDialCell(23).classList).toContain('mat-clock-dial-cell-active');
+    });
+
+    it('should change minutes using arrows', () => {
+      testComponent.selected = new Date(2023, 4, 27, 22, 20);
+      minuteElement.click();
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+
+      for (let i = 0; i < 5; i++) {
+        pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-minutes');
+      }
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(15)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+
+      for (let i = 0; i < 5; i++) {
+        pressArrowOnDial(UP_ARROW, '.mat-clock-dial-minutes');
+      }
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+    });
+
+    it('should change minutes with interval using arrows', () => {
+      testComponent.selected = new Date(2023, 4, 27, 22, 20);
+      testComponent.minuteInterval = 5;
+      minuteElement.click();
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+
+      pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-minutes');
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(15)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+
+      pressArrowOnDial(UP_ARROW, '.mat-clock-dial-minutes');
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+    });
   });
 
   describe('with min/max', () => {
@@ -312,6 +389,195 @@ describe('MatClockDials', () => {
       );
       expect(getDialCell(1).classList).toContain(
         'mat-clock-dial-cell-disabled'
+      );
+    });
+
+    it("shouldn't change hours if not available hours", () => {
+      testComponent.selected = new Date(2023, 4, 18, 13, 20);
+      testComponent.minTime = new Date(2023, 4, 18, 14, 20);
+      testComponent.maxTime = new Date(2023, 4, 18, 12, 20);
+      fixture.detectChanges();
+
+      expect(getDialCell(13).classList).toContain('mat-clock-dial-cell-active');
+
+      pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-hours');
+      fixture.detectChanges();
+
+      expect(getDialCell(13).classList).toContain('mat-clock-dial-cell-active');
+
+      pressArrowOnDial(UP_ARROW, '.mat-clock-dial-hours');
+      pressArrowOnDial(UP_ARROW, '.mat-clock-dial-hours');
+      fixture.detectChanges();
+
+      expect(getDialCell(13).classList).toContain('mat-clock-dial-cell-active');
+    });
+
+    it('should change minutes using arrows', () => {
+      testComponent.selected = new Date(2023, 4, 18, 13, 20);
+      testComponent.minTime = new Date(2023, 4, 18, 14, 20);
+      testComponent.maxTime = new Date(2023, 4, 18, 12, 20);
+      minuteElement.click();
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+
+      for (let i = 0; i < 5; i++) {
+        pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-minutes');
+      }
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+
+      for (let i = 0; i < 5; i++) {
+        pressArrowOnDial(UP_ARROW, '.mat-clock-dial-minutes');
+      }
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+    });
+
+    it('shouldn change hours if there are a min and a max values', () => {
+      testComponent.selected = new Date(2023, 4, 18, 3, 20);
+      testComponent.minTime = new Date(2023, 4, 18, 3, 20);
+      testComponent.maxTime = new Date(2023, 4, 18, 8, 20);
+      fixture.detectChanges();
+
+      expect(getDialCell(3).classList).toContain('mat-clock-dial-cell-active');
+
+      pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-hours');
+      fixture.detectChanges();
+
+      expect(getDialCell(8).classList).toContain('mat-clock-dial-cell-active');
+
+      pressArrowOnDial(UP_ARROW, '.mat-clock-dial-hours');
+      fixture.detectChanges();
+
+      expect(getDialCell(3).classList).toContain('mat-clock-dial-cell-active');
+    });
+
+    it('should change if there are a min and a max values', () => {
+      testComponent.selected = new Date(2023, 4, 18, 13, 10);
+      testComponent.minTime = new Date(2023, 4, 18, 13, 10);
+      testComponent.maxTime = new Date(2023, 4, 18, 13, 40);
+      minuteElement.click();
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(10)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+
+      pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-minutes');
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(40)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+
+      pressArrowOnDial(UP_ARROW, '.mat-clock-dial-minutes');
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(10)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+    });
+
+    it('should nothing has changed if use press another key', () => {
+      testComponent.selected = new Date(2023, 4, 18, 13, 10);
+      fixture.detectChanges();
+
+      expect(getDialCell(13).classList).toContain('mat-clock-dial-cell-active');
+
+      pressArrowOnDial(NUMPAD_EIGHT, '.mat-clock-dial-hours');
+      fixture.detectChanges();
+
+      expect(getDialCell(13).classList).toContain('mat-clock-dial-cell-active');
+
+      pressArrowOnDial(NUMPAD_TWO, '.mat-clock-dial-hours');
+      fixture.detectChanges();
+
+      expect(getDialCell(13).classList).toContain('mat-clock-dial-cell-active');
+
+      minuteElement.click();
+      fixture.detectChanges();
+      expect(getDialCell(getMinuteCellIndex(10)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+
+      pressArrowOnDial(NUMPAD_EIGHT, '.mat-clock-dial-minutes');
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(10)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+
+      pressArrowOnDial(NUMPAD_TWO, '.mat-clock-dial-minutes');
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(10)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+    });
+
+    it('should change minutes with interval using up arrow if there are min nad max', () => {
+      testComponent.selected = new Date(2023, 4, 27, 22, 35);
+      testComponent.minTime = new Date(2023, 4, 27, 22, 2);
+      testComponent.maxTime = new Date(2023, 4, 27, 22, 40);
+      testComponent.minuteInterval = 6;
+      minuteElement.click();
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(35)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+
+      pressArrowOnDial(UP_ARROW, '.mat-clock-dial-minutes');
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(5)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+
+      testComponent.selected = new Date(2023, 4, 27, 22, 35);
+      testComponent.minTime = new Date(2023, 4, 27, 22, 20);
+      testComponent.maxTime = new Date(2023, 4, 27, 22, 40);
+      testComponent.minuteInterval = 10;
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(35)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+
+      pressArrowOnDial(UP_ARROW, '.mat-clock-dial-minutes');
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(25)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+    });
+
+    it('should change minutes with interval using down arrow if there are min nad max', () => {
+      testComponent.selected = new Date(2023, 4, 27, 22, 5);
+      testComponent.minTime = new Date(2023, 4, 27, 22, 2);
+      testComponent.maxTime = new Date(2023, 4, 27, 22, 37);
+      testComponent.minuteInterval = 6;
+      minuteElement.click();
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(5)).classList).toContain(
+        'mat-clock-dial-cell-active'
+      );
+
+      pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-minutes');
+      fixture.detectChanges();
+
+      expect(getDialCell(getMinuteCellIndex(35)).classList).toContain(
+        'mat-clock-dial-cell-active'
       );
     });
 
@@ -724,6 +990,113 @@ describe('MatClockDials', () => {
           'mat-clock-dial-cell-disabled'
         );
       });
+
+      it('should change hours correctly with meridiem and max > 12', () => {
+        testComponent.selected = new Date(2023, 4, 18, 6, 10);
+        testComponent.minTime = new Date(2023, 4, 18, 6, 10);
+        testComponent.maxTime = new Date(2023, 4, 18, 15, 40);
+        fixture.detectChanges();
+
+        expect(getDialCell(6, true).classList).toContain(
+          'mat-clock-dial-cell-active'
+        );
+
+        pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-hours');
+        fixture.detectChanges();
+
+        expect(getDialCell(11, true).classList).toContain(
+          'mat-clock-dial-cell-active'
+        );
+
+        pressArrowOnDial(UP_ARROW, '.mat-clock-dial-hours');
+        fixture.detectChanges();
+
+        expect(getDialCell(6, true).classList).toContain(
+          'mat-clock-dial-cell-active'
+        );
+      });
+
+      it('should change hours correctly with meridiem and max < 12', () => {
+        testComponent.selected = new Date(2023, 4, 18, 6, 10);
+        testComponent.minTime = new Date(2023, 4, 18, 6, 10);
+        testComponent.maxTime = new Date(2023, 4, 18, 10, 40);
+        fixture.detectChanges();
+
+        expect(getDialCell(6, true).classList).toContain(
+          'mat-clock-dial-cell-active'
+        );
+
+        pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-hours');
+        fixture.detectChanges();
+
+        expect(getDialCell(10, true).classList).toContain(
+          'mat-clock-dial-cell-active'
+        );
+
+        pressArrowOnDial(UP_ARROW, '.mat-clock-dial-hours');
+        fixture.detectChanges();
+
+        expect(getDialCell(6, true).classList).toContain(
+          'mat-clock-dial-cell-active'
+        );
+      });
+
+      it('should change hours correctly with meridiem and min > 12', () => {
+        testComponent.selected = new Date(2023, 4, 18, 13, 10);
+        testComponent.minTime = new Date(2023, 4, 18, 13, 10);
+        testComponent.maxTime = new Date(2023, 4, 18, 15, 40);
+        fixture.detectChanges();
+
+        expect(getDialCell(13, true).classList).toContain(
+          'mat-clock-dial-cell-active'
+        );
+
+        pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-hours');
+        fixture.detectChanges();
+
+        expect(getDialCell(15, true).classList).toContain(
+          'mat-clock-dial-cell-active'
+        );
+
+        pressArrowOnDial(UP_ARROW, '.mat-clock-dial-hours');
+        fixture.detectChanges();
+
+        expect(getDialCell(13, true).classList).toContain(
+          'mat-clock-dial-cell-active'
+        );
+      });
+
+      it('should change hours correctly with meridiem and min < 12', () => {
+        testComponent.selected = new Date(2023, 4, 18, 13, 10);
+        testComponent.minTime = new Date(2023, 4, 18, 6, 10);
+        testComponent.maxTime = new Date(2023, 4, 18, 17, 40);
+        fixture.detectChanges();
+
+        expect(getDialCell(13, true).classList).toContain(
+          'mat-clock-dial-cell-active'
+        );
+
+        pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-hours');
+        fixture.detectChanges();
+
+        expect(getDialCell(12, true).classList).toContain(
+          'mat-clock-dial-cell-active'
+        );
+
+        pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-hours');
+        fixture.detectChanges();
+
+        expect(getDialCell(17, true).classList).toContain(
+          'mat-clock-dial-cell-active'
+        );
+
+        pressArrowOnDial(UP_ARROW, '.mat-clock-dial-hours');
+        fixture.detectChanges();
+
+        expect(getDialCell(12, true).classList).toContain(
+          'mat-clock-dial-cell-active'
+        );
+      });
     });
   });
 });
@@ -737,7 +1110,7 @@ function getDialElement(dial: DialClass): HTMLElement | null {
 export function getDialCell(hour: number, meridiem?: boolean): HTMLElement {
   const content = document.querySelector('.mat-clock-dial-faces')!;
   const cells = content.querySelectorAll<HTMLElement>('.mat-clock-dial-cell');
-  return cells[meridiem ? hour - 1 : hour];
+  return cells[meridiem ? (hour > 12 ? hour - 12 : hour) - 1 : hour];
 }
 
 export function clickDialCell(cell: HTMLElement) {
@@ -758,16 +1131,24 @@ export function getMinuteCellIndex(minute: number): number {
   return minute / 5;
 }
 
+function pressArrowOnDial(keyCode: number, dial: DialClass): void {
+  const keyEvent = new KeyboardEvent('keydown', { keyCode });
+  const dialElement = document.querySelector<HTMLElement>(dial)!;
+  dialElement.dispatchEvent(keyEvent);
+}
+
 @Component({
   template: `<mat-clock-dials
     [isMeridiem]="isMeridiem"
     [selected]="selected"
+    [minuteInterval]="minuteInterval"
     (_userSelection)="onSelect($event)"
   ></mat-clock-dials>`,
 })
 class StandardClockDials {
   isMeridiem = false;
   selected: Date | null = null;
+  minuteInterval: number = 1;
   onSelect(value: Date) {}
 }
 
@@ -778,6 +1159,7 @@ class StandardClockDials {
       [selected]="selected"
       [minTime]="minTime"
       [maxTime]="maxTime"
+      [minuteInterval]="minuteInterval"
     ></mat-clock-dials>
   `,
 })
@@ -786,5 +1168,6 @@ class WithMinMaxClockDials {
   selected: Date | null = null;
   minTime: Date | null = null;
   maxTime: Date | null = null;
+  minuteInterval: number = 1;
   onSelect(value: Date) {}
 }

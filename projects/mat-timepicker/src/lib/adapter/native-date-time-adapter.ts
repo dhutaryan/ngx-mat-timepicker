@@ -121,9 +121,6 @@ export class NativeDateTimeAdapter extends TimeAdapter<Date> {
 
   compareTime(first: Date, second: Date): number {
     return (
-      first.getFullYear() - second.getFullYear() ||
-      first.getMonth() - second.getMonth() ||
-      first.getDate() - second.getDate() ||
       first.getHours() - second.getHours() ||
       first.getMinutes() - second.getMinutes()
     );

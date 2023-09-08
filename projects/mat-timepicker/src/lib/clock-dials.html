@@ -8,7 +8,7 @@
     hours
     [class.mat-clock-dial-value-active]="isHoursView"
     (click)="onViewChange('hours')"
-    (keyup.enter)="onViewChange('hours')"
+    (keyup.space)="onViewChange('hours')"
   >
     {{ _withZeroPrefix(selectedHour) }}
   </div>
@@ -18,7 +18,7 @@
     minutes
     [class.mat-clock-dial-value-active]="!isHoursView"
     (click)="onViewChange('minutes')"
-    (keyup.enter)="onViewChange('minutes')"
+    (keyup.space)="onViewChange('minutes')"
   >
     {{ _withZeroPrefix(selectedMinute) }}
   </div>
@@ -43,6 +43,7 @@
         [isMeridiem]="isMeridiem"
         [availableHours]="_getAvailableHours()"
         (selectedChange)="_onHourChanged($event)"
+        (keydown)="_onKeydown($event, 'hour')"
       ></mat-hours-clock-dial>
     </ng-template>
     <ng-template [ngIf]="!isHoursView">
@@ -52,6 +53,7 @@
         [interval]="minuteInterval"
         [availableMinutes]="availableMinutes"
         (selectedChange)="_onMinuteSelected($event)"
+        (keydown)="_onKeydown($event, 'minute')"
       ></mat-minutes-clock-dial>
     </ng-template>
   </div>
