@@ -14,6 +14,7 @@ import {
   NUMPAD_TWO,
   UP_ARROW,
 } from '@angular/cdk/keycodes';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatNativeDateTimeModule } from './adapter';
 import { MatTimepickerModule } from './timepicker.module';
@@ -21,7 +22,11 @@ import { MatTimepickerModule } from './timepicker.module';
 // Creates a test component fixture.
 function createComponent<T>(component: Type<T>): ComponentFixture<T> {
   TestBed.configureTestingModule({
-    imports: [MatTimepickerModule, MatNativeDateTimeModule],
+    imports: [
+      MatTimepickerModule,
+      MatNativeDateTimeModule,
+      NoopAnimationsModule,
+    ],
     declarations: [component],
   });
 
@@ -168,7 +173,7 @@ describe('MatClockDials', () => {
       ).toBe('Select time');
     });
 
-    it('should have active class for hours and minutes', () => {
+    it('should have active class for hours and minutes', fakeAsync(() => {
       testComponent.selected = new Date(2023, 4, 27, 22, 20);
       fixture.detectChanges();
 
@@ -176,11 +181,12 @@ describe('MatClockDials', () => {
 
       minuteElement.click();
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(20 / 5).classList).toContain(
         'mat-clock-dial-cell-active'
       );
-    });
+    }));
 
     it('should change hours using arrows', () => {
       testComponent.selected = new Date(2023, 4, 27, 22, 20);
@@ -200,10 +206,11 @@ describe('MatClockDials', () => {
       expect(getDialCell(23).classList).toContain('mat-clock-dial-cell-active');
     });
 
-    it('should change minutes using arrows', () => {
+    it('should change minutes using arrows', fakeAsync(() => {
       testComponent.selected = new Date(2023, 4, 27, 22, 20);
       minuteElement.click();
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
         'mat-clock-dial-cell-active'
@@ -213,6 +220,7 @@ describe('MatClockDials', () => {
         pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-minutes');
       }
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(15)).classList).toContain(
         'mat-clock-dial-cell-active'
@@ -222,17 +230,19 @@ describe('MatClockDials', () => {
         pressArrowOnDial(UP_ARROW, '.mat-clock-dial-minutes');
       }
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
         'mat-clock-dial-cell-active'
       );
-    });
+    }));
 
-    it('should change minutes with interval using arrows', () => {
+    it('should change minutes with interval using arrows', fakeAsync(() => {
       testComponent.selected = new Date(2023, 4, 27, 22, 20);
       testComponent.minuteInterval = 5;
       minuteElement.click();
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
         'mat-clock-dial-cell-active'
@@ -240,6 +250,7 @@ describe('MatClockDials', () => {
 
       pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-minutes');
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(15)).classList).toContain(
         'mat-clock-dial-cell-active'
@@ -247,11 +258,12 @@ describe('MatClockDials', () => {
 
       pressArrowOnDial(UP_ARROW, '.mat-clock-dial-minutes');
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
         'mat-clock-dial-cell-active'
       );
-    });
+    }));
   });
 
   describe('with min/max', () => {
@@ -318,11 +330,12 @@ describe('MatClockDials', () => {
       );
     });
 
-    it('should disable minutes which are less than minMinute if hour is equal min hour', () => {
+    it('should disable minutes which are less than minMinute if hour is equal min hour', fakeAsync(() => {
       testComponent.selected = new Date(2023, 4, 18, 10, 30);
       testComponent.minTime = new Date(2023, 4, 18, 10, 20);
       minuteElement.click();
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(20)).classList).not.toContain(
         'mat-clock-dial-cell-disabled'
@@ -333,17 +346,19 @@ describe('MatClockDials', () => {
 
       testComponent.selected = new Date(2023, 4, 18, 11, 30);
       fixture.detectChanges();
+      flush();
 
       expect(
         hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
       ).toBe(0);
-    });
+    }));
 
-    it('should disable minutes which are more than maxMinute if hour is equal max hour', () => {
+    it('should disable minutes which are more than maxMinute if hour is equal max hour', fakeAsync(() => {
       testComponent.selected = new Date(2023, 4, 18, 10, 30);
       testComponent.maxTime = new Date(2023, 4, 18, 10, 40);
       minuteElement.click();
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(40)).classList).not.toContain(
         'mat-clock-dial-cell-disabled'
@@ -354,11 +369,12 @@ describe('MatClockDials', () => {
 
       testComponent.selected = new Date(2023, 4, 18, 9, 30);
       fixture.detectChanges();
+      flush();
 
       expect(
         hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
       ).toBe(0);
-    });
+    }));
 
     it('should disable minutes if selected hour is less or more than min or max hours', () => {
       testComponent.selected = new Date(2023, 4, 18, 2, 30);
@@ -392,7 +408,7 @@ describe('MatClockDials', () => {
       );
     });
 
-    it("shouldn't change hours if not available hours", () => {
+    it("shouldn't change hours if no available hours", () => {
       testComponent.selected = new Date(2023, 4, 18, 13, 20);
       testComponent.minTime = new Date(2023, 4, 18, 14, 20);
       testComponent.maxTime = new Date(2023, 4, 18, 12, 20);
@@ -412,12 +428,13 @@ describe('MatClockDials', () => {
       expect(getDialCell(13).classList).toContain('mat-clock-dial-cell-active');
     });
 
-    it('should change minutes using arrows', () => {
+    it('should change minutes using arrows if no available minutes', fakeAsync(() => {
       testComponent.selected = new Date(2023, 4, 18, 13, 20);
       testComponent.minTime = new Date(2023, 4, 18, 14, 20);
       testComponent.maxTime = new Date(2023, 4, 18, 12, 20);
       minuteElement.click();
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
         'mat-clock-dial-cell-active'
@@ -427,6 +444,7 @@ describe('MatClockDials', () => {
         pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-minutes');
       }
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
         'mat-clock-dial-cell-active'
@@ -436,11 +454,12 @@ describe('MatClockDials', () => {
         pressArrowOnDial(UP_ARROW, '.mat-clock-dial-minutes');
       }
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
         'mat-clock-dial-cell-active'
       );
-    });
+    }));
 
     it('shouldn change hours if there are a min and a max values', () => {
       testComponent.selected = new Date(2023, 4, 18, 3, 20);
@@ -461,12 +480,13 @@ describe('MatClockDials', () => {
       expect(getDialCell(3).classList).toContain('mat-clock-dial-cell-active');
     });
 
-    it('should change if there are a min and a max values', () => {
+    it('should change if there are a min and a max values', fakeAsync(() => {
       testComponent.selected = new Date(2023, 4, 18, 13, 10);
       testComponent.minTime = new Date(2023, 4, 18, 13, 10);
       testComponent.maxTime = new Date(2023, 4, 18, 13, 40);
       minuteElement.click();
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(10)).classList).toContain(
         'mat-clock-dial-cell-active'
@@ -474,6 +494,7 @@ describe('MatClockDials', () => {
 
       pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-minutes');
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(40)).classList).toContain(
         'mat-clock-dial-cell-active'
@@ -481,36 +502,43 @@ describe('MatClockDials', () => {
 
       pressArrowOnDial(UP_ARROW, '.mat-clock-dial-minutes');
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(10)).classList).toContain(
         'mat-clock-dial-cell-active'
       );
-    });
+    }));
 
-    it('should nothing has changed if use press another key', () => {
+    it('should nothing has changed if use press another key', fakeAsync(() => {
       testComponent.selected = new Date(2023, 4, 18, 13, 10);
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(13).classList).toContain('mat-clock-dial-cell-active');
 
       pressArrowOnDial(NUMPAD_EIGHT, '.mat-clock-dial-hours');
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(13).classList).toContain('mat-clock-dial-cell-active');
 
       pressArrowOnDial(NUMPAD_TWO, '.mat-clock-dial-hours');
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(13).classList).toContain('mat-clock-dial-cell-active');
 
       minuteElement.click();
       fixture.detectChanges();
+      flush();
+
       expect(getDialCell(getMinuteCellIndex(10)).classList).toContain(
         'mat-clock-dial-cell-active'
       );
 
       pressArrowOnDial(NUMPAD_EIGHT, '.mat-clock-dial-minutes');
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(10)).classList).toContain(
         'mat-clock-dial-cell-active'
@@ -518,19 +546,21 @@ describe('MatClockDials', () => {
 
       pressArrowOnDial(NUMPAD_TWO, '.mat-clock-dial-minutes');
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(10)).classList).toContain(
         'mat-clock-dial-cell-active'
       );
-    });
+    }));
 
-    it('should change minutes with interval using up arrow if there are min nad max', () => {
+    it('should change minutes with interval using up arrow if there are min nad max', fakeAsync(() => {
       testComponent.selected = new Date(2023, 4, 27, 22, 35);
       testComponent.minTime = new Date(2023, 4, 27, 22, 2);
       testComponent.maxTime = new Date(2023, 4, 27, 22, 40);
       testComponent.minuteInterval = 6;
       minuteElement.click();
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(35)).classList).toContain(
         'mat-clock-dial-cell-active'
@@ -538,6 +568,7 @@ describe('MatClockDials', () => {
 
       pressArrowOnDial(UP_ARROW, '.mat-clock-dial-minutes');
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(5)).classList).toContain(
         'mat-clock-dial-cell-active'
@@ -548,6 +579,7 @@ describe('MatClockDials', () => {
       testComponent.maxTime = new Date(2023, 4, 27, 22, 40);
       testComponent.minuteInterval = 10;
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(35)).classList).toContain(
         'mat-clock-dial-cell-active'
@@ -555,19 +587,21 @@ describe('MatClockDials', () => {
 
       pressArrowOnDial(UP_ARROW, '.mat-clock-dial-minutes');
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(25)).classList).toContain(
         'mat-clock-dial-cell-active'
       );
-    });
+    }));
 
-    it('should change minutes with interval using down arrow if there are min nad max', () => {
+    it('should change minutes with interval using down arrow if there are min nad max', fakeAsync(() => {
       testComponent.selected = new Date(2023, 4, 27, 22, 5);
       testComponent.minTime = new Date(2023, 4, 27, 22, 2);
       testComponent.maxTime = new Date(2023, 4, 27, 22, 37);
       testComponent.minuteInterval = 6;
       minuteElement.click();
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(5)).classList).toContain(
         'mat-clock-dial-cell-active'
@@ -575,11 +609,12 @@ describe('MatClockDials', () => {
 
       pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-minutes');
       fixture.detectChanges();
+      flush();
 
       expect(getDialCell(getMinuteCellIndex(35)).classList).toContain(
         'mat-clock-dial-cell-active'
       );
-    });
+    }));
 
     describe('with meridiem', () => {
       let amItem: HTMLDivElement;
@@ -952,12 +987,13 @@ describe('MatClockDials', () => {
         ).toBe(11);
       });
 
-      it('should disable minutes after switch ap/pm if min/max have 12h difference', () => {
+      it('should disable minutes after switch ap/pm if min/max have 12h difference', fakeAsync(() => {
         testComponent.selected = new Date(2023, 4, 18, 7, 45);
         testComponent.minTime = new Date(2023, 4, 18, 7, 40);
         testComponent.maxTime = new Date(2023, 4, 18, 19, 25);
         minuteElement.click();
         fixture.detectChanges();
+        flush();
 
         expect(getDialCell(getMinuteCellIndex(40)).classList).not.toContain(
           'mat-clock-dial-cell-disabled'
@@ -968,6 +1004,7 @@ describe('MatClockDials', () => {
 
         testComponent.selected = new Date(2023, 4, 18, 19, 20);
         fixture.detectChanges();
+        flush();
 
         expect(getDialCell(getMinuteCellIndex(25)).classList).not.toContain(
           'mat-clock-dial-cell-disabled'
@@ -975,13 +1012,14 @@ describe('MatClockDials', () => {
         expect(getDialCell(getMinuteCellIndex(30)).classList).toContain(
           'mat-clock-dial-cell-disabled'
         );
-      });
+      }));
 
-      it('should disable minutes if max hour is 12pm', () => {
+      it('should disable minutes if max hour is 12pm', fakeAsync(() => {
         testComponent.selected = new Date(2023, 4, 18, 12, 15);
         testComponent.maxTime = new Date(2023, 4, 18, 12, 25);
         minuteElement.click();
         fixture.detectChanges();
+        flush();
 
         expect(getDialCell(getMinuteCellIndex(25)).classList).not.toContain(
           'mat-clock-dial-cell-disabled'
@@ -989,7 +1027,7 @@ describe('MatClockDials', () => {
         expect(getDialCell(getMinuteCellIndex(30)).classList).toContain(
           'mat-clock-dial-cell-disabled'
         );
-      });
+      }));
 
       it('should change hours correctly with meridiem and max > 12', () => {
         testComponent.selected = new Date(2023, 4, 18, 6, 10);

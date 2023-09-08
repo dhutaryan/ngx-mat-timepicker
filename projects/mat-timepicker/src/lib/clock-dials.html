@@ -38,6 +38,7 @@
   >
     <ng-template [ngIf]="isHoursView">
       <mat-hours-clock-dial
+        [@enterLeaveAnimation]
         [color]="color"
         [selectedHour]="selectedHour"
         [isMeridiem]="isMeridiem"
@@ -48,6 +49,7 @@
     </ng-template>
     <ng-template [ngIf]="!isHoursView">
       <mat-minutes-clock-dial
+        [@enterLeaveAnimation]
         [color]="color"
         [selectedMinute]="selectedMinute"
         [interval]="minuteInterval"
