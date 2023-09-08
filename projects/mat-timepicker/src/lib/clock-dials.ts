@@ -80,6 +80,17 @@ export class MatClockDials<T>
 
           if (activeCell) {
             activeCell.focus();
+            return;
+          }
+
+          const activePoint: HTMLElement | null =
+            this._elementRef.nativeElement.querySelector(
+              '.mat-clock-dial-hand-point'
+            );
+
+          if (activePoint) {
+            // if no active cell we need to focus a small dot
+            activePoint.focus();
           }
         });
       });

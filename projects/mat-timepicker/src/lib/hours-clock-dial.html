@@ -4,7 +4,7 @@
   [class.mat-clock-dial-hand-disabled]="disabledHand"
   [ngStyle]="_handStyles()"
 ></div>
-<ng-template ngFor let-hour [ngForOf]="hours">
+<ng-template ngFor let-hour [ngForOf]="hours" [ngForTrackBy]="_trackBy">
   <button
     class="mat-clock-dial-cell mat-elevation-z0"
     mat-mini-fab

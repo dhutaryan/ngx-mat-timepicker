@@ -179,17 +179,23 @@ export class MatTimeInputs<T> extends MatTimeFaceBase<T> {
     super(_timeAdapter);
   }
 
-  isMinHour12: boolean;
+  /**
+   * Using for skipping that focus shouldn't be moved to the active cell on the next tick.
+   * We need to use it to avoid focusing input for input mode.
+   */
+  private _skipNextTickFocus = false;
 
   focusActiveCell(): void {
     this._ngZone.runOutsideAngular(() => {
       this._ngZone.onStable.pipe(take(1)).subscribe(() => {
         setTimeout(() => {
           const activeCell: HTMLElement | null =
-            this._elementRef.nativeElement.querySelector('input');
-
-          if (activeCell) {
+            this._elementRef.nativeElement.querySelector(
+              '.mat-timepicker-content input' // to avoid focus for inline mode
+            );
+          if (activeCell && !this._skipNextTickFocus) {
             activeCell.focus();
+            this._skipNextTickFocus = true;
           }
         });
       });

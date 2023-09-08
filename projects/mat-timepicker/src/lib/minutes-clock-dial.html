@@ -3,8 +3,10 @@
   [class.mat-clock-dial-hand-pointless]="isMinutePoint"
   [class.mat-clock-dial-hand-disabled]="disabled"
   [ngStyle]="_handStyles()"
-></div>
-<ng-template ngFor let-minute [ngForOf]="minutes">
+>
+  <div class="mat-clock-dial-hand-point" tabindex="0"></div>
+</div>
+<ng-template ngFor let-minute [ngForOf]="minutes" [ngForTrackBy]="_trackBy">
   <button
     class="mat-clock-dial-cell mat-elevation-z0"
     mat-mini-fab

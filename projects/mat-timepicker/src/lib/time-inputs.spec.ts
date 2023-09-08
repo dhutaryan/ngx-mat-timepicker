@@ -1,5 +1,6 @@
 import { Component, QueryList, Type, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -259,6 +260,46 @@ describe('MatInputs', () => {
       dispatchInputEvent(minuteInput, 'blur');
 
       expect(Number(minuteInput.value)).toBe(30);
+    });
+
+    it('should change hours using arrows', () => {
+      testComponent.selected = new Date(2023, 4, 27, 22, 20);
+      fixture.detectChanges();
+
+      expect(Number(hourInput.value)).toBe(22);
+      expect(Number(minuteInput.value)).toBe(20);
+
+      dispatchKeyEvent(hourInput, DOWN_ARROW);
+      fixture.detectChanges();
+
+      expect(Number(hourInput.value)).toBe(21);
+      expect(Number(minuteInput.value)).toBe(20);
+
+      dispatchKeyEvent(hourInput, UP_ARROW);
+      fixture.detectChanges();
+
+      expect(Number(hourInput.value)).toBe(22);
+      expect(Number(minuteInput.value)).toBe(20);
+    });
+
+    it('should change minutes using arrows', () => {
+      testComponent.selected = new Date(2023, 4, 27, 22, 20);
+      fixture.detectChanges();
+
+      expect(Number(minuteInput.value)).toBe(20);
+      expect(Number(hourInput.value)).toBe(22);
+
+      dispatchKeyEvent(minuteInput, DOWN_ARROW);
+      fixture.detectChanges();
+
+      expect(Number(minuteInput.value)).toBe(19);
+      expect(Number(hourInput.value)).toBe(22);
+
+      dispatchKeyEvent(minuteInput, UP_ARROW);
+      fixture.detectChanges();
+
+      expect(Number(minuteInput.value)).toBe(20);
+      expect(Number(hourInput.value)).toBe(22);
     });
   });
 
@@ -988,6 +1029,11 @@ describe('MatInputs', () => {
 
 function dispatchInputEvent(input: HTMLInputElement, type: 'focus' | 'blur') {
   const event = new InputEvent(type);
+  input.dispatchEvent(event);
+}
+
+function dispatchKeyEvent(input: HTMLInputElement, keyCode: number) {
+  const event = new KeyboardEvent('keydown', { keyCode });
   input.dispatchEvent(event);
 }
 
