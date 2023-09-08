@@ -1,3 +1,9 @@
+# 12.3.0
+
+- feature(dials): add animation while switching hour and minute dials ([#81](https://github.com/dhutaryan/ngx-mat-timepicker/pull/81))
+- fix(time-inputs): keep the same value if input value is a string ([#80](https://github.com/dhutaryan/ngx-mat-timepicker/pull/80))
+- feat(time-faces): handle time changing by arrows ([#79](https://github.com/dhutaryan/ngx-mat-timepicker/pull/79))
+
 # 12.2.0
 
 - feat(timepicker): add orientation for dial ([#74](https://github.com/dhutaryan/ngx-mat-timepicker/pull/74))
