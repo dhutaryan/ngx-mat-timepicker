@@ -58,8 +58,9 @@ export abstract class MatTimeInputBase {
   }
 
   blur() {
+    const isNumber = !isNaN(Number(this.inputElement.value));
     const value = this._formatValue(
-      Number(this.inputElement.value || this._value)
+      isNumber ? Number(this.inputElement.value || this._value) : this.value
     );
     this.setInputValue(value);
     this.setInputPlaceholder(value);

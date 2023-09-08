@@ -301,6 +301,28 @@ describe('MatInputs', () => {
       expect(Number(minuteInput.value)).toBe(20);
       expect(Number(hourInput.value)).toBe(22);
     });
+
+    it('should keep the same value if consumer entered a string', () => {
+      testComponent.selected = new Date(2023, 4, 27, 22, 20);
+      fixture.detectChanges();
+
+      expect(Number(hourInput.value)).toBe(22);
+      expect(Number(minuteInput.value)).toBe(20);
+
+      hourInput.value = 'value';
+      dispatchInputEvent(hourInput, 'blur');
+      fixture.detectChanges();
+
+      expect(Number(hourInput.value)).toBe(22);
+      expect(Number(minuteInput.value)).toBe(20);
+
+      minuteInput.value = 'value';
+      dispatchInputEvent(minuteInput, 'blur');
+      fixture.detectChanges();
+
+      expect(Number(hourInput.value)).toBe(22);
+      expect(Number(minuteInput.value)).toBe(20);
+    });
   });
 
   describe('with meridiem', () => {
