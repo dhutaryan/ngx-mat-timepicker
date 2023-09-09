@@ -4,8 +4,8 @@
   matRipple
   [class.mat-time-period-item-active]="period === 'am'"
   [class.mat-time-period-item-disabled]="_isPeriodDisabled('am')"
-  (click)="setPeriod('am')"
-  (keyup.space)="setPeriod('am')"
+  (click)="setPeriod($event,'am')"
+  (keydown.space)="setPeriod($event, 'am')"
 >
   AM
 </div>
@@ -16,8 +16,8 @@
   matRipple
   [class.mat-time-period-item-active]="period === 'pm'"
   [class.mat-time-period-item-disabled]="_isPeriodDisabled('pm')"
-  (click)="setPeriod('pm')"
-  (keyup.space)="setPeriod('pm')"
+  (click)="setPeriod($event,'pm')"
+  (keydown.space)="setPeriod($event, 'pm')"
 >
   PM
 </div>

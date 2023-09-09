@@ -7,8 +7,8 @@
     class="mat-clock-dial-value"
     hours
     [class.mat-clock-dial-value-active]="isHoursView"
-    (click)="onViewChange('hours')"
-    (keyup.space)="onViewChange('hours')"
+    (click)="onViewChange($event,'hours')"
+    (keydown.space)="onViewChange($event, 'hours')"
   >
     {{ _withZeroPrefix(selectedHour) }}
   </div>
@@ -17,8 +17,8 @@
     class="mat-clock-dial-value"
     minutes
     [class.mat-clock-dial-value-active]="!isHoursView"
-    (click)="onViewChange('minutes')"
-    (keyup.space)="onViewChange('minutes')"
+    (click)="onViewChange($event,'minutes')"
+    (keydown.space)="onViewChange($event,'minutes')"
   >
     {{ _withZeroPrefix(selectedMinute) }}
   </div>
