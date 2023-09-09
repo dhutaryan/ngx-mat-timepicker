@@ -1,3 +1,7 @@
+# 12.3.1
+
+- fix(dials): prevent scrolling by clicking space ([#84](https://github.com/dhutaryan/ngx-mat-timepicker/pull/84))
+
 # 12.3.0
 
 - feature(dials): add animation while switching hour and minute dials ([#81](https://github.com/dhutaryan/ngx-mat-timepicker/pull/81))
