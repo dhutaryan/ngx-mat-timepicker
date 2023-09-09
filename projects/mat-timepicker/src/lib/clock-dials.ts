@@ -67,7 +67,8 @@ export class MatClockDials<T>
   }
 
   /** Changes clock dial view. */
-  onViewChange(view: MatDialView): void {
+  onViewChange(event: Event, view: MatDialView): void {
+    event.preventDefault();
     this._view.next(view);
   }
 

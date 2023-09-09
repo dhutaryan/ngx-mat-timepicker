@@ -54,7 +54,8 @@ export class MatTimePeriod {
 
   @Output() periodChanged = new EventEmitter<MatTimePeriodType>();
 
-  setPeriod(period: MatTimePeriodType): void {
+  setPeriod(event: Event, period: MatTimePeriodType): void {
+    event.preventDefault();
     this.period = period;
     this.periodChanged.emit(period);
   }
