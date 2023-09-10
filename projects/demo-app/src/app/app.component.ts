@@ -9,6 +9,7 @@ import { FormControl } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   date = new Date();
+  date2 = new Date();
   min = new Date(2023, 4, 9, 5, 40);
   max = new Date(2023, 4, 9, 21, 15);
 
