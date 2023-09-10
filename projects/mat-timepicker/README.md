@@ -12,6 +12,7 @@ The timepicker module using Angular material.
 | mat-timepicker | Angular             |
 | -------------- | ------------------- |
 | 12.x.x         | >=12.0.0 && <15.0.0 |
+| 13.x.x         | >=13.0.0 && <15.0.0 |
 
 ## Documentation
 
