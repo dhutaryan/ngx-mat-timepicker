@@ -1,3 +1,7 @@
+# 13.0.0
+
+- build(deps): bump angular and angular material to v13 ([#87](https://github.com/dhutaryan/ngx-mat-timepicker/pull/87))
+
 # 12.3.1
 
 - fix(dials): prevent scrolling by clicking space ([#84](https://github.com/dhutaryan/ngx-mat-timepicker/pull/84))
