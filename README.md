@@ -13,6 +13,7 @@ The timepicker module using Angular material.
 | -------------- | ------------------- |
 | 12.x.x         | >=12.0.0 && <15.0.0 |
 | 13.x.x         | >=13.0.0 && <15.0.0 |
+| 14.x.x         | ^14.0.0             |
 
 ## Documentation
 
