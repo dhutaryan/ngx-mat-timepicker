@@ -6,7 +6,7 @@ import {
   fakeAsync,
   tick,
 } from '@angular/core/testing';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -324,7 +324,7 @@ class TimepickerWithActions {
   @ViewChild(MatTimepicker) timepicker: MatTimepicker<Date>;
   @ViewChild('input', { read: ElementRef }) input: ElementRef<HTMLInputElement>;
 
-  control = new FormControl(null);
+  control = new UntypedFormControl(null);
   onTimeChange = jasmine.createSpy('timeChange spy');
   opensAs: TimepickerOpenAs = 'popup';
   renderActions = true;

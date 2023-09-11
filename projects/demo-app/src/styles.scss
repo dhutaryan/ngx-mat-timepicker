@@ -2,7 +2,7 @@
 // For more information: https://material.angular.io/guide/theming
 @use "sass:map";
 @use "@angular/material" as mat;
-@use "~projects/mat-timepicker" as mat-timepicker;
+@use "projects/mat-timepicker" as mat-timepicker;
 
 @use "./styles/theme";
 
