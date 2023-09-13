@@ -10,7 +10,7 @@
 .mat-time-period-vertical {
   flex-direction: column;
   width: 3.25rem;
-  height: 4.375rem;
+  height: 4.5rem;
 }
 
 .mat-time-period-horizontal {
@@ -26,6 +26,7 @@
   justify-content: center;
   flex-grow: 1;
   height: 100%;
+  font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
 }

@@ -95,7 +95,7 @@ export class MatClockDials<T>
             // if no active cell we need to focus a small dot
             activePoint.focus();
           }
-        });
+        }, 50);
       });
     });
   }

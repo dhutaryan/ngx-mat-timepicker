@@ -487,7 +487,7 @@ describe('MatTimepicker', () => {
 
         expect(testComponent.timepicker.opened).toBe(true);
 
-        scrolledSubject.next(true);
+        scrolledSubject.next(null);
         flush();
         fixture.detectChanges();
 
@@ -787,9 +787,8 @@ describe('MatTimepicker', () => {
         fixture.detectChanges();
 
         expect(
-          fixture.debugElement.nativeElement.querySelector('mat-form-field')
-            .classList
-        ).toContain('mat-form-field-should-float');
+          fixture.debugElement.nativeElement.querySelector('label').classList
+        ).toContain('mdc-floating-label--float-above');
       });
 
       it('should pass the form field theme color to the overlay', fakeAsync(() => {
@@ -1394,6 +1393,7 @@ describe('MatTimepicker', () => {
         fixture.componentInstance.timepicker.open();
         fixture.detectChanges();
         tick();
+        flush();
 
         const timepicker = document.querySelector('.mat-timepicker');
         expect(timepicker?.classList).toContain('mat-accent');
@@ -1435,6 +1435,7 @@ describe('MatTimepicker', () => {
         fixture.componentInstance.timepicker.open();
         fixture.detectChanges();
         tick();
+        flush();
 
         expect(
           document?.querySelector('.cdk-overlay-pane.mat-timepicker-dialog')
@@ -1457,6 +1458,7 @@ describe('MatTimepicker', () => {
         fixture.componentInstance.timepicker.open();
         fixture.detectChanges();
         tick();
+        flush();
 
         expect(document?.querySelector('.mat-time-period')).toBe(null);
       }));
@@ -1477,6 +1479,7 @@ describe('MatTimepicker', () => {
         fixture.componentInstance.timepicker.open();
         fixture.detectChanges();
         tick();
+        flush();
 
         expect(document?.querySelector('.mat-time-toggle-mode-button')).toBe(
           null

@@ -4,7 +4,10 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
 import { A11yModule } from '@angular/cdk/a11y';
-import { MatButtonModule } from '@angular/material/button';
+import {
+  MAT_FAB_DEFAULT_OPTIONS,
+  MatButtonModule,
+} from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -90,6 +93,10 @@ import { MatTimepickerIntl } from './timepicker-intl';
     MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER,
     { provide: Window, useValue: window },
     { provide: MAT_DEFAULT_ACITONS, useValue: MatTimepickerDefaultActions },
+    {
+      provide: MAT_FAB_DEFAULT_OPTIONS,
+      useValue: { color: 'unthemed' },
+    },
   ],
 })
 export class MatTimepickerModule {}

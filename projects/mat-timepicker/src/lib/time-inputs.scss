@@ -12,39 +12,46 @@ $form-field-padding: 1.25rem;
   display: block;
 
   &.mat-form-field-appearance-outline {
-    .mat-form-field-flex {
+    .mat-mdc-form-field-flex {
       margin: 0;
     }
 
-    .mat-form-field-outline {
-      top: 0;
-    }
-
-    .mat-form-field-wrapper {
+    .mat-mdc-text-field-wrapper {
       top: 0;
       margin: 0;
-      padding-bottom: $form-field-padding;
     }
 
-    .mat-form-field-infix {
-      padding: 1rem 0;
+    &:not(.mat-focused) {
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-style: none;
+      }
     }
 
-    .mat-form-field-subscript-wrapper {
-      margin-top: 0.59375rem;
-      padding-left: 0;
+    .mat-mdc-form-field-subscript-wrapper {
+      margin-top: 0.75rem;
       line-height: 1;
       letter-spacing: 0.05rem;
+
+      .mat-mdc-form-field-hint-wrapper {
+        padding-left: 0;
+      }
     }
   }
 
-  .mat-form-field-infix {
+  .mat-mdc-form-field-bottom-align::before {
+    height: 0;
+  }
+
+  .mat-mdc-form-field-infix {
     border-top: none;
     text-align: center;
   }
 
-  input.mat-input-element {
+  input.mat-mdc-input-element {
     margin-top: 0;
     line-height: normal;
+    text-align: center;
   }
 }

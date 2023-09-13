@@ -1,5 +1,12 @@
 import { Component, QueryList, Type, ViewChildren } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  flush,
+  tick,
+  waitForAsync,
+} from '@angular/core/testing';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -108,11 +115,13 @@ describe('MatInputs', () => {
       expect(testComponent.onSelect).not.toHaveBeenCalled();
     });
 
-    it('should set placeholder as previous value after focus', () => {
-      testComponent.selected = new Date(2023, 4, 19, 21, 45);
+    it('should set placeholder as previous value after focus', fakeAsync(() => {
+      testComponent.selected = new Date(2023, 4, 19, 19, 45);
       fixture.detectChanges();
+      tick();
+      flush();
 
-      expect(Number(hourInput.value)).toBe(21);
+      expect(Number(hourInput.value)).toBe(19);
       expect(Number(minuteInput.value)).toBe(45);
 
       dispatchInputEvent(hourInput, 'focus');
@@ -120,13 +129,15 @@ describe('MatInputs', () => {
 
       expect(Number(hourInput.value)).toBe(0);
       expect(Number(minuteInput.value)).toBe(0);
-      expect(hourInput.placeholder).toBe('21');
+      expect(hourInput.placeholder).toBe('19');
       expect(minuteInput.placeholder).toBe('45');
-    });
+    }));
 
-    it('should keep the same value after focus and blur inputs', () => {
+    it('should keep the same value after focus and blur inputs', fakeAsync(() => {
       testComponent.selected = new Date(2023, 4, 19, 21, 45);
       fixture.detectChanges();
+      tick();
+      flush();
 
       expect(Number(hourInput.value)).toBe(21);
       expect(Number(minuteInput.value)).toBe(45);
@@ -147,7 +158,7 @@ describe('MatInputs', () => {
       expect(hourInput.placeholder).toBe('21');
       expect(minuteInput.placeholder).toBe('45');
       expect(testComponent.onSelect).toHaveBeenCalledTimes(2);
-    });
+    }));
 
     it('should emit time change event when value has been changed', () => {
       testComponent.selected = new Date(2023, 4, 19, 21, 45);
@@ -243,12 +254,12 @@ describe('MatInputs', () => {
       ).toBe('Enter time');
       expect(
         hostElement.querySelector(
-          '.mat-timepicker-content-layout-hours .mat-hint'
+          '.mat-timepicker-content-layout-hours .mat-mdc-form-field-hint'
         )?.textContent
       ).toBe('Hour');
       expect(
         hostElement.querySelector(
-          '.mat-timepicker-content-layout-minutes .mat-hint'
+          '.mat-timepicker-content-layout-minutes .mat-mdc-form-field-hint'
         )?.textContent
       ).toBe('Minute');
     });

@@ -9,7 +9,7 @@ $button-icon-size: 3.25rem;
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 0.5rem 1.5rem;
+  padding: 1rem 1.5rem;
 }
 
 .mat-timepicker-content-actions {
@@ -24,7 +24,6 @@ $button-icon-size: 3.25rem;
   height: $button-icon-size;
   margin-left: -0.75rem;
   margin-bottom: -0.25rem;
-  line-height: $button-icon-size;
 }
 
 .mat-timepicker-close-button {
