@@ -19,13 +19,9 @@ $clock-dial-hand-dot-size: 0.5rem;
     transform: translate(-50%, -50%);
     content: "";
   }
-
-  [mat-mini-fab] {
-    box-shadow: none;
-  }
 }
 
-.mat-clock-dial-cell {
+[mat-mini-fab].mat-clock-dial-cell {
   position: absolute;
   display: flex;
   align-items: center;
@@ -33,9 +29,17 @@ $clock-dial-hand-dot-size: 0.5rem;
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
+  box-shadow: none;
 
   &:disabled {
     pointer-events: none;
+  }
+
+  &:focus,
+  &:hover,
+  &:active,
+  &:focus:active {
+    box-shadow: none;
   }
 }
 

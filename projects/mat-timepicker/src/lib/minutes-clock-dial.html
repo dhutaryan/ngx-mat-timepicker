@@ -8,7 +8,7 @@
 </div>
 <ng-template ngFor let-minute [ngForOf]="minutes" [ngForTrackBy]="_trackBy">
   <button
-    class="mat-clock-dial-cell mat-elevation-z0"
+    class="mat-clock-dial-cell"
     mat-mini-fab
     disableRipple
     [tabIndex]="_isActiveCell(minute.value) ? 0 : -1"

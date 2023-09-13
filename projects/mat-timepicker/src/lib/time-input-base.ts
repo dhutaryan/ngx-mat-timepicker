@@ -7,6 +7,7 @@ import {
   ElementRef,
   ChangeDetectorRef,
   Inject,
+  Self,
 } from '@angular/core';
 
 export function withZeroPrefix(value: number): string {
@@ -33,7 +34,10 @@ export abstract class MatTimeInputBase {
     if (!this.hasFocus) {
       this.setInputValue(this._value);
     }
-    this.setInputPlaceholder(this._value);
+    // we need timeout here to set placeholder first time
+    setTimeout(() => {
+      this.setInputPlaceholder(this._value);
+    }, 0);
   }
   private _value: number;
 

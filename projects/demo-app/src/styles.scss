@@ -21,6 +21,7 @@
 @include mat.form-field-theme(theme.$ngx-mat-timepicker-theme);
 @include mat.input-theme(theme.$ngx-mat-timepicker-theme);
 @include mat.button-theme(theme.$ngx-mat-timepicker-theme);
+@include mat.fab-theme(theme.$ngx-mat-timepicker-theme);
 @include mat.divider-theme(theme.$ngx-mat-timepicker-theme);
 @include mat.card-theme(theme.$ngx-mat-timepicker-theme);
 @include mat-timepicker.timepicker-theme(theme.$ngx-mat-timepicker-theme);
@@ -35,4 +36,8 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mdc-button__label > * {
+  vertical-align: middle;
 }

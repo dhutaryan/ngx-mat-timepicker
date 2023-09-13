@@ -24,5 +24,6 @@ $ngx-mat-timepicker-theme: mat.define-light-theme(
       accent: $ngx-mat-timepicker-accent,
       warn: $ngx-mat-timepicker-warn,
     ),
+    typography: mat.define-typography-config(),
   )
 );
