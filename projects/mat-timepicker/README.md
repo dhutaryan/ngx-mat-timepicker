@@ -14,6 +14,7 @@ The timepicker module using Angular material.
 | 12.x.x         | >=12.0.0 && <15.0.0 |
 | 13.x.x         | >=13.0.0 && <15.0.0 |
 | 14.x.x         | ^14.0.0             |
+| 15.x.x         | ^15.0.0             |
 
 ## Documentation
 
@@ -93,6 +94,14 @@ Then you have to define a theme. [More details about theming](https://material.a
 ```scss
 @use "@dhutaryan/ngx-mat-timepicker" as mat-timepicker;
 
+// timepicker uses these component
+@include mat.form-field-theme(theme.$ngx-mat-timepicker-theme);
+@include mat.input-theme(theme.$ngx-mat-timepicker-theme);
+@include mat.button-theme(theme.$ngx-mat-timepicker-theme);
+@include mat.fab-theme(theme.$ngx-mat-timepicker-theme);
+@include mat.divider-theme(theme.$ngx-mat-timepicker-theme);
+
+// timepicker theme
 @include mat-timepicker.timepicker-theme($theme);
 ```
 
