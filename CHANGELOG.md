@@ -1,4 +1,8 @@
-# 14.0.0
+# 16.0.0
+
+- build(deps): bump angular and angular material to v16 ([#95](https://github.com/dhutaryan/ngx-mat-timepicker/pull/95))
+
+# 15.0.0
 
 - build(deps): bump angular and angular material to v15 ([#92](https://github.com/dhutaryan/ngx-mat-timepicker/pull/92))
 
