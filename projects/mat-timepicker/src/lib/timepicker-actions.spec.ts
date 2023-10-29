@@ -6,7 +6,11 @@ import {
   fakeAsync,
   tick,
 } from '@angular/core/testing';
-import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  UntypedFormControl,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -291,6 +295,7 @@ describe('MatTimepickerActions', () => {
     fixture.detectChanges();
     expect(content.querySelector('.cancel')).toBeTruthy();
     expect(content.querySelector('.apply')).toBeTruthy();
+    flush();
 
     fixture.componentInstance.renderActions = false;
     fixture.detectChanges();
