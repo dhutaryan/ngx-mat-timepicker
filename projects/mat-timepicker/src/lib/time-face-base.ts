@@ -135,6 +135,7 @@ export abstract class MatTimeFaceBase<T>
         this.minTime,
         this.maxTime
       );
+      this._userSelection.emit(this.selected);
     }
   }
 
