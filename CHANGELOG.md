@@ -1,4 +1,4 @@
-# 15.0.1
+# 15.0.2
 
 - fix(dials): handle touch move action ([#103](https://github.com/dhutaryan/ngx-mat-timepicker/pull/103))
 - fix(input): set value for empty input after apply with no changes ([#101](https://github.com/dhutaryan/ngx-mat-timepicker/pull/101))
