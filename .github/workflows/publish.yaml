@@ -3,6 +3,7 @@ name: ngx-mat-timepicker publish
 on:
   release:
     types: [published]
+    branches: ["master"]
 
 jobs:
   build:
