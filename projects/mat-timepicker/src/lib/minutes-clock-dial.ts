@@ -35,7 +35,8 @@ const CLOCK_OUTER_RADIUS = 100;
   encapsulation: ViewEncapsulation.None,
   host: {
     class: 'mat-clock-dial mat-clock-dial-minutes',
-    '(mousedown)': '_onMouseDown($event)',
+    '(mousedown)': '_onUserAction($event)',
+    '(touchstart)': '_onUserAction($event)',
   },
 })
 export class MatMinutesClockDial implements OnInit {
@@ -110,7 +111,11 @@ export class MatMinutesClockDial implements OnInit {
   }
 
   /** Handles mouse and touch events on dial and document. */
-  _onMouseDown(event: MouseEvent | TouchEvent): void {
+  _onUserAction(event: MouseEvent | TouchEvent): void {
+    if (event.cancelable) {
+      event.preventDefault();
+    }
+
     this._setMinute(event);
 
     const eventsSubscription = merge(

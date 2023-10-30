@@ -40,7 +40,8 @@ const CLOCK_INNER_RADIUS = CLOCK_OUTER_RADIUS - CLOCK_TICK_RADIUS * 2;
   encapsulation: ViewEncapsulation.None,
   host: {
     class: 'mat-clock-dial mat-clock-dial-hours',
-    '(mousedown)': '_onMouseDown($event)',
+    '(mousedown)': '_onUserAction($event)',
+    '(touchstart)': '_onUserAction($event)',
   },
 })
 export class MatHoursClockDial implements OnInit {
@@ -119,7 +120,11 @@ export class MatHoursClockDial implements OnInit {
   }
 
   /** Handles mouse and touch events on dial and document. */
-  _onMouseDown(event: MouseEvent | TouchEvent): void {
+  _onUserAction(event: MouseEvent | TouchEvent): void {
+    if (event.cancelable) {
+      event.preventDefault();
+    }
+
     this._setHour(event);
 
     const eventsSubscription = merge(
