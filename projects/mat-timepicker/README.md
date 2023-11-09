@@ -16,6 +16,7 @@ The timepicker module using Angular material.
 | 14.x.x         | ^14.0.0             |
 | 15.x.x         | ^15.0.0             |
 | 16.x.x         | ^16.0.0             |
+| 17.x.x         | ^17.0.0             |
 
 ## Documentation
 
