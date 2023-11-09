@@ -1,3 +1,7 @@
+# 17.0.0
+
+- build(deps): bump angular and angular material to v17 ([#106](https://github.com/dhutaryan/ngx-mat-timepicker/pull/106))
+
 # 16.0.1
 
 - fix(dials): handle touch move action ([#103](https://github.com/dhutaryan/ngx-mat-timepicker/pull/103))
