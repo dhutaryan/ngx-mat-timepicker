@@ -9,6 +9,10 @@ $inputs-separator-line-height: 1.25rem;
 $primary-opacity: 0.15;
 
 @mixin _color($palette) {
+  .mat-timepicker-toggle.mat-timepicker-toggle-active {
+    color: mat.get-color-from-palette($palette);
+  }
+
   .mat-time-period-item-active,
   .mat-clock-dial-value.mat-clock-dial-value-active {
     color: mat.get-color-from-palette($palette);
@@ -51,6 +55,10 @@ $primary-opacity: 0.15;
   $background: map.get($config, background);
 
   @include _color(map.get($config, primary));
+
+  .mat-timepicker-toggle {
+    color: mat.get-color-from-palette($foreground, icon);
+  }
 
   .mat-timepicker-content {
     @include mat.elevation(4);
