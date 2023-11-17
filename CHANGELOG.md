@@ -1,3 +1,7 @@
+# 16.0.2
+
+- feat(timepicker): change default colors for toggle icon ([#110](https://github.com/dhutaryan/ngx-mat-timepicker/pull/110))
+
 # 16.0.1
 
 - fix(dials): handle touch move action ([#103](https://github.com/dhutaryan/ngx-mat-timepicker/pull/103))
