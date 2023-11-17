@@ -1,4 +1,4 @@
-name: ngx-mat-timepicker publish
+name: ngx-mat-timepicker publish v16
 
 on:
   release:
@@ -24,7 +24,8 @@ jobs:
       - name: Build
         run: yarn run build:lib
       - name: Publish on npm
-        uses: JS-DevTools/npm-publish@v2
+        uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_TOKEN }}
           package: dist/mat-timepicker
+          tag: latest-v16
