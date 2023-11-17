@@ -23,6 +23,7 @@ export class MatTimepickerToggleIcon {}
   host: {
     class: 'mat-timepicker-toggle',
     '[attr.tabindex]': 'null',
+    '[class.mat-timepicker-toggle-active]': 'timepicker && timepicker.opened',
     '(click)': 'open($event)',
   },
   encapsulation: ViewEncapsulation.None,
