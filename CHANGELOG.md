@@ -1,3 +1,7 @@
+# 17.0.1
+
+- feat(timepicker): change default colors for toggle icon ([#110](https://github.com/dhutaryan/ngx-mat-timepicker/pull/110))
+
 # 17.0.0
 
 - build(deps): bump angular and angular material to v17 ([#106](https://github.com/dhutaryan/ngx-mat-timepicker/pull/106))
