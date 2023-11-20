@@ -78,7 +78,7 @@ export class MatClockDials<T>
         setTimeout(() => {
           const activeCell: HTMLElement | null =
             this._elementRef.nativeElement.querySelector(
-              '.mat-clock-dial-cell-active'
+              '.mat-timepicker-content .mat-clock-dial-cell-active' // to avoid focus for inline mode
             );
 
           if (activeCell) {
@@ -88,7 +88,7 @@ export class MatClockDials<T>
 
           const activePoint: HTMLElement | null =
             this._elementRef.nativeElement.querySelector(
-              '.mat-clock-dial-hand-point'
+              '.mat-timepicker-content .mat-clock-dial-hand-point' // to avoid focus for inline mode
             );
 
           if (activePoint) {

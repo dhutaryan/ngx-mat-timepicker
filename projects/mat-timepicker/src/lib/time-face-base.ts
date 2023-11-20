@@ -51,7 +51,7 @@ export abstract class MatTimeFaceBase<T>
     this._setMaxHour();
     this._setMinMinute();
     this._setMaxMinute();
-    this._moveFocusOnNextTick = true;
+    this._moveFocusOnNextTick = this.isMeridiem;
   }
   private _selected: T | null;
 
