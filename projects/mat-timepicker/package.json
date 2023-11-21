@@ -1,6 +1,6 @@
 {
   "name": "@dhutaryan/ngx-mat-timepicker",
-  "description": "Angular imepicker to add time which is based on material design and Angular material.",
+  "description": "Angular timepicker to add time which is based on material design and Angular material.",
   "version": "17.0.1",
   "license": "MIT",
   "author": {
