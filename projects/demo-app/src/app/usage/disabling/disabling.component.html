@@ -1,0 +1,24 @@
+<mat-form-field>
+  <mat-label>Completely disabled</mat-label>
+  <input type="text" matInput disabled [matTimepicker]="timepicker1" />
+  <mat-timepicker-toggle matSuffix [for]="timepicker1"></mat-timepicker-toggle>
+  <mat-timepicker #timepicker1></mat-timepicker>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Popup disabled</mat-label>
+  <input type="text" matInput [matTimepicker]="timepicker2" />
+  <mat-timepicker-toggle
+    matSuffix
+    [for]="timepicker2"
+    disabled
+  ></mat-timepicker-toggle>
+  <mat-timepicker #timepicker2></mat-timepicker>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Input disabled</mat-label>
+  <input type="text" matInput disabled [matTimepicker]="timepicker3" />
+  <mat-timepicker-toggle matSuffix [for]="timepicker3"></mat-timepicker-toggle>
+  <mat-timepicker #timepicker3 disabled="false"></mat-timepicker>
+</mat-form-field>

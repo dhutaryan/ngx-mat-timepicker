@@ -1,0 +1,16 @@
+<mat-form-field>
+  <mat-label>Input & change events</mat-label>
+  <input
+    type="text"
+    matInput
+    [matTimepicker]="timepicker"
+    (timeInput)="addEvent('input', $event)"
+    (timeChange)="addEvent('change', $event)"
+  />
+  <mat-timepicker-toggle matSuffix [for]="timepicker"></mat-timepicker-toggle>
+  <mat-timepicker #timepicker></mat-timepicker>
+</mat-form-field>
+
+@for (event of events; track event) {
+<div>{{ event }}</div>
+}

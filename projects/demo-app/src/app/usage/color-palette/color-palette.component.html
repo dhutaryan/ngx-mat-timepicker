@@ -1,0 +1,19 @@
+<mat-form-field color="accent">
+  <mat-label>Inherited color</mat-label>
+  <input type="text" matInput [matTimepicker]="accentTimepicker" />
+  <mat-timepicker-toggle
+    matSuffix
+    [for]="accentTimepicker"
+  ></mat-timepicker-toggle>
+  <mat-timepicker #accentTimepicker></mat-timepicker>
+</mat-form-field>
+
+<mat-form-field color="warn">
+  <mat-label>Custom color</mat-label>
+  <input type="text" matInput [matTimepicker]="customTimepicker" />
+  <mat-timepicker-toggle
+    matSuffix
+    [for]="customTimepicker"
+  ></mat-timepicker-toggle>
+  <mat-timepicker #customTimepicker color="primary"></mat-timepicker>
+</mat-form-field>

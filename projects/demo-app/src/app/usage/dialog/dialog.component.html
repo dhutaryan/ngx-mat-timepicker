@@ -1,0 +1,7 @@
+<mat-form-field>
+  <mat-label>Choose a time</mat-label>
+  <input type="text" matInput [matTimepicker]="timepicker" />
+  <mat-timepicker-toggle matSuffix [for]="timepicker"></mat-timepicker-toggle>
+  <mat-timepicker #timepicker openAs="dialog"></mat-timepicker>
+  <mat-hint>hh:mm</mat-hint>
+</mat-form-field>
