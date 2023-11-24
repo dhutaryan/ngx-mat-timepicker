@@ -22,22 +22,44 @@
       "prefix": "demo",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@ng-doc/builder:application",
           "options": {
             "outputPath": "dist/demo-app",
             "index": "projects/demo-app/src/index.html",
-            "main": "projects/demo-app/src/main.ts",
-            "polyfills": "projects/demo-app/src/polyfills.ts",
+            "browser": "projects/demo-app/src/main.ts",
+            "polyfills": ["projects/demo-app/src/polyfills.ts"],
             "tsConfig": "projects/demo-app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "stylePreprocessorOptions": {
+              "includePaths": [""]
+            },
             "assets": [
+              {
+                "glob": "**/*",
+                "input": "node_modules/@ng-doc/app/assets",
+                "output": "assets/ng-doc/app"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/@ng-doc/ui-kit/assets",
+                "output": "assets/ng-doc/ui-kit"
+              },
+              {
+                "glob": "**/*",
+                "input": "ng-doc/demo-app/assets",
+                "output": "assets/ng-doc"
+              },
               "projects/demo-app/src/favicon.ico",
               "projects/demo-app/src/assets"
             ],
             "styles": [
+              "node_modules/@ng-doc/app/styles/global.css",
               "projects/demo-app/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "@ng-doc/core"
+            ]
           },
           "configurations": {
             "production": {
@@ -45,7 +67,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -62,9 +84,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -73,7 +93,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@ng-doc/builder:dev-server",
           "configurations": {
             "production": {
               "buildTarget": "demo-app:build:production"

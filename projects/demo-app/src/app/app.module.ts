@@ -1,41 +1,60 @@
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatCardModule } from '@angular/material/card';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgDocButtonIconComponent, NgDocIconComponent } from '@ng-doc/ui-kit';
+import {
+  NgDocRootComponent,
+  NgDocNavbarComponent,
+  NgDocSidebarComponent,
+  provideNgDocApp,
+  provideSearchEngine,
+  NgDocDefaultSearchEngine,
+  providePageSkeleton,
+  NG_DOC_DEFAULT_PAGE_SKELETON,
+  provideMainPageProcessor,
+  NG_DOC_DEFAULT_PAGE_PROCESSORS,
+} from '@ng-doc/app';
 
-import { MatNativeDateTimeModule, MatTimepickerModule } from 'mat-timepicker';
-import { AppRoutingModule } from './app-routing.module';
+import { NG_DOC_ROUTING, provideNgDocContext } from '@ng-doc/generated';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    MatCardModule,
-    MatTimepickerModule,
-    MatNativeDateTimeModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FlexLayoutModule,
-    AppRoutingModule,
+    RouterModule.forRoot(
+      [...NG_DOC_ROUTING, { path: '**', redirectTo: 'what-is' }],
+      {
+        scrollPositionRestoration: 'enabled',
+        anchorScrolling: 'enabled',
+        scrollOffset: [0, 70],
+      }
+    ),
+    NgDocRootComponent,
+    NgDocNavbarComponent,
+    NgDocSidebarComponent,
+    NgDocButtonIconComponent,
+    NgDocIconComponent,
   ],
-  providers: [],
+  providers: [
+    provideNgDocContext(),
+    provideNgDocApp({
+      uiKit: {
+        assetsPath: 'assets/ng-doc/ui-kit',
+        customIconsPath: 'assets/icons',
+      },
+    }),
+    provideSearchEngine(NgDocDefaultSearchEngine),
+    providePageSkeleton(NG_DOC_DEFAULT_PAGE_SKELETON),
+    provideMainPageProcessor(NG_DOC_DEFAULT_PAGE_PROCESSORS),
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
