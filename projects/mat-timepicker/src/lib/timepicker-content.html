@@ -80,9 +80,9 @@
   <!-- Invisible close button for screen reader users. -->
   <button
     type="button"
+    class="mat-timepicker-close-button"
     mat-raised-button
     [color]="color || 'primary'"
-    class="mat-timepicker-close-button"
     [class.cdk-visually-hidden]="!_closeButtonFocused"
     (focus)="_closeButtonFocused = true"
     (blur)="_closeButtonFocused = false"
