@@ -21,6 +21,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Run tests
         run: yarn run test:lib -- --watch=false --browsers=ChromeHeadless
