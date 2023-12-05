@@ -1,6 +1,20 @@
+# 13.1.0
+
+- fix(timepicker): disable timepicker toggle if input is disabled ([#124](https://github.com/dhutaryan/ngx-mat-timepicker/pull/124))
+- fix(input): add min/max attributes ([#123](https://github.com/dhutaryan/ngx-mat-timepicker/pull/123))
+- fix(input): add missed export for MatTimepickerInputEvent ([#122](https://github.com/dhutaryan/ngx-mat-timepicker/pull/122))
+- fix(timepicker): increase css weight for close button ([#115](https://github.com/dhutaryan/ngx-mat-timepicker/pull/115))
+
 # 13.0.0
 
 - build(deps): bump angular and angular material to v13 ([#87](https://github.com/dhutaryan/ngx-mat-timepicker/pull/87))
+
+# 12.4.0
+
+- fix(timepicker): disable timepicker toggle if input is disabled ([#124](https://github.com/dhutaryan/ngx-mat-timepicker/pull/124))
+- fix(input): add min/max attributes ([#123](https://github.com/dhutaryan/ngx-mat-timepicker/pull/123))
+- fix(input): add missed export for MatTimepickerInputEvent ([#122](https://github.com/dhutaryan/ngx-mat-timepicker/pull/122))
+- fix(timepicker): increase css weight for close button ([#115](https://github.com/dhutaryan/ngx-mat-timepicker/pull/115))
 
 # 12.3.1
 
