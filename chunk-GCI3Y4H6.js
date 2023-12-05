@@ -155,6 +155,8 @@ import"./chunk-ZPYN6FOY.js";import{a as Mn}from"./chunk-4FEUOWQR.js";import{$ as
 </span><span class="line ngde"><span class="hljs-tag ngde">&#x3C;/<span class="hljs-name ngde">mat-form-field</span>></span>
 </span></code></pre>`}],EventsComponent:[{title:"TypeScript",code:`<pre class="ngde hljs"><code lang="typescript" class="hljs language-typescript code-lines ngde"><span class="line ngde"><span class="hljs-keyword ngde">import</span> { <span class="hljs-title class_ ngde">ChangeDetectionStrategy</span>, <span class="hljs-title class_ ngde">Component</span> } <span class="hljs-keyword ngde">from</span> <span class="hljs-string ngde">'@angular/core'</span>;
 </span><span class="line ngde">
+</span><span class="line ngde"><span class="hljs-keyword ngde">import</span> { <span class="hljs-title class_ ngde">MatTimepickerInputEvent</span> } <span class="hljs-keyword ngde">from</span> <span class="hljs-string ngde">'mat-timepicker'</span>;
+</span><span class="line ngde">
 </span><span class="line ngde"><span class="hljs-meta ngde">@Component</span>({
 </span><span class="line ngde">  <span class="hljs-attr ngde">selector</span>: <span class="hljs-string ngde">'demo-events'</span>,
 </span><span class="line ngde">  <span class="hljs-attr ngde">templateUrl</span>: <span class="hljs-string ngde">'./events.component.html'</span>,
@@ -163,7 +165,7 @@ import"./chunk-ZPYN6FOY.js";import{a as Mn}from"./chunk-4FEUOWQR.js";import{$ as
 </span><span class="line ngde"><span class="hljs-keyword ngde">export</span> <span class="hljs-keyword ngde">class</span> <span class="hljs-title class_ ngde">EventsComponent</span> {
 </span><span class="line ngde">  <span class="hljs-attr ngde">events</span>: <span class="hljs-built_in ngde">string</span>[] = [];
 </span><span class="line ngde">
-</span><span class="line ngde">  <span class="hljs-title function_ ngde">addEvent</span>(<span class="hljs-attr ngde">type</span>: <span class="hljs-built_in ngde">string</span>, <span class="hljs-attr ngde">event</span>: <span class="hljs-built_in ngde">any</span>): <span class="hljs-built_in ngde">void</span> {
+</span><span class="line ngde">  <span class="hljs-title function_ ngde">addEvent</span>(<span class="hljs-attr ngde">type</span>: <span class="hljs-built_in ngde">string</span>, <span class="hljs-attr ngde">event</span>: <span class="hljs-title class_ ngde">MatTimepickerInputEvent</span>&#x3C;<span class="hljs-title class_ ngde">Date</span>>): <span class="hljs-built_in ngde">void</span> {
 </span><span class="line ngde">    <span class="hljs-variable language_ ngde">this</span>.<span class="hljs-property ngde">events</span>.<span class="hljs-title function_ ngde">push</span>(<span class="hljs-string ngde">\`<span class="hljs-subst ngde">\${<span class="hljs-keyword ngde">type</span>}</span>: <span class="hljs-subst ngde">\${event.value}</span>\`</span>);
 </span><span class="line ngde">  }
 </span><span class="line ngde">}
