@@ -1,6 +1,50 @@
 [
   {
     "breadcrumbs": [
+      "Getting started"
+    ],
+    "pageType": "guide",
+    "title": "Getting started",
+    "section": "Getting started",
+    "route": "/getting-started",
+    "fragment": "getting-started",
+    "content": "You have to install the Angular Material and set it up. Learn more about the setup. Install the ngx-mat-timepicker: or"
+  },
+  {
+    "breadcrumbs": [
+      "Getting started"
+    ],
+    "pageType": "guide",
+    "title": "Getting started",
+    "section": "Import module",
+    "route": "/getting-started",
+    "fragment": "import-module",
+    "content": "Import MatTimepickerModule to your project."
+  },
+  {
+    "breadcrumbs": [
+      "Getting started"
+    ],
+    "pageType": "guide",
+    "title": "Getting started",
+    "section": "Adapter",
+    "route": "/getting-started",
+    "fragment": "adapter",
+    "content": "Add a timepicker adapter. or create and add your own"
+  },
+  {
+    "breadcrumbs": [
+      "Getting started"
+    ],
+    "pageType": "guide",
+    "title": "Getting started",
+    "section": "Theming",
+    "route": "/getting-started",
+    "fragment": "theming",
+    "content": "Then you have to define a theme. More details about theming. As ngx-mat-timepicker uses some material components, it's necessary to add theme for them."
+  },
+  {
+    "breadcrumbs": [
       "Usage"
     ],
     "pageType": "guide",
@@ -295,50 +339,6 @@
     "route": "/usage",
     "fragment": "localizing-labels-and-messages",
     "content": "The various text strings used by the timepicker are provided through MatTimepickerIntl. Localization of these messages can be done by providing a subclass with translated values in your application root module."
-  },
-  {
-    "breadcrumbs": [
-      "Getting started"
-    ],
-    "pageType": "guide",
-    "title": "Getting started",
-    "section": "Getting started",
-    "route": "/getting-started",
-    "fragment": "getting-started",
-    "content": "You have to install the Angular Material and set it up. Learn more about the setup. Install the ngx-mat-timepicker: or"
-  },
-  {
-    "breadcrumbs": [
-      "Getting started"
-    ],
-    "pageType": "guide",
-    "title": "Getting started",
-    "section": "Import module",
-    "route": "/getting-started",
-    "fragment": "import-module",
-    "content": "Import MatTimepickerModule to your project."
-  },
-  {
-    "breadcrumbs": [
-      "Getting started"
-    ],
-    "pageType": "guide",
-    "title": "Getting started",
-    "section": "Adapter",
-    "route": "/getting-started",
-    "fragment": "adapter",
-    "content": "Add a timepicker adapter. or create and add your own"
-  },
-  {
-    "breadcrumbs": [
-      "Getting started"
-    ],
-    "pageType": "guide",
-    "title": "Getting started",
-    "section": "Theming",
-    "route": "/getting-started",
-    "fragment": "theming",
-    "content": "Then you have to define a theme. More details about theming. As ngx-mat-timepicker uses some material components, it's necessary to add theme for them."
   },
   {
     "breadcrumbs": [
