@@ -9,6 +9,7 @@ export * from './lib/timepicker-toggle';
 export * from './lib/timepicker-content';
 export * from './lib/timepicker-content-layout';
 export * from './lib/timepicker-input';
+export * from './lib/timepicker-input-base';
 export * from './lib/hours-clock-dial';
 export * from './lib/minutes-clock-dial';
 export * from './lib/time-inputs';
