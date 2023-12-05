@@ -47,6 +47,8 @@ export const MAT_TIMEPICKER_VALIDATORS: any = {
     class: 'mat-timepicker-input',
     '[attr.aria-haspopup]': '_timepicker ? "dialog" : null',
     '[attr.aria-owns]': '(_timepicker?.opened && _timepicker.id) || null',
+    '[attr.min]': 'min || null',
+    '[attr.max]': 'max || null',
     '[disabled]': 'disabled',
     '(input)': '_onInput($event.target.value)',
     '(change)': '_onChange()',
