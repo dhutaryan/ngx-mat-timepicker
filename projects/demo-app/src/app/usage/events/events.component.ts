@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
+import { MatTimepickerInputEvent } from 'mat-timepicker';
+
 @Component({
   selector: 'demo-events',
   templateUrl: './events.component.html',
@@ -8,7 +10,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 export class EventsComponent {
   events: string[] = [];
 
-  addEvent(type: string, event: any): void {
+  addEvent(type: string, event: MatTimepickerInputEvent<Date>): void {
     this.events.push(`${type}: ${event.value}`);
   }
 }
