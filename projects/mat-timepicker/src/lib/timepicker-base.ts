@@ -139,7 +139,9 @@ export abstract class MatTimepickerBase<
   /** Whether the timepicker pop-up should be disabled. */
   @Input()
   get disabled(): boolean {
-    return this._disabled;
+    return this._disabled === undefined && this.timepickerInput
+      ? this.timepickerInput.disabled
+      : !!this._disabled;
   }
   set disabled(value: BooleanInput) {
     const newValue = coerceBooleanProperty(value);
