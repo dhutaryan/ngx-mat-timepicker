@@ -1,4 +1,4 @@
-name: ngx-mat-timepicker publish
+name: ngx-mat-timepicker publish v12
 
 on:
   release:
@@ -27,3 +27,4 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
           package: dist/mat-timepicker
+          tag: latest-v12
