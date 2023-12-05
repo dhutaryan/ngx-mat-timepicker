@@ -20,7 +20,7 @@ The timepicker module using Angular material.
 
 ## Documentation
 
-Check out the [demo](https://dhutaryan.github.io/ngx-mat-timepicker/) and [API](https://github.com/dhutaryan/ngx-mat-timepicker/wiki/API).
+Check out the [documentation](https://dhutaryan.github.io/ngx-mat-timepicker/).
 
 ## Installation
 
