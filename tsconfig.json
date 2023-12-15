@@ -24,10 +24,10 @@
     ],
     "paths": {
       "@ng-doc/generated": [
-        "./ng-doc/demo-app/index.ts"
+        "./ng-doc/docs/index.ts"
       ],
       "@ng-doc/generated/*": [
-        "./ng-doc/demo-app/*"
+        "./ng-doc/docs/*"
       ],
       "mat-timepicker": [
         "projects/mat-timepicker/src/public-api.ts"
