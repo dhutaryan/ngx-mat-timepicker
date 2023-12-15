@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "demo-app": {
+    "docs": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -18,17 +18,17 @@
         }
       },
       "root": "",
-      "sourceRoot": "projects/demo-app/src",
-      "prefix": "demo",
+      "sourceRoot": "projects/docs/src",
+      "prefix": "docs",
       "architect": {
         "build": {
           "builder": "@ng-doc/builder:application",
           "options": {
-            "outputPath": "dist/demo-app",
-            "index": "projects/demo-app/src/index.html",
-            "browser": "projects/demo-app/src/main.ts",
-            "polyfills": ["projects/demo-app/src/polyfills.ts"],
-            "tsConfig": "projects/demo-app/tsconfig.app.json",
+            "outputPath": "dist/docs",
+            "index": "projects/docs/src/index.html",
+            "browser": "projects/docs/src/main.ts",
+            "polyfills": ["projects/docs/src/polyfills.ts"],
+            "tsConfig": "projects/docs/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "stylePreprocessorOptions": {
               "includePaths": [""]
@@ -46,15 +46,15 @@
               },
               {
                 "glob": "**/*",
-                "input": "ng-doc/demo-app/assets",
+                "input": "ng-doc/docs/assets",
                 "output": "assets/ng-doc"
               },
-              "projects/demo-app/src/favicon.ico",
-              "projects/demo-app/src/assets"
+              "projects/docs/src/favicon.ico",
+              "projects/docs/src/assets"
             ],
             "styles": [
               "node_modules/@ng-doc/app/styles/global.css",
-              "projects/demo-app/src/styles.scss"
+              "projects/docs/src/styles.scss"
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
@@ -77,8 +77,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "projects/demo-app/src/environments/environment.ts",
-                  "with": "projects/demo-app/src/environments/environment.prod.ts"
+                  "replace": "projects/docs/src/environments/environment.ts",
+                  "with": "projects/docs/src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -96,10 +96,10 @@
           "builder": "@ng-doc/builder:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "demo-app:build:production"
+              "buildTarget": "docs:build:production"
             },
             "development": {
-              "buildTarget": "demo-app:build:development"
+              "buildTarget": "docs:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -107,23 +107,23 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "demo-app:build"
+            "buildTarget": "docs:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/demo-app/src/test.ts",
-            "polyfills": "projects/demo-app/src/polyfills.ts",
-            "tsConfig": "projects/demo-app/tsconfig.spec.json",
-            "karmaConfig": "projects/demo-app/karma.conf.js",
+            "main": "projects/docs/src/test.ts",
+            "polyfills": "projects/docs/src/polyfills.ts",
+            "tsConfig": "projects/docs/tsconfig.spec.json",
+            "karmaConfig": "projects/docs/karma.conf.js",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "projects/demo-app/src/favicon.ico",
-              "projects/demo-app/src/assets"
+              "projects/docs/src/favicon.ico",
+              "projects/docs/src/assets"
             ],
             "styles": [
-              "projects/demo-app/src/styles.scss"
+              "projects/docs/src/styles.scss"
             ],
             "scripts": []
           }

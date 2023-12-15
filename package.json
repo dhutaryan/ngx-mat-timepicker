@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration production --base-href=/ngx-mat-timepicker/",
+    "build": "ng build --configuration production --base-href /ngx-mat-timepicker/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build:lib": "ng build mat-timepicker --configuration production",
