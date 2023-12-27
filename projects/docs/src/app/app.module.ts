@@ -18,6 +18,7 @@ import {
   NG_DOC_DEFAULT_PAGE_SKELETON,
   provideMainPageProcessor,
   NG_DOC_DEFAULT_PAGE_PROCESSORS,
+  NgDocThemeToggleComponent,
 } from '@ng-doc/app';
 
 import { NG_DOC_ROUTING, provideNgDocContext } from '@ng-doc/generated';
@@ -42,6 +43,7 @@ import { AppComponent } from './app.component';
     NgDocSidebarComponent,
     NgDocButtonIconComponent,
     NgDocIconComponent,
+    NgDocThemeToggleComponent,
   ],
   providers: [
     provideNgDocContext(),
