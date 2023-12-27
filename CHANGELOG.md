@@ -1,3 +1,7 @@
+# 17.2.0
+
+- feat(timepicker): add touchUi property to make some elements bigger ([#128](https://github.com/dhutaryan/ngx-mat-timepicker/pull/128))
+
 # 17.1.0
 
 - fix(timepicker): disable timepicker toggle if input is disabled ([#124](https://github.com/dhutaryan/ngx-mat-timepicker/pull/124))

@@ -92,9 +92,15 @@ As with any standard `<input>`, it is possible to disable the timepicker input b
 
 ## Confirmation action buttons
 
-By default, the timepicker uses "OK" and "Cancel" buttons. If you want to change default buttons, you can `<mat-timepicker-actions>` element inside `<mat-timepicker>` with with own buttons marked with the matTimepickerCancel and matTimepickerApply attributes respectively. Doing so will replace default buttons by yours.
+By default, the timepicker uses "OK" and "Cancel" buttons. If you want to change default buttons, you can `<mat-timepicker-actions>` element inside `<mat-timepicker>` with with own buttons marked with the `matTimepickerCancel` and `matTimepickerApply` attributes respectively. Doing so will replace default buttons by yours.
 
 {{ NgDocActions.demo("ActionButtonsComponent") }}
+
+## Touch UI mode
+
+The timepicker normally opens as a popup under the input. However this is not ideal for touch devices that don't have as much screen real estate and need bigger click targets. For this reason `<mat-timepicker>` has a touchUi property that can be set to true in order to enable a more touch friendly UI where the timepicker opens in a dialog and has a larger elements. Applied for dial mode only.
+
+{{ NgDocActions.demo("TouchUiComponent") }}
 
 ## Manually open and close the timepicker
 
