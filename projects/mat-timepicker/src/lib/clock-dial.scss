@@ -1,11 +1,14 @@
 $clock-dial-hand-width: 1px;
 $clock-dial-hand-dot-size: 0.5rem;
 
+$clock-dial-size: 16rem;
+$clock-dial-cell-size: 2rem;
+
 .mat-clock-dial {
   position: relative;
   display: block;
-  width: 16rem;
-  height: 16rem;
+  width: $clock-dial-size;
+  height: $clock-dial-size;
   margin: 0 auto;
   border-radius: 50%;
 
@@ -26,8 +29,8 @@ $clock-dial-hand-dot-size: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: $clock-dial-cell-size;
+  height: $clock-dial-cell-size;
   border-radius: 50%;
   box-shadow: none;
 
@@ -40,6 +43,19 @@ $clock-dial-hand-dot-size: 0.5rem;
   &:active,
   &:focus:active {
     box-shadow: none;
+  }
+}
+
+.mat-timepicker-content-touch {
+  .mat-clock-dial {
+    width: calc(#{$clock-dial-size} * 1.25);
+    height: calc(#{$clock-dial-size} * 1.25);
+  }
+
+  [mat-mini-fab].mat-clock-dial-cell {
+    width: calc(#{$clock-dial-cell-size} * 1.5);
+    height: calc(#{$clock-dial-cell-size} * 1.5);
+    font-size: 1.125rem;
   }
 }
 

@@ -680,6 +680,23 @@ describe('MatTimepicker', () => {
           document.querySelector('.mat-time-period-horizontal')
         ).not.toBeNull();
       }));
+
+      it('should apply content touch class for touchUi', fakeAsync(() => {
+        testComponent.touchUi = true;
+        fixture.detectChanges();
+        expect(
+          document.querySelector('.cdk-overlay-pane.mat-timepicker-popup')
+        ).toBeNull();
+
+        testComponent.timepicker.open();
+        fixture.detectChanges();
+        tick();
+        flush();
+
+        expect(
+          document.querySelector('.mat-timepicker-content-touch')
+        ).not.toBeNull();
+      }));
     });
 
     describe('timepicker with too many inputs', () => {
@@ -1559,6 +1576,7 @@ describe('MatTimepicker', () => {
       [format]="format"
       [mode]="mode"
       [orientation]="orientation"
+      [touchUi]="touchUi"
     ></mat-timepicker>
   `,
 })
@@ -1570,6 +1588,7 @@ class StandardTimepicker {
   format = '12h';
   mode = 'dial';
   orientation: TimepickerOrientation | null = null;
+  touchUi = false;
   @ViewChild('t') timepicker: MatTimepicker<Date>;
   @ViewChild(MatTimepickerInput) timepickerInput: MatTimepickerInput<Date>;
 }

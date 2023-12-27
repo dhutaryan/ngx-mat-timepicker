@@ -12,6 +12,7 @@ import {
   ElementRef,
   InjectionToken,
   Optional,
+  booleanAttribute,
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import {
@@ -237,6 +238,22 @@ export abstract class MatTimepickerBase<
     this._orientation = value;
   }
   private _orientation: TimepickerOrientation;
+
+  /**
+   * Whether the timepicker UI is in touch mode. In touch mode elements are larger for bigger touch targets.
+   */
+  @Input({ transform: booleanAttribute })
+  get touchUi(): boolean {
+    return this._touchUi;
+  }
+  set touchUi(value: boolean) {
+    this._touchUi = coerceBooleanProperty(value);
+
+    if (value) {
+      this.openAs = 'dialog';
+    }
+  }
+  private _touchUi: boolean = false;
 
   /** Preferred position of the timepicker in the X axis. */
   @Input()
