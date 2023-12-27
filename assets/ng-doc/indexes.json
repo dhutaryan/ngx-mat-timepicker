@@ -269,6 +269,28 @@
     ],
     "pageType": "guide",
     "title": "Usage",
+    "section": "Touch UI mode",
+    "route": "/usage",
+    "fragment": "touch-ui-mode",
+    "content": "The timepicker normally opens as a popup under the input. However this is not ideal for touch devices that don't have as much screen real estate and need bigger click targets. For this reason "
+  },
+  {
+    "breadcrumbs": [
+      "Usage"
+    ],
+    "pageType": "guide",
+    "title": "Usage",
+    "section": "Touch UI mode",
+    "route": "/usage",
+    "fragment": "touch-ui-mode",
+    "content": " has a touchUi property that can be set to true in order to enable a more touch friendly UI where the timepicker opens in a dialog and has a larger elements. Applied for dial mode only."
+  },
+  {
+    "breadcrumbs": [
+      "Usage"
+    ],
+    "pageType": "guide",
+    "title": "Usage",
     "section": "Manually open and close the timepicker",
     "route": "/usage",
     "fragment": "manually-open-and-close-the-timepicker",
