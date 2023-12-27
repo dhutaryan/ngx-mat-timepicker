@@ -14,6 +14,7 @@ import { DisablingComponent } from './disabling/disabling.component';
 import { ActionButtonsComponent } from './action-buttons/action-buttons.component';
 import { ManuallyToggleComponent } from './manually-toggle/manually-toggle.component';
 import { InlineComponent } from './inline/inline.component';
+import { TouchUiComponent } from './touch-ui/touch-ui.component';
 
 const Usage: NgDocPage = {
   title: `Usage`,
@@ -34,6 +35,7 @@ const Usage: NgDocPage = {
     ActionButtonsComponent,
     ManuallyToggleComponent,
     InlineComponent,
+    TouchUiComponent,
   },
 };
 
