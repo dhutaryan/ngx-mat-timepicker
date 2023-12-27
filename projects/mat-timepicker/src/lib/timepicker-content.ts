@@ -41,6 +41,7 @@ const _MatTimepickerContentBase = mixinColor(
     class: 'mat-timepicker-content',
     '[@transformPanel]': '_animationState',
     '(@transformPanel.done)': '_animationDone.next()',
+    '[class.mat-timepicker-content-touch]': 'timepicker.touchUi',
   },
   animations: [
     matTimepickerAnimations.transformPanel,

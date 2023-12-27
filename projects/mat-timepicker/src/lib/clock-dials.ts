@@ -40,6 +40,9 @@ export class MatClockDials<T>
   /** Layout orientation. */
   @Input() orientation: TimepickerOrientation;
 
+  /** Whether the timepicker UI is in touch mode. */
+  @Input() touchUi: boolean;
+
   isHoursView = true;
 
   /** Specifies the view of clock dial. */

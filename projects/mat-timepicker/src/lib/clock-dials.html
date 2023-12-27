@@ -43,6 +43,7 @@
         [selectedHour]="selectedHour"
         [isMeridiem]="isMeridiem"
         [availableHours]="_getAvailableHours()"
+        [touchUi]="touchUi"
         (selectedChange)="_onHourChanged($event)"
         (keydown)="_onKeydown($event, 'hour')"
       ></mat-hours-clock-dial>
@@ -54,6 +55,7 @@
         [selectedMinute]="selectedMinute"
         [interval]="minuteInterval"
         [availableMinutes]="availableMinutes"
+        [touchUi]="touchUi"
         (selectedChange)="_onMinuteSelected($event)"
         (keydown)="_onKeydown($event, 'minute')"
       ></mat-minutes-clock-dial>

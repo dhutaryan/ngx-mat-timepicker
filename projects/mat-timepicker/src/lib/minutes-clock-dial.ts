@@ -12,19 +12,19 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { ThemePalette } from '@angular/material/core';
 import { debounceTime, fromEvent, merge, take } from 'rxjs';
 
 import { ClockDialViewCell } from './hours-clock-dial';
-import { ThemePalette } from '@angular/material/core';
+import {
+  getClockCorrectedRadius,
+  getClockOuterRadius,
+  getClockRadius,
+} from './clock-size';
 
 export const ALL_MINUTES = Array(60)
   .fill(null)
   .map((_, i) => i);
-
-const CLOCK_RADIUS = 128;
-const CLOCK_TICK_RADIUS = 16;
-const CLOCK_CORRECTED_RADIUS = CLOCK_RADIUS - CLOCK_TICK_RADIUS;
-const CLOCK_OUTER_RADIUS = 100;
 
 @Component({
   selector: 'mat-minutes-clock-dial',
@@ -73,6 +73,16 @@ export class MatMinutesClockDial implements OnInit {
   /** Color palette. */
   @Input() color: ThemePalette;
 
+  /** Whether the timepicker UI is in touch mode. */
+  @Input()
+  get touchUi(): boolean {
+    return this._touchUi;
+  }
+  set touchUi(value: boolean) {
+    this._touchUi = value;
+  }
+  private _touchUi: boolean;
+
   /** Emits selected minute. */
   @Output() selectedChange = new EventEmitter<number>();
 
@@ -100,8 +110,9 @@ export class MatMinutesClockDial implements OnInit {
   /** Hand styles based on selected minute. */
   _handStyles(): any {
     const deg = Math.round(this._selectedMinute * (360 / 60));
-    const height = CLOCK_OUTER_RADIUS;
-    const marginTop = CLOCK_RADIUS - CLOCK_OUTER_RADIUS;
+    const height = getClockOuterRadius(this.touchUi);
+    const marginTop =
+      getClockRadius(this.touchUi) - getClockOuterRadius(this.touchUi);
 
     return {
       transform: `rotate(${deg}deg)`,
@@ -188,8 +199,12 @@ export class MatMinutesClockDial implements OnInit {
         return {
           value: minute,
           displayValue,
-          left: CLOCK_CORRECTED_RADIUS + Math.sin(radian) * CLOCK_OUTER_RADIUS,
-          top: CLOCK_CORRECTED_RADIUS - Math.cos(radian) * CLOCK_OUTER_RADIUS,
+          left:
+            getClockCorrectedRadius(this.touchUi) +
+            Math.sin(radian) * getClockOuterRadius(this.touchUi),
+          top:
+            getClockCorrectedRadius(this.touchUi) -
+            Math.cos(radian) * getClockOuterRadius(this.touchUi),
           disabled: !this.availableMinutes.includes(minute),
         };
       }
