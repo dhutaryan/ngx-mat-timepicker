@@ -88,6 +88,8 @@ export class MatMinutesClockDial implements OnInit {
 
   minutes: ClockDialViewCell[] = [];
 
+  _window?: Window;
+
   get disabled(): boolean {
     return !this.availableMinutes.includes(this.selectedMinute);
   }
@@ -99,9 +101,12 @@ export class MatMinutesClockDial implements OnInit {
   constructor(
     private _element: ElementRef<HTMLElement>,
     private _cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) private _document: Document,
-    @Inject(Window) private _window: Window
-  ) {}
+    @Inject(DOCUMENT) private _document: Document
+  ) {
+    if (_document && _document.defaultView instanceof Window) {
+      this._window = _document.defaultView;
+    }
+  }
 
   ngOnInit(): void {
     this._initMinutes();
@@ -162,6 +167,10 @@ export class MatMinutesClockDial implements OnInit {
   }
 
   private _setMinute(event: MouseEvent | TouchEvent): void {
+    if (!this._window) {
+      return;
+    }
+
     const element = this._element.nativeElement;
     const elementRect = element.getBoundingClientRect();
     const width = element.offsetWidth;

@@ -91,7 +91,7 @@ import { MatTimepickerIntl } from './timepicker-intl';
   providers: [
     MatTimepickerIntl,
     MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER,
-    { provide: Window, useValue: window },
+    // { provide: Window, useValue: window },
     { provide: MAT_DEFAULT_ACITONS, useValue: MatTimepickerDefaultActions },
     {
       provide: MAT_FAB_DEFAULT_OPTIONS,

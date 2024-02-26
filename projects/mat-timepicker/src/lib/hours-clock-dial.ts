@@ -99,6 +99,7 @@ export class MatHoursClockDial implements OnInit {
   }>();
 
   hours: ClockDialViewCell[] = [];
+  _window?: Window;
 
   get disabledHand(): boolean {
     return !this.availableHours.includes(this.selectedHour);
@@ -111,9 +112,12 @@ export class MatHoursClockDial implements OnInit {
   constructor(
     private _element: ElementRef<HTMLElement>,
     private _cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) private _document: Document,
-    @Inject(Window) private _window: Window
-  ) {}
+    @Inject(DOCUMENT) private _document: Document
+  ) {
+    if (this._document) {
+      this._window = this._document.defaultView as Window;
+    }
+  }
 
   ngOnInit(): void {
     this._initHours();
@@ -179,6 +183,10 @@ export class MatHoursClockDial implements OnInit {
 
   /** Changes selected hour based on coordinates. */
   private _setHour(event: MouseEvent | TouchEvent): void {
+    if (!this._window) {
+      return;
+    }
+
     const element = this._element.nativeElement;
     const elementRect = element.getBoundingClientRect();
     const width = element.offsetWidth;
