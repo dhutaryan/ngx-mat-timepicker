@@ -1,13 +1,10 @@
-<mat-timepicker-content-layout
-  [title]="_intl.dialsTitle"
-  [orientation]="orientation"
->
+<mat-timepicker-content-layout [title]="_intl.dialsTitle" [orientation]="orientation">
   <div
     tabindex="0"
     class="mat-clock-dial-value"
     hours
     [class.mat-clock-dial-value-active]="isHoursView"
-    (click)="onViewChange($event,'hours')"
+    (click)="onViewChange($event, 'hours')"
     (keydown.space)="onViewChange($event, 'hours')"
   >
     {{ _withZeroPrefix(selectedHour) }}
@@ -17,8 +14,8 @@
     class="mat-clock-dial-value"
     minutes
     [class.mat-clock-dial-value-active]="!isHoursView"
-    (click)="onViewChange($event,'minutes')"
-    (keydown.space)="onViewChange($event,'minutes')"
+    (click)="onViewChange($event, 'minutes')"
+    (keydown.space)="onViewChange($event, 'minutes')"
   >
     {{ _withZeroPrefix(selectedMinute) }}
   </div>
@@ -36,7 +33,7 @@
     class="mat-clock-dial-faces"
     [class.mat-clock-dial-faces-horizontal]="orientation === 'horizontal'"
   >
-    <ng-template [ngIf]="isHoursView">
+    @if (isHoursView) {
       <mat-hours-clock-dial
         [@enterLeaveAnimation]
         [color]="color"
@@ -47,8 +44,9 @@
         (selectedChange)="_onHourChanged($event)"
         (keydown)="_onKeydown($event, 'hour')"
       ></mat-hours-clock-dial>
-    </ng-template>
-    <ng-template [ngIf]="!isHoursView">
+    }
+
+    @if (!isHoursView) {
       <mat-minutes-clock-dial
         [@enterLeaveAnimation]
         [color]="color"
@@ -59,6 +57,6 @@
         (selectedChange)="_onMinuteSelected($event)"
         (keydown)="_onKeydown($event, 'minute')"
       ></mat-minutes-clock-dial>
-    </ng-template>
+    }
   </div>
 </mat-timepicker-content-layout>

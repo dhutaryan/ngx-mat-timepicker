@@ -4,7 +4,7 @@
   [class.mat-clock-dial-hand-disabled]="disabledHand"
   [ngStyle]="_handStyles()"
 ></div>
-<ng-template ngFor let-hour [ngForOf]="hours" [ngForTrackBy]="_trackBy">
+@for (hour of hours; track hour.value) {
   <button
     class="mat-clock-dial-cell"
     mat-mini-fab
@@ -19,4 +19,4 @@
   >
     {{ hour.displayValue }}
   </button>
-</ng-template>
+}

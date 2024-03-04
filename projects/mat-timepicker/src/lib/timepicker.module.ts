@@ -4,21 +4,10 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
 import { A11yModule } from '@angular/cdk/a11y';
-import {
-  MAT_FAB_DEFAULT_OPTIONS,
-  MatButtonModule,
-} from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatRippleModule } from '@angular/material/core';
-import { MatDividerModule } from '@angular/material/divider';
+import { MAT_FAB_DEFAULT_OPTIONS } from '@angular/material/button';
 
 import { MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER } from './timepicker-scroll-strategy';
-import {
-  MatTimepickerToggle,
-  MatTimepickerToggleIcon,
-} from './timepicker-toggle';
+import { MatTimepickerToggle, MatTimepickerToggleIcon } from './timepicker-toggle';
 import { MatTimepicker } from './timepicker';
 import { MatTimepickerContent } from './timepicker-content';
 import { MatTimepickerContentLayout } from './timepicker-content-layout';
@@ -38,10 +27,14 @@ import { MAT_DEFAULT_ACITONS } from './timepicker-actions-default';
 import { MatTimepickerIntl } from './timepicker-intl';
 
 @NgModule({
-  declarations: [
+  declarations: [],
+  imports: [
+    OverlayModule,
+    PortalModule,
+    A11yModule,
+    MatTimepicker,
     MatTimepickerToggle,
     MatTimepickerToggleIcon,
-    MatTimepicker,
     MatTimepickerContent,
     MatTimepickerContentLayout,
     MatTimepickerInput,
@@ -57,23 +50,11 @@ import { MatTimepickerIntl } from './timepicker-intl';
     MatTimepickerApply,
     MatTimepickerCancel,
   ],
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatRippleModule,
-    MatDividerModule,
-    OverlayModule,
-    PortalModule,
-    A11yModule,
-  ],
   exports: [
     CdkScrollableModule,
+    MatTimepicker,
     MatTimepickerToggle,
     MatTimepickerToggleIcon,
-    MatTimepicker,
     MatTimepickerContent,
     MatTimepickerContentLayout,
     MatTimepickerInput,
@@ -83,6 +64,7 @@ import { MatTimepickerIntl } from './timepicker-intl';
     MatClockDials,
     MatHoursClockDial,
     MatMinutesClockDial,
+    MatTimePeriod,
     MatTimepickerActions,
     MatTimepickerDefaultActions,
     MatTimepickerApply,

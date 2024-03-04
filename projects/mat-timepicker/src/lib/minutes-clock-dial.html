@@ -6,7 +6,7 @@
 >
   <div class="mat-clock-dial-hand-point" tabindex="0"></div>
 </div>
-<ng-template ngFor let-minute [ngForOf]="minutes" [ngForTrackBy]="_trackBy">
+@for (minute of minutes; track minute.value) {
   <button
     class="mat-clock-dial-cell"
     mat-mini-fab
@@ -21,4 +21,4 @@
   >
     {{ minute.displayValue }}
   </button>
-</ng-template>
+}

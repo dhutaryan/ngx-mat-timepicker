@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -13,14 +13,11 @@ import {
 } from '@angular/core';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { ThemePalette } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
 import { debounceTime, fromEvent, merge, take } from 'rxjs';
 
 import { ClockDialViewCell } from './hours-clock-dial';
-import {
-  getClockCorrectedRadius,
-  getClockOuterRadius,
-  getClockRadius,
-} from './clock-size';
+import { getClockCorrectedRadius, getClockOuterRadius, getClockRadius } from './clock-size';
 
 export const ALL_MINUTES = Array(60)
   .fill(null)
@@ -28,6 +25,8 @@ export const ALL_MINUTES = Array(60)
 
 @Component({
   selector: 'mat-minutes-clock-dial',
+  standalone: true,
+  imports: [CommonModule, MatButtonModule],
   templateUrl: 'minutes-clock-dial.html',
   styleUrls: ['clock-dial.scss'],
   exportAs: 'matMinutesClockDial',
@@ -100,7 +99,7 @@ export class MatMinutesClockDial implements OnInit {
     private _element: ElementRef<HTMLElement>,
     private _cdr: ChangeDetectorRef,
     @Inject(DOCUMENT) private _document: Document,
-    @Inject(Window) private _window: Window
+    @Inject(Window) private _window: Window,
   ) {}
 
   ngOnInit(): void {
@@ -111,8 +110,7 @@ export class MatMinutesClockDial implements OnInit {
   _handStyles(): any {
     const deg = Math.round(this._selectedMinute * (360 / 60));
     const height = getClockOuterRadius(this.touchUi);
-    const marginTop =
-      getClockRadius(this.touchUi) - getClockOuterRadius(this.touchUi);
+    const marginTop = getClockRadius(this.touchUi) - getClockOuterRadius(this.touchUi);
 
     return {
       transform: `rotate(${deg}deg)`,
@@ -131,7 +129,7 @@ export class MatMinutesClockDial implements OnInit {
 
     const eventsSubscription = merge(
       fromEvent<MouseEvent>(this._document, 'mousemove'),
-      fromEvent<TouchEvent>(this._document, 'touchmove')
+      fromEvent<TouchEvent>(this._document, 'touchmove'),
     )
       .pipe(debounceTime(0))
       .subscribe({
@@ -143,7 +141,7 @@ export class MatMinutesClockDial implements OnInit {
 
     merge(
       fromEvent<MouseEvent>(this._document, 'mouseup'),
-      fromEvent<TouchEvent>(this._document, 'touchend')
+      fromEvent<TouchEvent>(this._document, 'touchend'),
     )
       .pipe(take(1))
       .subscribe({
@@ -157,19 +155,13 @@ export class MatMinutesClockDial implements OnInit {
     return this.selectedMinute === minute;
   }
 
-  _trackBy(index: number, cell: ClockDialViewCell): number {
-    return cell.value;
-  }
-
   private _setMinute(event: MouseEvent | TouchEvent): void {
     const element = this._element.nativeElement;
     const elementRect = element.getBoundingClientRect();
     const width = element.offsetWidth;
     const height = element.offsetHeight;
-    const pageX =
-      event instanceof MouseEvent ? event.pageX : event.touches[0].pageX;
-    const pageY =
-      event instanceof MouseEvent ? event.pageY : event.touches[0].pageY;
+    const pageX = event instanceof MouseEvent ? event.pageX : event.touches[0].pageX;
+    const pageY = event instanceof MouseEvent ? event.pageY : event.touches[0].pageY;
     const x = width / 2 - (pageX - elementRect.left - this._window.scrollX);
     const y = height / 2 - (pageY - elementRect.top - this._window.scrollY);
     const unit = Math.PI / (30 / this.interval);
@@ -178,10 +170,7 @@ export class MatMinutesClockDial implements OnInit {
     const initialValue = Math.round(radian / unit) * this.interval;
     const value = initialValue === 60 ? 0 : initialValue;
 
-    if (
-      this.availableMinutes.includes(value) &&
-      this.availableMinutes.includes(value)
-    ) {
+    if (this.availableMinutes.includes(value) && this.availableMinutes.includes(value)) {
       this.selectedMinute = value;
       this.selectedChange.emit(this.selectedMinute);
     }
@@ -191,23 +180,21 @@ export class MatMinutesClockDial implements OnInit {
 
   /** Creates list of minutes. */
   private _initMinutes(): void {
-    this.minutes = ALL_MINUTES.filter((minute) => minute % 5 === 0).map(
-      (minute) => {
-        const radian = (minute / 30) * Math.PI;
-        const displayValue = minute === 0 ? '00' : String(minute);
+    this.minutes = ALL_MINUTES.filter((minute) => minute % 5 === 0).map((minute) => {
+      const radian = (minute / 30) * Math.PI;
+      const displayValue = minute === 0 ? '00' : String(minute);
 
-        return {
-          value: minute,
-          displayValue,
-          left:
-            getClockCorrectedRadius(this.touchUi) +
-            Math.sin(radian) * getClockOuterRadius(this.touchUi),
-          top:
-            getClockCorrectedRadius(this.touchUi) -
-            Math.cos(radian) * getClockOuterRadius(this.touchUi),
-          disabled: !this.availableMinutes.includes(minute),
-        };
-      }
-    );
+      return {
+        value: minute,
+        displayValue,
+        left:
+          getClockCorrectedRadius(this.touchUi) +
+          Math.sin(radian) * getClockOuterRadius(this.touchUi),
+        top:
+          getClockCorrectedRadius(this.touchUi) -
+          Math.cos(radian) * getClockOuterRadius(this.touchUi),
+        disabled: !this.availableMinutes.includes(minute),
+      };
+    });
   }
 }

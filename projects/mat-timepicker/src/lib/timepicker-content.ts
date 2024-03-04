@@ -1,4 +1,5 @@
-import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
+import { ComponentPortal, PortalModule, TemplatePortal } from '@angular/cdk/portal';
+import { A11yModule } from '@angular/cdk/a11y';
 import {
   Component,
   ChangeDetectionStrategy,
@@ -9,13 +10,12 @@ import {
   AfterViewInit,
   ViewChild,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { mixinColor } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
 import { Subject } from 'rxjs';
 
-import {
-  ExtractTimeTypeFromSelection,
-  MatTimeSelectionModel,
-} from './time-selection-model';
+import { ExtractTimeTypeFromSelection, MatTimeSelectionModel } from './time-selection-model';
 import { matTimepickerAnimations } from './timepicker-animations';
 import { MatTimepickerBase, TimepickerMode } from './timepicker-base';
 import { MatTimepickerIntl } from './timepicker-intl';
@@ -27,11 +27,13 @@ import { TimepickerOrientation } from './orientation';
 const _MatTimepickerContentBase = mixinColor(
   class {
     constructor(public _elementRef: ElementRef) {}
-  }
+  },
 );
 
 @Component({
   selector: 'mat-timepicker-content',
+  standalone: true,
+  imports: [CommonModule, PortalModule, A11yModule, MatTimeInputs, MatClockDials, MatButtonModule],
   templateUrl: './timepicker-content.html',
   styleUrls: ['./timepicker-content.scss'],
   exportAs: 'matTimepickerContent',
@@ -43,10 +45,7 @@ const _MatTimepickerContentBase = mixinColor(
     '(@transformPanel.done)': '_animationDone.next()',
     '[class.mat-timepicker-content-touch]': 'timepicker.touchUi',
   },
-  animations: [
-    matTimepickerAnimations.transformPanel,
-    matTimepickerAnimations.fadeInTimepicker,
-  ],
+  animations: [matTimepickerAnimations.transformPanel, matTimepickerAnimations.fadeInTimepicker],
 })
 export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
   extends _MatTimepickerContentBase
@@ -100,15 +99,14 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
     elementRef: ElementRef,
     intl: MatTimepickerIntl,
     private _globalModel: MatTimeSelectionModel<S, T>,
-    private _changeDetectorRef: ChangeDetectorRef
+    private _changeDetectorRef: ChangeDetectorRef,
   ) {
     super(elementRef);
     this._closeButtonText = intl.closeTimepickerLabel;
   }
 
   ngOnInit() {
-    this._animationState =
-      this.timepicker.openAs === 'dialog' ? 'enter-dialog' : 'enter-dropdown';
+    this._animationState = this.timepicker.openAs === 'dialog' ? 'enter-dialog' : 'enter-dropdown';
   }
 
   ngAfterViewInit() {
@@ -145,7 +143,7 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
    */
   _assignActions(
     portal: TemplatePortal<any> | ComponentPortal<any> | null,
-    forceRerender: boolean
+    forceRerender: boolean,
   ) {
     // As we have actions, clone the model so that we have the ability to cancel the selection.
     // Note that we want to assign this as soon as possible,
