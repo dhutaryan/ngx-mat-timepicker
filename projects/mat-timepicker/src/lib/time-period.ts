@@ -7,11 +7,15 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatRippleModule } from '@angular/material/core';
 
 export type MatTimePeriodType = 'am' | 'pm';
 
 @Component({
   selector: 'mat-time-period',
+  standalone: true,
+  imports: [MatDividerModule, MatRippleModule],
   templateUrl: './time-period.html',
   styleUrls: ['./time-period.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

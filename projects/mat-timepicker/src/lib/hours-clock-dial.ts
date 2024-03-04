@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -12,6 +12,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
 import { debounceTime, fromEvent, merge, take } from 'rxjs';
 
 import {
@@ -36,6 +37,8 @@ export const ALL_HOURS = Array(24)
 
 @Component({
   selector: 'mat-hours-clock-dial',
+  standalone: true,
+  imports: [CommonModule, MatButtonModule],
   templateUrl: 'hours-clock-dial.html',
   styleUrls: ['clock-dial.scss'],
   exportAs: 'matHoursClockDial',
@@ -112,7 +115,7 @@ export class MatHoursClockDial implements OnInit {
     private _element: ElementRef<HTMLElement>,
     private _cdr: ChangeDetectorRef,
     @Inject(DOCUMENT) private _document: Document,
-    @Inject(Window) private _window: Window
+    @Inject(Window) private _window: Window,
   ) {}
 
   ngOnInit(): void {
@@ -143,7 +146,7 @@ export class MatHoursClockDial implements OnInit {
 
     const eventsSubscription = merge(
       fromEvent<MouseEvent>(this._document, 'mousemove'),
-      fromEvent<TouchEvent>(this._document, 'touchmove')
+      fromEvent<TouchEvent>(this._document, 'touchmove'),
     )
       .pipe(debounceTime(0))
       .subscribe({
@@ -155,7 +158,7 @@ export class MatHoursClockDial implements OnInit {
 
     merge(
       fromEvent<MouseEvent>(this._document, 'mouseup'),
-      fromEvent<TouchEvent>(this._document, 'touchend')
+      fromEvent<TouchEvent>(this._document, 'touchend'),
     )
       .pipe(take(1))
       .subscribe({
@@ -173,20 +176,14 @@ export class MatHoursClockDial implements OnInit {
     return this.selectedHour === hour;
   }
 
-  _trackBy(index: number, cell: ClockDialViewCell): number {
-    return cell.value;
-  }
-
   /** Changes selected hour based on coordinates. */
   private _setHour(event: MouseEvent | TouchEvent): void {
     const element = this._element.nativeElement;
     const elementRect = element.getBoundingClientRect();
     const width = element.offsetWidth;
     const height = element.offsetHeight;
-    const pageX =
-      event instanceof MouseEvent ? event.pageX : event.touches[0].pageX;
-    const pageY =
-      event instanceof MouseEvent ? event.pageY : event.touches[0].pageY;
+    const pageX = event instanceof MouseEvent ? event.pageX : event.touches[0].pageX;
+    const pageY = event instanceof MouseEvent ? event.pageY : event.touches[0].pageY;
     const x = width / 2 - (pageX - elementRect.left - this._window.scrollX);
     const y = height / 2 - (pageY - elementRect.top - this._window.scrollY);
     const unit = Math.PI / 6;
@@ -194,8 +191,7 @@ export class MatHoursClockDial implements OnInit {
     const radian = atan2 < 0 ? Math.PI * 2 + atan2 : atan2;
     const initialValue = Math.round(radian / unit);
     const z = Math.sqrt(x * x + y * y);
-    const outer =
-      z > getClockOuterRadius(this.touchUi) - getClockTickRadius(this.touchUi);
+    const outer = z > getClockOuterRadius(this.touchUi) - getClockTickRadius(this.touchUi);
     const value = this._getHourValue(initialValue, outer);
 
     if (this.availableHours.includes(value)) {
@@ -248,9 +244,7 @@ export class MatHoursClockDial implements OnInit {
     }
 
     const outer = hour >= 0 && hour < 12;
-    const radius = outer
-      ? getClockOuterRadius(this.touchUi)
-      : getClockInnerRadius(this.touchUi);
+    const radius = outer ? getClockOuterRadius(this.touchUi) : getClockInnerRadius(this.touchUi);
 
     return radius;
   }

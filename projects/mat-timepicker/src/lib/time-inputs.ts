@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   Component,
   ChangeDetectionStrategy,
@@ -12,19 +12,20 @@ import {
   NgZone,
 } from '@angular/core';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { take } from 'rxjs';
 
 import { TimeAdapter } from './adapter';
 import { MatTimeFaceBase } from './time-face-base';
 import { MatTimepickerIntl } from './timepicker-intl';
-import {
-  MatTimeInputBase,
-  withZeroPrefix,
-  withZeroPrefixMeridiem,
-} from './time-input-base';
+import { MatTimeInputBase, withZeroPrefix, withZeroPrefixMeridiem } from './time-input-base';
+import { MatTimePeriod } from './time-period';
+import { MatTimepickerContentLayout } from './timepicker-content-layout';
 
 @Directive({
   selector: 'input[matHourInput]',
+  standalone: true,
   exportAs: 'matTimeInput',
   host: {
     class: 'mat-time-input',
@@ -47,7 +48,7 @@ export class MatHourInput extends MatTimeInputBase {
   constructor(
     element: ElementRef<HTMLInputElement>,
     _cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) _document: Document
+    @Inject(DOCUMENT) _document: Document,
   ) {
     super(element, _cdr, _document);
   }
@@ -90,22 +91,20 @@ export class MatHourInput extends MatTimeInputBase {
         // the last item is max becuase 12 at the beginning is kinda "min"
         const maxHour = this.availableHours[this.availableHours.length - 1];
 
-        return Math.min(
-          Math.max(value, Math.min(...this.availableHours)),
-          maxHour
-        );
+        return Math.min(Math.max(value, Math.min(...this.availableHours)), maxHour);
       }
     }
 
     return Math.min(
       Math.max(value, Math.min(...this.availableHours)),
-      Math.max(...this.availableHours)
+      Math.max(...this.availableHours),
     );
   }
 }
 
 @Directive({
   selector: 'input[matMinuteInput]',
+  standalone: true,
   exportAs: 'matTimeInput',
   host: {
     class: 'mat-time-input',
@@ -136,7 +135,7 @@ export class MatMinuteInput extends MatTimeInputBase {
   constructor(
     element: ElementRef<HTMLInputElement>,
     _cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) _document: Document
+    @Inject(DOCUMENT) _document: Document,
   ) {
     super(element, _cdr, _document);
   }
@@ -154,13 +153,23 @@ export class MatMinuteInput extends MatTimeInputBase {
 
     return Math.min(
       Math.max(roundedValue, Math.min(...this.availableMinutes)),
-      Math.max(...this.availableMinutes)
+      Math.max(...this.availableMinutes),
     );
   }
 }
 
 @Component({
   selector: 'mat-time-inputs',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTimepickerContentLayout,
+    MatHourInput,
+    MatMinuteInput,
+    MatTimePeriod,
+  ],
   templateUrl: './time-inputs.html',
   styleUrls: ['./time-inputs.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -174,7 +183,7 @@ export class MatTimeInputs<T> extends MatTimeFaceBase<T> {
     public _intl: MatTimepickerIntl,
     @Optional() _timeAdapter: TimeAdapter<T>,
     private _ngZone: NgZone,
-    private _elementRef: ElementRef
+    private _elementRef: ElementRef,
   ) {
     super(_timeAdapter);
   }
@@ -189,10 +198,9 @@ export class MatTimeInputs<T> extends MatTimeFaceBase<T> {
     this._ngZone.runOutsideAngular(() => {
       this._ngZone.onStable.pipe(take(1)).subscribe(() => {
         setTimeout(() => {
-          const activeCell: HTMLElement | null =
-            this._elementRef.nativeElement.querySelector(
-              '.mat-timepicker-content input' // to avoid focus for inline mode
-            );
+          const activeCell: HTMLElement | null = this._elementRef.nativeElement.querySelector(
+            '.mat-timepicker-content input', // to avoid focus for inline mode
+          );
           if (activeCell && !this._skipNextTickFocus) {
             activeCell.focus();
             this._skipNextTickFocus = true;

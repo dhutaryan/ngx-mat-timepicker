@@ -7,16 +7,20 @@ import {
   ContentChild,
   Attribute,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { MatButtonModule } from '@angular/material/button';
 
 import { MatTimepicker } from './timepicker';
 import { MatTimepickerIntl } from './timepicker-intl';
 
-@Directive({ selector: '[matTimepickerToggleIcon]' })
+@Directive({ selector: '[matTimepickerToggleIcon]', standalone: true })
 export class MatTimepickerToggleIcon {}
 
 @Component({
   selector: 'mat-timepicker-toggle',
+  standalone: true,
+  imports: [CommonModule, MatButtonModule],
   templateUrl: './timepicker-toggle.html',
   styleUrls: ['./timepicker-toggle.scss'],
   exportAs: 'matTimepickerToggle',
@@ -61,11 +65,10 @@ export class MatTimepickerToggle<T> {
 
   constructor(
     @Attribute('tabindex') defaultTabIndex: string,
-    public _intl: MatTimepickerIntl
+    public _intl: MatTimepickerIntl,
   ) {
     const parsedTabIndex = Number(defaultTabIndex);
-    this.tabIndex =
-      parsedTabIndex || parsedTabIndex === 0 ? parsedTabIndex : null;
+    this.tabIndex = parsedTabIndex || parsedTabIndex === 0 ? parsedTabIndex : null;
   }
 
   /** Opens timepicker. */
