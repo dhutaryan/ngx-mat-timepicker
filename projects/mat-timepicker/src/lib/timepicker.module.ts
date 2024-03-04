@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
@@ -73,7 +72,6 @@ import { MatTimepickerIntl } from './timepicker-intl';
   providers: [
     MatTimepickerIntl,
     MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER,
-    { provide: Window, useValue: window },
     { provide: MAT_DEFAULT_ACITONS, useValue: MatTimepickerDefaultActions },
     {
       provide: MAT_FAB_DEFAULT_OPTIONS,

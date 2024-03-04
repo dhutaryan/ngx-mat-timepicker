@@ -99,7 +99,6 @@ export class MatMinutesClockDial implements OnInit {
     private _element: ElementRef<HTMLElement>,
     private _cdr: ChangeDetectorRef,
     @Inject(DOCUMENT) private _document: Document,
-    @Inject(Window) private _window: Window,
   ) {}
 
   ngOnInit(): void {
@@ -157,13 +156,14 @@ export class MatMinutesClockDial implements OnInit {
 
   private _setMinute(event: MouseEvent | TouchEvent): void {
     const element = this._element.nativeElement;
+    const window = this._getWindow();
     const elementRect = element.getBoundingClientRect();
     const width = element.offsetWidth;
     const height = element.offsetHeight;
     const pageX = event instanceof MouseEvent ? event.pageX : event.touches[0].pageX;
     const pageY = event instanceof MouseEvent ? event.pageY : event.touches[0].pageY;
-    const x = width / 2 - (pageX - elementRect.left - this._window.scrollX);
-    const y = height / 2 - (pageY - elementRect.top - this._window.scrollY);
+    const x = width / 2 - (pageX - elementRect.left - window.scrollX);
+    const y = height / 2 - (pageY - elementRect.top - window.scrollY);
     const unit = Math.PI / (30 / this.interval);
     const atan2 = Math.atan2(-x, y);
     const radian = atan2 < 0 ? Math.PI * 2 + atan2 : atan2;
@@ -196,5 +196,10 @@ export class MatMinutesClockDial implements OnInit {
         disabled: !this.availableMinutes.includes(minute),
       };
     });
+  }
+
+  /** Use defaultView of injected document if available or fallback to global window reference */
+  private _getWindow(): Window {
+    return this._document.defaultView || window;
   }
 }
