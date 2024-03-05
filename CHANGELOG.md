@@ -1,3 +1,7 @@
+# 17.3.0
+- fix(dials): replace injected window object ([#135](https://github.com/dhutaryan/ngx-mat-timepicker/pull/135))
+- feat(timepicker): move to standalone components ([#134](https://github.com/dhutaryan/ngx-mat-timepicker/pull/134))
+
 # 17.2.0
 
 - feat(timepicker): add touchUi property to make some elements bigger ([#128](https://github.com/dhutaryan/ngx-mat-timepicker/pull/128))
