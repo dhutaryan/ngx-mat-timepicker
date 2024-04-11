@@ -394,5 +394,4626 @@
     "route": "/what-is",
     "fragment": "how-does-it-work",
     "content": "ngx-mat-timepicker contains module with all necessary components and another module with time adapter (uses native JS date under the hood). Adapter is used to unify the work with time. You can create your own adapter with any library to handle time. You have to import both modules, add theme style and use it by the same way as you use mat-datepicker. That's it!"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatNativeDateTimeModule"
+    ],
+    "pageType": "api",
+    "title": "MatNativeDateTimeModule",
+    "section": "MatNativeDateTimeModule",
+    "route": "/api/api/classes/MatNativeDateTimeModule",
+    "fragment": "matnativedatetimemodule"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MAT_TIME_LOCALE"
+    ],
+    "pageType": "api",
+    "title": "MAT_TIME_LOCALE",
+    "section": "MAT_TIME_LOCALE",
+    "route": "/api/api/variables/MAT_TIME_LOCALE",
+    "fragment": "mat_time_locale",
+    "content": "InjectionToken for timepicker that can be used to override default locale code."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MAT_TIME_LOCALE_PROVIDER"
+    ],
+    "pageType": "api",
+    "title": "MAT_TIME_LOCALE_PROVIDER",
+    "section": "MAT_TIME_LOCALE_PROVIDER",
+    "route": "/api/api/variables/MAT_TIME_LOCALE_PROVIDER",
+    "fragment": "mat_time_locale_provider",
+    "content": "Provider for MAT_TIME_LOCALE injection token."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "TimeAdapter",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "timeadapter"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Properties",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "properties",
+    "content": "The locale to use for time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "Clamp the given time between min and max time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The time to clamp."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The minimum value to allow. If null or omitted no min is enforced."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The maximum value to allow. If null or omitted no max is enforced."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "Compares two time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The first time to compare."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The second time to compare."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "Attempts to deserialize a value to a valid time object. The "
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": " will call this method on all of its @Input() properties that accept time. It is therefore possible to support passing values from your backend directly to these properties by overriding this method to also deserialize the format used by your backend."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The value to be deserialized into a time object."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "Formats a time as a string according to the given format."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The value to format."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The format to use to display the time as a string."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "Gets the hour component of the given time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The time to extract the hour from."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "Gets the minute component of the given time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The time to extract the minute from."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "Gets the period component of the given time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The time to extract the period from."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "Given a potential time object, returns that same time object if it is a valid time, or null if it's not a valid time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The object to check."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "Gets time instance that is not valid."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "Checks whether the given object is considered a time instance by this timeAdapter."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The object to check"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "Checks whether the given time is valid."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The time to check."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "Gets now's time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "Parses a time from a user-provided value."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The value to parse."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The expected format of the value being parsed (type is implementation-dependent)."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "Checks if two time are equal."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The first time to check."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The second time to check."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "Sets the locale used for all time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The new locale."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "Update the hour component of the given time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The time to update the hour."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The new hour to update given time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "Update the minute component of the given time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The time to update the minute."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "TimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/TimeAdapter",
+    "fragment": "methods",
+    "content": "The new minute to update given time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "NativeDateTimeAdapter",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "nativedatetimeadapter",
+    "content": "Adapts the native JS Date for components that work with time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Properties",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "properties",
+    "content": "The locale to use for time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "Clamp the given time between min and max time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "The time to clamp."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "The minimum value to allow. If null or omitted no min is enforced."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "The maximum value to allow. If null or omitted no max is enforced."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "Compares two time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "The first time to compare."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "The second time to compare."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "Returns the given value if given a valid Date or null. Deserializes valid ISO 8601 strings (https://www.ietf.org/rfc/rfc3339.txt) into valid Dates and empty string into null. Returns an invalid date for all other values."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "Formats a time as a string according to the given format."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "The format to use to display the time as a string."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "Gets the hour component of the given time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "Gets the minute component of the given time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "Gets the period component of the given time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "Given a potential time object, returns that same time object if it is a valid time, or null if it's not a valid time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "The object to check."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "Gets time instance that is not valid."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "Checks whether the given object is considered a time instance by this timeAdapter."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "The object to check"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "Checks whether the given time is valid."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "Gets now's time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "Parses a time from a user-provided value."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "The value to parse."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "The expected format of the value being parsed (type is implementation-dependent)."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "Checks if two time are equal."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "The first time to check."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "The second time to check."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "Sets the locale used for all time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "The new locale."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "Update the hour component of the given time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "The new hour to update given time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "Update the minute component of the given time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeAdapter",
+    "section": "Methods",
+    "route": "/api/api/classes/NativeDateTimeAdapter",
+    "fragment": "methods",
+    "content": "The new minute to update given time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "enterLeaveAnimation"
+    ],
+    "pageType": "api",
+    "title": "enterLeaveAnimation",
+    "section": "enterLeaveAnimation",
+    "route": "/api/api/variables/enterLeaveAnimation",
+    "fragment": "enterleaveanimation"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatDialView"
+    ],
+    "pageType": "api",
+    "title": "MatDialView",
+    "section": "MatDialView",
+    "route": "/api/api/type-aliases/MatDialView",
+    "fragment": "matdialview"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "MatClockDials",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "matclockdials"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "Properties",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "properties",
+    "content": "Emits when any hour, minute or period is selected."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "Properties",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "properties",
+    "content": "Color palette."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "Properties",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "properties",
+    "content": "Whether the clock uses 12 hour format."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "Properties",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "properties",
+    "content": "Layout orientation."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "Properties",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "properties",
+    "content": "Whether the timepicker UI is in touch mode."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "accessors",
+    "content": "The maximum selectable time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "accessors",
+    "content": "The minimum selectable time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "accessors",
+    "content": "Step over minutes."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "accessors",
+    "content": "The currently selected time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "Methods",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "methods",
+    "content": "Handles hour selection."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "Methods",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "methods",
+    "content": "Handles hour selection."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "Methods",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "methods",
+    "content": "Handles minute selection."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "Methods",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "methods",
+    "content": "Handles period changing."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "Methods",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "methods",
+    "content": "Focuses the active cell after or input the microtask queue is empty. Adding a 0ms setTimeout seems to fix Voiceover losing focus when pressing PageUp/PageDown. Determined a 0ms by gradually increasing duration from 0 and testing two use cases with screen reader enabled:"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "Methods",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "methods",
+    "content": "Pressing PageUp/PageDown repeatedly with pausing between each key press. Pressing and holding the PageDown key with repeated keys enabled."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "Methods",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "methods",
+    "content": "Test 1 worked roughly 95-99% of the time with 0ms and got a little bit better as the duration increased. Test 2 got slightly better until the duration was long enough to interfere with repeated keys. If the repeated key speed was faster than the timeout duration, then pressing and holding pagedown caused the entire page to scroll. Since repeated key speed can verify across machines, determined that any duration could potentially interfere with repeated keys. 0ms would be best because it almost entirely eliminates the focus being lost in Voiceover without causing unintended side effects. Adding delay also complicates writing tests."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatClockDials"
+    ],
+    "pageType": "api",
+    "title": "MatClockDials",
+    "section": "Methods",
+    "route": "/api/api/classes/MatClockDials",
+    "fragment": "methods",
+    "content": "Changes clock dial view."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "ClockDialViewCell"
+    ],
+    "pageType": "api",
+    "title": "ClockDialViewCell",
+    "section": "ClockDialViewCell",
+    "route": "/api/api/interfaces/ClockDialViewCell",
+    "fragment": "clockdialviewcell"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "ALL_HOURS"
+    ],
+    "pageType": "api",
+    "title": "ALL_HOURS",
+    "section": "ALL_HOURS",
+    "route": "/api/api/variables/ALL_HOURS",
+    "fragment": "all_hours"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatHoursClockDial"
+    ],
+    "pageType": "api",
+    "title": "MatHoursClockDial",
+    "section": "MatHoursClockDial",
+    "route": "/api/api/classes/MatHoursClockDial",
+    "fragment": "mathoursclockdial"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatHoursClockDial"
+    ],
+    "pageType": "api",
+    "title": "MatHoursClockDial",
+    "section": "Properties",
+    "route": "/api/api/classes/MatHoursClockDial",
+    "fragment": "properties",
+    "content": "Color palette."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatHoursClockDial"
+    ],
+    "pageType": "api",
+    "title": "MatHoursClockDial",
+    "section": "Properties",
+    "route": "/api/api/classes/MatHoursClockDial",
+    "fragment": "properties",
+    "content": "Emits selected hour."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatHoursClockDial"
+    ],
+    "pageType": "api",
+    "title": "MatHoursClockDial",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatHoursClockDial",
+    "fragment": "accessors",
+    "content": "Whether the clock uses 12 hour format."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatHoursClockDial"
+    ],
+    "pageType": "api",
+    "title": "MatHoursClockDial",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatHoursClockDial",
+    "fragment": "accessors",
+    "content": "Selected hour."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatHoursClockDial"
+    ],
+    "pageType": "api",
+    "title": "MatHoursClockDial",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatHoursClockDial",
+    "fragment": "accessors",
+    "content": "Whether the timepicker UI is in touch mode."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatHoursClockDial"
+    ],
+    "pageType": "api",
+    "title": "MatHoursClockDial",
+    "section": "Methods",
+    "route": "/api/api/classes/MatHoursClockDial",
+    "fragment": "methods",
+    "content": "Hand styles based on selected hour."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatHoursClockDial"
+    ],
+    "pageType": "api",
+    "title": "MatHoursClockDial",
+    "section": "Methods",
+    "route": "/api/api/classes/MatHoursClockDial",
+    "fragment": "methods",
+    "content": "Handles mouse and touch events on dial and document."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "ALL_MINUTES"
+    ],
+    "pageType": "api",
+    "title": "ALL_MINUTES",
+    "section": "ALL_MINUTES",
+    "route": "/api/api/variables/ALL_MINUTES",
+    "fragment": "all_minutes"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatMinutesClockDial"
+    ],
+    "pageType": "api",
+    "title": "MatMinutesClockDial",
+    "section": "MatMinutesClockDial",
+    "route": "/api/api/classes/MatMinutesClockDial",
+    "fragment": "matminutesclockdial"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatMinutesClockDial"
+    ],
+    "pageType": "api",
+    "title": "MatMinutesClockDial",
+    "section": "Properties",
+    "route": "/api/api/classes/MatMinutesClockDial",
+    "fragment": "properties",
+    "content": "Color palette."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatMinutesClockDial"
+    ],
+    "pageType": "api",
+    "title": "MatMinutesClockDial",
+    "section": "Properties",
+    "route": "/api/api/classes/MatMinutesClockDial",
+    "fragment": "properties",
+    "content": "Emits selected minute."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatMinutesClockDial"
+    ],
+    "pageType": "api",
+    "title": "MatMinutesClockDial",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatMinutesClockDial",
+    "fragment": "accessors",
+    "content": "Step over minutes."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatMinutesClockDial"
+    ],
+    "pageType": "api",
+    "title": "MatMinutesClockDial",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatMinutesClockDial",
+    "fragment": "accessors",
+    "content": "Selected minute."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatMinutesClockDial"
+    ],
+    "pageType": "api",
+    "title": "MatMinutesClockDial",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatMinutesClockDial",
+    "fragment": "accessors",
+    "content": "Whether the timepicker UI is in touch mode."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatMinutesClockDial"
+    ],
+    "pageType": "api",
+    "title": "MatMinutesClockDial",
+    "section": "Methods",
+    "route": "/api/api/classes/MatMinutesClockDial",
+    "fragment": "methods",
+    "content": "Hand styles based on selected minute."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatMinutesClockDial"
+    ],
+    "pageType": "api",
+    "title": "MatMinutesClockDial",
+    "section": "Methods",
+    "route": "/api/api/classes/MatMinutesClockDial",
+    "fragment": "methods",
+    "content": "Handles mouse and touch events on dial and document."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimepickerOrientation"
+    ],
+    "pageType": "api",
+    "title": "TimepickerOrientation",
+    "section": "TimepickerOrientation",
+    "route": "/api/api/type-aliases/TimepickerOrientation",
+    "fragment": "timepickerorientation",
+    "content": "Possible options for the timepicker orientation (dial mode only)."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeFaceBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimeFaceBase",
+    "section": "MatTimeFaceBase",
+    "route": "/api/api/classes/MatTimeFaceBase",
+    "fragment": "mattimefacebase"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeFaceBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimeFaceBase",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimeFaceBase",
+    "fragment": "properties",
+    "content": "Emits when any hour, minute or period is selected."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeFaceBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimeFaceBase",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimeFaceBase",
+    "fragment": "properties",
+    "content": "Color palette."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeFaceBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimeFaceBase",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimeFaceBase",
+    "fragment": "properties",
+    "content": "Whether the clock uses 12 hour format."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeFaceBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimeFaceBase",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimeFaceBase",
+    "fragment": "accessors",
+    "content": "The maximum selectable time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeFaceBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimeFaceBase",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimeFaceBase",
+    "fragment": "accessors",
+    "content": "The minimum selectable time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeFaceBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimeFaceBase",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimeFaceBase",
+    "fragment": "accessors",
+    "content": "Step over minutes."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeFaceBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimeFaceBase",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimeFaceBase",
+    "fragment": "accessors",
+    "content": "The currently selected time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeFaceBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimeFaceBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimeFaceBase",
+    "fragment": "methods",
+    "content": "Handles hour selection."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeFaceBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimeFaceBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimeFaceBase",
+    "fragment": "methods",
+    "content": "Handles minute selection."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeFaceBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimeFaceBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimeFaceBase",
+    "fragment": "methods",
+    "content": "Handles period changing."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeFaceBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimeFaceBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimeFaceBase",
+    "fragment": "methods",
+    "content": "Focuses the active cell after or input the microtask queue is empty. Adding a 0ms setTimeout seems to fix Voiceover losing focus when pressing PageUp/PageDown. Determined a 0ms by gradually increasing duration from 0 and testing two use cases with screen reader enabled:"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeFaceBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimeFaceBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimeFaceBase",
+    "fragment": "methods",
+    "content": "Pressing PageUp/PageDown repeatedly with pausing between each key press. Pressing and holding the PageDown key with repeated keys enabled."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeFaceBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimeFaceBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimeFaceBase",
+    "fragment": "methods",
+    "content": "Test 1 worked roughly 95-99% of the time with 0ms and got a little bit better as the duration increased. Test 2 got slightly better until the duration was long enough to interfere with repeated keys. If the repeated key speed was faster than the timeout duration, then pressing and holding pagedown caused the entire page to scroll. Since repeated key speed can verify across machines, determined that any duration could potentially interfere with repeated keys. 0ms would be best because it almost entirely eliminates the focus being lost in Voiceover without causing unintended side effects. Adding delay also complicates writing tests."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "withZeroPrefix"
+    ],
+    "pageType": "api",
+    "title": "withZeroPrefix",
+    "section": "withZeroPrefix",
+    "route": "/api/api/functions/withZeroPrefix",
+    "fragment": "withzeroprefix"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "withZeroPrefixMeridiem"
+    ],
+    "pageType": "api",
+    "title": "withZeroPrefixMeridiem",
+    "section": "withZeroPrefixMeridiem",
+    "route": "/api/api/functions/withZeroPrefixMeridiem",
+    "fragment": "withzeroprefixmeridiem"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimeInputBase",
+    "section": "MatTimeInputBase",
+    "route": "/api/api/classes/MatTimeInputBase",
+    "fragment": "mattimeinputbase"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatHourInput"
+    ],
+    "pageType": "api",
+    "title": "MatHourInput",
+    "section": "MatHourInput",
+    "route": "/api/api/classes/MatHourInput",
+    "fragment": "mathourinput"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatMinuteInput"
+    ],
+    "pageType": "api",
+    "title": "MatMinuteInput",
+    "section": "MatMinuteInput",
+    "route": "/api/api/classes/MatMinuteInput",
+    "fragment": "matminuteinput"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatMinuteInput"
+    ],
+    "pageType": "api",
+    "title": "MatMinuteInput",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatMinuteInput",
+    "fragment": "accessors",
+    "content": "Step over minutes."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeInputs"
+    ],
+    "pageType": "api",
+    "title": "MatTimeInputs",
+    "section": "MatTimeInputs",
+    "route": "/api/api/classes/MatTimeInputs",
+    "fragment": "mattimeinputs"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeInputs"
+    ],
+    "pageType": "api",
+    "title": "MatTimeInputs",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimeInputs",
+    "fragment": "properties",
+    "content": "Emits when any hour, minute or period is selected."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeInputs"
+    ],
+    "pageType": "api",
+    "title": "MatTimeInputs",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimeInputs",
+    "fragment": "properties",
+    "content": "Color palette."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeInputs"
+    ],
+    "pageType": "api",
+    "title": "MatTimeInputs",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimeInputs",
+    "fragment": "properties",
+    "content": "Whether the clock uses 12 hour format."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeInputs"
+    ],
+    "pageType": "api",
+    "title": "MatTimeInputs",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimeInputs",
+    "fragment": "accessors",
+    "content": "The maximum selectable time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeInputs"
+    ],
+    "pageType": "api",
+    "title": "MatTimeInputs",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimeInputs",
+    "fragment": "accessors",
+    "content": "The minimum selectable time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeInputs"
+    ],
+    "pageType": "api",
+    "title": "MatTimeInputs",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimeInputs",
+    "fragment": "accessors",
+    "content": "Step over minutes."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeInputs"
+    ],
+    "pageType": "api",
+    "title": "MatTimeInputs",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimeInputs",
+    "fragment": "accessors",
+    "content": "The currently selected time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeInputs"
+    ],
+    "pageType": "api",
+    "title": "MatTimeInputs",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimeInputs",
+    "fragment": "methods",
+    "content": "Handles hour selection."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeInputs"
+    ],
+    "pageType": "api",
+    "title": "MatTimeInputs",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimeInputs",
+    "fragment": "methods",
+    "content": "Handles minute selection."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeInputs"
+    ],
+    "pageType": "api",
+    "title": "MatTimeInputs",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimeInputs",
+    "fragment": "methods",
+    "content": "Handles period changing."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeInputs"
+    ],
+    "pageType": "api",
+    "title": "MatTimeInputs",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimeInputs",
+    "fragment": "methods",
+    "content": "Focuses the active cell after or input the microtask queue is empty. Adding a 0ms setTimeout seems to fix Voiceover losing focus when pressing PageUp/PageDown. Determined a 0ms by gradually increasing duration from 0 and testing two use cases with screen reader enabled:"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeInputs"
+    ],
+    "pageType": "api",
+    "title": "MatTimeInputs",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimeInputs",
+    "fragment": "methods",
+    "content": "Pressing PageUp/PageDown repeatedly with pausing between each key press. Pressing and holding the PageDown key with repeated keys enabled."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeInputs"
+    ],
+    "pageType": "api",
+    "title": "MatTimeInputs",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimeInputs",
+    "fragment": "methods",
+    "content": "Test 1 worked roughly 95-99% of the time with 0ms and got a little bit better as the duration increased. Test 2 got slightly better until the duration was long enough to interfere with repeated keys. If the repeated key speed was faster than the timeout duration, then pressing and holding pagedown caused the entire page to scroll. Since repeated key speed can verify across machines, determined that any duration could potentially interfere with repeated keys. 0ms would be best because it almost entirely eliminates the focus being lost in Voiceover without causing unintended side effects. Adding delay also complicates writing tests."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimePeriodType"
+    ],
+    "pageType": "api",
+    "title": "MatTimePeriodType",
+    "section": "MatTimePeriodType",
+    "route": "/api/api/type-aliases/MatTimePeriodType",
+    "fragment": "mattimeperiodtype"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimePeriod"
+    ],
+    "pageType": "api",
+    "title": "MatTimePeriod",
+    "section": "MatTimePeriod",
+    "route": "/api/api/classes/MatTimePeriod",
+    "fragment": "mattimeperiod"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimePeriod"
+    ],
+    "pageType": "api",
+    "title": "MatTimePeriod",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimePeriod",
+    "fragment": "accessors",
+    "content": "Whether the time period is vertically aligned."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MAT_SINGLE_TIME_SELECTION_MODEL_FACTORY"
+    ],
+    "pageType": "api",
+    "title": "MAT_SINGLE_TIME_SELECTION_MODEL_FACTORY",
+    "section": "MAT_SINGLE_TIME_SELECTION_MODEL_FACTORY",
+    "route": "/api/api/functions/MAT_SINGLE_TIME_SELECTION_MODEL_FACTORY",
+    "fragment": "mat_single_time_selection_model_factory"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "ExtractTimeTypeFromSelection"
+    ],
+    "pageType": "api",
+    "title": "ExtractTimeTypeFromSelection",
+    "section": "ExtractTimeTypeFromSelection",
+    "route": "/api/api/type-aliases/ExtractTimeTypeFromSelection",
+    "fragment": "extracttimetypefromselection"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeSelectionModelChange"
+    ],
+    "pageType": "api",
+    "title": "TimeSelectionModelChange",
+    "section": "TimeSelectionModelChange",
+    "route": "/api/api/interfaces/TimeSelectionModelChange",
+    "fragment": "timeselectionmodelchange",
+    "content": "Event emitted by the time selection model when its selection changes. @docs-private"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeSelectionModelChange"
+    ],
+    "pageType": "api",
+    "title": "TimeSelectionModelChange",
+    "section": "Properties",
+    "route": "/api/api/interfaces/TimeSelectionModelChange",
+    "fragment": "properties",
+    "content": "Previous value"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeSelectionModelChange"
+    ],
+    "pageType": "api",
+    "title": "TimeSelectionModelChange",
+    "section": "Properties",
+    "route": "/api/api/interfaces/TimeSelectionModelChange",
+    "fragment": "properties",
+    "content": "New value for the selection."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimeSelectionModelChange"
+    ],
+    "pageType": "api",
+    "title": "TimeSelectionModelChange",
+    "section": "Properties",
+    "route": "/api/api/interfaces/TimeSelectionModelChange",
+    "fragment": "properties",
+    "content": "Object that triggered the change."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeSelectionModel"
+    ],
+    "pageType": "api",
+    "title": "MatTimeSelectionModel",
+    "section": "MatTimeSelectionModel",
+    "route": "/api/api/classes/MatTimeSelectionModel",
+    "fragment": "mattimeselectionmodel",
+    "content": "A selection model containing a time selection."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeSelectionModel"
+    ],
+    "pageType": "api",
+    "title": "MatTimeSelectionModel",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimeSelectionModel",
+    "fragment": "properties",
+    "content": "The current selection."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeSelectionModel"
+    ],
+    "pageType": "api",
+    "title": "MatTimeSelectionModel",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimeSelectionModel",
+    "fragment": "properties",
+    "content": "Emits when the selection has changed."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeSelectionModel"
+    ],
+    "pageType": "api",
+    "title": "MatTimeSelectionModel",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimeSelectionModel",
+    "fragment": "methods",
+    "content": "Adds a time to the current selection."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeSelectionModel"
+    ],
+    "pageType": "api",
+    "title": "MatTimeSelectionModel",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimeSelectionModel",
+    "fragment": "methods",
+    "content": "Clones the selection model."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeSelectionModel"
+    ],
+    "pageType": "api",
+    "title": "MatTimeSelectionModel",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimeSelectionModel",
+    "fragment": "methods",
+    "content": "Updates the current selection in the model."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeSelectionModel"
+    ],
+    "pageType": "api",
+    "title": "MatTimeSelectionModel",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimeSelectionModel",
+    "fragment": "methods",
+    "content": "New selection that should be assigned."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimeSelectionModel"
+    ],
+    "pageType": "api",
+    "title": "MatTimeSelectionModel",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimeSelectionModel",
+    "fragment": "methods",
+    "content": "Object that triggered the selection change."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatSingleTimeSelectionModel"
+    ],
+    "pageType": "api",
+    "title": "MatSingleTimeSelectionModel",
+    "section": "MatSingleTimeSelectionModel",
+    "route": "/api/api/classes/MatSingleTimeSelectionModel",
+    "fragment": "matsingletimeselectionmodel",
+    "content": "A selection model that contains a single time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatSingleTimeSelectionModel"
+    ],
+    "pageType": "api",
+    "title": "MatSingleTimeSelectionModel",
+    "section": "Properties",
+    "route": "/api/api/classes/MatSingleTimeSelectionModel",
+    "fragment": "properties",
+    "content": "The current selection."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatSingleTimeSelectionModel"
+    ],
+    "pageType": "api",
+    "title": "MatSingleTimeSelectionModel",
+    "section": "Properties",
+    "route": "/api/api/classes/MatSingleTimeSelectionModel",
+    "fragment": "properties",
+    "content": "Emits when the selection has changed."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatSingleTimeSelectionModel"
+    ],
+    "pageType": "api",
+    "title": "MatSingleTimeSelectionModel",
+    "section": "Methods",
+    "route": "/api/api/classes/MatSingleTimeSelectionModel",
+    "fragment": "methods",
+    "content": "Adds a time to the current selection. In the case of a single time selection, the added time simply overwrites the previous selection"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatSingleTimeSelectionModel"
+    ],
+    "pageType": "api",
+    "title": "MatSingleTimeSelectionModel",
+    "section": "Methods",
+    "route": "/api/api/classes/MatSingleTimeSelectionModel",
+    "fragment": "methods",
+    "content": "Clones the selection model."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatSingleTimeSelectionModel"
+    ],
+    "pageType": "api",
+    "title": "MatSingleTimeSelectionModel",
+    "section": "Methods",
+    "route": "/api/api/classes/MatSingleTimeSelectionModel",
+    "fragment": "methods",
+    "content": "Updates the current selection in the model."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatSingleTimeSelectionModel"
+    ],
+    "pageType": "api",
+    "title": "MatSingleTimeSelectionModel",
+    "section": "Methods",
+    "route": "/api/api/classes/MatSingleTimeSelectionModel",
+    "fragment": "methods",
+    "content": "New selection that should be assigned."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatSingleTimeSelectionModel"
+    ],
+    "pageType": "api",
+    "title": "MatSingleTimeSelectionModel",
+    "section": "Methods",
+    "route": "/api/api/classes/MatSingleTimeSelectionModel",
+    "fragment": "methods",
+    "content": "Object that triggered the selection change."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MAT_SINGLE_TIME_SELECTION_MODEL_PROVIDER"
+    ],
+    "pageType": "api",
+    "title": "MAT_SINGLE_TIME_SELECTION_MODEL_PROVIDER",
+    "section": "MAT_SINGLE_TIME_SELECTION_MODEL_PROVIDER",
+    "route": "/api/api/variables/MAT_SINGLE_TIME_SELECTION_MODEL_PROVIDER",
+    "fragment": "mat_single_time_selection_model_provider",
+    "content": "Used to provide a single selection model to a component."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MAT_DEFAULT_ACITONS"
+    ],
+    "pageType": "api",
+    "title": "MAT_DEFAULT_ACITONS",
+    "section": "MAT_DEFAULT_ACITONS",
+    "route": "/api/api/variables/MAT_DEFAULT_ACITONS",
+    "fragment": "mat_default_acitons"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerApply"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerApply",
+    "section": "MatTimepickerApply",
+    "route": "/api/api/classes/MatTimepickerApply",
+    "fragment": "mattimepickerapply",
+    "content": "Button that will close the timepicker and assign the current selection to the data model."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerCancel"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerCancel",
+    "section": "MatTimepickerCancel",
+    "route": "/api/api/classes/MatTimepickerCancel",
+    "fragment": "mattimepickercancel",
+    "content": "Button that will close the timepicker and discard the current selection."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerActions"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerActions",
+    "section": "MatTimepickerActions",
+    "route": "/api/api/classes/MatTimepickerActions",
+    "fragment": "mattimepickeractions",
+    "content": "Container that can be used to project a row of action buttons to the bottom of a timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerDefaultActions"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerDefaultActions",
+    "section": "MatTimepickerDefaultActions",
+    "route": "/api/api/classes/MatTimepickerDefaultActions",
+    "fragment": "mattimepickerdefaultactions",
+    "content": "Default action buttons to the bottom of a timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "matTimepickerAnimations"
+    ],
+    "pageType": "api",
+    "title": "matTimepickerAnimations",
+    "section": "matTimepickerAnimations",
+    "route": "/api/api/variables/matTimepickerAnimations",
+    "fragment": "mattimepickeranimations",
+    "content": "Animations used by the timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimepickerOpenAs"
+    ],
+    "pageType": "api",
+    "title": "TimepickerOpenAs",
+    "section": "TimepickerOpenAs",
+    "route": "/api/api/type-aliases/TimepickerOpenAs",
+    "fragment": "timepickeropenas",
+    "content": "Possible options for the timepicker to open."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimepickerDropdownPositionX"
+    ],
+    "pageType": "api",
+    "title": "TimepickerDropdownPositionX",
+    "section": "TimepickerDropdownPositionX",
+    "route": "/api/api/type-aliases/TimepickerDropdownPositionX",
+    "fragment": "timepickerdropdownpositionx",
+    "content": "Possible positions for the timepicker dropdown along the X axis."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimepickerDropdownPositionY"
+    ],
+    "pageType": "api",
+    "title": "TimepickerDropdownPositionY",
+    "section": "TimepickerDropdownPositionY",
+    "route": "/api/api/type-aliases/TimepickerDropdownPositionY",
+    "fragment": "timepickerdropdownpositiony",
+    "content": "Possible positions for the timepicker dropdown along the Y axis."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimepickerMode"
+    ],
+    "pageType": "api",
+    "title": "TimepickerMode",
+    "section": "TimepickerMode",
+    "route": "/api/api/type-aliases/TimepickerMode",
+    "fragment": "timepickermode",
+    "content": "Possible options for the timepicker to display."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "TimepickerFormat"
+    ],
+    "pageType": "api",
+    "title": "TimepickerFormat",
+    "section": "TimepickerFormat",
+    "route": "/api/api/type-aliases/TimepickerFormat",
+    "fragment": "timepickerformat",
+    "content": "Possible options for the timepicker period format."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerControl"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerControl",
+    "section": "MatTimepickerControl",
+    "route": "/api/api/interfaces/MatTimepickerControl",
+    "fragment": "mattimepickercontrol",
+    "content": "Form control that can be associated with a timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerPanel"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerPanel",
+    "section": "MatTimepickerPanel",
+    "route": "/api/api/interfaces/MatTimepickerPanel",
+    "fragment": "mattimepickerpanel",
+    "content": "A timepicker that can be attached to a {@link MatTimepickerControl}."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerPanel"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerPanel",
+    "section": "Methods",
+    "route": "/api/api/interfaces/MatTimepickerPanel",
+    "fragment": "methods",
+    "content": "Register an input with the timeepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerDefaultOptions"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerDefaultOptions",
+    "section": "MatTimepickerDefaultOptions",
+    "route": "/api/api/interfaces/MatTimepickerDefaultOptions",
+    "fragment": "mattimepickerdefaultoptions",
+    "content": "Represents the default options for the form field that can be configured using the MAT_TIMEPICKER_DEFAULT_OPTIONS injection token."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerDefaultOptions"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerDefaultOptions",
+    "section": "Properties",
+    "route": "/api/api/interfaces/MatTimepickerDefaultOptions",
+    "fragment": "properties",
+    "content": "Default color of the timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerDefaultOptions"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerDefaultOptions",
+    "section": "Properties",
+    "route": "/api/api/interfaces/MatTimepickerDefaultOptions",
+    "fragment": "properties",
+    "content": "Default timepicker format."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerDefaultOptions"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerDefaultOptions",
+    "section": "Properties",
+    "route": "/api/api/interfaces/MatTimepickerDefaultOptions",
+    "fragment": "properties",
+    "content": "Step for minutes."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerDefaultOptions"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerDefaultOptions",
+    "section": "Properties",
+    "route": "/api/api/interfaces/MatTimepickerDefaultOptions",
+    "fragment": "properties",
+    "content": "Default timepicker mode."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerDefaultOptions"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerDefaultOptions",
+    "section": "Properties",
+    "route": "/api/api/interfaces/MatTimepickerDefaultOptions",
+    "fragment": "properties",
+    "content": "Defines how timepicker will be appeared."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerDefaultOptions"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerDefaultOptions",
+    "section": "Properties",
+    "route": "/api/api/interfaces/MatTimepickerDefaultOptions",
+    "fragment": "properties",
+    "content": "Orientation for dial mode."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerDefaultOptions"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerDefaultOptions",
+    "section": "Properties",
+    "route": "/api/api/interfaces/MatTimepickerDefaultOptions",
+    "fragment": "properties",
+    "content": "Should toggle face button be visible."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MAT_TIMEPICKER_DEFAULT_OPTIONS"
+    ],
+    "pageType": "api",
+    "title": "MAT_TIMEPICKER_DEFAULT_OPTIONS",
+    "section": "MAT_TIMEPICKER_DEFAULT_OPTIONS",
+    "route": "/api/api/variables/MAT_TIMEPICKER_DEFAULT_OPTIONS",
+    "fragment": "mat_timepicker_default_options",
+    "content": "Injection token that can be used to configure the default options for all timepickers within an app."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "MatTimepickerBase",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "mattimepickerbase"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "properties",
+    "content": "Portal with projected action buttons."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "properties",
+    "content": "Emits when the timepicker has been closed."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "properties",
+    "content": "The id for the timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "properties",
+    "content": "The input element this timepicker is associated with."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "properties",
+    "content": "Preferred position of the timepicker in the X axis."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "properties",
+    "content": "Preferred position of the timepicker in the Y axis."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "accessors",
+    "content": "Color palette to use on the timepicker's content."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "accessors",
+    "content": "Whether the timepicker pop-up should be disabled."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "accessors",
+    "content": "Timepicker period format."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "accessors",
+    "content": "Step for minutes."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "accessors",
+    "content": "Timepicker display mode."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "accessors",
+    "content": "Whether the timepicker mode which determines what the timepicker will be opened as."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "accessors",
+    "content": "Whether the timepicker is open."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "accessors",
+    "content": "Orientation for dial mode."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "accessors",
+    "content": "Show or hide toggle button between dial and input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "accessors",
+    "content": "Whether the timepicker UI is in touch mode. In touch mode elements are larger for bigger touch targets."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "methods",
+    "content": "Applies the current pending selection on the overlay to the model."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "methods",
+    "content": "Forwards relevant values from the timepicker to the timepicker content inside the overlay."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "methods",
+    "content": "The maximum selectable time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "methods",
+    "content": "The minimum selectable time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "methods",
+    "content": "Closes the timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "methods",
+    "content": "Opens the timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "methods",
+    "content": "Registers a portal containing action buttons with the timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "methods",
+    "content": "Portal to be registered."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "methods",
+    "content": "Register an input with this timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "methods",
+    "content": "The timepicker input to register with this timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "methods",
+    "content": "Removes a portal containing action buttons from the timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "methods",
+    "content": "Portal to be removed."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContentLayout"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContentLayout",
+    "section": "MatTimepickerContentLayout",
+    "route": "/api/api/classes/MatTimepickerContentLayout",
+    "fragment": "mattimepickercontentlayout"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContentLayout"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContentLayout",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerContentLayout",
+    "fragment": "properties",
+    "content": "Layout orientation."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContentLayout"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContentLayout",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerContentLayout",
+    "fragment": "properties",
+    "content": "Content title."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "MatTimepickerContent",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "mattimepickercontent"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "properties",
+    "content": "Portal with projected action buttons."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "properties",
+    "content": "Emits when an animation has finished."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "properties",
+    "content": "Current state of the animation."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "properties",
+    "content": "Whether the close button currently has focus."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "properties",
+    "content": "Text for the close button."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "properties",
+    "content": "Id of the label for the role=\"dialog\" element."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "properties",
+    "content": "Reference to the internal clock dials component."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "properties",
+    "content": "Reference to the internal time inputs component."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "properties",
+    "content": "Whether the clock uses 12 hour format."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "properties",
+    "content": "Step for minutes."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "properties",
+    "content": "Display mode."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "properties",
+    "content": "Orientation for dial mode."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "properties",
+    "content": "Whether should toggle face button be shown."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "properties",
+    "content": "Reference to the timepicker that created the overlay."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "methods",
+    "content": "Applies the current pending selection to the global model."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "methods",
+    "content": "Assigns a new portal containing the timepicker actions."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "methods",
+    "content": "Portal with the actions to be assigned."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "methods",
+    "content": "Whether a re-render of the portal should be triggered. This isn't necessary if the portal is assigned during initialization, but it may be required if it's added at a later point."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "methods",
+    "content": "Changes animation state while closing timepicker content."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputEvent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputEvent",
+    "section": "MatTimepickerInputEvent",
+    "route": "/api/api/classes/MatTimepickerInputEvent",
+    "fragment": "mattimepickerinputevent",
+    "content": "An event used for timepicker input and change events. We don't always have access to a native input or change event because the event may have been triggered by the user clicking on the clock popup. For consistency, we always use MatTimepickerInputEvent instead."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputEvent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputEvent",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerInputEvent",
+    "fragment": "properties",
+    "content": "The new value for the target timepicker input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "MatTimepickerInputBase",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "mattimepickerinputbase"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "properties",
+    "content": "Whether the last value set on the input was valid."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "properties",
+    "content": "Combined form control validator for this input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "properties",
+    "content": "Emits when a change event is fired on this ."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "properties",
+    "content": "Emits when an input event is fired on this ."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "accessors",
+    "content": "Whether the timepicker-input is disabled."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "accessors",
+    "content": "The value of the input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "methods",
+    "content": "Programmatically assigns a value to the input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "methods",
+    "content": "Assigns a value to the input's model."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "methods",
+    "content": "Formats a value and sets it on the input element."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "methods",
+    "content": "Gets the maximum time for the input. Used for validation."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "methods",
+    "content": "Gets the minimum time for the input. Used for validation."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "methods",
+    "content": "Gets the base validator functions."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "methods",
+    "content": "Converts a value from the model into a native value for the input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "methods",
+    "content": "Handles blur event on the input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "methods",
+    "content": "Handles change event on the input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "methods",
+    "content": "Registers a time selection model with the input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "methods",
+    "content": "Predicate that determines whether the input should handle a particular change event."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "methods",
+    "content": "Implemented as part of ControlValueAccessor."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "methods",
+    "content": "Implemented as part of ControlValueAccessor."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "methods",
+    "content": "Implemented as part of ControlValueAccessor."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "methods",
+    "content": "Implemented as part of ControlValueAccessor."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MAT_TIMEPICKER_VALUE_ACCESSOR"
+    ],
+    "pageType": "api",
+    "title": "MAT_TIMEPICKER_VALUE_ACCESSOR",
+    "section": "MAT_TIMEPICKER_VALUE_ACCESSOR",
+    "route": "/api/api/variables/MAT_TIMEPICKER_VALUE_ACCESSOR",
+    "fragment": "mat_timepicker_value_accessor"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MAT_TIMEPICKER_VALIDATORS"
+    ],
+    "pageType": "api",
+    "title": "MAT_TIMEPICKER_VALIDATORS",
+    "section": "MAT_TIMEPICKER_VALIDATORS",
+    "route": "/api/api/variables/MAT_TIMEPICKER_VALIDATORS",
+    "fragment": "mat_timepicker_validators"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "MatTimepickerInput",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "mattimepickerinput",
+    "content": "Directive used to connect an input to a MatTimepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "properties",
+    "content": "Whether the last value set on the input was valid."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "properties",
+    "content": "The combined form control validator for this input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "properties",
+    "content": "Emits when a change event is fired on this ."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "properties",
+    "content": "Emits when an input event is fired on this ."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "accessors",
+    "content": "Whether the timepicker-input is disabled."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "accessors",
+    "content": "The timepicker that this input is associated with."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "accessors",
+    "content": "The maximum valid date."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "accessors",
+    "content": "The minimum valid date."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "accessors",
+    "content": "The value of the input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Programmatically assigns a value to the input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Assigns a value to the input's model."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Formats a value and sets it on the input element."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Gets the input's maximum time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Gets the input's minimum time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Gets the base validator functions."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Converts a value from the model into a native value for the input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Handles blur event on the input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Handles change event on the input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Registers a time selection model with the input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Predicate that determines whether the input should handle a particular change event."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Gets the element that the timepicker popup should be connected to. The element to connect the popup to."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Gets the ID of an element that should be used a description for the timepicker overlay."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Returns the palette used by the input's form field, if any."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Implemented as part of ControlValueAccessor."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Implemented as part of ControlValueAccessor."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Implemented as part of ControlValueAccessor."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "methods",
+    "content": "Implemented as part of ControlValueAccessor."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerIntl"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerIntl",
+    "section": "MatTimepickerIntl",
+    "route": "/api/api/classes/MatTimepickerIntl",
+    "fragment": "mattimepickerintl"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerIntl"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerIntl",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerIntl",
+    "fragment": "properties",
+    "content": "Label for the button used to close the timepicker popup (used by screen readers)."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerIntl"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerIntl",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerIntl",
+    "fragment": "properties",
+    "content": "A label for dials title."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerIntl"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerIntl",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerIntl",
+    "fragment": "properties",
+    "content": "A label for hour input hint."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerIntl"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerIntl",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerIntl",
+    "fragment": "properties",
+    "content": "A label for inputs title."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerIntl"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerIntl",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerIntl",
+    "fragment": "properties",
+    "content": "A label for minute input hint."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerIntl"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerIntl",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerIntl",
+    "fragment": "properties",
+    "content": "Label for the button used to open the timepicker popup (used by screen readers)."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY"
+    ],
+    "pageType": "api",
+    "title": "MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY",
+    "section": "MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY",
+    "route": "/api/api/functions/MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY",
+    "fragment": "mat_timepicker_scroll_strategy_factory",
+    "content": "Timepicker scroll strategy factory."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MAT_TIMEPICKER_SCROLL_STRATEGY"
+    ],
+    "pageType": "api",
+    "title": "MAT_TIMEPICKER_SCROLL_STRATEGY",
+    "section": "MAT_TIMEPICKER_SCROLL_STRATEGY",
+    "route": "/api/api/variables/MAT_TIMEPICKER_SCROLL_STRATEGY",
+    "fragment": "mat_timepicker_scroll_strategy",
+    "content": "Injection token that determines the scroll handling while the timepicker is open."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER"
+    ],
+    "pageType": "api",
+    "title": "MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER",
+    "section": "MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER",
+    "route": "/api/api/variables/MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER",
+    "fragment": "mat_timepicker_scroll_strategy_factory_provider",
+    "content": "Timepicker scroll strategy provider."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerToggleIcon"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerToggleIcon",
+    "section": "MatTimepickerToggleIcon",
+    "route": "/api/api/classes/MatTimepickerToggleIcon",
+    "fragment": "mattimepickertoggleicon"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerToggle"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerToggle",
+    "section": "MatTimepickerToggle",
+    "route": "/api/api/classes/MatTimepickerToggle",
+    "fragment": "mattimepickertoggle"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerToggle"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerToggle",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerToggle",
+    "fragment": "properties",
+    "content": "Screen-reader label for the button."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerToggle"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerToggle",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerToggle",
+    "fragment": "properties",
+    "content": "Custom icon set by the consumer."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerToggle"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerToggle",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerToggle",
+    "fragment": "properties",
+    "content": "Whether ripples on the toggle should be disabled."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerToggle"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerToggle",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerToggle",
+    "fragment": "properties",
+    "content": "Tabindex for the toggle."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerToggle"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerToggle",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerToggle",
+    "fragment": "properties",
+    "content": "Timepicker instance."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerToggle"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerToggle",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepickerToggle",
+    "fragment": "accessors",
+    "content": "Whether the toggle button is disabled."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerToggle"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerToggle",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepickerToggle",
+    "fragment": "methods",
+    "content": "Opens timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerModule"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerModule",
+    "section": "MatTimepickerModule",
+    "route": "/api/api/classes/MatTimepickerModule",
+    "fragment": "mattimepickermodule"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "MatTimepicker",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "mattimepicker"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "properties",
+    "content": "Portal with projected action buttons."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "properties",
+    "content": "Emits when the timepicker has been closed."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "properties",
+    "content": "The id for the timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "properties",
+    "content": "The input element this timepicker is associated with."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "properties",
+    "content": "Preferred position of the timepicker in the X axis."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "properties",
+    "content": "Preferred position of the timepicker in the Y axis."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "accessors",
+    "content": "Color palette to use on the timepicker's content."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "accessors",
+    "content": "Whether the timepicker pop-up should be disabled."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "accessors",
+    "content": "Timepicker period format."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "accessors",
+    "content": "Step for minutes."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "accessors",
+    "content": "Timepicker display mode."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "accessors",
+    "content": "Whether the timepicker mode which determines what the timepicker will be opened as."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "accessors",
+    "content": "Whether the timepicker is open."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "accessors",
+    "content": "Orientation for dial mode."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "accessors",
+    "content": "Show or hide toggle button between dial and input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Accessors",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "accessors",
+    "content": "Whether the timepicker UI is in touch mode. In touch mode elements are larger for bigger touch targets."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "methods",
+    "content": "Applies the current pending selection on the overlay to the model."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "methods",
+    "content": "Forwards relevant values from the timepicker to the timepicker content inside the overlay."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "methods",
+    "content": "The maximum selectable time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "methods",
+    "content": "The minimum selectable time."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "methods",
+    "content": "Closes the timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "methods",
+    "content": "Opens the timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "methods",
+    "content": "Registers a portal containing action buttons with the timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "methods",
+    "content": "Portal to be registered."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "methods",
+    "content": "Register an input with this timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "methods",
+    "content": "The timepicker input to register with this timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "methods",
+    "content": "Removes a portal containing action buttons from the timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Methods",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "methods",
+    "content": "Portal to be removed."
   }
 ]
