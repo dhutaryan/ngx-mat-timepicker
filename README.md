@@ -123,13 +123,13 @@ Then you have to define a theme. [More details about theming](https://material.a
 Default locale is `en-US`. You can set your locale as:
 
 ```typescript
-import { MAT_TIME_LOCALE } from "@dhutaryan/ngx-mat-timepicker";
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 @NgModule({
   imports: [
     // ...
   ],
-  providers: [{ provide: MAT_TIME_LOCALE, useValue: "en-GB" }],
+  providers: [{ provide: LOCALE_ID, useValue: "en-GB" }],
 })
 export class MyModule {}
 ```
