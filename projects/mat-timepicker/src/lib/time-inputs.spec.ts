@@ -17,11 +17,7 @@ import { MatHourInput, MatMinuteInput } from './time-inputs';
 
 function createComponent<T>(component: Type<T>): ComponentFixture<T> {
   TestBed.configureTestingModule({
-    imports: [
-      MatTimepickerModule,
-      MatNativeDateTimeModule,
-      NoopAnimationsModule,
-    ],
+    imports: [MatTimepickerModule, MatNativeDateTimeModule, NoopAnimationsModule],
     declarations: [component],
   });
 
@@ -41,8 +37,7 @@ describe('MatInputs', () => {
       fixture.detectChanges();
       testComponent = fixture.componentInstance;
       hostElement = fixture.nativeElement;
-      const timeInputElements =
-        hostElement.querySelectorAll<HTMLInputElement>('.mat-time-input');
+      const timeInputElements = hostElement.querySelectorAll<HTMLInputElement>('.mat-time-input');
       hourInput = timeInputElements[0];
       minuteInput = timeInputElements[1];
 
@@ -53,15 +48,9 @@ describe('MatInputs', () => {
       const container = fixture.debugElement.query(By.css('.mat-time-inputs'));
 
       expect(container).not.toBeNull();
-      expect(
-        container.query(By.css('.mat-timepicker-content-layout-hours'))
-      ).not.toBeNull();
-      expect(
-        container.query(By.css('.mat-timepicker-content-layout-minutes'))
-      ).not.toBeNull();
-      expect(container.queryAll(By.css('.mat-time-inputs-field')).length).toBe(
-        2
-      );
+      expect(container.query(By.css('.mat-timepicker-content-layout-hours'))).not.toBeNull();
+      expect(container.query(By.css('.mat-timepicker-content-layout-minutes'))).not.toBeNull();
+      expect(container.queryAll(By.css('.mat-time-inputs-field')).length).toBe(2);
     });
 
     it('should set default values as now', () => {
@@ -76,14 +65,10 @@ describe('MatInputs', () => {
       fixture.detectChanges();
       expect(testComponent.onSelect).not.toHaveBeenCalled();
 
-      const amElement = document.querySelectorAll<HTMLElement>(
-        '.mat-time-period-item'
-      )[0];
+      const amElement = document.querySelectorAll<HTMLElement>('.mat-time-period-item')[0];
       amElement.click();
 
-      expect(testComponent.onSelect).toHaveBeenCalledOnceWith(
-        new Date(2023, 4, 8, 11, 16)
-      );
+      expect(testComponent.onSelect).toHaveBeenCalledOnceWith(new Date(2023, 4, 8, 11, 16));
     });
 
     it('should set selected value', () => {
@@ -169,18 +154,14 @@ describe('MatInputs', () => {
       fixture.detectChanges();
       dispatchInputEvent(hourInput, 'blur');
 
-      expect(testComponent.onSelect).toHaveBeenCalledOnceWith(
-        new Date(2023, 4, 19, 14, 45)
-      );
+      expect(testComponent.onSelect).toHaveBeenCalledOnceWith(new Date(2023, 4, 19, 14, 45));
 
       dispatchInputEvent(minuteInput, 'focus');
       minuteInput.value = '32';
       fixture.detectChanges();
       dispatchInputEvent(minuteInput, 'blur');
 
-      expect(testComponent.onSelect).toHaveBeenCalledWith(
-        new Date(2023, 4, 19, 21, 32)
-      );
+      expect(testComponent.onSelect).toHaveBeenCalledWith(new Date(2023, 4, 19, 21, 32));
     });
 
     it('should keep hour as 0 if no meridiem', () => {
@@ -248,19 +229,16 @@ describe('MatInputs', () => {
     });
 
     it('should have intl strings', () => {
+      expect(hostElement.querySelector('.mat-timepicker-content-layout-title')?.textContent).toBe(
+        'Enter time',
+      );
       expect(
-        hostElement.querySelector('.mat-timepicker-content-layout-title')
-          ?.textContent
-      ).toBe('Enter time');
-      expect(
-        hostElement.querySelector(
-          '.mat-timepicker-content-layout-hours .mat-mdc-form-field-hint'
-        )?.textContent
+        hostElement.querySelector('.mat-timepicker-content-layout-hours .mat-mdc-form-field-hint')
+          ?.textContent,
       ).toBe('Hour');
       expect(
-        hostElement.querySelector(
-          '.mat-timepicker-content-layout-minutes .mat-mdc-form-field-hint'
-        )?.textContent
+        hostElement.querySelector('.mat-timepicker-content-layout-minutes .mat-mdc-form-field-hint')
+          ?.textContent,
       ).toBe('Minute');
     });
 
@@ -334,6 +312,17 @@ describe('MatInputs', () => {
       expect(Number(hourInput.value)).toBe(22);
       expect(Number(minuteInput.value)).toBe(20);
     });
+
+    it('should prevent to enter any symbols except numbers', () => {
+      const date = new Date();
+      dispatchKeyEvent(hourInput, 17);
+
+      expect(Number(hourInput.value)).toBe(date.getHours());
+
+      dispatchKeyEvent(minuteInput, 18);
+
+      expect(Number(minuteInput.value)).toBe(date.getMinutes());
+    });
   });
 
   describe('with meridiem', () => {
@@ -348,8 +337,7 @@ describe('MatInputs', () => {
       fixture.detectChanges();
       testComponent = fixture.componentInstance;
       hostElement = fixture.nativeElement;
-      const timeInputElements =
-        hostElement.querySelectorAll<HTMLInputElement>('.mat-time-input');
+      const timeInputElements = hostElement.querySelectorAll<HTMLInputElement>('.mat-time-input');
       hourInput = timeInputElements[0];
       minuteInput = timeInputElements[1];
 
@@ -393,8 +381,7 @@ describe('MatInputs', () => {
       fixture.detectChanges();
       testComponent = fixture.componentInstance;
       hostElement = fixture.nativeElement;
-      const timeInputElements =
-        hostElement.querySelectorAll<HTMLInputElement>('.mat-time-input');
+      const timeInputElements = hostElement.querySelectorAll<HTMLInputElement>('.mat-time-input');
       hourInput = timeInputElements[0];
       minuteInput = timeInputElements[1];
 
@@ -497,9 +484,7 @@ describe('MatInputs', () => {
         testComponent.isMeridiem = true;
         fixture.detectChanges();
 
-        const periodItems = fixture.debugElement.queryAll(
-          By.css('.mat-time-period-item')
-        );
+        const periodItems = fixture.debugElement.queryAll(By.css('.mat-time-period-item'));
         amItem = periodItems[0].nativeElement;
         pmItem = periodItems[1].nativeElement;
       }));
@@ -1081,9 +1066,7 @@ function dispatchKeyEvent(input: HTMLInputElement, keyCode: number) {
   `,
 })
 class StandardTimeInputs {
-  @ViewChildren('.mat-time-input') timeInputs: QueryList<
-    MatHourInput | MatMinuteInput
-  >;
+  @ViewChildren('.mat-time-input') timeInputs: QueryList<MatHourInput | MatMinuteInput>;
 
   isMeridiem = false;
   selected: Date | null = null;
@@ -1101,9 +1084,7 @@ class StandardTimeInputs {
   `,
 })
 class TimeInputsWithMeridiem {
-  @ViewChildren('.mat-time-input') timeInputs: QueryList<
-    MatHourInput | MatMinuteInput
-  >;
+  @ViewChildren('.mat-time-input') timeInputs: QueryList<MatHourInput | MatMinuteInput>;
 
   selected: Date | null = null;
   onSelect(value: Date) {}
@@ -1121,9 +1102,7 @@ class TimeInputsWithMeridiem {
   `,
 })
 class WithMinMaxTimeInputs {
-  @ViewChildren('.mat-time-input') timeInputs: QueryList<
-    MatHourInput | MatMinuteInput
-  >;
+  @ViewChildren('.mat-time-input') timeInputs: QueryList<MatHourInput | MatMinuteInput>;
 
   isMeridiem = false;
   selected: Date | null = null;
