@@ -1,3 +1,7 @@
+# 13.2.0
+- fix(inputs): prevent letters from being type ([#142](https://github.com/dhutaryan/ngx-mat-timepicker/pull/142))
+- feat(actions): use string from intl ([#141](https://github.com/dhutaryan/ngx-mat-timepicker/pull/141))
+
 # 13.1.0
 
 - fix(timepicker): disable timepicker toggle if input is disabled ([#124](https://github.com/dhutaryan/ngx-mat-timepicker/pull/124))
@@ -8,6 +12,10 @@
 # 13.0.0
 
 - build(deps): bump angular and angular material to v13 ([#87](https://github.com/dhutaryan/ngx-mat-timepicker/pull/87))
+
+# 12.5.0
+- fix(inputs): prevent letters from being type ([#142](https://github.com/dhutaryan/ngx-mat-timepicker/pull/142))
+- feat(actions): use string from intl ([#141](https://github.com/dhutaryan/ngx-mat-timepicker/pull/141))
 
 # 12.4.0
 
