@@ -15,6 +15,7 @@ import {
 
 import { MatTimepickerBase, MatTimepickerControl } from './timepicker-base';
 import { mixinColor } from '@angular/material/core';
+import { MatTimepickerIntl } from './timepicker-intl';
 
 /** Button that will close the timepicker and assign the current selection to the data model. */
 @Directive({
@@ -25,7 +26,7 @@ import { mixinColor } from '@angular/material/core';
 })
 export class MatTimepickerApply {
   constructor(
-    private _timepicker: MatTimepickerBase<MatTimepickerControl<any>, unknown>
+    private _timepicker: MatTimepickerBase<MatTimepickerControl<any>, unknown>,
   ) {}
 
   _applySelection() {
@@ -43,7 +44,7 @@ export class MatTimepickerApply {
 })
 export class MatTimepickerCancel {
   constructor(
-    private _timepicker: MatTimepickerBase<MatTimepickerControl<any>, unknown>
+    private _timepicker: MatTimepickerBase<MatTimepickerControl<any>, unknown>,
   ) {}
 
   close() {
@@ -78,7 +79,7 @@ export class MatTimepickerActions implements AfterViewInit, OnDestroy {
 
   constructor(
     private _timepicker: MatTimepickerBase<MatTimepickerControl<any>, unknown>,
-    private _viewContainerRef: ViewContainerRef
+    private _viewContainerRef: ViewContainerRef,
   ) {}
 
   ngAfterViewInit() {
@@ -100,7 +101,7 @@ export class MatTimepickerActions implements AfterViewInit, OnDestroy {
 const _MatTimepickerDefaultActions = mixinColor(
   class {
     constructor(public _elementRef: ElementRef) {}
-  }
+  },
 );
 
 /**
@@ -112,8 +113,12 @@ const _MatTimepickerDefaultActions = mixinColor(
   template: `
     <div class="mat-timepicker-actions">
       <ng-content></ng-content>
-      <button [color]="color" mat-button matTimepickerCancel>Cancel</button>
-      <button [color]="color" mat-button matTimepickerApply>OK</button>
+      <button [color]="color" mat-button matTimepickerCancel>
+        {{ _intl.cancelButton }}
+      </button>
+      <button [color]="color" mat-button matTimepickerApply>
+        {{ _intl.okButton }}
+      </button>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -128,7 +133,8 @@ export class MatTimepickerDefaultActions
 {
   constructor(
     elementRef: ElementRef,
-    private _timepicker: MatTimepickerBase<MatTimepickerControl<any>, unknown>
+    private _timepicker: MatTimepickerBase<MatTimepickerControl<any>, unknown>,
+    public _intl: MatTimepickerIntl,
   ) {
     super(elementRef);
   }
