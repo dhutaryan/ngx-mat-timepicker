@@ -47,13 +47,13 @@ describe('MatInputs', () => {
 
       expect(container).not.toBeNull();
       expect(
-        container.query(By.css('.mat-timepicker-content-layout-hours'))
+        container.query(By.css('.mat-timepicker-content-layout-hours')),
       ).not.toBeNull();
       expect(
-        container.query(By.css('.mat-timepicker-content-layout-minutes'))
+        container.query(By.css('.mat-timepicker-content-layout-minutes')),
       ).not.toBeNull();
       expect(container.queryAll(By.css('.mat-time-inputs-field')).length).toBe(
-        2
+        2,
       );
     });
 
@@ -70,12 +70,12 @@ describe('MatInputs', () => {
       expect(testComponent.onSelect).not.toHaveBeenCalled();
 
       const amElement = document.querySelectorAll<HTMLElement>(
-        '.mat-time-period-item'
+        '.mat-time-period-item',
       )[0];
       amElement.click();
 
       expect(testComponent.onSelect).toHaveBeenCalledOnceWith(
-        new Date(2023, 4, 8, 11, 16)
+        new Date(2023, 4, 8, 11, 16),
       );
     });
 
@@ -159,7 +159,7 @@ describe('MatInputs', () => {
       dispatchInputEvent(hourInput, 'blur');
 
       expect(testComponent.onSelect).toHaveBeenCalledOnceWith(
-        new Date(2023, 4, 19, 14, 45)
+        new Date(2023, 4, 19, 14, 45),
       );
 
       dispatchInputEvent(minuteInput, 'focus');
@@ -168,7 +168,7 @@ describe('MatInputs', () => {
       dispatchInputEvent(minuteInput, 'blur');
 
       expect(testComponent.onSelect).toHaveBeenCalledWith(
-        new Date(2023, 4, 19, 21, 32)
+        new Date(2023, 4, 19, 21, 32),
       );
     });
 
@@ -239,17 +239,21 @@ describe('MatInputs', () => {
     it('should have intl strings', () => {
       expect(
         hostElement.querySelector('.mat-timepicker-content-layout-title')
-          ?.textContent
+          ?.textContent,
+      ).toBe('Enter time');
+      expect(
+        hostElement.querySelector('.mat-timepicker-content-layout-title')
+          ?.textContent,
       ).toBe('Enter time');
       expect(
         hostElement.querySelector(
-          '.mat-timepicker-content-layout-hours .mat-hint'
-        )?.textContent
+          '.mat-timepicker-content-layout-hours .mat-hint',
+        )?.textContent,
       ).toBe('Hour');
       expect(
         hostElement.querySelector(
-          '.mat-timepicker-content-layout-minutes .mat-hint'
-        )?.textContent
+          '.mat-timepicker-content-layout-minutes .mat-hint',
+        )?.textContent,
       ).toBe('Minute');
     });
 
@@ -322,6 +326,17 @@ describe('MatInputs', () => {
 
       expect(Number(hourInput.value)).toBe(22);
       expect(Number(minuteInput.value)).toBe(20);
+    });
+
+    it('should prevent to enter any symbols except numbers', () => {
+      const date = new Date();
+      dispatchKeyEvent(hourInput, 17);
+
+      expect(Number(hourInput.value)).toBe(date.getHours());
+
+      dispatchKeyEvent(minuteInput, 18);
+
+      expect(Number(minuteInput.value)).toBe(date.getMinutes());
     });
   });
 
@@ -487,7 +502,7 @@ describe('MatInputs', () => {
         fixture.detectChanges();
 
         const periodItems = fixture.debugElement.queryAll(
-          By.css('.mat-time-period-item')
+          By.css('.mat-time-period-item'),
         );
         amItem = periodItems[0].nativeElement;
         pmItem = periodItems[1].nativeElement;
