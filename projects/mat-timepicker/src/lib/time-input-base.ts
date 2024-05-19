@@ -8,20 +8,31 @@ import {
   ChangeDetectorRef,
   Inject,
   Self,
+  HostListener,
 } from '@angular/core';
 
 export function withZeroPrefix(value: number): string {
   return value < 10 ? `0${value}` : `${value}`;
 }
 
-export function withZeroPrefixMeridiem(
-  value: number,
-  isMeridiem: boolean
-): string {
+export function withZeroPrefixMeridiem(value: number, isMeridiem: boolean): string {
   const newValue = isMeridiem && value === 0 ? 12 : value;
 
   return withZeroPrefix(newValue);
 }
+
+const DIGIT_KEYS = [
+  'Digit0',
+  'Digit1',
+  'Digit2',
+  'Digit3',
+  'Digit4',
+  'Digit5',
+  'Digit6',
+  'Digit7',
+  'Digit8',
+  'Digit9',
+];
 
 @Directive()
 export abstract class MatTimeInputBase {
@@ -43,6 +54,12 @@ export abstract class MatTimeInputBase {
 
   @Output() timeChanged = new EventEmitter<number>();
 
+  @HostListener('keydown', ['$event']) _keydown(event: KeyboardEvent) {
+    if (!DIGIT_KEYS.includes(event.code)) {
+      event.preventDefault();
+    }
+  }
+
   get inputElement() {
     return this.element.nativeElement as HTMLInputElement;
   }
@@ -54,7 +71,7 @@ export abstract class MatTimeInputBase {
   constructor(
     private element: ElementRef<HTMLInputElement>,
     private _cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) private _document: Document
+    @Inject(DOCUMENT) private _document: Document,
   ) {}
 
   focus() {
@@ -64,7 +81,7 @@ export abstract class MatTimeInputBase {
   blur() {
     const isNumber = !isNaN(Number(this.inputElement.value));
     const value = this._formatValue(
-      isNumber ? Number(this.inputElement.value || this._value) : this.value
+      isNumber ? Number(this.inputElement.value || this._value) : this.value,
     );
     this.setInputValue(value);
     this.setInputPlaceholder(value);
