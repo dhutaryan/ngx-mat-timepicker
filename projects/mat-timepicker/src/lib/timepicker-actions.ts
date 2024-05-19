@@ -16,6 +16,7 @@ import { mixinColor } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 
 import { MatTimepickerBase, MatTimepickerControl } from './timepicker-base';
+import { MatTimepickerIntl } from './timepicker-intl';
 
 /** Button that will close the timepicker and assign the current selection to the data model. */
 @Directive({
@@ -114,8 +115,8 @@ const _MatTimepickerDefaultActions = mixinColor(
   template: `
     <div class="mat-timepicker-actions">
       <ng-content></ng-content>
-      <button [color]="color" mat-button matTimepickerCancel>Cancel</button>
-      <button [color]="color" mat-button matTimepickerApply>OK</button>
+      <button [color]="color" mat-button matTimepickerCancel>{{ _intl.cancelButton }}</button>
+      <button [color]="color" mat-button matTimepickerApply>{{ _intl.okButton }}</button>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -128,6 +129,7 @@ export class MatTimepickerDefaultActions extends _MatTimepickerDefaultActions im
   constructor(
     elementRef: ElementRef,
     private _timepicker: MatTimepickerBase<MatTimepickerControl<any>, unknown>,
+    public _intl: MatTimepickerIntl,
   ) {
     super(elementRef);
   }
