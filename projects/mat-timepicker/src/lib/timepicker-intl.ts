@@ -20,4 +20,10 @@ export class MatTimepickerIntl {
 
   /** Label for the button used to close the timepicker popup (used by screen readers). */
   closeTimepickerLabel = 'Close timepicker';
+
+  /** A label for OK button to apply time. */
+  okButton = 'OK';
+
+  /** A label for cancel button to close timepicker. */
+  cancelButton = 'Cancel';
 }
