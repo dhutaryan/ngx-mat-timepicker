@@ -4407,6 +4407,19 @@
     "section": "Properties",
     "route": "/api/api/classes/MatTimepickerIntl",
     "fragment": "properties",
+    "content": "A label for cancel button to close timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerIntl"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerIntl",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerIntl",
+    "fragment": "properties",
     "content": "Label for the button used to close the timepicker popup (used by screen readers)."
   },
   {
@@ -4460,6 +4473,19 @@
     "route": "/api/api/classes/MatTimepickerIntl",
     "fragment": "properties",
     "content": "A label for minute input hint."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerIntl"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerIntl",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerIntl",
+    "fragment": "properties",
+    "content": "A label for OK button to apply time."
   },
   {
     "breadcrumbs": [
