@@ -1,7 +1,11 @@
+# 12.5.1
+
+- fix(inputs): allow to enter some special chars ([#145](https://github.com/dhutaryan/ngx-mat-timepicker/pull/145))
+
 # 12.5.0
+
 - fix(inputs): prevent letters from being type ([#142](https://github.com/dhutaryan/ngx-mat-timepicker/pull/142))
 - feat(actions): use string from intl ([#141](https://github.com/dhutaryan/ngx-mat-timepicker/pull/141))
-
 
 # 12.4.0
 
