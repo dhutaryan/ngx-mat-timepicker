@@ -36,10 +36,8 @@ import {
   DOWN_ARROW,
   ESCAPE,
   hasModifierKey,
-  LEFT_ARROW,
   PAGE_DOWN,
   PAGE_UP,
-  RIGHT_ARROW,
   UP_ARROW,
 } from '@angular/cdk/keycodes';
 import { filter, first, merge, Observable } from 'rxjs';
@@ -486,8 +484,6 @@ export abstract class MatTimepickerBase<
       if (
         keyCode === UP_ARROW ||
         keyCode === DOWN_ARROW ||
-        keyCode === LEFT_ARROW ||
-        keyCode === RIGHT_ARROW ||
         keyCode === PAGE_UP ||
         keyCode === PAGE_DOWN
       ) {
