@@ -1,3 +1,7 @@
+# 14.2.2
+
+- fix(theme): use timepicker selectors to override styles ([#150](https://github.com/dhutaryan/ngx-mat-timepicker/pull/150))
+
 # 14.2.1
 
 - fix(inputs): allow to enter some special chars ([#145](https://github.com/dhutaryan/ngx-mat-timepicker/pull/145))
@@ -18,6 +22,14 @@
 
 - build(deps): bump angular and angular material to v14 ([#90](https://github.com/dhutaryan/ngx-mat-timepicker/pull/90))
 
+# 13.2.2
+
+- fix(theme): use timepicker selectors to override styles ([#150](https://github.com/dhutaryan/ngx-mat-timepicker/pull/150))
+
+# 13.2.1
+
+- fix(inputs): allow to enter some special chars ([#145](https://github.com/dhutaryan/ngx-mat-timepicker/pull/145))
+
 # 13.2.0
 
 - fix(inputs): prevent letters from being type ([#142](https://github.com/dhutaryan/ngx-mat-timepicker/pull/142))
@@ -33,6 +45,14 @@
 # 13.0.0
 
 - build(deps): bump angular and angular material to v13 ([#87](https://github.com/dhutaryan/ngx-mat-timepicker/pull/87))
+
+# 12.5.2
+
+- fix(theme): use timepicker selectors to override styles ([#150](https://github.com/dhutaryan/ngx-mat-timepicker/pull/150))
+
+# 12.5.1
+
+- fix(inputs): allow to enter some special chars ([#145](https://github.com/dhutaryan/ngx-mat-timepicker/pull/145))
 
 # 12.5.0
 
