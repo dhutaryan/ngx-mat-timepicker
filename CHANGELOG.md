@@ -1,3 +1,7 @@
+# 12.5.2
+
+- fix(theme): use timepicker selectors to override styles ([#150](https://github.com/dhutaryan/ngx-mat-timepicker/pull/150))
+
 # 12.5.1
 
 - fix(inputs): allow to enter some special chars ([#145](https://github.com/dhutaryan/ngx-mat-timepicker/pull/145))
