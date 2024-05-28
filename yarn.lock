@@ -3517,28 +3517,28 @@
   resolved "https://registry.yarnpkg.com/@microsoft/tsdoc/-/tsdoc-0.14.2.tgz#c3ec604a0b54b9a9b87e9735dfc59e1a5da6a5fb"
   integrity sha512-9b8mPpKrfeGRuhFH5iO1iwCLeIIsV6+H1sRfxbkoGXIyQE2BTsPd9zqSqQJ+pv5sJ/hT5M1zvOFL02MnEezFug==
 
-"@ng-doc/app@^17.6.8":
-  version "17.6.8"
-  resolved "https://registry.yarnpkg.com/@ng-doc/app/-/app-17.6.8.tgz#8a7e5433e0a5be97f65cb96672aae6ef6e4c02a0"
-  integrity sha512-uWLBoF9Pzv8uS2d3uzaVWlUZztRhAxOZp2SRim2LARl5ZRn17JmhyudW5dX42s6+yEJ+x+q2T90mlgo7dtIprg==
+"@ng-doc/app@^17.6.10":
+  version "17.6.10"
+  resolved "https://registry.yarnpkg.com/@ng-doc/app/-/app-17.6.10.tgz#f9a61becaab35163d6566a048fe9aa36398a6d49"
+  integrity sha512-G18NKB/AZSYNe4E8tJibep/jSLdkN9niPocaRrp53s3PZWdVqou2Fhhpb82x/9XytF5w3tDn/xvPVUwPOm20hw==
   dependencies:
-    "@ng-doc/core" "17.6.8"
-    "@ng-doc/ui-kit" "17.6.8"
+    "@ng-doc/core" "17.6.10"
+    "@ng-doc/ui-kit" "17.6.10"
     "@orama/plugin-match-highlight" "1.0.2"
     "@orama/stemmers" "1.0.2"
     highlight.js "11.5.1"
     tslib "^2.6.2"
 
-"@ng-doc/builder@^17.6.8":
-  version "17.6.8"
-  resolved "https://registry.yarnpkg.com/@ng-doc/builder/-/builder-17.6.8.tgz#2cd691ff730ae1d170ef5e8f07d46012e6ef7827"
-  integrity sha512-Hznnxxc/sxMNBZHAhGpEfLs7qzumuggm1/qEhZOlAZFj4tAcTu75OxyxJwcSchEizzdQjLC/THM78wnydDDklw==
+"@ng-doc/builder@^17.6.10":
+  version "17.6.10"
+  resolved "https://registry.yarnpkg.com/@ng-doc/builder/-/builder-17.6.10.tgz#095836b2ec3c39c3e2d699faa6a92c14f599380d"
+  integrity sha512-RCBgk15X0Wdb2k1nxNR74yUeDrJUCrVMvSx0G1iME1pJdPG0Hd5oIK42Drzfvog6VP10VF7xRxAkaUiuOLdpmg==
   dependencies:
     "@angular-devkit/architect" ">=0.1700.0"
     "@angular-devkit/build-angular" ">=17.0.0"
     "@microsoft/tsdoc" "0.14.2"
-    "@ng-doc/core" "17.6.8"
-    "@ng-doc/utils" "17.6.8"
+    "@ng-doc/core" "17.6.10"
+    "@ng-doc/utils" "17.6.10"
     "@orama/orama" "1.0.2"
     "@orama/plugin-parsedoc" "1.0.2"
     chokidar "3.5.3"
@@ -3559,28 +3559,28 @@
     ts-morph "20.0.0"
     tslib "^2.6.2"
 
-"@ng-doc/core@17.6.8", "@ng-doc/core@^17.6.8":
-  version "17.6.8"
-  resolved "https://registry.yarnpkg.com/@ng-doc/core/-/core-17.6.8.tgz#42bfb2e7a1b810adcd6f84d4464d9503555ef81a"
-  integrity sha512-doL8Ph3fbcVfqcFHOzVW9HfiL4m7TLNITHIcLgKcPpRFNU91kP1VfRjvBqh8lGAhiu3arXqO96azIcl+x90/1A==
+"@ng-doc/core@17.6.10", "@ng-doc/core@^17.6.10":
+  version "17.6.10"
+  resolved "https://registry.yarnpkg.com/@ng-doc/core/-/core-17.6.10.tgz#b14365363cc958f37999f78706864f0a1b6ebc1a"
+  integrity sha512-cBiOdOvGMitzIlQV6GV4R5VXHaCfWPuQwQ0JOJtFGvvubCF85NKLVDkUIb777yOMtz1PluxoNVpUc0JmgQEUhg==
   dependencies:
     css-what "6.1.0"
     esthetic "0.5.6-beta.1"
     posthtml-parser "0.11.0"
     posthtml-render "3.0.0"
 
-"@ng-doc/ui-kit@17.6.8", "@ng-doc/ui-kit@^17.6.8":
-  version "17.6.8"
-  resolved "https://registry.yarnpkg.com/@ng-doc/ui-kit/-/ui-kit-17.6.8.tgz#778f6d04096b44550aa42cd2e55dcdfdd0b9e4e1"
-  integrity sha512-uo3lqQxUx9cI43unGnI3CyTur0/faFnOA/oJzcfMYglOxXM/zY8mmid/CJx27jlRbM0ZXafCZAr7HgxpBZJHiw==
+"@ng-doc/ui-kit@17.6.10", "@ng-doc/ui-kit@^17.6.10":
+  version "17.6.10"
+  resolved "https://registry.yarnpkg.com/@ng-doc/ui-kit/-/ui-kit-17.6.10.tgz#6a9912b7c09b09c0f3e77b985207f3db351d95b8"
+  integrity sha512-Yt+Xkou+quqYNlmD5lvX8DUY6k/K6T6fHxJ+hIq1nP56aV5s7CpvaHMdHd+00Fqg7n/A0r55lywMzg0VLYk3pQ==
   dependencies:
-    "@ng-doc/core" "17.6.8"
+    "@ng-doc/core" "17.6.10"
     tslib "^2.6.2"
 
-"@ng-doc/utils@17.6.8":
-  version "17.6.8"
-  resolved "https://registry.yarnpkg.com/@ng-doc/utils/-/utils-17.6.8.tgz#ffddc170361bdc94939ca86a52dd44a8b2173570"
-  integrity sha512-hffx945YFZZfhjO3rLuL1o7yMlDFs6wFKimNZzufC/VzfxEDQCGjRNG6/sPC4XnkErFTi/+lRIUi/cUkaNaUyw==
+"@ng-doc/utils@17.6.10":
+  version "17.6.10"
+  resolved "https://registry.yarnpkg.com/@ng-doc/utils/-/utils-17.6.10.tgz#e0ad84cf18eba8d859edcd0a57cd6e696313b120"
+  integrity sha512-IjmEvAl8eMYrm7B9UPxh7lAL0QVYgxZc0urCoD1f9EqKIl2Tjc0FyFDO9YEQkqIWq1fB0C9BpSkZqq+qTEu8ow==
   dependencies:
     chalk "5.2.0"
     github-slugger "2.0.0"
