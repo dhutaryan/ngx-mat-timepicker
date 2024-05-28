@@ -93,7 +93,7 @@ $primary-opacity: 0.15;
 
   .mat-clock-dial-value,
   .mat-clock-dial,
-  .mat-mdc-text-field-wrapper {
+  .mat-time-inputs-field .mat-mdc-text-field-wrapper {
     background-color: mat.get-color-from-palette($background, background);
   }
 
@@ -101,7 +101,7 @@ $primary-opacity: 0.15;
     background-color: transparent;
   }
 
-  [mat-mini-fab]:not(.mat-primary):not(.mat-accent):not(.mat-warn) {
+  .mat-clock-dial-cell:not(.mat-primary):not(.mat-accent):not(.mat-warn) {
     background: transparent;
 
     &:not(.mat-clock-dial-cell-disabled):hover {
@@ -109,11 +109,11 @@ $primary-opacity: 0.15;
     }
   }
 
-  [mat-mini-fab].mat-clock-dial-cell-disabled:hover {
+  .mat-clock-dial-cell.mat-clock-dial-cell-disabled:hover {
     cursor: default;
   }
 
-  [mat-mini-fab].mat-clock-dial-cell.mat-clock-dial-cell-disabled {
+  .mat-clock-dial-cell.mat-clock-dial-cell.mat-clock-dial-cell-disabled {
     color: mat.get-color-from-palette($foreground, disabled-button);
 
     .mat-mdc-button-persistent-ripple::before {
