@@ -1,4 +1,4 @@
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Inject, Injectable, Optional, inject } from '@angular/core';
 
 import { MAT_TIME_LOCALE, TimeAdapter } from './time-adapter';
 import { MatTimePeriodType } from '../time-period';
@@ -14,9 +14,14 @@ const ISO_8601_REGEX =
 /** Adapts the native JS Date for components that work with time. */
 @Injectable()
 export class NativeDateTimeAdapter extends TimeAdapter<Date> {
+  private readonly _matTimeLocale = inject(MAT_TIME_LOCALE, { optional: true });
+
   constructor(@Optional() @Inject(MAT_TIME_LOCALE) matTimeLocale: string) {
     super();
-    super.setLocale(matTimeLocale);
+    if (matTimeLocale !== undefined) {
+      this._matTimeLocale = matTimeLocale;
+    }
+    super.setLocale(this._matTimeLocale);
   }
 
   now(): Date {
@@ -146,7 +151,7 @@ export class NativeDateTimeAdapter extends TimeAdapter<Date> {
       date.getHours(),
       date.getMinutes(),
       date.getSeconds(),
-      date.getMilliseconds()
+      date.getMilliseconds(),
     );
     return dtf.format(d);
   }
