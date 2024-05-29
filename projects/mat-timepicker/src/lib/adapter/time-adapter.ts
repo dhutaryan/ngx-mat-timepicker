@@ -1,10 +1,22 @@
-import { InjectionToken, LOCALE_ID } from '@angular/core';
+import { InjectionToken, LOCALE_ID, inject } from '@angular/core';
 import { MatTimePeriodType } from '../time-period';
 
 /** InjectionToken for timepicker that can be used to override default locale code. */
-export const MAT_TIME_LOCALE = new InjectionToken<string>('MAT_TIME_LOCALE');
+export const MAT_TIME_LOCALE = new InjectionToken<string>('MAT_TIME_LOCALE', {
+  providedIn: 'root',
+  factory: MAT_DATE_TIME_LOCALE_FACTORY,
+});
 
-/** Provider for MAT_TIME_LOCALE injection token. */
+export function MAT_DATE_TIME_LOCALE_FACTORY(): string {
+  return inject(LOCALE_ID);
+}
+
+/**
+ * No longer needed since MAT_TIME_LOCALE has been changed to a scoped injectable.
+ * If you are importing and providing this in your code you can simply remove it.
+ * @deprecated
+ * @breaking-change 18.0.0
+ */
 export const MAT_TIME_LOCALE_PROVIDER = {
   provide: MAT_TIME_LOCALE,
   useExisting: LOCALE_ID,
