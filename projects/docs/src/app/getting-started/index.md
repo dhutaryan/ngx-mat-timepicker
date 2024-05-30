@@ -36,15 +36,15 @@ export class MyModule {}
 Add a timepicker adapter.
 
 ```typescript
-import { MatNativeDateTimeModule, MatTimepickerModule } from "@dhutaryan/ngx-mat-timepicker";
+import { MatTimepickerModule, provideNativeDateTimeAdapter } from "@dhutaryan/ngx-mat-timepicker";
 
 @NgModule({
   imports: [
     // ...
     MatTimepickerModule,
-    MatNativeDateTimeModule,
     // ...
   ],
+  providers: [provideNativeDateTimeAdapter()]
 })
 export class MyModule {}
 ```
