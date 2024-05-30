@@ -35,20 +35,29 @@ export class NativeDateTimeAdapter extends TimeAdapter<Date> {
       return new Date(value);
     }
 
-    const { hour, minute } = this.parseTime(value);
+    const { hour, minute, meridiem } = this.parseTime(value);
+    // hour should be in 24h format
+    // so, if meridiem is 'pm' and hour is less than 12, add 12 to hour
+    const correctedHour = meridiem === 'pm' && hour < 12 ? hour + 12 : hour;
     const date = new Date();
-    date.setHours(Number(hour));
-    date.setMinutes(Number(minute));
+    date.setHours(correctedHour);
+    date.setMinutes(minute);
 
     return value ? new Date(date) : null;
   }
 
-  parseTime(value: string) {
-    const [hour, minute] = value
-      .replace(/(\sam|\spm|\sAM|\sPM|am|pm|AM|PM)/g, '')
-      .split(':');
+  parseTime(value: string): {
+    hour: number;
+    minute: number;
+    meridiem?: 'am' | 'pm';
+  } {
+    const time = value.replace(/(\sam|\spm|\sAM|\sPM|am|pm|AM|PM)/g, '');
+    const meridiem = value.replace(time, '').trim().toLowerCase() as
+      | 'am'
+      | 'pm';
+    const [hour, minute] = time.split(':');
 
-    return { hour, minute };
+    return { hour: Number(hour), minute: Number(minute), meridiem };
   }
 
   getHour(date: Date): number {
