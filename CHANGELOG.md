@@ -1,3 +1,8 @@
+# 17.5.0
+
+- fix(adapter): take am/pm value into account ([#158](https://github.com/dhutaryan/ngx-mat-timepicker/pull/158))
+- feat(adapter): add provider function for native date time ([#155](https://github.com/dhutaryan/ngx-mat-timepicker/pull/155))
+
 # 17.4.2
 
 - fix(theme): use timepicker selectors to override styles ([#150](https://github.com/dhutaryan/ngx-mat-timepicker/pull/150))
@@ -36,6 +41,11 @@
 
 - build(deps): bump angular and angular material to v17 ([#106](https://github.com/dhutaryan/ngx-mat-timepicker/pull/106))
 
+# 16.3.0
+
+- fix(adapter): take am/pm value into account ([#158](https://github.com/dhutaryan/ngx-mat-timepicker/pull/158))
+- feat(adapter): add provider function for native date time ([#155](https://github.com/dhutaryan/ngx-mat-timepicker/pull/155))
+
 # 16.2.2
 
 - fix(theme): use timepicker selectors to override styles ([#150](https://github.com/dhutaryan/ngx-mat-timepicker/pull/150))
@@ -69,6 +79,11 @@
 # 16.0.0
 
 - build(deps): bump angular and angular material to v16 ([#95](https://github.com/dhutaryan/ngx-mat-timepicker/pull/95))
+
+# 15.3.0
+
+- fix(adapter): take am/pm value into account ([#158](https://github.com/dhutaryan/ngx-mat-timepicker/pull/158))
+- feat(adapter): add provider function for native date time ([#155](https://github.com/dhutaryan/ngx-mat-timepicker/pull/155))
 
 # 15.2.2
 
