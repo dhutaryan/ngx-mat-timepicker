@@ -399,6 +399,30 @@
     "breadcrumbs": [
       "API",
       "ngx-mat-timepicker",
+      "provideNativeDateTimeAdapter"
+    ],
+    "pageType": "api",
+    "title": "provideNativeDateTimeAdapter",
+    "section": "provideNativeDateTimeAdapter",
+    "route": "/api/api/functions/provideNativeDateTimeAdapter",
+    "fragment": "providenativedatetimeadapter"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "NativeDateTimeModule"
+    ],
+    "pageType": "api",
+    "title": "NativeDateTimeModule",
+    "section": "NativeDateTimeModule",
+    "route": "/api/api/classes/NativeDateTimeModule",
+    "fragment": "nativedatetimemodule"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
       "MatNativeDateTimeModule"
     ],
     "pageType": "api",
@@ -406,6 +430,18 @@
     "section": "MatNativeDateTimeModule",
     "route": "/api/api/classes/MatNativeDateTimeModule",
     "fragment": "matnativedatetimemodule"
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MAT_DATE_TIME_LOCALE_FACTORY"
+    ],
+    "pageType": "api",
+    "title": "MAT_DATE_TIME_LOCALE_FACTORY",
+    "section": "MAT_DATE_TIME_LOCALE_FACTORY",
+    "route": "/api/api/functions/MAT_DATE_TIME_LOCALE_FACTORY",
+    "fragment": "mat_date_time_locale_factory"
   },
   {
     "breadcrumbs": [
@@ -431,7 +467,7 @@
     "section": "MAT_TIME_LOCALE_PROVIDER",
     "route": "/api/api/variables/MAT_TIME_LOCALE_PROVIDER",
     "fragment": "mat_time_locale_provider",
-    "content": "Provider for MAT_TIME_LOCALE injection token."
+    "content": "No longer needed since MAT_TIME_LOCALE has been changed to a scoped injectable. If you are importing and providing this in your code you can simply remove it."
   },
   {
     "breadcrumbs": [
