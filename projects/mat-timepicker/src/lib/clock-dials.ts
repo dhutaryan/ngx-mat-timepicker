@@ -126,7 +126,7 @@ export class MatClockDials<T>
     return withZeroPrefixMeridiem(value, this.isMeridiem);
   }
 
-  _onMinuteSelected(minute: number): void {
+  override _onMinuteSelected(minute: number): void {
     super._onMinuteSelected(minute);
     this._cdr.detectChanges();
   }
