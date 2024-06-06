@@ -1,3 +1,7 @@
+# 12.5.3
+
+- fix(inputs): allow to use tab key ([#163](https://github.com/dhutaryan/ngx-mat-timepicker/pull/163))
+
 # 12.5.2
 
 - fix(theme): use timepicker selectors to override styles ([#150](https://github.com/dhutaryan/ngx-mat-timepicker/pull/150))
