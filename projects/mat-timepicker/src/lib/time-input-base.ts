@@ -35,7 +35,7 @@ const DIGIT_KEYS = [
   'Digit8',
   'Digit9',
 ];
-const SPECIAL_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight'];
+const SPECIAL_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
 
 @Directive()
 export abstract class MatTimeInputBase {
@@ -56,7 +56,8 @@ export abstract class MatTimeInputBase {
 
   @HostListener('keydown', ['$event']) _keydown(event: KeyboardEvent) {
     const isAllow =
-      (DIGIT_KEYS.includes(event.code) && !event.shiftKey) || SPECIAL_KEYS.includes(event.code);
+      (DIGIT_KEYS.includes(event.code) && !event.shiftKey) ||
+      SPECIAL_KEYS.includes(event.code);
 
     if (!isAllow) {
       event.preventDefault();
