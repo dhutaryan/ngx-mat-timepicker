@@ -1,3 +1,7 @@
+# 14.2.3
+
+- fix(inputs): allow to use tab key ([#163](https://github.com/dhutaryan/ngx-mat-timepicker/pull/163))
+
 # 14.2.2
 
 - fix(theme): use timepicker selectors to override styles ([#150](https://github.com/dhutaryan/ngx-mat-timepicker/pull/150))
@@ -22,6 +26,10 @@
 
 - build(deps): bump angular and angular material to v14 ([#90](https://github.com/dhutaryan/ngx-mat-timepicker/pull/90))
 
+# 13.2.3
+
+- fix(inputs): allow to use tab key ([#163](https://github.com/dhutaryan/ngx-mat-timepicker/pull/163))
+
 # 13.2.2
 
 - fix(theme): use timepicker selectors to override styles ([#150](https://github.com/dhutaryan/ngx-mat-timepicker/pull/150))
@@ -45,6 +53,10 @@
 # 13.0.0
 
 - build(deps): bump angular and angular material to v13 ([#87](https://github.com/dhutaryan/ngx-mat-timepicker/pull/87))
+
+# 12.5.3
+
+- fix(inputs): allow to use tab key ([#163](https://github.com/dhutaryan/ngx-mat-timepicker/pull/163))
 
 # 12.5.2
 
