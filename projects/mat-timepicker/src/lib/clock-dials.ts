@@ -8,6 +8,7 @@ import {
   NgZone,
   ElementRef,
   Input,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject, Subscription, take } from 'rxjs';
@@ -46,7 +47,10 @@ export type MatDialView = 'hours' | 'minutes';
   },
   animations: [enterLeaveAnimation],
 })
-export class MatClockDials<T> extends MatTimeFaceBase<T> implements OnInit, OnDestroy {
+export class MatClockDials<T>
+  extends MatTimeFaceBase<T>
+  implements OnInit, OnDestroy
+{
   /** Layout orientation. */
   @Input() orientation: TimepickerOrientation;
 
@@ -64,12 +68,15 @@ export class MatClockDials<T> extends MatTimeFaceBase<T> implements OnInit, OnDe
     @Optional() _timeAdapter: TimeAdapter<T>,
     private _ngZone: NgZone,
     private _elementRef: ElementRef,
+    private _cdr: ChangeDetectorRef,
   ) {
     super(_timeAdapter);
   }
 
   ngOnInit(): void {
-    this._viewSubscription = this._view.subscribe((view) => (this.isHoursView = view === 'hours'));
+    this._viewSubscription = this._view.subscribe(
+      (view) => (this.isHoursView = view === 'hours'),
+    );
   }
 
   ngOnDestroy(): void {
@@ -87,18 +94,20 @@ export class MatClockDials<T> extends MatTimeFaceBase<T> implements OnInit, OnDe
     this._ngZone.runOutsideAngular(() => {
       this._ngZone.onStable.pipe(take(1)).subscribe(() => {
         setTimeout(() => {
-          const activeCell: HTMLElement | null = this._elementRef.nativeElement.querySelector(
-            '.mat-timepicker-content .mat-clock-dial-cell-active', // to avoid focus for inline mode
-          );
+          const activeCell: HTMLElement | null =
+            this._elementRef.nativeElement.querySelector(
+              '.mat-timepicker-content .mat-clock-dial-cell-active', // to avoid focus for inline mode
+            );
 
           if (activeCell) {
             activeCell.focus();
             return;
           }
 
-          const activePoint: HTMLElement | null = this._elementRef.nativeElement.querySelector(
-            '.mat-timepicker-content .mat-clock-dial-hand-point', // to avoid focus for inline mode
-          );
+          const activePoint: HTMLElement | null =
+            this._elementRef.nativeElement.querySelector(
+              '.mat-timepicker-content .mat-clock-dial-hand-point', // to avoid focus for inline mode
+            );
 
           if (activePoint) {
             // if no active cell we need to focus a small dot
@@ -117,11 +126,23 @@ export class MatClockDials<T> extends MatTimeFaceBase<T> implements OnInit, OnDe
     return withZeroPrefixMeridiem(value, this.isMeridiem);
   }
 
+  override _onMinuteSelected(minute: number): void {
+    super._onMinuteSelected(minute);
+    this._cdr.detectChanges();
+  }
+
   /** Handles hour selection. */
-  _onHourChanged({ hour, changeView = false }: { hour: number; changeView?: boolean }): void {
+  _onHourChanged({
+    hour,
+    changeView = false,
+  }: {
+    hour: number;
+    changeView?: boolean;
+  }): void {
     if (changeView) {
       this._view.next('minutes');
     }
     this._onHourSelected(hour);
+    this._cdr.detectChanges();
   }
 }
