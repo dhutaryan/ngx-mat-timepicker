@@ -8,6 +8,7 @@ import {
   NgZone,
   ElementRef,
   Input,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { BehaviorSubject, Subscription, take } from 'rxjs';
 
@@ -50,14 +51,15 @@ export class MatClockDials<T>
     public _intl: MatTimepickerIntl,
     @Optional() _timeAdapter: TimeAdapter<T>,
     private _ngZone: NgZone,
-    private _elementRef: ElementRef
+    private _elementRef: ElementRef,
+    private _cdr: ChangeDetectorRef,
   ) {
     super(_timeAdapter);
   }
 
   ngOnInit(): void {
     this._viewSubscription = this._view.subscribe(
-      (view) => (this.isHoursView = view === 'hours')
+      (view) => (this.isHoursView = view === 'hours'),
     );
   }
 
@@ -78,7 +80,7 @@ export class MatClockDials<T>
         setTimeout(() => {
           const activeCell: HTMLElement | null =
             this._elementRef.nativeElement.querySelector(
-              '.mat-timepicker-content .mat-clock-dial-cell-active' // to avoid focus for inline mode
+              '.mat-timepicker-content .mat-clock-dial-cell-active', // to avoid focus for inline mode
             );
 
           if (activeCell) {
@@ -88,7 +90,7 @@ export class MatClockDials<T>
 
           const activePoint: HTMLElement | null =
             this._elementRef.nativeElement.querySelector(
-              '.mat-timepicker-content .mat-clock-dial-hand-point' // to avoid focus for inline mode
+              '.mat-timepicker-content .mat-clock-dial-hand-point', // to avoid focus for inline mode
             );
 
           if (activePoint) {
@@ -108,6 +110,11 @@ export class MatClockDials<T>
     return withZeroPrefixMeridiem(value, this.isMeridiem);
   }
 
+  override _onMinuteSelected(minute: number): void {
+    super._onMinuteSelected(minute);
+    this._cdr.detectChanges();
+  }
+
   /** Handles hour selection. */
   _onHourChanged({
     hour,
@@ -120,5 +127,6 @@ export class MatClockDials<T>
       this._view.next('minutes');
     }
     this._onHourSelected(hour);
+    this._cdr.detectChanges();
   }
 }
