@@ -23,18 +23,7 @@ export function withZeroPrefixMeridiem(
   return withZeroPrefix(newValue);
 }
 
-const DIGIT_KEYS = [
-  'Digit0',
-  'Digit1',
-  'Digit2',
-  'Digit3',
-  'Digit4',
-  'Digit5',
-  'Digit6',
-  'Digit7',
-  'Digit8',
-  'Digit9',
-];
+const DIGIT_KEYS = Array.from({ length: 10 },  (_, i) => `${i}`);
 const SPECIAL_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
 
 @Directive()
@@ -56,7 +45,7 @@ export abstract class MatTimeInputBase {
 
   @HostListener('keydown', ['$event']) _keydown(event: KeyboardEvent) {
     const isAllow =
-      (DIGIT_KEYS.includes(event.code) && !event.shiftKey) ||
+      (DIGIT_KEYS.includes(event.key) && !event.shiftKey) ||
       SPECIAL_KEYS.includes(event.code);
 
     if (!isAllow) {
