@@ -19,7 +19,11 @@ import { take } from 'rxjs';
 import { TimeAdapter } from './adapter';
 import { MatTimeFaceBase } from './time-face-base';
 import { MatTimepickerIntl } from './timepicker-intl';
-import { MatTimeInputBase, withZeroPrefix, withZeroPrefixMeridiem } from './time-input-base';
+import {
+  MatTimeInputBase,
+  withZeroPrefix,
+  withZeroPrefixMeridiem,
+} from './time-input-base';
 import { MatTimePeriod } from './time-period';
 import { MatTimepickerContentLayout } from './timepicker-content-layout';
 
@@ -91,7 +95,10 @@ export class MatHourInput extends MatTimeInputBase {
         // the last item is max becuase 12 at the beginning is kinda "min"
         const maxHour = this.availableHours[this.availableHours.length - 1];
 
-        return Math.min(Math.max(value, Math.min(...this.availableHours)), maxHour);
+        return Math.min(
+          Math.max(value, Math.min(...this.availableHours)),
+          maxHour,
+        );
       }
     }
 
@@ -197,15 +204,14 @@ export class MatTimeInputs<T> extends MatTimeFaceBase<T> {
   focusActiveCell(): void {
     this._ngZone.runOutsideAngular(() => {
       this._ngZone.onStable.pipe(take(1)).subscribe(() => {
-        setTimeout(() => {
-          const activeCell: HTMLElement | null = this._elementRef.nativeElement.querySelector(
+        const activeCell: HTMLElement | null =
+          this._elementRef.nativeElement.querySelector(
             '.mat-timepicker-content input', // to avoid focus for inline mode
           );
-          if (activeCell && !this._skipNextTickFocus) {
-            activeCell.focus();
-            this._skipNextTickFocus = true;
-          }
-        });
+        if (activeCell && !this._skipNextTickFocus) {
+          activeCell.focus();
+          this._skipNextTickFocus = true;
+        }
       });
     });
   }

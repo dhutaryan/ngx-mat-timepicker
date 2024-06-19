@@ -8,7 +8,13 @@ import {
   UP_ARROW,
 } from '@angular/cdk/keycodes';
 import { Overlay, ScrollDispatcher } from '@angular/cdk/overlay';
-import { Component, Provider, Type, ViewChild } from '@angular/core';
+import {
+  Component,
+  Provider,
+  Type,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import {
   ComponentFixture,
   fakeAsync,
@@ -40,6 +46,7 @@ import {
   getMinuteCellIndex,
 } from './clock-dials.spec';
 import { TimepickerOrientation } from './orientation';
+import { _supportsShadowDom } from '@angular/cdk/platform';
 
 describe('MatTimepicker', () => {
   const SUPPORTS_INTL = typeof Intl != 'undefined';
@@ -49,7 +56,7 @@ describe('MatTimepicker', () => {
     component: Type<T>,
     imports: Type<any>[] = [],
     providers: Provider[] = [],
-    declarations: Type<any>[] = []
+    declarations: Type<any>[] = [],
   ): ComponentFixture<T> {
     TestBed.configureTestingModule({
       imports: [
@@ -91,14 +98,14 @@ describe('MatTimepicker', () => {
       it('should initialize with correct value shown in input', () => {
         if (SUPPORTS_INTL) {
           expect(fixture.nativeElement.querySelector('input').value).toBe(
-            '05:00 AM'
+            '05:00 AM',
           );
         }
       });
 
       it('open timepicker should open popup', fakeAsync(() => {
         expect(
-          document.querySelector('.cdk-overlay-pane.mat-timepicker-popup')
+          document.querySelector('.cdk-overlay-pane.mat-timepicker-popup'),
         ).toBeNull();
 
         testComponent.timepicker.open();
@@ -107,7 +114,7 @@ describe('MatTimepicker', () => {
         flush();
 
         expect(
-          document.querySelector('.cdk-overlay-pane.mat-timepicker-popup')
+          document.querySelector('.cdk-overlay-pane.mat-timepicker-popup'),
         ).not.toBeNull();
       }));
 
@@ -130,7 +137,7 @@ describe('MatTimepicker', () => {
         fixture.detectChanges();
 
         expect(document.querySelectorAll('.mat-timpicker-dialog').length).toBe(
-          0
+          0,
         );
 
         testComponent.timepicker.open();
@@ -150,7 +157,7 @@ describe('MatTimepicker', () => {
         flush();
 
         expect(document.querySelectorAll('.mat-timepicker-dialog').length).toBe(
-          1
+          1,
         );
       }));
 
@@ -161,7 +168,7 @@ describe('MatTimepicker', () => {
         flush();
 
         expect(
-          document.querySelector('.mat-timepicker-content')
+          document.querySelector('.mat-timepicker-content'),
         ).not.toBeNull();
 
         testComponent.opened = false;
@@ -269,7 +276,7 @@ describe('MatTimepicker', () => {
         flush();
 
         const popup = document.querySelector(
-          '.mat-timepicker-content-container'
+          '.mat-timepicker-content-container',
         )!;
         expect(popup).toBeTruthy();
         expect(popup.getAttribute('role')).toBe('dialog');
@@ -277,7 +284,7 @@ describe('MatTimepicker', () => {
 
       it('should set aria-labelledby to the one from the input, if not placed inside a mat-form-field', fakeAsync(() => {
         expect(
-          fixture.nativeElement.querySelector('mat-form-field')
+          fixture.nativeElement.querySelector('mat-form-field'),
         ).toBeFalsy();
 
         const input: HTMLInputElement =
@@ -290,7 +297,7 @@ describe('MatTimepicker', () => {
         flush();
 
         const popup = document.querySelector(
-          '.cdk-overlay-pane .mat-timepicker-content-container'
+          '.cdk-overlay-pane .mat-timepicker-content-container',
         )!;
         expect(popup).toBeTruthy();
         expect(popup.getAttribute('aria-labelledby')).toBe('test-label');
@@ -374,7 +381,7 @@ describe('MatTimepicker', () => {
 
       it('input should aria-owns timepicker after opened in popup mode', fakeAsync(() => {
         const inputEl = fixture.debugElement.query(
-          By.css('input')
+          By.css('input'),
         )!.nativeElement;
         expect(inputEl.getAttribute('aria-owns')).toBeNull();
 
@@ -389,7 +396,7 @@ describe('MatTimepicker', () => {
         const ownedElement = document.getElementById(ownedElementId);
         expect(ownedElement).not.toBeNull();
         expect((ownedElement as Element).tagName.toLowerCase()).toBe(
-          'mat-clock-dials'
+          'mat-clock-dials',
         );
       }));
 
@@ -398,7 +405,7 @@ describe('MatTimepicker', () => {
         fixture.detectChanges();
 
         const inputEl = fixture.debugElement.query(
-          By.css('input')
+          By.css('input'),
         )!.nativeElement;
         expect(inputEl.getAttribute('aria-owns')).toBeNull();
 
@@ -413,7 +420,7 @@ describe('MatTimepicker', () => {
         const ownedElement = document.getElementById(ownedElementId);
         expect(ownedElement).not.toBeNull();
         expect((ownedElement as Element).tagName.toLowerCase()).toBe(
-          'mat-clock-dials'
+          'mat-clock-dials',
         );
       }));
 
@@ -443,7 +450,7 @@ describe('MatTimepicker', () => {
         const subscription =
           testComponent.timepicker.closedStream.subscribe(spy);
         const backdrop = document.querySelector(
-          '.cdk-overlay-backdrop'
+          '.cdk-overlay-backdrop',
         )! as HTMLElement;
 
         backdrop.click();
@@ -475,7 +482,7 @@ describe('MatTimepicker', () => {
               useFactory: (overlay: Overlay) => () =>
                 overlay.scrollStrategies.close(),
             },
-          ]
+          ],
         );
 
         fixture.detectChanges();
@@ -579,7 +586,7 @@ describe('MatTimepicker', () => {
         flush();
 
         const button = document.querySelector(
-          '.mat-timepicker-close-button'
+          '.mat-timepicker-close-button',
         ) as HTMLButtonElement;
         expect(button.classList).toContain('cdk-visually-hidden');
 
@@ -601,10 +608,10 @@ describe('MatTimepicker', () => {
         flush();
 
         const button = document.querySelector(
-          '.mat-timepicker-close-button'
+          '.mat-timepicker-close-button',
         ) as HTMLButtonElement;
         expect(
-          document.querySelector('.mat-timepicker-content')
+          document.querySelector('.mat-timepicker-content'),
         ).not.toBeNull();
 
         button.click();
@@ -634,7 +641,7 @@ describe('MatTimepicker', () => {
           fixture.detectChanges();
           expect(event.defaultPrevented)
             .withContext(
-              `Expected default action to be prevented for key code ${keyCode}`
+              `Expected default action to be prevented for key code ${keyCode}`,
             )
             .toBe(true);
         });
@@ -645,7 +652,7 @@ describe('MatTimepicker', () => {
 
       it('should have vertical class by default', fakeAsync(() => {
         expect(
-          document.querySelector('.cdk-overlay-pane.mat-timepicker-popup')
+          document.querySelector('.cdk-overlay-pane.mat-timepicker-popup'),
         ).toBeNull();
 
         testComponent.timepicker.open();
@@ -654,10 +661,10 @@ describe('MatTimepicker', () => {
         flush();
 
         expect(
-          document.querySelector('.mat-timepicker-content-layout-vertical')
+          document.querySelector('.mat-timepicker-content-layout-vertical'),
         ).not.toBeNull();
         expect(
-          document.querySelector('.mat-time-period-vertical')
+          document.querySelector('.mat-time-period-vertical'),
         ).not.toBeNull();
       }));
 
@@ -665,7 +672,7 @@ describe('MatTimepicker', () => {
         testComponent.orientation = 'horizontal';
         fixture.detectChanges();
         expect(
-          document.querySelector('.cdk-overlay-pane.mat-timepicker-popup')
+          document.querySelector('.cdk-overlay-pane.mat-timepicker-popup'),
         ).toBeNull();
 
         testComponent.timepicker.open();
@@ -674,10 +681,10 @@ describe('MatTimepicker', () => {
         flush();
 
         expect(
-          document.querySelector('.mat-timepicker-content-layout-horizontal')
+          document.querySelector('.mat-timepicker-content-layout-horizontal'),
         ).not.toBeNull();
         expect(
-          document.querySelector('.mat-time-period-horizontal')
+          document.querySelector('.mat-time-period-horizontal'),
         ).not.toBeNull();
       }));
 
@@ -685,7 +692,7 @@ describe('MatTimepicker', () => {
         testComponent.touchUi = true;
         fixture.detectChanges();
         expect(
-          document.querySelector('.cdk-overlay-pane.mat-timepicker-popup')
+          document.querySelector('.cdk-overlay-pane.mat-timepicker-popup'),
         ).toBeNull();
 
         testComponent.timepicker.open();
@@ -694,7 +701,7 @@ describe('MatTimepicker', () => {
         flush();
 
         expect(
-          document.querySelector('.mat-timepicker-content-touch')
+          document.querySelector('.mat-timepicker-content-touch'),
         ).not.toBeNull();
       }));
     });
@@ -804,7 +811,7 @@ describe('MatTimepicker', () => {
         fixture.detectChanges();
 
         expect(
-          fixture.debugElement.nativeElement.querySelector('label').classList
+          fixture.debugElement.nativeElement.querySelector('label').classList,
         ).toContain('mdc-floating-label--float-above');
       });
 
@@ -861,11 +868,11 @@ describe('MatTimepicker', () => {
         flush();
 
         const popup = document.querySelector(
-          '.cdk-overlay-pane .mat-timepicker-content-container'
+          '.cdk-overlay-pane .mat-timepicker-content-container',
         )!;
         expect(popup).toBeTruthy();
         expect(popup.getAttribute('aria-labelledby')).toBe(
-          label.getAttribute('id')
+          label.getAttribute('id'),
         );
       }));
     });
@@ -897,10 +904,10 @@ describe('MatTimepicker', () => {
 
       it('should use min and max time specified by the input', () => {
         expect(testComponent.timepicker._getMinTime()).toEqual(
-          new Date(2023, 4, 18, 3, 45)
+          new Date(2023, 4, 18, 3, 45),
         );
         expect(testComponent.timepicker._getMaxTime()).toEqual(
-          new Date(2023, 4, 18, 20, 10)
+          new Date(2023, 4, 18, 20, 10),
         );
       });
 
@@ -909,7 +916,7 @@ describe('MatTimepicker', () => {
         revalidate();
 
         expect(
-          fixture.debugElement.query(By.css('input'))!.nativeElement.classList
+          fixture.debugElement.query(By.css('input'))!.nativeElement.classList,
         ).toContain('ng-invalid');
       }));
 
@@ -918,7 +925,7 @@ describe('MatTimepicker', () => {
         revalidate();
 
         expect(
-          fixture.debugElement.query(By.css('input'))!.nativeElement.classList
+          fixture.debugElement.query(By.css('input'))!.nativeElement.classList,
         ).toContain('ng-invalid');
       }));
 
@@ -927,7 +934,7 @@ describe('MatTimepicker', () => {
         revalidate();
 
         expect(
-          fixture.debugElement.query(By.css('input'))!.nativeElement.classList
+          fixture.debugElement.query(By.css('input'))!.nativeElement.classList,
         ).not.toContain('ng-invalid');
       }));
 
@@ -936,7 +943,7 @@ describe('MatTimepicker', () => {
         revalidate();
 
         expect(
-          fixture.debugElement.query(By.css('input'))!.nativeElement.classList
+          fixture.debugElement.query(By.css('input'))!.nativeElement.classList,
         ).not.toContain('ng-invalid');
       }));
 
@@ -945,13 +952,13 @@ describe('MatTimepicker', () => {
         revalidate();
 
         expect(
-          fixture.debugElement.query(By.css('input'))!.nativeElement.classList
+          fixture.debugElement.query(By.css('input'))!.nativeElement.classList,
         ).not.toContain('ng-invalid');
       }));
 
       it('should update validity when switching between null and invalid', fakeAsync(() => {
         const inputEl = fixture.debugElement.query(
-          By.css('input')
+          By.css('input'),
         )!.nativeElement;
         inputEl.value = '';
         inputEl.dispatchEvent(new Event('input'));
@@ -974,7 +981,7 @@ describe('MatTimepicker', () => {
 
       it('should update validity when a value is assigned', fakeAsync(() => {
         const inputEl = fixture.debugElement.query(
-          By.css('input')
+          By.css('input'),
         )!.nativeElement;
         inputEl.value = '';
         inputEl.dispatchEvent(new Event('input'));
@@ -1186,11 +1193,11 @@ describe('MatTimepicker', () => {
     });
 
     describe('with ISO 8601 strings as input', () => {
-      let fixture: ComponentFixture<DatepickerWithISOStrings>;
-      let testComponent: DatepickerWithISOStrings;
+      let fixture: ComponentFixture<TimepickerWithISOStrings>;
+      let testComponent: TimepickerWithISOStrings;
 
       beforeEach(fakeAsync(() => {
-        fixture = createComponent(DatepickerWithISOStrings, [
+        fixture = createComponent(TimepickerWithISOStrings, [
           MatNativeDateTimeModule,
         ]);
         testComponent = fixture.componentInstance;
@@ -1207,7 +1214,7 @@ describe('MatTimepicker', () => {
         fixture.detectChanges();
 
         expect(testComponent.timepickerInput.value).toEqual(
-          new Date(2017, 5, 1, 9, 13)
+          new Date(2017, 5, 1, 9, 13),
         );
         // expect(testComponent.timepickerInput.min).toEqual(new Date(2017, 0, 1));
         // expect(testComponent.timepickerInput.max).toEqual(new Date(2017, 11, 31));
@@ -1304,6 +1311,277 @@ describe('MatTimepicker', () => {
       }));
     });
 
+    describe('timepicker with mat-timepicker-toggle', () => {
+      let fixture: ComponentFixture<TimepickerWithToggle>;
+      let testComponent: TimepickerWithToggle;
+
+      beforeEach(fakeAsync(() => {
+        fixture = createComponent(TimepickerWithToggle, [
+          MatNativeDateTimeModule,
+        ]);
+        fixture.detectChanges();
+
+        testComponent = fixture.componentInstance;
+      }));
+
+      afterEach(fakeAsync(() => {
+        testComponent.timepicker.close();
+        fixture.detectChanges();
+        flush();
+      }));
+
+      it('should set `aria-haspopup` on the toggle button', () => {
+        const button = fixture.debugElement.query(By.css('button'))!;
+
+        expect(button).toBeTruthy();
+        expect(button.nativeElement.getAttribute('aria-haspopup')).toBe(
+          'dialog',
+        );
+      });
+
+      it('should set a default `aria-label` on the toggle button', () => {
+        const button = fixture.debugElement.query(By.css('button'))!;
+
+        expect(button).toBeTruthy();
+        expect(button.nativeElement.getAttribute('aria-label')).toBe(
+          'Open timepicker',
+        );
+      });
+
+      it('should be able to change the button `aria-label`', () => {
+        fixture.componentInstance.ariaLabel = 'Toggle the timepicker';
+        fixture.changeDetectorRef.markForCheck();
+        fixture.detectChanges();
+        const button = fixture.debugElement.query(By.css('button'))!;
+
+        expect(button).toBeTruthy();
+        expect(button.nativeElement.getAttribute('aria-label')).toBe(
+          'Toggle the timepicker',
+        );
+      });
+
+      it('should open timepicker when toggle clicked', () => {
+        expect(document.querySelector('.mat-timepicker-popup')).toBeNull();
+
+        const toggle = fixture.debugElement.query(By.css('button'))!;
+        const el = toggle.nativeElement as HTMLButtonElement;
+        el.click();
+        fixture.detectChanges();
+
+        expect(document.querySelector('.mat-timepicker-popup')).not.toBeNull();
+      });
+
+      it('should not open timepicker when toggle clicked if timepicker is disabled', () => {
+        testComponent.timepicker.disabled = true;
+        fixture.changeDetectorRef.markForCheck();
+        fixture.detectChanges();
+        const toggle = fixture.debugElement.query(By.css('button'))!
+          .nativeElement as HTMLButtonElement;
+
+        expect(toggle.hasAttribute('disabled')).toBe(true);
+        expect(document.querySelector('.mat-timepicker-popup')).toBeNull();
+
+        toggle.click();
+        fixture.detectChanges();
+
+        expect(document.querySelector('.mat-timepicker-popup')).toBeNull();
+      });
+
+      it('should not open timepicker when toggle clicked if input is disabled', () => {
+        expect(testComponent.timepicker.disabled).toBe(false);
+
+        testComponent.input.disabled = true;
+        fixture.changeDetectorRef.markForCheck();
+        fixture.detectChanges();
+        const toggle = fixture.debugElement.query(By.css('button'))!
+          .nativeElement as HTMLButtonElement;
+
+        expect(toggle.hasAttribute('disabled')).toBe(true);
+        expect(document.querySelector('.mat-timepicker-popup')).toBeNull();
+
+        toggle.click();
+        fixture.detectChanges();
+
+        expect(document.querySelector('.mat-timepicker-popup')).toBeNull();
+      });
+
+      it('should set the `button` type on the trigger to prevent form submissions', () => {
+        let toggle = fixture.debugElement.query(
+          By.css('button'),
+        )!.nativeElement;
+        expect(toggle.getAttribute('type')).toBe('button');
+      });
+
+      it('should remove the underlying SVG icon from the tab order', () => {
+        const icon = fixture.debugElement.nativeElement.querySelector('svg');
+        expect(icon.getAttribute('focusable')).toBe('false');
+      });
+
+      it('should restore focus to the toggle after the timepicker is closed', fakeAsync(() => {
+        let toggle = fixture.debugElement.query(
+          By.css('button'),
+        )!.nativeElement;
+
+        fixture.componentInstance.touchUi = false;
+        fixture.changeDetectorRef.markForCheck();
+        fixture.detectChanges();
+
+        toggle.focus();
+        expect(document.activeElement).toBe(toggle);
+
+        fixture.componentInstance.timepicker.open();
+        fixture.detectChanges();
+        tick();
+
+        let pane = document.querySelector('.cdk-overlay-pane')!;
+
+        expect(pane).toBeTruthy();
+        expect(pane.contains(document.activeElement)).toBe(true);
+
+        fixture.componentInstance.timepicker.close();
+        fixture.detectChanges();
+        flush();
+
+        expect(document.activeElement).toBe(toggle);
+      }));
+
+      it('should restore focus when placed inside a shadow root', fakeAsync(() => {
+        if (!_supportsShadowDom()) {
+          return;
+        }
+
+        fixture.destroy();
+        TestBed.resetTestingModule();
+        fixture = createComponent(TimepickerWithToggleInShadowDom, [
+          MatNativeDateTimeModule,
+        ]);
+        fixture.detectChanges();
+        testComponent = fixture.componentInstance;
+
+        const toggle = fixture.debugElement.query(
+          By.css('button'),
+        )!.nativeElement;
+        fixture.componentInstance.touchUi = false;
+        fixture.changeDetectorRef.markForCheck();
+        fixture.detectChanges();
+
+        toggle.focus();
+        spyOn(toggle, 'focus').and.callThrough();
+        fixture.componentInstance.timepicker.open();
+        fixture.detectChanges();
+        tick();
+        fixture.componentInstance.timepicker.close();
+        fixture.detectChanges();
+        flush();
+
+        // We have to assert by looking at the `focus` method, because
+        // `document.activeElement` will return the shadow root.
+        expect(toggle.focus).toHaveBeenCalled();
+      }));
+
+      it('should allow for focus restoration to be disabled', fakeAsync(() => {
+        let toggle = fixture.debugElement.query(
+          By.css('button'),
+        )!.nativeElement;
+
+        fixture.componentInstance.touchUi = false;
+        fixture.componentInstance.restoreFocus = false;
+        fixture.changeDetectorRef.markForCheck();
+        fixture.detectChanges();
+
+        toggle.focus();
+        expect(document.activeElement).toBe(toggle);
+
+        fixture.componentInstance.timepicker.open();
+        fixture.detectChanges();
+        tick();
+
+        let pane = document.querySelector('.cdk-overlay-pane')!;
+
+        expect(pane).toBeTruthy();
+        expect(pane.contains(document.activeElement)).toBe(true);
+
+        fixture.componentInstance.timepicker.close();
+        fixture.detectChanges();
+
+        expect(document.activeElement).not.toBe(toggle);
+      }));
+
+      it('should not override focus if it was moved inside the closed event in touchUi mode', fakeAsync(() => {
+        const focusTarget = document.createElement('button');
+        const timepicker = fixture.componentInstance.timepicker;
+        const subscription = timepicker.closedStream.subscribe(() =>
+          focusTarget.focus(),
+        );
+        const input = fixture.nativeElement.querySelector('input');
+
+        focusTarget.setAttribute('tabindex', '0');
+        document.body.appendChild(focusTarget);
+
+        // Important: we're testing the touchUi behavior on particular.
+        fixture.componentInstance.touchUi = true;
+        fixture.changeDetectorRef.markForCheck();
+        fixture.detectChanges();
+
+        // Focus the input before opening so that the timepicker restores focus to it on close.
+        input.focus();
+
+        expect(document.activeElement).toBe(input);
+
+        timepicker.open();
+        fixture.detectChanges();
+        tick(500);
+        fixture.detectChanges();
+
+        expect(document.activeElement).not.toBe(input);
+
+        timepicker.close();
+        fixture.detectChanges();
+        tick(500);
+        fixture.detectChanges();
+
+        expect(document.activeElement).toBe(focusTarget);
+
+        focusTarget.remove();
+        subscription.unsubscribe();
+      }));
+
+      // it('should re-render when the i18n labels change', inject(
+      //   [MatTimepickerIntl],
+      //   (intl: MatTimepickerIntl) => {
+      //     const toggle = fixture.debugElement.query(By.css('button'))!.nativeElement;
+
+      //     intl.openTimepickerLabel = 'Open the timepicker, perhaps?';
+      //     intl.changes.next();
+      //     fixture.detectChanges();
+
+      //     expect(toggle.getAttribute('aria-label')).toBe('Open the timepicker, perhaps?');
+      //   },
+      // ));
+
+      it('should toggle the active state of the timepicker toggle', fakeAsync(() => {
+        const toggle = fixture.debugElement.query(
+          By.css('mat-timepicker-toggle'),
+        )!.nativeElement;
+
+        expect(toggle.classList).not.toContain('mat-timepicker-toggle-active');
+
+        fixture.componentInstance.timepicker.open();
+        fixture.detectChanges();
+        tick();
+        flush();
+
+        expect(toggle.classList).toContain('mat-timepicker-toggle-active');
+
+        fixture.componentInstance.timepicker.close();
+        fixture.detectChanges();
+        flush();
+        fixture.detectChanges();
+
+        expect(toggle.classList).not.toContain('mat-timepicker-toggle-active');
+      }));
+    });
+
     xdescribe('timepicker directionality', () => {
       it('should pass along the directionality to the popup', fakeAsync(() => {
         const fixture = createComponent(
@@ -1314,7 +1592,7 @@ describe('MatTimepicker', () => {
               provide: Directionality,
               useValue: { value: 'rtl' },
             },
-          ]
+          ],
         );
 
         fixture.detectChanges();
@@ -1323,7 +1601,7 @@ describe('MatTimepicker', () => {
         tick();
 
         const overlay = document.querySelector(
-          '.cdk-overlay-connected-position-bounding-box'
+          '.cdk-overlay-connected-position-bounding-box',
         )!;
 
         expect(overlay.getAttribute('dir')).toBe('rtl');
@@ -1339,7 +1617,7 @@ describe('MatTimepicker', () => {
               provide: Directionality,
               useFactory: () => dirProvider,
             },
-          ]
+          ],
         );
 
         fixture.detectChanges();
@@ -1348,7 +1626,7 @@ describe('MatTimepicker', () => {
         tick();
 
         let overlay = document.querySelector(
-          '.cdk-overlay-connected-position-bounding-box'
+          '.cdk-overlay-connected-position-bounding-box',
         )!;
 
         expect(overlay.getAttribute('dir')).toBe('ltr');
@@ -1363,7 +1641,7 @@ describe('MatTimepicker', () => {
         tick();
 
         overlay = document.querySelector(
-          '.cdk-overlay-connected-position-bounding-box'
+          '.cdk-overlay-connected-position-bounding-box',
         )!;
 
         expect(overlay.getAttribute('dir')).toBe('rtl');
@@ -1378,7 +1656,7 @@ describe('MatTimepicker', () => {
               provide: Directionality,
               useValue: { value: 'rtl' },
             },
-          ]
+          ],
         );
 
         fixture.componentInstance.openAs = 'dialog';
@@ -1403,7 +1681,7 @@ describe('MatTimepicker', () => {
               provide: MAT_TIMEPICKER_DEFAULT_OPTIONS,
               useValue: { color: 'accent' },
             },
-          ]
+          ],
         );
         fixture.detectChanges();
 
@@ -1425,7 +1703,7 @@ describe('MatTimepicker', () => {
               provide: MAT_TIMEPICKER_DEFAULT_OPTIONS,
               useValue: { mode: 'input' },
             },
-          ]
+          ],
         );
         fixture.detectChanges();
 
@@ -1445,7 +1723,7 @@ describe('MatTimepicker', () => {
               provide: MAT_TIMEPICKER_DEFAULT_OPTIONS,
               useValue: { openAs: 'dialog' },
             },
-          ]
+          ],
         );
         fixture.detectChanges();
 
@@ -1455,7 +1733,7 @@ describe('MatTimepicker', () => {
         flush();
 
         expect(
-          document?.querySelector('.cdk-overlay-pane.mat-timepicker-dialog')
+          document?.querySelector('.cdk-overlay-pane.mat-timepicker-dialog'),
         ).not.toBe(null);
       }));
 
@@ -1468,7 +1746,7 @@ describe('MatTimepicker', () => {
               provide: MAT_TIMEPICKER_DEFAULT_OPTIONS,
               useValue: { format: '24h' },
             },
-          ]
+          ],
         );
         fixture.detectChanges();
 
@@ -1489,7 +1767,7 @@ describe('MatTimepicker', () => {
               provide: MAT_TIMEPICKER_DEFAULT_OPTIONS,
               useValue: { showToggleModeButton: false },
             },
-          ]
+          ],
         );
         fixture.detectChanges();
 
@@ -1499,7 +1777,7 @@ describe('MatTimepicker', () => {
         flush();
 
         expect(document?.querySelector('.mat-time-toggle-mode-button')).toBe(
-          null
+          null,
         );
       }));
 
@@ -1512,7 +1790,7 @@ describe('MatTimepicker', () => {
               provide: MAT_TIMEPICKER_DEFAULT_OPTIONS,
               useValue: { minuteInterval: 15 },
             },
-          ]
+          ],
         );
         fixture.detectChanges();
 
@@ -1520,7 +1798,7 @@ describe('MatTimepicker', () => {
         fixture.detectChanges();
         tick();
         const minuteElement = document.querySelectorAll(
-          '.mat-clock-dial-value'
+          '.mat-clock-dial-value',
         )[1] as HTMLDivElement;
         minuteElement?.click();
         fixture.detectChanges();
@@ -1532,7 +1810,7 @@ describe('MatTimepicker', () => {
         flush();
 
         expect(getDialCell(getMinuteCellIndex(30)).classList).toContain(
-          'mat-clock-dial-cell-active'
+          'mat-clock-dial-cell-active',
         );
       }));
 
@@ -1545,7 +1823,7 @@ describe('MatTimepicker', () => {
               provide: MAT_TIMEPICKER_DEFAULT_OPTIONS,
               useValue: { orientation: 'horizontal' },
             },
-          ]
+          ],
         );
         fixture.detectChanges();
 
@@ -1555,10 +1833,10 @@ describe('MatTimepicker', () => {
         flush();
 
         expect(
-          document.querySelector('.mat-timepicker-content-layout-horizontal')
+          document.querySelector('.mat-timepicker-content-layout-horizontal'),
         ).not.toBeNull();
         expect(
-          document.querySelector('.mat-time-period-horizontal')
+          document.querySelector('.mat-time-period-horizontal'),
         ).not.toBeNull();
       }));
     });
@@ -1667,7 +1945,7 @@ class TimepickerWithChangeAndInputEvents {
     <mat-timepicker #t></mat-timepicker>
   `,
 })
-class DatepickerWithISOStrings {
+class TimepickerWithISOStrings {
   value = new Date(2017, 5, 1, 9, 13).toISOString();
   min = new Date(2017, 0, 1).toISOString();
   max = new Date(2017, 11, 31).toISOString();
@@ -1721,3 +1999,44 @@ class TimepickerWithMinAndMaxValidation {
   minTime = new Date(2023, 4, 18, 3, 45);
   maxTime = new Date(2023, 4, 18, 20, 10);
 }
+
+@Component({
+  template: `
+    <input [matTimepicker]="t" />
+    <mat-timepicker-toggle
+      [for]="t"
+      [aria-label]="ariaLabel"
+    ></mat-timepicker-toggle>
+    <mat-timepicker
+      #t
+      [openAs]="openAs"
+      [restoreFocus]="restoreFocus"
+      [touchUi]="touchUi"
+    ></mat-timepicker>
+  `,
+})
+class TimepickerWithToggle {
+  @ViewChild('t') timepicker: MatTimepicker<Date>;
+  @ViewChild(MatTimepickerInput) input: MatTimepickerInput<Date>;
+  openAs: TimepickerOpenAs = 'popup';
+  restoreFocus = true;
+  ariaLabel: string;
+  touchUi = false;
+}
+
+@Component({
+  encapsulation: ViewEncapsulation.ShadowDom,
+  template: `
+    <input [matTimepicker]="t" />
+    <mat-timepicker-toggle
+      [for]="t"
+      [aria-label]="ariaLabel"
+    ></mat-timepicker-toggle>
+    <mat-timepicker
+      #t
+      [touchUi]="touchUi"
+      [restoreFocus]="restoreFocus"
+    ></mat-timepicker>
+  `,
+})
+class TimepickerWithToggleInShadowDom extends TimepickerWithToggle {}

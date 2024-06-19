@@ -4,8 +4,11 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnChanges,
+  OnDestroy,
   Optional,
   Output,
+  SimpleChanges,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -14,7 +17,7 @@ import {
   Validator,
   ValidatorFn,
 } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 
 import { TimeAdapter } from './adapter';
 import {
@@ -36,7 +39,7 @@ export class MatTimepickerInputEvent<D, S = unknown> {
     /** Reference to the timepicker input component that emitted the event. */
     public target: MatTimepickerInputBase<S, D>,
     /** Reference to the native input element associated with the timepicker input. */
-    public targetElement: HTMLElement
+    public targetElement: HTMLElement,
   ) {
     this.value = this.target.value;
   }
@@ -46,9 +49,10 @@ const TIME_FORMATS = { hour: '2-digit', minute: '2-digit' };
 
 @Directive()
 export abstract class MatTimepickerInputBase<
-  S,
-  T = ExtractTimeTypeFromSelection<S>
-> implements ControlValueAccessor, Validator
+    S,
+    T = ExtractTimeTypeFromSelection<S>,
+  >
+  implements OnChanges, OnDestroy, ControlValueAccessor, Validator
 {
   /** The value of the input. */
   @Input()
@@ -73,7 +77,7 @@ export abstract class MatTimepickerInputBase<
 
     if (this._disabled !== newValue) {
       this._disabled = newValue;
-      // this.stateChanges.next(undefined);
+      this.stateChanges.next(undefined);
     }
 
     // We need to null check the `blur` method, because it's undefined during SSR.
@@ -116,6 +120,9 @@ export abstract class MatTimepickerInputBase<
    */
   private _pendingValue: T | null;
 
+  /** Emits when the internal state has changed */
+  readonly stateChanges = new Subject<void>();
+
   _onTouched = () => {};
   _validatorOnChange = () => {};
 
@@ -124,8 +131,19 @@ export abstract class MatTimepickerInputBase<
 
   constructor(
     protected _elementRef: ElementRef<HTMLInputElement>,
-    @Optional() public _timeAdapter: TimeAdapter<T>
+    @Optional() public _timeAdapter: TimeAdapter<T>,
   ) {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (timeInputsHaveChanged(changes, this._timeAdapter)) {
+      this.stateChanges.next(undefined);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this._valueChangesSubscription.unsubscribe();
+    this.stateChanges.complete();
+  }
 
   /** Registers a time selection model with the input. */
   _registerModel(model: MatTimeSelectionModel<S, T>): void {
@@ -145,13 +163,13 @@ export abstract class MatTimepickerInputBase<
           this._onTouched();
           this._formatValue(value);
           this.timeInput.emit(
-            new MatTimepickerInputEvent(this, this._elementRef.nativeElement)
+            new MatTimepickerInputEvent(this, this._elementRef.nativeElement),
           );
           this.timeChange.emit(
-            new MatTimepickerInputEvent(this, this._elementRef.nativeElement)
+            new MatTimepickerInputEvent(this, this._elementRef.nativeElement),
           );
         }
-      }
+      },
     );
   }
 
@@ -181,7 +199,7 @@ export abstract class MatTimepickerInputBase<
     if (hasChanged) {
       this._assignValue(time);
       this.timeInput.emit(
-        new MatTimepickerInputEvent(this, this._elementRef.nativeElement)
+        new MatTimepickerInputEvent(this, this._elementRef.nativeElement),
       );
     }
   }
@@ -189,7 +207,7 @@ export abstract class MatTimepickerInputBase<
   /** Handles change event on the input. */
   _onChange() {
     this.timeChange.emit(
-      new MatTimepickerInputEvent(this, this._elementRef.nativeElement)
+      new MatTimepickerInputEvent(this, this._elementRef.nativeElement),
     );
   }
 
@@ -242,7 +260,7 @@ export abstract class MatTimepickerInputBase<
 
   /** Predicate that determines whether the input should handle a particular change event. */
   protected abstract _shouldHandleChangeEvent(
-    event: TimeSelectionModelChange<S>
+    event: TimeSelectionModelChange<S>,
   ): boolean;
 
   /** Programmatically assigns a value to the input. */
@@ -291,10 +309,10 @@ export abstract class MatTimepickerInputBase<
 
   /** The form control validator for the min time. */
   private _minValidator: ValidatorFn = (
-    control: AbstractControl
+    control: AbstractControl,
   ): ValidationErrors | null => {
     const controlValue = this._timeAdapter.getValidTimeOrNull(
-      this._timeAdapter.deserialize(control.value)
+      this._timeAdapter.deserialize(control.value),
     );
     const min = this._getMinTime();
     return !min ||
@@ -306,10 +324,10 @@ export abstract class MatTimepickerInputBase<
 
   /** The form control validator for the max time. */
   private _maxValidator: ValidatorFn = (
-    control: AbstractControl
+    control: AbstractControl,
   ): ValidationErrors | null => {
     const controlValue = this._timeAdapter.getValidTimeOrNull(
-      this._timeAdapter.deserialize(control.value)
+      this._timeAdapter.deserialize(control.value),
     );
     const max = this._getMaxTime();
     return !max ||
@@ -318,4 +336,32 @@ export abstract class MatTimepickerInputBase<
       ? null
       : { matTimepickerMax: { max, actual: controlValue } };
   };
+}
+
+/**
+ * Checks whether the `SimpleChanges` object from an `ngOnChanges`
+ * callback has any changes, accounting for time objects.
+ */
+export function timeInputsHaveChanged(
+  changes: SimpleChanges,
+  adapter: TimeAdapter<unknown>,
+): boolean {
+  const keys = Object.keys(changes);
+
+  for (const key of keys) {
+    const { previousValue, currentValue } = changes[key];
+
+    if (
+      adapter.isTimeInstance(previousValue) &&
+      adapter.isTimeInstance(currentValue)
+    ) {
+      if (!adapter.sameTime(previousValue, currentValue)) {
+        return true;
+      }
+    } else {
+      return true;
+    }
+  }
+
+  return false;
 }
