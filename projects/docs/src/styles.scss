@@ -1,10 +1,10 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use "sass:map";
-@use "@angular/material" as mat;
-@use "projects/mat-timepicker" as mat-timepicker;
+@use 'sass:map';
+@use '@angular/material' as mat;
 
-@use "./styles/theme";
+@use './styles/theme';
+@use './styles/all-components';
 
 // Plus imports for other components in your app.
 
@@ -17,16 +17,23 @@
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 :root {
-  @include mat.core-theme(theme.$ngx-mat-timepicker-theme);
-  @include mat.toolbar-theme(theme.$ngx-mat-timepicker-theme);
-  @include mat.form-field-theme(theme.$ngx-mat-timepicker-theme);
-  @include mat.input-theme(theme.$ngx-mat-timepicker-theme);
-  @include mat.button-theme(theme.$ngx-mat-timepicker-theme);
-  @include mat.fab-theme(theme.$ngx-mat-timepicker-theme);
-  @include mat.icon-button-theme(theme.$ngx-mat-timepicker-theme);
-  @include mat.divider-theme(theme.$ngx-mat-timepicker-theme);
-  @include mat.card-theme(theme.$ngx-mat-timepicker-theme);
-  @include mat-timepicker.timepicker-theme(theme.$ngx-mat-timepicker-theme);
+  &:not(.m2) {
+    @include all-components.theme(theme.$ngx-mat-timepicker-theme);
+  }
+
+  &.m2 {
+    @include all-components.theme(theme.$ngx-mat-timepicker-theme-m2);
+  }
+
+  &.dark-theme {
+    &:not(.m2) {
+      @include all-components.color(theme.$ngx-mat-timepicker-theme-dark);
+    }
+
+    &.m2 {
+      @include all-components.color(theme.$ngx-mat-timepicker-theme-m2-dark);
+    }
+  }
 }
 
 /* You can add global styles to this file, and also import other style files */

@@ -30,6 +30,7 @@ import { MatTimepickerIntl } from './timepicker-intl';
 import { MatClockDials } from './clock-dials';
 import { MatTimeInputs } from './time-inputs';
 import { TimepickerOrientation } from './orientation';
+import { MatIconModule } from '@angular/material/icon';
 
 // Boilerplate for applying mixins to MatTimepickerContent.
 const _MatTimepickerContentBase = mixinColor(

@@ -1,0 +1,41 @@
+@use '@angular/material' as mat;
+
+@mixin m3-typography($theme) {
+  h6.mat-timepicker-content-layout-title {
+    font: mat.get-theme-typography($theme, label-medium);
+    letter-spacing: mat.get-theme-typography(
+      $theme,
+      label-medium,
+      letter-spacing
+    );
+  }
+
+  .mat-time-inputs-field {
+    input.mat-mdc-input-element {
+      font: mat.get-theme-typography($theme, display-large);
+      letter-spacing: mat.get-theme-typography(
+        $theme,
+        display-large,
+        letter-spacing
+      );
+    }
+  }
+
+  .mat-timepicker-content-layout-separator {
+    font: mat.get-theme-typography($theme, display-large);
+    letter-spacing: mat.get-theme-typography(
+      $theme,
+      display-large,
+      letter-spacing
+    );
+  }
+
+  .mat-clock-dial-value {
+    font: mat.get-theme-typography($theme, display-large);
+    letter-spacing: mat.get-theme-typography(
+      $theme,
+      display-large,
+      letter-spacing
+    );
+  }
+}

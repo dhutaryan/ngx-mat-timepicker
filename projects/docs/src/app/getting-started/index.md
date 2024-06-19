@@ -69,11 +69,15 @@ export class MyModule {}
 
 Then you have to define a theme. [More details about theming](https://material.angular.io/guide/theming). As ngx-mat-timepicker uses some material components, it's necessary to add theme for them.
 
+`ngx-mat-timepicker` supports both, Material 2 (M2) and Material 3 (M3) designs.
+
+### M2 Design Theme
+
 ```scss
 @use "@angular/material" as mat;
 @use "@dhutaryan/ngx-mat-timepicker" as mat-timepicker;
 
-$my-theme: mat.define-light-theme(...);
+$my-theme: mat.m2-define-light-theme(...);
 
 // timepicker uses these component
 @include mat.form-field-theme($my-theme);
@@ -84,4 +88,26 @@ $my-theme: mat.define-light-theme(...);
 @include mat.divider-theme($my-theme);
 // timepicker theme
 @include mat-timepicker.timepicker-theme($my-theme);
+```
+
+### M3 Design Theme
+
+```scss
+@use "@angular/material" as mat;
+@use "@dhutaryan/ngx-mat-timepicker" as mat-timepicker;
+
+$my-theme: mat.define-theme(...);
+
+:root {
+  // timepicker uses these component
+  @include mat.form-field-theme($my-theme);
+  @include mat.input-theme($my-theme);
+  @include mat.button-theme($my-theme);
+  @include mat.fab-theme($my-theme);
+  @include mat.icon-button-theme($my-theme);
+  @include mat.divider-theme($my-theme);
+  // timepicker theme
+  @include mat-timepicker.timepicker-theme($my-theme);
+}
+
 ```

@@ -1,0 +1,111 @@
+@use 'sass:color';
+@use '@angular/material' as mat;
+
+@mixin _m3-color($theme) {
+  .mat-timepicker-toggle.mat-timepicker-toggle-active {
+    color: mat.get-theme-color($theme, primary);
+  }
+
+  .mat-time-period-item-active,
+  .mat-clock-dial-value.mat-clock-dial-value-active {
+    color: mat.get-theme-color($theme, on-tertiary-container);
+    background-color: mat.get-theme-color($theme, tertiary-container);
+  }
+
+  .mat-clock-dial::before {
+    background-color: mat.get-theme-color($theme, primary);
+  }
+
+  .mat-clock-dial-hand:not(.mat-clock-dial-hand-disabled) {
+    background-color: mat.get-theme-color($theme, primary);
+
+    &::before {
+      background-color: mat.get-theme-color($theme, primary);
+    }
+  }
+
+  .mat-clock-dial-hand.mat-clock-dial-hand-disabled {
+    &::before {
+      background-color: color.adjust(
+        mat.get-theme-color($theme, primary),
+        $alpha: -0.6
+      );
+    }
+  }
+
+  [mat-mini-fab].mat-clock-dial-cell.mat-clock-dial-cell-disabled.mat-clock-dial-cell-active {
+    background-color: color.adjust(
+      mat.get-theme-color($theme, primary),
+      $alpha: -0.6
+    );
+  }
+  [mat-mini-fab].mat-clock-dial-cell.mat-clock-dial-cell-active {
+    background-color: mat.get-theme-color($theme, primary);
+    color: mat.get-theme-color($theme, on-primary);
+  }
+}
+
+@mixin m3-color($theme) {
+  @include _m3-color($theme);
+
+  .mat-timepicker-toggle {
+    color: mat.get-theme-color($theme, on-surface-variant);
+  }
+
+  .mat-timepicker-content {
+    @include mat.elevation(3);
+    background-color: mat.get-theme-color($theme, surface-container-high);
+    color: mat.get-theme-color($theme, on-surface);
+  }
+
+  .mat-timepicker-content-layout-title {
+    color: mat.get-theme-color($theme, on-surface-variant);
+  }
+
+  .mat-time-toggle-mode-button svg {
+    // TODO: @Dharmen
+    // color: mat.get-theme-color($theme, on-surface);
+    // color: inherit;
+  }
+
+  .mat-time-period {
+    border-color: mat.get-theme-color($theme, outline);
+  }
+
+  .mat-time-period-item-disabled {
+    color: mat.get-theme-color($theme, on-surface);
+    background-color: mat.get-theme-color($theme, surface-container-highest);
+  }
+
+  .mat-clock-dial-value,
+  .mat-clock-dial,
+  .mat-time-inputs-field .mat-mdc-text-field-wrapper {
+    background-color: mat.get-theme-color($theme, surface-container-highest);
+  }
+
+  .mat-clock-dial-hand.mat-clock-dial-hand-disabled {
+    background-color: transparent;
+  }
+
+  .mat-clock-dial-cell:not(.mat-clock-dial-cell-active) {
+    background: transparent;
+
+    &:not(.mat-clock-dial-cell-disabled):hover {
+      color: mat.get-theme-color($theme, on-primary-container);
+      background-color: mat.get-theme-color($theme, primary-container);
+    }
+  }
+
+  .mat-clock-dial-cell.mat-clock-dial-cell-disabled:hover {
+    cursor: default;
+  }
+
+  // TODO: @Dharmen
+  // .mat-clock-dial-cell.mat-clock-dial-cell.mat-clock-dial-cell-disabled {
+  //   color: mat.get-theme-color($theme, foreground, disabled-button);
+
+  //   .mat-mdc-button-persistent-ripple::before {
+  //     background-color: transparent;
+  //   }
+  // }
+}

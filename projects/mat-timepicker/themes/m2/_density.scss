@@ -1,0 +1,8 @@
+@mixin m2-density() {
+  .mat-timepicker-content-layout-separator {
+    height: 1.75rem;
+  }
+  .mat-time-inputs .mat-timepicker-content-layout-separator {
+    margin-top: -1.25rem;
+  }
+}

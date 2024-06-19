@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+@use 'projects/mat-timepicker' as mat-timepicker;
+
+@mixin theme($theme) {
+  @include mat.core-theme($theme);
+  @include mat.toolbar-theme($theme);
+  @include mat.form-field-theme($theme);
+  @include mat.input-theme($theme);
+  @include mat.button-theme($theme);
+  @include mat.fab-theme($theme);
+  @include mat.icon-button-theme($theme);
+  @include mat.divider-theme($theme);
+  @include mat.card-theme($theme);
+  @include mat-timepicker.timepicker-theme($theme);
+}
+
+@mixin color($theme) {
+    @include mat.core-color($theme);
+    @include mat.toolbar-color($theme);
+    @include mat.form-field-color($theme);
+    @include mat.input-color($theme);
+    @include mat.button-color($theme);
+    @include mat.fab-color($theme);
+    @include mat.icon-button-color($theme);
+    @include mat.divider-color($theme);
+    @include mat.card-color($theme);
+    @include mat-timepicker.timepicker-color($theme);
+  }
