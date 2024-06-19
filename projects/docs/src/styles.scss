@@ -16,16 +16,18 @@
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.core-theme(theme.$ngx-mat-timepicker-theme);
-@include mat.toolbar-theme(theme.$ngx-mat-timepicker-theme);
-@include mat.form-field-theme(theme.$ngx-mat-timepicker-theme);
-@include mat.input-theme(theme.$ngx-mat-timepicker-theme);
-@include mat.button-theme(theme.$ngx-mat-timepicker-theme);
-@include mat.fab-theme(theme.$ngx-mat-timepicker-theme);
-@include mat.icon-button-theme(theme.$ngx-mat-timepicker-theme);
-@include mat.divider-theme(theme.$ngx-mat-timepicker-theme);
-@include mat.card-theme(theme.$ngx-mat-timepicker-theme);
-@include mat-timepicker.timepicker-theme(theme.$ngx-mat-timepicker-theme);
+:root {
+  @include mat.core-theme(theme.$ngx-mat-timepicker-theme);
+  @include mat.toolbar-theme(theme.$ngx-mat-timepicker-theme);
+  @include mat.form-field-theme(theme.$ngx-mat-timepicker-theme);
+  @include mat.input-theme(theme.$ngx-mat-timepicker-theme);
+  @include mat.button-theme(theme.$ngx-mat-timepicker-theme);
+  @include mat.fab-theme(theme.$ngx-mat-timepicker-theme);
+  @include mat.icon-button-theme(theme.$ngx-mat-timepicker-theme);
+  @include mat.divider-theme(theme.$ngx-mat-timepicker-theme);
+  @include mat.card-theme(theme.$ngx-mat-timepicker-theme);
+  @include mat-timepicker.timepicker-theme(theme.$ngx-mat-timepicker-theme);
+}
 
 /* You can add global styles to this file, and also import other style files */
 
