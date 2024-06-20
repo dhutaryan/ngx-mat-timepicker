@@ -1,3 +1,7 @@
+# 14.2.4
+
+- fix: allow to type using numpad ([#166](https://github.com/dhutaryan/ngx-mat-timepicker/pull/166))
+
 # 14.2.3
 
 - fix(inputs): allow to use tab key ([#163](https://github.com/dhutaryan/ngx-mat-timepicker/pull/163))
@@ -26,6 +30,10 @@
 
 - build(deps): bump angular and angular material to v14 ([#90](https://github.com/dhutaryan/ngx-mat-timepicker/pull/90))
 
+# 13.2.4
+
+- fix: allow to type using numpad ([#166](https://github.com/dhutaryan/ngx-mat-timepicker/pull/166))
+
 # 13.2.3
 
 - fix(inputs): allow to use tab key ([#163](https://github.com/dhutaryan/ngx-mat-timepicker/pull/163))
@@ -53,6 +61,10 @@
 # 13.0.0
 
 - build(deps): bump angular and angular material to v13 ([#87](https://github.com/dhutaryan/ngx-mat-timepicker/pull/87))
+
+# 12.5.4
+
+- fix: allow to type using numpad ([#166](https://github.com/dhutaryan/ngx-mat-timepicker/pull/166))
 
 # 12.5.3
 
