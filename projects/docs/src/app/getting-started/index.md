@@ -111,3 +111,35 @@ $my-theme: mat.define-theme(...);
 }
 
 ```
+
+### Multiple themes
+
+If you have multiple themes, you can use `timepicker-color` mixin for other themes to avoid generating duplicate styles.
+
+```scss
+@use "@angular/material" as mat;
+@use "@dhutaryan/ngx-mat-timepicker" as mat-timepicker;
+
+$my-light-theme: mat.define-theme();
+$my-dark-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+    ),
+  )
+);
+
+:root {
+  // other needed components' themes
+
+  // timepicker theme
+  @include mat-timepicker.timepicker-theme($my-light-theme);
+
+  &.dark-theme {
+    // other needed components' colors
+
+    // timepicker color
+    @include mat-timepicker.timepicker-color($theme);
+  }
+}
+```
