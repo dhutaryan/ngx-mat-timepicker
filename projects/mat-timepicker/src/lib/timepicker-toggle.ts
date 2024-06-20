@@ -6,8 +6,13 @@ import {
   Input,
   ContentChild,
   Attribute,
+  SimpleChanges,
+  OnChanges,
+  OnDestroy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Observable, Subscription, merge, of } from 'rxjs';
 
 import { MatTimepicker } from './timepicker';
 import { MatTimepickerIntl } from './timepicker-intl';
@@ -29,7 +34,7 @@ export class MatTimepickerToggleIcon {}
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MatTimepickerToggle<T> {
+export class MatTimepickerToggle<T> implements OnChanges, OnDestroy {
   /** Timepicker instance. */
   @Input('for') timepicker: MatTimepicker<T>;
 
@@ -59,13 +64,26 @@ export class MatTimepickerToggle<T> {
   /** Screen-reader label for the button. */
   @Input('aria-label') ariaLabel: string;
 
+  private _stateChanges = Subscription.EMPTY;
+
   constructor(
     @Attribute('tabindex') defaultTabIndex: string,
-    public _intl: MatTimepickerIntl
+    public _intl: MatTimepickerIntl,
+    private _cdr: ChangeDetectorRef,
   ) {
     const parsedTabIndex = Number(defaultTabIndex);
     this.tabIndex =
       parsedTabIndex || parsedTabIndex === 0 ? parsedTabIndex : null;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['timepicker']) {
+      this._watchStateChanges();
+    }
+  }
+
+  ngOnDestroy() {
+    this._stateChanges.unsubscribe();
   }
 
   /** Opens timepicker. */
@@ -74,5 +92,25 @@ export class MatTimepickerToggle<T> {
       this.timepicker.open();
       event.stopPropagation();
     }
+  }
+
+  private _watchStateChanges() {
+    const timepickerStateChanged = this.timepicker
+      ? this.timepicker.stateChanges
+      : of();
+    const inputStateChanged =
+      this.timepicker && this.timepicker.timepickerInput
+        ? this.timepicker.timepickerInput.stateChanges
+        : of();
+    const timepickerToggled = this.timepicker
+      ? merge(this.timepicker.openedStream, this.timepicker.closedStream)
+      : of();
+
+    this._stateChanges.unsubscribe();
+    this._stateChanges = merge(
+      timepickerStateChanged as Observable<void>,
+      inputStateChanged,
+      timepickerToggled,
+    ).subscribe(() => this._cdr.markForCheck());
   }
 }

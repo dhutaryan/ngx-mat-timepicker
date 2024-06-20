@@ -12,8 +12,11 @@ import {
   ElementRef,
   InjectionToken,
   Optional,
+  inject,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { ThemePalette } from '@angular/material/core';
+import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
 import {
   BooleanInput,
   coerceBooleanProperty,
@@ -39,7 +42,7 @@ import {
   PAGE_UP,
   UP_ARROW,
 } from '@angular/cdk/keycodes';
-import { filter, first, merge, Observable } from 'rxjs';
+import { filter, first, merge, Observable, Subject, take } from 'rxjs';
 
 import { MatTimepickerContent } from './timepicker-content';
 import { MAT_TIMEPICKER_SCROLL_STRATEGY } from './timepicker-scroll-strategy';
@@ -70,6 +73,7 @@ export interface MatTimepickerControl<T> {
   disabled: boolean;
   min: T | null;
   max: T | null;
+  stateChanges: Observable<void>;
   getThemePalette(): ThemePalette;
   getConnectedOverlayOrigin(): ElementRef;
   getOverlayLabelId(): string | null;
@@ -81,6 +85,12 @@ export interface MatTimepickerPanel<
   S,
   T = ExtractTimeTypeFromSelection<S>
 > {
+  /** Stream that emits whenever the timepicker is opened. */
+  openedStream: EventEmitter<void>;
+  /** Stream that emits whenever the timepicker is closed. */
+  closedStream: EventEmitter<void>;
+  /** Emits when the timepicker's state changes. */
+  stateChanges: Subject<void>;
   /** Register an input with the timeepicker. */
   registerInput(input: C): MatTimeSelectionModel<S, T>;
 }
@@ -146,6 +156,7 @@ export abstract class MatTimepickerBase<
 
     if (newValue !== this._disabled) {
       this._disabled = newValue;
+      this.stateChanges.next(undefined);
     }
   }
   private _disabled: boolean;
@@ -244,6 +255,23 @@ export abstract class MatTimepickerBase<
   @Input()
   yPosition: TimepickerDropdownPositionY = 'below';
 
+  /**
+   * Whether to restore focus to the previously-focused element when the timepicker is closed.
+   * Note that automatic focus restoration is an accessibility feature and it is recommended that
+   * you provide your own equivalent, if you decide to turn it off.
+   */
+  @Input()
+  get restoreFocus(): boolean {
+    return this._restoreFocus;
+  }
+  set restoreFocus(value: BooleanInput) {
+    this._restoreFocus = coerceBooleanProperty(value);
+  }
+  private _restoreFocus = true;
+
+  /** Emits when the timepicker has been opened. */
+  @Output('opened') readonly openedStream = new EventEmitter<void>();
+
   /** Emits when the timepicker has been closed. */
   @Output('closed') readonly closedStream = new EventEmitter<void>();
 
@@ -256,6 +284,9 @@ export abstract class MatTimepickerBase<
   /** Portal with projected action buttons. */
   _actionsPortal: TemplatePortal | null = null;
 
+  /** Emits when the timepicker's state changes. */
+  readonly stateChanges = new Subject<void>();
+
   /** A reference to the overlay into which we've rendered the timepicker. */
   private _overlayRef: OverlayRef | null;
 
@@ -264,6 +295,11 @@ export abstract class MatTimepickerBase<
 
   /** Unique class that will be added to the backdrop so that the test harnesses can look it up. */
   private _backdropHarnessClass = `${this.id}-backdrop`;
+
+  /** The element that was focused before the timepicker was opened. */
+  private _focusedElementBeforeOpen: HTMLElement | null = null;
+
+  private _document = inject(DOCUMENT);
 
   /** Scroll strategy. */
   private _scrollStrategy: () => ScrollStrategy;
@@ -314,16 +350,23 @@ export abstract class MatTimepickerBase<
         }
       }
     }
+
+    this.stateChanges.next(undefined);
   }
 
   ngOnDestroy() {
     this._destroyOverlay();
     this.close();
+    this.stateChanges.complete();
   }
 
   /** Opens the timepicker. */
   open(): void {
-    if (this._opened || this.disabled) {
+    if (
+      this._opened ||
+      this.disabled ||
+      this._componentRef?.instance._isAnimating
+    ) {
       return;
     }
 
@@ -333,29 +376,58 @@ export abstract class MatTimepickerBase<
       );
     }
 
+    this._focusedElementBeforeOpen = _getFocusedElementPierceShadowDom();
     this._openOverlay();
     this._opened = true;
+    this.openedStream.emit();
   }
 
   /** Closes the timepicker. */
   close(): void {
-    if (!this._opened) {
+    if (!this._opened || this._componentRef?.instance._isAnimating) {
       return;
     }
 
-    if (this._componentRef) {
-      const instance = this._componentRef.instance;
-      instance.startExitAnimation();
-      instance._animationDone
-        .pipe(first())
-        .subscribe(() => this._destroyOverlay());
-    }
+    const canRestoreFocus =
+      this.restoreFocus &&
+      this._focusedElementBeforeOpen &&
+      typeof this._focusedElementBeforeOpen.focus === 'function';
 
-    // The `_opened` could've been reset already if
-    // we got two events in quick succession.
-    if (this._opened) {
-      this._opened = false;
-      this.closedStream.emit();
+    const completeClose = () => {
+      // The `_opened` could've been reset already if
+      // we got two events in quick succession.
+      if (this._opened) {
+        this._opened = false;
+        this.closedStream.emit();
+      }
+    };
+
+    if (this._componentRef) {
+      const { instance, location } = this._componentRef;
+      instance._startExitAnimation();
+      instance._animationDone.pipe(take(1)).subscribe(() => {
+        const activeElement = this._document.activeElement;
+
+        // Since we restore focus after the exit animation, we have to check that
+        // the user didn't move focus themselves inside the `close` handler.
+        if (
+          canRestoreFocus &&
+          (!activeElement ||
+            activeElement === this._document.activeElement ||
+            location.nativeElement.contains(activeElement))
+        ) {
+          this._focusedElementBeforeOpen!.focus();
+        }
+
+        this._focusedElementBeforeOpen = null;
+        this._destroyOverlay();
+      });
+
+      if (canRestoreFocus) {
+        setTimeout(completeClose);
+      } else {
+        completeClose();
+      }
     }
   }
 

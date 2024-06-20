@@ -1,3 +1,4 @@
+import { AnimationEvent } from '@angular/animations';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import {
   Component,
@@ -10,7 +11,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { mixinColor } from '@angular/material/core';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 
 import {
   ExtractTimeTypeFromSelection,
@@ -27,7 +28,7 @@ import { TimepickerOrientation } from './orientation';
 const _MatTimepickerContentBase = mixinColor(
   class {
     constructor(public _elementRef: ElementRef) {}
-  }
+  },
 );
 
 @Component({
@@ -40,7 +41,9 @@ const _MatTimepickerContentBase = mixinColor(
   host: {
     class: 'mat-timepicker-content',
     '[@transformPanel]': '_animationState',
-    '(@transformPanel.done)': '_animationDone.next()',
+    '(@transformPanel.start)': '_handleAnimationEvent($event)',
+    '(@transformPanel.done)': '_handleAnimationEvent($event)',
+    '[class.mat-timepicker-content-touch]': 'timepicker.touchUi',
   },
   animations: [
     matTimepickerAnimations.transformPanel,
@@ -90,16 +93,20 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
   /** Whether the close button currently has focus. */
   _closeButtonFocused: boolean;
 
+  /** Whether there is an in-progress animation. */
+  _isAnimating = false;
+
   /** Emits when an animation has finished. */
   readonly _animationDone = new Subject<void>();
 
   private _model: MatTimeSelectionModel<S, T>;
+  private _subscriptions = new Subscription();
 
   constructor(
     elementRef: ElementRef,
     intl: MatTimepickerIntl,
     private _globalModel: MatTimeSelectionModel<S, T>,
-    private _changeDetectorRef: ChangeDetectorRef
+    private _changeDetectorRef: ChangeDetectorRef,
   ) {
     super(elementRef);
     this._closeButtonText = intl.closeTimepickerLabel;
@@ -111,13 +118,31 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
   }
 
   ngAfterViewInit() {
+    this._subscriptions.add(
+      this.timepicker.stateChanges.subscribe(() => {
+        this._changeDetectorRef.markForCheck();
+      }),
+    );
     (this._dials || this._inputs)?.focusActiveCell();
   }
 
+  ngOnDestroy() {
+    this._subscriptions.unsubscribe();
+    this._animationDone.complete();
+  }
+
   /** Changes animation state while closing timepicker content. */
-  startExitAnimation() {
+  _startExitAnimation() {
     this._animationState = 'void';
     this._changeDetectorRef.markForCheck();
+  }
+
+  _handleAnimationEvent(event: AnimationEvent) {
+    this._isAnimating = event.phaseName === 'start';
+
+    if (!this._isAnimating) {
+      this._animationDone.next();
+    }
   }
 
   onToggleMode(mode: TimepickerMode): void {
@@ -144,7 +169,7 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
    */
   _assignActions(
     portal: TemplatePortal<any> | ComponentPortal<any> | null,
-    forceRerender: boolean
+    forceRerender: boolean,
   ) {
     // As we have actions, clone the model so that we have the ability to cancel the selection.
     // Note that we want to assign this as soon as possible,
