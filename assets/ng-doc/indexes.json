@@ -2926,6 +2926,45 @@
     ],
     "pageType": "api",
     "title": "MatTimepickerPanel",
+    "section": "Properties",
+    "route": "/api/api/interfaces/MatTimepickerPanel",
+    "fragment": "properties",
+    "content": "Stream that emits whenever the timepicker is closed."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerPanel"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerPanel",
+    "section": "Properties",
+    "route": "/api/api/interfaces/MatTimepickerPanel",
+    "fragment": "properties",
+    "content": "Stream that emits whenever the timepicker is opened."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerPanel"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerPanel",
+    "section": "Properties",
+    "route": "/api/api/interfaces/MatTimepickerPanel",
+    "fragment": "properties",
+    "content": "Emits when the timepicker's state changes."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerPanel"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerPanel",
     "section": "Methods",
     "route": "/api/api/interfaces/MatTimepickerPanel",
     "fragment": "methods",
@@ -3098,6 +3137,45 @@
     "route": "/api/api/classes/MatTimepickerBase",
     "fragment": "properties",
     "content": "The id for the timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "properties",
+    "content": "Emits when the timepicker has been opened."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "properties",
+    "content": "Whether to restore focus to the previously-focused element when the timepicker is closed. Note that automatic focus restoration is an accessibility feature and it is recommended that you provide your own equivalent, if you decide to turn it off."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerBase",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerBase",
+    "fragment": "properties",
+    "content": "Emits when the timepicker's state changes."
   },
   {
     "breadcrumbs": [
@@ -3589,6 +3667,19 @@
     "section": "Properties",
     "route": "/api/api/classes/MatTimepickerContent",
     "fragment": "properties",
+    "content": "Whether there is an in-progress animation."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerContent"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerContent",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerContent",
+    "fragment": "properties",
     "content": "Whether the clock uses 12 hour format."
   },
   {
@@ -3725,6 +3816,19 @@
     "breadcrumbs": [
       "API",
       "ngx-mat-timepicker",
+      "timeInputsHaveChanged"
+    ],
+    "pageType": "api",
+    "title": "timeInputsHaveChanged",
+    "section": "timeInputsHaveChanged",
+    "route": "/api/api/functions/timeInputsHaveChanged",
+    "fragment": "timeinputshavechanged",
+    "content": "Checks whether the SimpleChanges object from an ngOnChanges callback has any changes, accounting for time objects."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
       "MatTimepickerInputEvent"
     ],
     "pageType": "api",
@@ -3784,6 +3888,19 @@
     "route": "/api/api/classes/MatTimepickerInputBase",
     "fragment": "properties",
     "content": "Combined form control validator for this input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInputBase"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInputBase",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerInputBase",
+    "fragment": "properties",
+    "content": "Emits when the internal state has changed"
   },
   {
     "breadcrumbs": [
@@ -4094,6 +4211,19 @@
     "route": "/api/api/classes/MatTimepickerInput",
     "fragment": "properties",
     "content": "The combined form control validator for this input."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerInput"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerInput",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerInput",
+    "fragment": "properties",
+    "content": "Emits when the internal state has changed"
   },
   {
     "breadcrumbs": [
@@ -4752,6 +4882,45 @@
     "route": "/api/api/classes/MatTimepicker",
     "fragment": "properties",
     "content": "The id for the timepicker."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "properties",
+    "content": "Emits when the timepicker has been opened."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "properties",
+    "content": "Whether to restore focus to the previously-focused element when the timepicker is closed. Note that automatic focus restoration is an accessibility feature and it is recommended that you provide your own equivalent, if you decide to turn it off."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepicker"
+    ],
+    "pageType": "api",
+    "title": "MatTimepicker",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepicker",
+    "fragment": "properties",
+    "content": "Emits when the timepicker's state changes."
   },
   {
     "breadcrumbs": [
