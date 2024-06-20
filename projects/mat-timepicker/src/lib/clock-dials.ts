@@ -77,27 +77,25 @@ export class MatClockDials<T>
   focusActiveCell(): void {
     this._ngZone.runOutsideAngular(() => {
       this._ngZone.onStable.pipe(take(1)).subscribe(() => {
-        setTimeout(() => {
-          const activeCell: HTMLElement | null =
-            this._elementRef.nativeElement.querySelector(
-              '.mat-timepicker-content .mat-clock-dial-cell-active', // to avoid focus for inline mode
-            );
+        const activeCell: HTMLElement | null =
+          this._elementRef.nativeElement.querySelector(
+            '.mat-timepicker-content .mat-clock-dial-cell-active', // to avoid focus for inline mode
+          );
 
-          if (activeCell) {
-            activeCell.focus();
-            return;
-          }
+        if (activeCell) {
+          activeCell.focus();
+          return;
+        }
 
-          const activePoint: HTMLElement | null =
-            this._elementRef.nativeElement.querySelector(
-              '.mat-timepicker-content .mat-clock-dial-hand-point', // to avoid focus for inline mode
-            );
+        const activePoint: HTMLElement | null =
+          this._elementRef.nativeElement.querySelector(
+            '.mat-timepicker-content .mat-clock-dial-hand-point', // to avoid focus for inline mode
+          );
 
-          if (activePoint) {
-            // if no active cell we need to focus a small dot
-            activePoint.focus();
-          }
-        }, 50);
+        if (activePoint) {
+          // if no active cell we need to focus a small dot
+          activePoint.focus();
+        }
       });
     });
   }

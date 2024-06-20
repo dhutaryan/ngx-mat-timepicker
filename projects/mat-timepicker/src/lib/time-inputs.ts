@@ -47,7 +47,7 @@ export class MatHourInput extends MatTimeInputBase {
   constructor(
     element: ElementRef<HTMLInputElement>,
     _cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) _document: Document
+    @Inject(DOCUMENT) _document: Document,
   ) {
     super(element, _cdr, _document);
   }
@@ -92,14 +92,14 @@ export class MatHourInput extends MatTimeInputBase {
 
         return Math.min(
           Math.max(value, Math.min(...this.availableHours)),
-          maxHour
+          maxHour,
         );
       }
     }
 
     return Math.min(
       Math.max(value, Math.min(...this.availableHours)),
-      Math.max(...this.availableHours)
+      Math.max(...this.availableHours),
     );
   }
 }
@@ -136,7 +136,7 @@ export class MatMinuteInput extends MatTimeInputBase {
   constructor(
     element: ElementRef<HTMLInputElement>,
     _cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) _document: Document
+    @Inject(DOCUMENT) _document: Document,
   ) {
     super(element, _cdr, _document);
   }
@@ -154,7 +154,7 @@ export class MatMinuteInput extends MatTimeInputBase {
 
     return Math.min(
       Math.max(roundedValue, Math.min(...this.availableMinutes)),
-      Math.max(...this.availableMinutes)
+      Math.max(...this.availableMinutes),
     );
   }
 }
@@ -174,7 +174,7 @@ export class MatTimeInputs<T> extends MatTimeFaceBase<T> {
     public _intl: MatTimepickerIntl,
     @Optional() _timeAdapter: TimeAdapter<T>,
     private _ngZone: NgZone,
-    private _elementRef: ElementRef
+    private _elementRef: ElementRef,
   ) {
     super(_timeAdapter);
   }
@@ -188,16 +188,14 @@ export class MatTimeInputs<T> extends MatTimeFaceBase<T> {
   focusActiveCell(): void {
     this._ngZone.runOutsideAngular(() => {
       this._ngZone.onStable.pipe(take(1)).subscribe(() => {
-        setTimeout(() => {
-          const activeCell: HTMLElement | null =
-            this._elementRef.nativeElement.querySelector(
-              '.mat-timepicker-content input' // to avoid focus for inline mode
-            );
-          if (activeCell && !this._skipNextTickFocus) {
-            activeCell.focus();
-            this._skipNextTickFocus = true;
-          }
-        });
+        const activeCell: HTMLElement | null =
+          this._elementRef.nativeElement.querySelector(
+            '.mat-timepicker-content input', // to avoid focus for inline mode
+          );
+        if (activeCell && !this._skipNextTickFocus) {
+          activeCell.focus();
+          this._skipNextTickFocus = true;
+        }
       });
     });
   }
