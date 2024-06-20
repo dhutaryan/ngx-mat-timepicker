@@ -1,0 +1,27 @@
+@use '@angular/material' as mat;
+@use "./variables";
+
+@mixin m2-typography($theme) {
+  h6.mat-timepicker-content-layout-title {
+    font: {
+      size: variables.$timepicker-content-title-font-size;
+      weight: mat.get-theme-typography($theme, subtitle-2, font-weight);
+    }
+  }
+
+  .mat-time-inputs-field {
+    input.mat-mdc-input-element {
+      font-size: variables.$input-font-size;
+      line-height: normal;
+    }
+  }
+
+  .mat-timepicker-content-layout-separator {
+    font-size: variables.$inputs-separator-font-size;
+    line-height: variables.$inputs-separator-line-height;
+  }
+
+  .mat-clock-dial-value {
+    font-size: variables.$input-font-size;
+  }
+}

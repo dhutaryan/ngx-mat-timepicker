@@ -2,7 +2,7 @@ $clock-dial-hand-width: 1px;
 $clock-dial-hand-dot-size: 0.5rem;
 
 $clock-dial-size: 16rem;
-$clock-dial-cell-size: 2rem;
+$clock-dial-cell-size: 48px;
 
 .mat-clock-dial {
   position: relative;
@@ -11,6 +11,7 @@ $clock-dial-cell-size: 2rem;
   height: $clock-dial-size;
   margin: 0 auto;
   border-radius: 50%;
+  --mdc-fab-small-container-shape: 50%;
 
   &::before {
     position: absolute;

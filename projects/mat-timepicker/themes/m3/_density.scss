@@ -1,0 +1,21 @@
+@mixin m3-density() {
+  .mat-clock-dial-hand {
+    width: 2px;
+  }
+  .mat-timepicker-content {
+    border-radius: 28px;
+  }
+  .mat-time-toggle-mode-button {
+    margin-top: 0.5rem;
+  }
+  .mat-time-inputs-field {
+    --mat-form-field-container-vertical-padding: 4px;
+    .mdc-text-field {
+      border-bottom-right-radius: var(--mdc-shape-small, 4px);
+      border-bottom-left-radius: var(--mdc-shape-small, 4px);
+    }
+  }
+  .mat-time-inputs .mat-timepicker-content-layout-separator {
+    margin-top: -1.5rem;
+  }
+}

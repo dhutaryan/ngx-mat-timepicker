@@ -1,0 +1,9 @@
+@use './color';
+@use './typography';
+@use "./density";
+
+@mixin theme($theme) {
+  @include color.m2-color($theme);
+  @include typography.m2-typography($theme);
+  @include density.m2-density();
+}

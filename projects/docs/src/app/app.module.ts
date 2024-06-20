@@ -1,7 +1,4 @@
-import {
-  provideHttpClient,
-  withInterceptorsFromDi,
-} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +17,7 @@ import {
   NG_DOC_DEFAULT_PAGE_PROCESSORS,
   NgDocThemeToggleComponent,
 } from '@ng-doc/app';
+import { NgDocTooltipDirective } from '@ng-doc/ui-kit';
 
 import { NG_DOC_ROUTING, provideNgDocContext } from '@ng-doc/generated';
 import { AppComponent } from './app.component';
@@ -44,6 +42,7 @@ import { AppComponent } from './app.component';
     NgDocButtonIconComponent,
     NgDocIconComponent,
     NgDocThemeToggleComponent,
+    NgDocTooltipDirective
   ],
   providers: [
     provideNgDocContext(),

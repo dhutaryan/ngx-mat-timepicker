@@ -1,7 +1,7 @@
 const TOUCH_UI_MULTIPLIER = 1.25;
 const TOUCH_UI_TICK_MULTIPLIER = 1.5;
 const CLOCK_RADIUS = 128;
-const CLOCK_TICK_RADIUS = 16;
+const CLOCK_TICK_RADIUS = 24;
 const CLOCK_OUTER_RADIUS = 100;
 
 export function getClockRadius(touchUi?: boolean): number {

@@ -1,5 +1,3 @@
-$button-icon-size: 3.25rem;
-
 .mat-timepicker-content {
   display: block;
   border-radius: 4px;
@@ -20,8 +18,6 @@ $button-icon-size: 3.25rem;
 }
 
 .mat-time-toggle-mode-button {
-  width: $button-icon-size;
-  height: $button-icon-size;
   margin-left: -0.75rem;
   margin-bottom: -0.25rem;
 }

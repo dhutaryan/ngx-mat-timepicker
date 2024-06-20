@@ -1,0 +1,111 @@
+@use 'sass:color';
+@use '@angular/material' as mat;
+@use "./variables";
+
+@mixin _m2-color($theme, $palette) {
+  .mat-timepicker-toggle.mat-timepicker-toggle-active {
+    color: mat.get-theme-color($theme, $palette, default);
+  }
+
+  .mat-time-period-item-active,
+  .mat-clock-dial-value.mat-clock-dial-value-active {
+    color: mat.get-theme-color($theme, $palette, default);
+    background-color: rgba(
+      mat.get-theme-color($theme, $palette, default),
+      variables.$primary-opacity
+    );
+  }
+
+  .mat-clock-dial::before {
+    background-color: mat.get-theme-color($theme, $palette, default);
+  }
+
+  .mat-clock-dial-hand:not(.mat-clock-dial-hand-disabled) {
+    background-color: mat.get-theme-color($theme, $palette, default);
+
+    &::before {
+      background-color: mat.get-theme-color($theme, $palette, default);
+    }
+  }
+
+  .mat-clock-dial-hand.mat-clock-dial-hand-disabled {
+    &::before {
+      background-color: color.adjust(
+        mat.get-theme-color($theme, $palette, default),
+        $alpha: -0.6
+      );
+    }
+  }
+
+  [mat-mini-fab].mat-clock-dial-cell.mat-clock-dial-cell-disabled.mat-clock-dial-cell-active {
+    background-color: color.adjust(
+      mat.get-theme-color($theme, $palette, default),
+      $alpha: -0.6
+    );
+  }
+}
+
+@mixin m2-color($theme) {
+  @include _m2-color($theme, primary);
+
+  .mat-timepicker-toggle {
+    color: mat.get-theme-color($theme, foreground, icon);
+  }
+
+  .mat-timepicker-content {
+    @include mat.elevation(4);
+    background-color: mat.get-theme-color($theme, background, card);
+    color: mat.get-theme-color($theme, foreground, text);
+
+    &.mat-accent {
+      @include _m2-color($theme, accent);
+    }
+
+    &.mat-warn {
+      @include _m2-color($theme, warn);
+    }
+  }
+
+  .mat-timepicker-content-layout-title {
+    color: mat.get-theme-color($theme, foreground, secondary-text);
+  }
+
+  .mat-time-period {
+    border-color: mat.get-theme-color($theme, foreground, divider);
+  }
+
+  .mat-time-period-item-disabled {
+    color: mat.get-theme-color($theme, foreground, disabled-button);
+    background-color: mat.get-theme-color($theme, background, disabled-button);
+  }
+
+  .mat-clock-dial-value,
+  .mat-clock-dial,
+  .mat-time-inputs-field .mat-mdc-text-field-wrapper {
+    background-color: mat.get-theme-color($theme, background, background);
+  }
+
+  .mat-clock-dial-hand.mat-clock-dial-hand-disabled {
+    background-color: transparent;
+  }
+
+  .mat-clock-dial-cell:not(.mat-primary):not(.mat-accent):not(.mat-warn) {
+    background: transparent;
+
+    &:not(.mat-clock-dial-cell-disabled):hover {
+      background-color: mat.get-theme-color($theme, background, hover);
+    }
+  }
+
+  .mat-clock-dial-cell.mat-clock-dial-cell-disabled:hover {
+    cursor: default;
+  }
+
+  .mat-clock-dial-cell.mat-clock-dial-cell.mat-clock-dial-cell-disabled {
+    color: mat.get-theme-color($theme, foreground, disabled-button);
+
+    .mat-mdc-button-persistent-ripple::before {
+      background-color: transparent;
+    }
+  }
+}
