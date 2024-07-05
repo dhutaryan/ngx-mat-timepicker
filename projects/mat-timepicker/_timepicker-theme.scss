@@ -10,31 +10,31 @@ $primary-opacity: 0.15;
 
 @mixin _color($palette) {
   .mat-timepicker-toggle.mat-timepicker-toggle-active {
-    color: mat.get-color-from-palette($palette);
+    color: mat.m2-get-color-from-palette($palette);
   }
 
   .mat-time-period-item-active,
   .mat-clock-dial-value.mat-clock-dial-value-active {
-    color: mat.get-color-from-palette($palette);
-    background-color: mat.get-color-from-palette($palette, $primary-opacity);
+    color: mat.m2-get-color-from-palette($palette);
+    background-color: mat.m2-get-color-from-palette($palette, $primary-opacity);
   }
 
   .mat-clock-dial::before {
-    background-color: mat.get-color-from-palette($palette);
+    background-color: mat.m2-get-color-from-palette($palette);
   }
 
   .mat-clock-dial-hand:not(.mat-clock-dial-hand-disabled) {
-    background-color: mat.get-color-from-palette($palette);
+    background-color: mat.m2-get-color-from-palette($palette);
 
     &::before {
-      background-color: mat.get-color-from-palette($palette);
+      background-color: mat.m2-get-color-from-palette($palette);
     }
   }
 
   .mat-clock-dial-hand.mat-clock-dial-hand-disabled {
     &::before {
       background-color: color.adjust(
-        mat.get-color-from-palette($palette),
+        mat.m2-get-color-from-palette($palette),
         $alpha: -0.6
       );
     }
@@ -42,14 +42,14 @@ $primary-opacity: 0.15;
 
   [mat-mini-fab].mat-clock-dial-cell.mat-clock-dial-cell-disabled.mat-clock-dial-cell-active {
     background-color: color.adjust(
-      mat.get-color-from-palette($palette),
+      mat.m2-get-color-from-palette($palette),
       $alpha: -0.6
     );
   }
 }
 
 @mixin color($config-or-theme) {
-  $config: mat.get-color-config($config-or-theme);
+  $config: mat.m2-get-color-config($config-or-theme);
   $is-dark-theme: map.get($config, is-dark);
   $foreground: map.get($config, foreground);
   $background: map.get($config, background);
@@ -57,13 +57,13 @@ $primary-opacity: 0.15;
   @include _color(map.get($config, primary));
 
   .mat-timepicker-toggle {
-    color: mat.get-color-from-palette($foreground, icon);
+    color: mat.m2-get-color-from-palette($foreground, icon);
   }
 
   .mat-timepicker-content {
     @include mat.elevation(4);
-    background-color: mat.get-color-from-palette($background, card);
-    color: mat.get-color-from-palette($foreground, text);
+    background-color: mat.m2-get-color-from-palette($background, card);
+    color: mat.m2-get-color-from-palette($foreground, text);
 
     &.mat-accent {
       @include _color(map.get($config, accent));
@@ -75,26 +75,26 @@ $primary-opacity: 0.15;
   }
 
   .mat-timepicker-content-layout-title {
-    color: mat.get-color-from-palette($foreground, secondary-text);
+    color: mat.m2-get-color-from-palette($foreground, secondary-text);
   }
 
   .mat-time-toggle-mode-button svg {
-    fill: mat.get-color-from-palette($foreground, secondary-text);
+    fill: mat.m2-get-color-from-palette($foreground, secondary-text);
   }
 
   .mat-time-period {
-    border-color: mat.get-color-from-palette($foreground, divider);
+    border-color: mat.m2-get-color-from-palette($foreground, divider);
   }
 
   .mat-time-period-item-disabled {
-    color: mat.get-color-from-palette($foreground, disabled-button);
-    background-color: mat.get-color-from-palette($background, disabled-button);
+    color: mat.m2-get-color-from-palette($foreground, disabled-button);
+    background-color: mat.m2-get-color-from-palette($background, disabled-button);
   }
 
   .mat-clock-dial-value,
   .mat-clock-dial,
   .mat-time-inputs-field .mat-mdc-text-field-wrapper {
-    background-color: mat.get-color-from-palette($background, background);
+    background-color: mat.m2-get-color-from-palette($background, background);
   }
 
   .mat-clock-dial-hand.mat-clock-dial-hand-disabled {
@@ -105,7 +105,7 @@ $primary-opacity: 0.15;
     background: transparent;
 
     &:not(.mat-clock-dial-cell-disabled):hover {
-      background-color: mat.get-color-from-palette($background, hover);
+      background-color: mat.m2-get-color-from-palette($background, hover);
     }
   }
 
@@ -114,7 +114,7 @@ $primary-opacity: 0.15;
   }
 
   .mat-clock-dial-cell.mat-clock-dial-cell.mat-clock-dial-cell-disabled {
-    color: mat.get-color-from-palette($foreground, disabled-button);
+    color: mat.m2-get-color-from-palette($foreground, disabled-button);
 
     .mat-mdc-button-persistent-ripple::before {
       background-color: transparent;
@@ -123,12 +123,12 @@ $primary-opacity: 0.15;
 }
 
 @mixin typography($config-or-theme) {
-  $config: mat.get-typography-config($config-or-theme);
+  $config: mat.m2-get-typography-config($config-or-theme);
 
   h6.mat-timepicker-content-layout-title {
     font: {
       size: $timepicker-content-title-font-size;
-      weight: mat.font-weight($config, subtitle-2);
+      weight: mat.m2-font-weight($config, subtitle-2);
     }
   }
 
@@ -150,8 +150,8 @@ $primary-opacity: 0.15;
 }
 
 @mixin theme($theme-or-color-config) {
-  $color: mat.get-color-config($theme-or-color-config);
-  $typography: mat.get-typography-config($theme-or-color-config);
+  $color: mat.m2-get-color-config($theme-or-color-config);
+  $typography: mat.m2-get-typography-config($theme-or-color-config);
 
   @if $color != null {
     @include color($color);
@@ -160,7 +160,7 @@ $primary-opacity: 0.15;
   @if $typography != null {
     @include typography($typography);
   } @else {
-    $typography: mat.define-typography-config();
+    $typography: mat.m2-define-typography-config();
     @include typography($typography);
   }
 }
