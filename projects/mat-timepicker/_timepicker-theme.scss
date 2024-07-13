@@ -1,166 +1,21 @@
-@use "sass:color";
-@use "sass:map";
-@use "@angular/material" as mat;
+@use '@angular/material' as mat;
 
-$timepicker-content-title-font-size: 12px !default;
-$input-font-size: 2rem !default;
-$inputs-separator-font-size: 3rem !default;
-$inputs-separator-line-height: 1.25rem;
-$primary-opacity: 0.15;
+@use './themes/m2/theme' as m2-theme;
+@use './themes/m2/color' as m2-color;
 
-@mixin _color($palette) {
-  .mat-timepicker-toggle.mat-timepicker-toggle-active {
-    color: mat.m2-get-color-from-palette($palette);
-  }
-
-  .mat-time-period-item-active,
-  .mat-clock-dial-value.mat-clock-dial-value-active {
-    color: mat.m2-get-color-from-palette($palette);
-    background-color: mat.m2-get-color-from-palette($palette, $primary-opacity);
-  }
-
-  .mat-clock-dial::before {
-    background-color: mat.m2-get-color-from-palette($palette);
-  }
-
-  .mat-clock-dial-hand:not(.mat-clock-dial-hand-disabled) {
-    background-color: mat.m2-get-color-from-palette($palette);
-
-    &::before {
-      background-color: mat.m2-get-color-from-palette($palette);
-    }
-  }
-
-  .mat-clock-dial-hand.mat-clock-dial-hand-disabled {
-    &::before {
-      background-color: color.adjust(
-        mat.m2-get-color-from-palette($palette),
-        $alpha: -0.6
-      );
-    }
-  }
-
-  [mat-mini-fab].mat-clock-dial-cell.mat-clock-dial-cell-disabled.mat-clock-dial-cell-active {
-    background-color: color.adjust(
-      mat.m2-get-color-from-palette($palette),
-      $alpha: -0.6
-    );
-  }
-}
-
-@mixin color($config-or-theme) {
-  $config: mat.m2-get-color-config($config-or-theme);
-  $is-dark-theme: map.get($config, is-dark);
-  $foreground: map.get($config, foreground);
-  $background: map.get($config, background);
-
-  @include _color(map.get($config, primary));
-
-  .mat-timepicker-toggle {
-    color: mat.m2-get-color-from-palette($foreground, icon);
-  }
-
-  .mat-timepicker-content {
-    @include mat.elevation(4);
-    background-color: mat.m2-get-color-from-palette($background, card);
-    color: mat.m2-get-color-from-palette($foreground, text);
-
-    &.mat-accent {
-      @include _color(map.get($config, accent));
-    }
-
-    &.mat-warn {
-      @include _color(map.get($config, warn));
-    }
-  }
-
-  .mat-timepicker-content-layout-title {
-    color: mat.m2-get-color-from-palette($foreground, secondary-text);
-  }
-
-  .mat-time-toggle-mode-button svg {
-    fill: mat.m2-get-color-from-palette($foreground, secondary-text);
-  }
-
-  .mat-time-period {
-    border-color: mat.m2-get-color-from-palette($foreground, divider);
-  }
-
-  .mat-time-period-item-disabled {
-    color: mat.m2-get-color-from-palette($foreground, disabled-button);
-    background-color: mat.m2-get-color-from-palette($background, disabled-button);
-  }
-
-  .mat-clock-dial-value,
-  .mat-clock-dial,
-  .mat-time-inputs-field .mat-mdc-text-field-wrapper {
-    background-color: mat.m2-get-color-from-palette($background, background);
-  }
-
-  .mat-clock-dial-hand.mat-clock-dial-hand-disabled {
-    background-color: transparent;
-  }
-
-  .mat-clock-dial-cell:not(.mat-primary):not(.mat-accent):not(.mat-warn) {
-    background: transparent;
-
-    &:not(.mat-clock-dial-cell-disabled):hover {
-      background-color: mat.m2-get-color-from-palette($background, hover);
-    }
-  }
-
-  .mat-clock-dial-cell.mat-clock-dial-cell-disabled:hover {
-    cursor: default;
-  }
-
-  .mat-clock-dial-cell.mat-clock-dial-cell.mat-clock-dial-cell-disabled {
-    color: mat.m2-get-color-from-palette($foreground, disabled-button);
-
-    .mat-mdc-button-persistent-ripple::before {
-      background-color: transparent;
-    }
-  }
-}
-
-@mixin typography($config-or-theme) {
-  $config: mat.m2-get-typography-config($config-or-theme);
-
-  h6.mat-timepicker-content-layout-title {
-    font: {
-      size: $timepicker-content-title-font-size;
-      weight: mat.m2-font-weight($config, subtitle-2);
-    }
-  }
-
-  .mat-time-inputs-field {
-    input.mat-mdc-input-element {
-      font-size: $input-font-size;
-      line-height: normal;
-    }
-  }
-
-  .mat-timepicker-content-layout-separator {
-    font-size: $inputs-separator-font-size;
-    line-height: $inputs-separator-line-height;
-  }
-
-  .mat-clock-dial-value {
-    font-size: $input-font-size;
-  }
-}
-
-@mixin theme($theme-or-color-config) {
-  $color: mat.m2-get-color-config($theme-or-color-config);
-  $typography: mat.m2-get-typography-config($theme-or-color-config);
-
-  @if $color != null {
-    @include color($color);
-  }
-
-  @if $typography != null {
-    @include typography($typography);
+@mixin theme($theme) {
+  @if (mat.get-theme-version($theme) == 1) {
+    // @include m3-theme.theme($theme);
   } @else {
-    $typography: mat.m2-define-typography-config();
-    @include typography($typography);
+    @include m2-theme.theme($theme);
+  }
+}
+
+@mixin color($theme) {
+  @if (mat.get-theme-version($theme) == 1) {
+    // @include m3-color.m3-color($theme);
+  } @else {
+    $typography: mat.define-typography-config();
+    @include m2-color.m2-color($theme);
   }
 }

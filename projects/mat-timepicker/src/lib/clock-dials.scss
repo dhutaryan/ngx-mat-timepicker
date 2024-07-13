@@ -19,3 +19,7 @@
     margin-top: 0;
   }
 }
+
+.mat-clock-dial-cell.mat-clock-dial-cell-disabled:hover {
+  cursor: default;
+}

@@ -8,6 +8,12 @@
       "options": {
         "parser": "angular"
       }
+    },
+    {
+      "files": "*.scss",
+      "options": {
+       "printWidth": 100
+      }
     }
   ]
 }

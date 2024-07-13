@@ -1,0 +1,35 @@
+@use 'sass:map';
+
+@mixin declaration($property, $value) {
+  --mat-timepicker-#{$property}: #{$value};
+}
+
+@mixin declare-custom-properties($theme, $prefix: --mat-timepicker) {
+  @each $key, $value in $theme {
+    @include declaration($key, $value);
+  }
+}
+
+@mixin current-selector-or-root($root: html) {
+  @if & {
+    @content;
+  } @else {
+    #{$root} {
+      @content;
+    }
+  }
+}
+
+@mixin create-token-values($tokens) {
+  @include current-selector-or-root() {
+    @include declare-custom-properties($tokens);
+  }
+}
+
+@function merge-all($maps...) {
+  $result: ();
+  @each $map in $maps {
+    $result: map.merge($result, $map);
+  }
+  @return $result;
+}
