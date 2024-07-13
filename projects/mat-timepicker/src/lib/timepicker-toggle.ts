@@ -33,6 +33,8 @@ export class MatTimepickerToggleIcon {}
     class: 'mat-timepicker-toggle',
     '[attr.tabindex]': 'null',
     '[class.mat-timepicker-toggle-active]': 'timepicker && timepicker.opened',
+    '[class.mat-accent]': 'timepicker && timepicker.color === "accent"',
+    '[class.mat-warn]': 'timepicker && timepicker.color === "warn"',
     '(click)': 'open($event)',
   },
   encapsulation: ViewEncapsulation.None,
