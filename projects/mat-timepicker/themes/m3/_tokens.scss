@@ -1,0 +1,99 @@
+@use 'sass:color';
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@use '../utils';
+@use '../variables';
+
+@function get-unthemable-tokens() {
+  @return (content-border-radius: 1rem, clock-dial-cell-border-radius: 50%);
+}
+
+@function get-color-tokens($theme, $palette-name: primary) {
+  $color: mat.get-theme-color($theme, $palette-name);
+  $color-tokens: get-content-color-tokens($theme, $palette-name);
+
+  $surface-container-highest: mat.get-theme-color($theme, surface-container-highest);
+
+  $toggle-color: get-toggle-color-tokens($theme, $palette-name);
+
+  @return utils.merge-all(
+    $toggle-color,
+    $color-tokens,
+    (
+      clock-dial-cell-active-text-color: mat.get-theme-color($theme, on-primary),
+      clock-dial-cell-disabled-text-color:
+        color.change(mat.get-theme-color($theme, on-surface), $alpha: 0.4),
+      clock-dial-cell-disabled-background-color: transparent,
+      content-background-color: mat.get-theme-color($theme, surface-container-high),
+      content-text-color: mat.get-theme-color($theme, on-surface),
+      content-layout-title-color: mat.get-theme-color($theme, on-surface-variant),
+      toggle-mode-button-color: mat.get-theme-color($theme, on-surface-variant),
+      time-period-border-color: mat.get-theme-color($theme, outline),
+      time-period-disabled-text-color: mat.get-theme-color($theme, on-surface-variant),
+      time-period-disabled-background-color:
+        color.change(mat.get-theme-color($theme, on-surface), $alpha: 0.2),
+      clock-dial-background-color: $surface-container-highest,
+      clock-dial-value-background-color: $surface-container-highest,
+      time-inputs-field-background-color: $surface-container-highest,
+      toggle-color: mat.get-theme-color($theme, on-surface-variant),
+    )
+  );
+}
+
+@function get-content-color-tokens($theme, $palette-name: primary) {
+  $color: mat.get-theme-color($theme, $palette-name);
+
+  $common-tokens: (
+    clock-dial-center-point-color: $color,
+    clock-dial-hand-color: $color,
+    clock-dial-hand-disabled-color: transparent,
+    clock-dial-hand-value-point-color: $color,
+    clock-dial-hand-value-point-disabled-color: color.change($color, $alpha: 0.4),
+    clock-dial-cell-unthemable-color: transparent,
+    clock-dial-cell-active-disabled-color: color.change($color, $alpha: 0.4),
+    clock-dial-cell-active-background-color: $color,
+  );
+  $tokens: (
+    primary: (
+      clock-dial-value-active-text-color: mat.get-theme-color($theme, on-primary-container),
+      clock-dial-value-active-background-color: mat.get-theme-color($theme, primary-container),
+      time-period-active-text-color: mat.get-theme-color($theme, on-tertiary-container),
+      time-period-active-background-color: mat.get-theme-color($theme, tertiary-container),
+    ),
+    tertiary: (
+      clock-dial-value-active-text-color: mat.get-theme-color($theme, on-tertiary-container),
+      clock-dial-value-active-background-color: mat.get-theme-color($theme, tertiary-container),
+      time-period-active-text-color: mat.get-theme-color($theme, on-primary-container),
+      time-period-active-background-color: mat.get-theme-color($theme, primary-container),
+    ),
+    error: (
+      clock-dial-value-active-text-color: mat.get-theme-color($theme, on-error-container),
+      clock-dial-value-active-background-color: mat.get-theme-color($theme, error-container),
+      time-period-active-text-color: mat.get-theme-color($theme, on-tertiary-container),
+      time-period-active-background-color: mat.get-theme-color($theme, tertiary-container),
+    ),
+  );
+
+  @return utils.merge-all($common-tokens, map.get($tokens, $palette-name) or ());
+}
+
+@function get-toggle-color-tokens($theme, $palette-name: primary) {
+  $color: mat.get-theme-color($theme, $palette-name);
+
+  @return (toggle-active-color: $color);
+}
+
+@function get-typography-tokens($theme) {
+  @return (
+    content-layout-title-font-size: variables.$timepicker-content-title-font-size,
+    content-layout-title-font-weight: mat.get-theme-typography($theme, title-medium, font-weight),
+    content-layout-separator-font-size: variables.$inputs-separator-font-size,
+    content-layout-separator-line-height: variables.$inputs-separator-line-height,
+    time-inputs-field-font-size: variables.$input-font-size,
+    time-inputs-field-line-height: 1.25,
+    clock-dial-value-font-family: var(--mat-form-field-container-text-font),
+    clock-dial-value-font-size: variables.$input-font-size,
+    clock-dial-value-letter-spacing: 0.5px
+  );
+}

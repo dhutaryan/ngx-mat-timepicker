@@ -1,0 +1,14 @@
+@use '../utils';
+@use './tokens';
+
+@mixin m3-base() {
+  @include utils.create-token-values(tokens.get-unthemable-tokens());
+
+  .mat-clock-dial-cell.mat-mdc-mini-fab {
+    border-radius: var(--mat-timepicker-clock-dial-cell-border-radius);
+
+    .mdc-fab__ripple {
+      border-radius: inherit;
+    }
+  }
+}

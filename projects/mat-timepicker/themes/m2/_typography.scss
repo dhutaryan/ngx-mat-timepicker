@@ -7,29 +7,4 @@
   @include utils.create-token-values(
     tokens.get-typography-tokens(mat.m2-get-typography-config($config-or-theme))
   );
-
-  h6.mat-timepicker-content-layout-title {
-    font: {
-      size: var(--mat-timepicker-content-layout-title-font-size);
-      weight: var(--mat-timepicker-content-layout-title-font-weight);
-    }
-  }
-
-  .mat-time-inputs-field {
-    input.mat-mdc-input-element {
-      font-size: var(--mat-timepicker-time-inputs-field-font-size);
-      line-height: var(--mat-timepicker-time-inputs-field-line-height);
-    }
-  }
-
-  .mat-timepicker-content-layout-separator {
-    font-size: var(--mat-timepicker-content-layout-separator-font-size);
-    line-height: var(--mat-timepicker-content-layout-separator-line-height);
-  }
-
-  .mat-clock-dial-value {
-    font-family: var(--mat-timepicker-clock-dial-value-font-family);
-    font-size: var(--mat-timepicker-clock-dial-value-font-size);
-    letter-spacing: var(--mat-timepicker-clock-dial-value-letter-spacing);
-  }
 }

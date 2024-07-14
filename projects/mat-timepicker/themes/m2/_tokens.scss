@@ -3,11 +3,13 @@
 @use '@angular/material' as mat;
 
 @use '../utils';
+@use '../variables';
+
+@function get-unthemable-tokens() {
+  @return (opacity-active: 0.15, content-border-radius: 0.25rem);
+}
 
 @function get-color-tokens($theme, $palette-name: primary) {
-  $palette: map.get($theme, $palette-name);
-  $color: mat.m2-get-color-from-palette($palette);
-
   $foreground: map.get($theme, foreground);
   $secondary-text: mat.m2-get-color-from-palette($foreground, secondary-text);
 
@@ -15,25 +17,12 @@
   $background-color: mat.m2-get-color-from-palette($background, background);
 
   $toggle-color: get-toggle-color-tokens($theme, $palette-name);
+  $content-color: get-content-color-tokens($theme, $palette-name);
 
   @return utils.merge-all(
     $toggle-color,
+    $content-color,
     (
-      opacity-active: 0.15,
-      toggle-active-text-color: $color,
-      clock-dial-value-active-text-color: $color,
-      clock-dial-value-active-background-color:
-        mat.m2-get-color-from-palette($palette, default, var(--mat-timepicker-opacity-active)),
-      time-period-active-text-color: $color,
-      time-period-active-background-color:
-        mat.m2-get-color-from-palette($palette, default, var(--mat-timepicker-opacity-active)),
-      clock-dial-center-point-color: $color,
-      clock-dial-hand-color: $color,
-      clock-dial-hand-disabled-color: transparent,
-      clock-dial-hand-value-point-color: $color,
-      clock-dial-hand-value-point-disabled-color: color.adjust($color, $alpha: -0.6),
-      clock-dial-cell-unthemable-color: transparent,
-      clock-dial-cell-active-disabled-color: color.adjust($color, $alpha: -0.6),
       clock-dial-cell-disabled-text-color:
         mat.m2-get-color-from-palette($foreground, disabled-button),
       clock-dial-cell-disabled-background-color: transparent,
@@ -48,36 +37,49 @@
       clock-dial-background-color: $background-color,
       clock-dial-value-background-color: $background-color,
       time-inputs-field-background-color: $background-color,
+      toggle-color: $secondary-text,
     )
+  );
+}
+
+@function get-content-color-tokens($theme, $palette-name: primary) {
+  $palette: map.get($theme, $palette-name);
+  $color: mat.m2-get-color-from-palette($palette);
+
+  @return (
+    clock-dial-value-active-text-color: $color,
+    clock-dial-value-active-background-color:
+      mat.m2-get-color-from-palette($palette, default, var(--mat-timepicker-opacity-active)),
+    time-period-active-text-color: $color,
+    time-period-active-background-color:
+      mat.m2-get-color-from-palette($palette, default, var(--mat-timepicker-opacity-active)),
+    clock-dial-center-point-color: $color,
+    clock-dial-hand-color: $color,
+    clock-dial-hand-disabled-color: transparent,
+    clock-dial-hand-value-point-color: $color,
+    clock-dial-hand-value-point-disabled-color: color.change($color, $alpha: 0.4),
+    clock-dial-cell-unthemable-color: transparent,
+    clock-dial-cell-active-disabled-color: color.change($color, $alpha: 0.4)
   );
 }
 
 @function get-toggle-color-tokens($theme, $palette-name: primary) {
   $palette: map.get($theme, $palette-name);
   $color: mat.m2-get-color-from-palette($palette);
-  $foreground: map.get($theme, foreground);
 
-  @return (
-    toggle-color: mat.m2-get-color-from-palette($foreground, secondary-text),
-    toggle-active-color: $color
-  );
+  @return (toggle-active-color: $color);
 }
-
-$timepicker-content-title-font-size: 12px !default;
-$input-font-size: 2rem !default;
-$inputs-separator-font-size: 3rem !default;
-$inputs-separator-line-height: 1.25rem;
 
 @function get-typography-tokens($theme) {
   @return (
-    content-layout-title-font-size: $timepicker-content-title-font-size,
+    content-layout-title-font-size: variables.$timepicker-content-title-font-size,
     content-layout-title-font-weight: mat.m2-font-weight($theme, subtitle-2),
-    content-layout-separator-font-size: $inputs-separator-font-size,
-    content-layout-separator-line-height: $inputs-separator-line-height,
-    time-inputs-field-font-size: $input-font-size,
+    content-layout-separator-font-size: variables.$inputs-separator-font-size,
+    content-layout-separator-line-height: variables.$inputs-separator-line-height,
+    time-inputs-field-font-size: variables.$input-font-size,
     time-inputs-field-line-height: 1.25,
     clock-dial-value-font-family: var(--mat-form-field-container-text-font),
-    clock-dial-value-font-size: $input-font-size,
+    clock-dial-value-font-size: variables.$input-font-size,
     clock-dial-value-letter-spacing: 0.5px
   );
 }

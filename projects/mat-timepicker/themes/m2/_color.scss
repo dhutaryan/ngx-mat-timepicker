@@ -5,114 +5,18 @@
 @use '../utils';
 @use './tokens';
 
-@mixin _color($theme, $palette-name) {
-  @include utils.create-token-values(tokens.get-color-tokens($theme, $palette-name));
-  @include utils.create-token-values(tokens.get-toggle-color-tokens($theme, $palette-name));
-
-  .mat-timepicker-toggle {
-    color: var(--mat-timepicker-toggle-color);
-  }
-
-  .mat-timepicker-toggle.mat-timepicker-toggle-active {
-    color: var(--mat-timepicker-toggle-active-color);
-  }
-
-  .mat-time-period-item-active {
-    color: var(--mat-timepicker-time-period-active-text-color);
-    background-color: var(--mat-timepicker-time-period-active-background-color);
-  }
-
-  .mat-clock-dial-value.mat-clock-dial-value-active {
-    color: var(--mat-timepicker-clock-dial-value-active-text-color);
-    background-color: var(--mat-timepicker-clock-dial-value-active-background-color);
-  }
-
-  .mat-clock-dial::before {
-    background-color: var(--mat-timepicker-clock-dial-center-point-color);
-  }
-
-  .mat-clock-dial-hand:not(.mat-clock-dial-hand-disabled) {
-    background-color: var(--mat-timepicker-clock-dial-hand-color);
-
-    &::before {
-      background-color: var(--mat-timepicker-clock-dial-hand-value-point-color);
-    }
-  }
-
-  .mat-clock-dial-hand.mat-clock-dial-hand-disabled {
-    &::before {
-      background-color: var(--mat-timepicker-clock-dial-hand-value-point-disabled-color);
-    }
-  }
-
-  [mat-mini-fab].mat-clock-dial-cell.mat-clock-dial-cell-disabled.mat-clock-dial-cell-active {
-    background-color: var(--mat-timepicker-clock-dial-cell-active-disabled-color);
-  }
-
-  .mat-timepicker-content {
-    @include mat.elevation(4);
-    background-color: var(--mat-timepicker-content-background-color);
-    color: var(--mat-timepicker-content-text-color);
-  }
-
-  .mat-timepicker-content-layout-title {
-    color: var(--mat-timepicker-content-layout-title-color);
-  }
-
-  .mat-time-toggle-mode-button svg {
-    fill: var(--mat-timepicker-toggle-mode-button-color);
-  }
-
-  .mat-time-period {
-    border-color: var(--mat-timepicker-time-period-border-color);
-  }
-
-  .mat-time-period-item-disabled {
-    color: var(--mat-timepicker-time-period-disabled-text-color);
-    background-color: var(--mat-timepicker-time-period-disabled-background-color);
-  }
-
-  .mat-clock-dial {
-    background-color: var(--mat-timepicker-clock-dial-background-color);
-  }
-
-  .mat-clock-dial-value {
-    background-color: var(--mat-timepicker-clock-dial-value-background-color);
-  }
-
-  .mat-time-inputs-field .mat-mdc-text-field-wrapper {
-    background-color: var(--mat-timepicker-time-inputs-field-background-color);
-  }
-
-  .mat-clock-dial-hand.mat-clock-dial-hand-disabled {
-    background-color: var(--mat-timepicker-clock-dial-hand-disabled-color);
-  }
-
-  .mat-clock-dial-cell:not(.mat-primary):not(.mat-accent):not(.mat-warn) {
-    background: var(--mat-timepicker-clock-dial-cell-unthemable-color);
-  }
-
-  .mat-clock-dial-cell.mat-clock-dial-cell-disabled {
-    color: var(--mat-timepicker-clock-dial-cell-disabled-text-color);
-
-    .mat-mdc-button-persistent-ripple::before {
-      background-color: var(--mat-timepicker-clock-dial-cell-disabled-background-color);
-    }
-  }
-}
-
 @mixin m2-color($config-or-theme) {
   $config: mat.m2-get-color-config($config-or-theme);
 
-  @include _color($config, primary);
+  @include utils.create-token-values(tokens.get-color-tokens($config, primary));
 
   .mat-timepicker-content {
     &.mat-accent {
-      @include _color($config, accent);
+      @include utils.create-token-values(tokens.get-content-color-tokens($config, accent));
     }
 
     &.mat-warn {
-      @include _color($config, warn);
+      @include utils.create-token-values(tokens.get-content-color-tokens($config, warn));
     }
   }
 

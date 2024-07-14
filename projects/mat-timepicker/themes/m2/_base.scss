@@ -1,0 +1,6 @@
+@use '../utils';
+@use './tokens';
+
+@mixin m2-base() {
+  @include utils.create-token-values(tokens.get-unthemable-tokens());
+}

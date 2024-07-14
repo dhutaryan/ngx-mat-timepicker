@@ -1,0 +1,41 @@
+@use '@angular/material' as mat;
+
+@use '../utils';
+@use './tokens';
+
+@mixin m3-color($theme) {
+  @include utils.create-token-values(tokens.get-color-tokens($theme, primary));
+
+  .mat-timepicker-content {
+    &.mat-accent {
+      @include utils.create-token-values(tokens.get-content-color-tokens($theme, tertiary));
+    }
+
+    &.mat-warn {
+      @include utils.create-token-values(tokens.get-content-color-tokens($theme, error));
+    }
+  }
+
+  .mat-timepicker-toggle-active {
+    &.mat-accent {
+      $tertiary-tokens: tokens.get-toggle-color-tokens($theme, tertiary);
+      @include utils.create-token-values($tertiary-tokens);
+    }
+
+    &.mat-warn {
+      $error-tokens: tokens.get-toggle-color-tokens($theme, error);
+      @include utils.create-token-values($error-tokens);
+    }
+  }
+
+  .mat-clock-dial-cell.mat-clock-dial-cell-active {
+    background-color: var(--mat-timepicker-clock-dial-cell-active-background-color);
+    color: var(--mat-timepicker-clock-dial-cell-active-text-color);
+  }
+
+  .mat-time-period {
+    .mat-divider {
+      border-top-color: var(--mat-timepicker-time-period-border-color);
+    }
+  }
+}
