@@ -31,12 +31,6 @@
     }
   }
 
-  .mat-clock-dial-hand.mat-clock-dial-hand-disabled {
-    &::before {
-      background-color: var(--mat-timepicker-clock-dial-hand-value-point-disabled-color);
-    }
-  }
-
   [mat-mini-fab].mat-clock-dial-cell.mat-clock-dial-cell-disabled.mat-clock-dial-cell-active {
     background-color: var(--mat-timepicker-clock-dial-cell-active-disabled-color);
   }
@@ -79,6 +73,10 @@
 
   .mat-clock-dial-hand.mat-clock-dial-hand-disabled {
     background-color: var(--mat-timepicker-clock-dial-hand-disabled-color);
+
+    &::before {
+      background-color: var(--mat-timepicker-clock-dial-hand-value-point-disabled-color);
+    }
   }
 
   .mat-clock-dial-cell:not(.mat-primary):not(.mat-accent):not(.mat-warn) {
