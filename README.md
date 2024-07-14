@@ -11,6 +11,7 @@ The timepicker module using Angular material.
 
 | mat-timepicker | Angular             |
 | -------------- | ------------------- |
+| 18.x.x         | >=18.0.0            |
 | 17.x.x         | ^17.0.0             |
 | 16.x.x         | ^16.0.0             |
 | 15.x.x         | ^15.0.0             |
@@ -106,6 +107,9 @@ Then you have to define a theme. [More details about theming](https://material.a
 
 // timepicker theme
 @include mat-timepicker.timepicker-theme($theme);
+
+// if you want to support color attribute in M3 add compatibility mixin
+@include mat.color-variants-backwards-compatibility($my-theme)
 ```
 
 ## Usage
