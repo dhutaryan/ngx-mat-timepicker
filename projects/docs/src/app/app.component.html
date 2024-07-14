@@ -10,6 +10,13 @@
     </ng-template>
     <ng-template #controls>
       <div class="right-content">
+        <button
+          ng-doc-button-icon
+          size="large"
+          (click)="toggleMaterialDesign()"
+        >
+          <ng-doc-icon customIcon="palette" [size]="24"></ng-doc-icon>
+        </button>
         <ng-doc-theme-toggle></ng-doc-theme-toggle>
         <a
           href="https://github.com/dhutaryan/ngx-mat-timepicker"
