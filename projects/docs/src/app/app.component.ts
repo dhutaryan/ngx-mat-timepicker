@@ -38,6 +38,10 @@ export class AppComponent implements OnInit {
     this.document.documentElement.classList.toggle('m2');
   }
 
+  hasM2Class(): boolean {
+    return this.document.documentElement.classList.contains('m2');
+  }
+
   private handleTheme(theme: NgDocTheme | undefined) {
     if (theme?.id === NG_DOC_NIGHT_THEME.id) {
       this._renderer.addClass(this.document.documentElement, 'dark-theme');

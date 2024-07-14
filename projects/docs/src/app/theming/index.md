@@ -8,7 +8,7 @@
 @use "@angular/material" as mat;
 @use "@dhutaryan/ngx-mat-timepicker" as mat-timepicker;
 
-$my-theme: mat.define-light-theme(...);
+$my-theme: mat.define-theme(...);
 
 // timepicker uses these component
 @include mat.form-field-theme($my-theme);
@@ -31,7 +31,7 @@ Will be updated...
 @use "@angular/material" as mat;
 @use "@dhutaryan/ngx-mat-timepicker" as mat-timepicker;
 
-$my-theme: mat.define-light-theme(...);
+$my-theme: mat.m2-define-light-theme(...);
 
 // timepicker uses these component
 @include mat.form-field-theme($my-theme);
