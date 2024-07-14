@@ -1,0 +1,6 @@
+@use '../utils';
+@use './tokens';
+
+@mixin m3-typography($theme) {
+  @include utils.create-token-values(tokens.get-typography-tokens($theme));
+}

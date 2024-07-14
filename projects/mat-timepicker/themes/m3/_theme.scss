@@ -1,0 +1,12 @@
+@use 'sass:list';
+@use 'sass:map';
+
+@use './base';
+@use './color';
+@use './typography';
+
+@mixin theme($theme) {
+  @include base.m3-base();
+  @include color.m3-color($theme);
+  @include typography.m3-typography($theme);
+}

@@ -1,21 +1,28 @@
 @use '@angular/material' as mat;
 
+@use './themes/base.scss';
 @use './themes/m2/theme' as m2-theme;
 @use './themes/m2/color' as m2-color;
+@use './themes/m3/theme' as m3-theme;
+@use './themes/m3/color' as m3-color;
 
 @mixin theme($theme) {
+  @include base.define-color();
+  @include base.define-typography();
+
   @if (mat.get-theme-version($theme) == 1) {
-    // @include m3-theme.theme($theme);
+    @include m3-theme.theme($theme);
   } @else {
     @include m2-theme.theme($theme);
   }
 }
 
 @mixin color($theme) {
+  @include base.define-color();
+
   @if (mat.get-theme-version($theme) == 1) {
-    // @include m3-color.m3-color($theme);
+    @include m3-color.m3-color($theme);
   } @else {
-    $typography: mat.define-typography-config();
     @include m2-color.m2-color($theme);
   }
 }

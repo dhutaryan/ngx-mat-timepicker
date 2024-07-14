@@ -1,11 +1,14 @@
 @use '@angular/material' as mat;
 
+@use './base';
 @use './color';
 @use './typography';
 
 @mixin theme($theme-or-color-config) {
   $color: mat.m2-get-color-config($theme-or-color-config);
   $typography: mat.m2-get-typography-config($theme-or-color-config);
+
+  @include base.m2-base();
 
   @if $color != null {
     @include color.m2-color($color);
