@@ -35,7 +35,7 @@ import{a as r}from"./chunk-Q4Z2UPH5.js";import"./chunk-P6AWNZJE.js";import{b as 
 </span></code></pre><h2 id="theming" class="ngde">Theming<a title="Link to heading" class="ng-doc-header-link ngde" href="/getting-started#theming"><ng-doc-icon icon="link-2" size="16" class="ngde"></ng-doc-icon></a></h2><p class="ngde">Then you have to define a theme. <a href="https://material.angular.io/guide/theming" class="ngde">More details about theming</a>. As ngx-mat-timepicker uses some material components, it's necessary to add theme for them.</p><pre class="ngde hljs"><code class="hljs language-scss code-lines ngde" lang="scss" name="" icon="" highlightedlines="[]"><span class="line ngde"><span class="hljs-keyword ngde">@use</span> <span class="hljs-string ngde">"@angular/material"</span> as mat;
 </span><span class="line ngde"><span class="hljs-keyword ngde">@use</span> <span class="hljs-string ngde">"@dhutaryan/ngx-mat-timepicker"</span> as mat-timepicker;
 </span><span class="line ngde">
-</span><span class="line ngde"><span class="hljs-variable ngde">$my-theme</span>: mat.<span class="hljs-built_in ngde">define-light-theme</span>(...);
+</span><span class="line ngde"><span class="hljs-variable ngde">$my-theme</span>: mat.<span class="hljs-built_in ngde">define-theme</span>(...);
 </span><span class="line ngde">
 </span><span class="line ngde"><span class="hljs-comment ngde">// timepicker uses these component</span>
 </span><span class="line ngde"><span class="hljs-keyword ngde">@include</span> mat.form-field-theme(<span class="hljs-variable ngde">$my-theme</span>);
