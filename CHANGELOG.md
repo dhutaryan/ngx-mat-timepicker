@@ -1,3 +1,7 @@
+# 18.0.0
+
+- feat(timepicker): add material 3 support and tokens api ([#171](https://github.com/dhutaryan/ngx-mat-timepicker/pull/171))
+
 # 17.6.0
 
 - feat(timepicker): restore focus after timepicker is closed ([#169](https://github.com/dhutaryan/ngx-mat-timepicker/pull/169))
