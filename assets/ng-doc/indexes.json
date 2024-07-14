@@ -45,6 +45,39 @@
   },
   {
     "breadcrumbs": [
+      "Theming"
+    ],
+    "pageType": "guide",
+    "title": "Theming",
+    "section": "Theming",
+    "route": "/theming",
+    "fragment": "theming",
+    "content": "ngx-mat-timepicker supports both material 2 and material 3. Tokens API allows you to customize styles by easy way."
+  },
+  {
+    "breadcrumbs": [
+      "Theming"
+    ],
+    "pageType": "guide",
+    "title": "Theming",
+    "section": "Material 3",
+    "route": "/theming",
+    "fragment": "material-3",
+    "content": "Will be updated..."
+  },
+  {
+    "breadcrumbs": [
+      "Theming"
+    ],
+    "pageType": "guide",
+    "title": "Theming",
+    "section": "Material 2",
+    "route": "/theming",
+    "fragment": "material-2",
+    "content": "Will be updated..."
+  },
+  {
+    "breadcrumbs": [
       "Usage"
     ],
     "pageType": "guide",
