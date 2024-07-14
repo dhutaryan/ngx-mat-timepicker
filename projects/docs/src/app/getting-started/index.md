@@ -84,4 +84,6 @@ $my-theme: mat.define-light-theme(...);
 @include mat.divider-theme($my-theme);
 // timepicker theme
 @include mat-timepicker.timepicker-theme($my-theme);
+// if you want to support color attribute in M3 add compatibility mixin
+@include mat.color-variants-backwards-compatibility($my-theme)
 ```

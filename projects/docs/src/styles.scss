@@ -16,16 +16,53 @@
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.core-theme(theme.$ngx-mat-timepicker-theme);
-@include mat.toolbar-theme(theme.$ngx-mat-timepicker-theme);
-@include mat.form-field-theme(theme.$ngx-mat-timepicker-theme);
-@include mat.input-theme(theme.$ngx-mat-timepicker-theme);
-@include mat.button-theme(theme.$ngx-mat-timepicker-theme);
-@include mat.fab-theme(theme.$ngx-mat-timepicker-theme);
-@include mat.icon-button-theme(theme.$ngx-mat-timepicker-theme);
-@include mat.divider-theme(theme.$ngx-mat-timepicker-theme);
-@include mat.card-theme(theme.$ngx-mat-timepicker-theme);
-@include mat-timepicker.timepicker-theme(theme.$ngx-mat-timepicker-theme);
+@mixin components-theme($theme) {
+  @include mat.core-theme($theme);
+  @include mat.toolbar-theme($theme);
+  @include mat.form-field-theme($theme);
+  @include mat.input-theme($theme);
+  @include mat.button-theme($theme);
+  @include mat.fab-theme($theme);
+  @include mat.icon-button-theme($theme);
+  @include mat.divider-theme($theme);
+  @include mat.card-theme($theme);
+  @include mat-timepicker.timepicker-theme($theme);
+}
+
+@mixin components-color($theme) {
+  @include mat.core-color($theme);
+  @include mat.toolbar-color($theme);
+  @include mat.form-field-color($theme);
+  @include mat.input-color($theme);
+  @include mat.button-color($theme);
+  @include mat.fab-color($theme);
+  @include mat.icon-button-color($theme);
+  @include mat.divider-color($theme);
+  @include mat.card-color($theme);
+  @include mat-timepicker.timepicker-color($theme);
+}
+
+:root {
+  &:not(.m2) {
+    @include components-theme(theme.$ngx-mat-timepicker-theme);
+    @include mat.color-variants-backwards-compatibility(theme.$ngx-mat-timepicker-theme);
+  }
+
+  &.m2 {
+    @include components-theme(theme.$ngx-mat-timepicker-theme-m2);
+  }
+
+  &.dark-theme {
+    &:not(.m2) {
+      @include components-color(theme.$ngx-mat-timepicker-theme-dark);
+      @include mat.color-variants-backwards-compatibility(theme.$ngx-mat-timepicker-theme-dark);
+    }
+
+    &.m2 {
+      @include components-color(theme.$ngx-mat-timepicker-theme-m2-dark);
+    }
+  }
+}
 
 /* You can add global styles to this file, and also import other style files */
 
