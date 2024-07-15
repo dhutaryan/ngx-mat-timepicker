@@ -1,3 +1,8 @@
+# 18.0.1
+
+- fix(timepicker): use correct elevation for m3 ([#176](https://github.com/dhutaryan/ngx-mat-timepicker/pull/176))
+- fix(timepicker): add missing theme imports ([#175](https://github.com/dhutaryan/ngx-mat-timepicker/pull/175))
+
 # 18.0.0
 
 - feat(timepicker): add material 3 support and tokens api ([#171](https://github.com/dhutaryan/ngx-mat-timepicker/pull/171))
