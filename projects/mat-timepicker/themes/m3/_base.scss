@@ -1,8 +1,14 @@
+@use '@angular/material' as mat;
+
 @use '../utils';
 @use './tokens';
 
 @mixin m3-base() {
   @include utils.create-token-values(tokens.get-unthemable-tokens());
+
+  .mat-timepicker-content {
+    @include mat.elevation(0);
+  }
 
   .mat-clock-dial-cell.mat-mdc-mini-fab {
     border-radius: var(--mat-timepicker-clock-dial-cell-border-radius);

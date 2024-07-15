@@ -36,7 +36,6 @@
   }
 
   .mat-timepicker-content {
-    @include mat.elevation(4);
     background-color: var(--mat-timepicker-content-background-color);
     color: var(--mat-timepicker-content-text-color);
     border-radius: var(--mat-timepicker-content-border-radius);
