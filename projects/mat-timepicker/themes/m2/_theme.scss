@@ -18,6 +18,6 @@
     @include typography.m2-typography($typography);
   } @else {
     $typography: mat.m2-define-typography-config();
-    @include typography($typography);
+    @include typography.m2-typography($typography);
   }
 }
