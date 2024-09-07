@@ -1672,7 +1672,7 @@ describe('MatTimepicker', () => {
     });
 
     fdescribe('timepicker default options', () => {
-      it('should be able to change the default color', fakeAsync(() => {
+      fit('should be able to change the default color', fakeAsync(() => {
         const fixture = createComponent(
           FormFieldTimepicker,
           [MatNativeDateTimeModule],
@@ -1781,8 +1781,7 @@ describe('MatTimepicker', () => {
         );
       }));
 
-      it('should be able to change the default minutes interval', fakeAsync(() => {
-        TestBed.resetTestingModule();
+      fit('should be able to change the default minutes interval', fakeAsync(() => {
         const fixture = createComponent(
           StandardTimepicker,
           [MatNativeDateTimeModule],
