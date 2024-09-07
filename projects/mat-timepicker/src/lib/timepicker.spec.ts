@@ -1782,6 +1782,7 @@ describe('MatTimepicker', () => {
       }));
 
       it('should be able to change the default minutes interval', fakeAsync(() => {
+        TestBed.resetTestingModule();
         const fixture = createComponent(
           StandardTimepicker,
           [MatNativeDateTimeModule],
