@@ -33,5 +33,10 @@
   "dependencies": {
     "tslib": ">=2.0.0"
   },
+  "exports": {
+    ".": {
+      "sass": "./_index.scss"
+    }
+  },
   "sideEffects": false
 }
