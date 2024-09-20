@@ -1,3 +1,7 @@
+# 18.0.2
+
+- fixed incorrect @include statement ([#176](https://github.com/dhutaryan/ngx-mat-timepicker/issues/180))
+
 # 18.0.1
 
 - fix(timepicker): use correct elevation for m3 ([#176](https://github.com/dhutaryan/ngx-mat-timepicker/pull/176))
