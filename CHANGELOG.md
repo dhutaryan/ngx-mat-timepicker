@@ -1,3 +1,6 @@
+# 15.4.1
+
+- fixed incorrect @include statement ([#176](https://github.com/dhutaryan/ngx-mat-timepicker/issues/180))
 
 # 15.4.0
 
