@@ -4606,6 +4606,19 @@
     "section": "Properties",
     "route": "/api/api/classes/MatTimepickerIntl",
     "fragment": "properties",
+    "content": "A label for am text."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerIntl"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerIntl",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerIntl",
+    "fragment": "properties",
     "content": "A label for cancel button to close timepicker."
   },
   {
@@ -4698,6 +4711,19 @@
     "route": "/api/api/classes/MatTimepickerIntl",
     "fragment": "properties",
     "content": "Label for the button used to open the timepicker popup (used by screen readers)."
+  },
+  {
+    "breadcrumbs": [
+      "API",
+      "ngx-mat-timepicker",
+      "MatTimepickerIntl"
+    ],
+    "pageType": "api",
+    "title": "MatTimepickerIntl",
+    "section": "Properties",
+    "route": "/api/api/classes/MatTimepickerIntl",
+    "fragment": "properties",
+    "content": "A label for am text."
   },
   {
     "breadcrumbs": [
