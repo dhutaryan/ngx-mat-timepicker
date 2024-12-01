@@ -1,3 +1,7 @@
+# 16.4.2
+
+- fix(intl): add strings for am/pm ([#190](https://github.com/dhutaryan/ngx-mat-timepicker/issues/190))
+
 # 16.4.1
 
 - fixed incorrect @include statement ([#176](https://github.com/dhutaryan/ngx-mat-timepicker/issues/180))
@@ -51,9 +55,13 @@
 
 - build(deps): bump angular and angular material to v16 ([#95](https://github.com/dhutaryan/ngx-mat-timepicker/pull/95))
 
+# 15.4.2
+
+- fix(intl): add strings for am/pm ([#190](https://github.com/dhutaryan/ngx-mat-timepicker/issues/190))
+
 # 15.4.1
 
-- fixed incorrect @include statement ([#176](https://github.com/dhutaryan/ngx-mat-timepicker/issues/180))
+- fixed incorrect @include statement ([#180](https://github.com/dhutaryan/ngx-mat-timepicker/issues/180))
 
 # 15.4.0
 
