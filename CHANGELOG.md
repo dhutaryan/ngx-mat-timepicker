@@ -1,3 +1,7 @@
+# 18.0.3
+
+- fix(intl): add strings for am/pm ([#190](https://github.com/dhutaryan/ngx-mat-timepicker/issues/190))
+
 # 18.0.2
 
 - fixed incorrect @include statement ([#176](https://github.com/dhutaryan/ngx-mat-timepicker/issues/180))
@@ -10,6 +14,14 @@
 # 18.0.0
 
 - feat(timepicker): add material 3 support and tokens api ([#171](https://github.com/dhutaryan/ngx-mat-timepicker/pull/171))
+
+# 17.6.2
+
+- fix(intl): add strings for am/pm ([#190](https://github.com/dhutaryan/ngx-mat-timepicker/issues/190))
+
+# 17.6.1
+
+- fixed incorrect @include statement ([#176](https://github.com/dhutaryan/ngx-mat-timepicker/issues/180))
 
 # 17.6.0
 
@@ -64,6 +76,14 @@
 
 - build(deps): bump angular and angular material to v17 ([#106](https://github.com/dhutaryan/ngx-mat-timepicker/pull/106))
 
+# 16.4.2
+
+- fix(intl): add strings for am/pm ([#190](https://github.com/dhutaryan/ngx-mat-timepicker/issues/190))
+
+# 16.4.1
+
+- fixed incorrect @include statement ([#176](https://github.com/dhutaryan/ngx-mat-timepicker/issues/180))
+
 # 16.4.0
 
 - feat(timepicker): restore focus after timepicker is closed ([#169](https://github.com/dhutaryan/ngx-mat-timepicker/pull/169))
@@ -112,6 +132,14 @@
 # 16.0.0
 
 - build(deps): bump angular and angular material to v16 ([#95](https://github.com/dhutaryan/ngx-mat-timepicker/pull/95))
+
+# 15.4.2
+
+- fix(intl): add strings for am/pm ([#190](https://github.com/dhutaryan/ngx-mat-timepicker/issues/190))
+
+# 15.4.1
+
+- fixed incorrect @include statement ([#180](https://github.com/dhutaryan/ngx-mat-timepicker/issues/180))
 
 # 15.4.0
 
