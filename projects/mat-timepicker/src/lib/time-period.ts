@@ -10,6 +10,8 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatRippleModule } from '@angular/material/core';
 
+import { MatTimepickerIntl } from './timepicker-intl';
+
 export type MatTimePeriodType = 'am' | 'pm';
 
 @Component({
@@ -57,6 +59,8 @@ export class MatTimePeriod {
   private _disabledPeriod: MatTimePeriodType | null = null;
 
   @Output() periodChanged = new EventEmitter<MatTimePeriodType>();
+
+  constructor(public _intl: MatTimepickerIntl) {}
 
   setPeriod(event: Event, period: MatTimePeriodType): void {
     event.preventDefault();

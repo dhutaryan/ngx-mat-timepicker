@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MatTimepickerIntl {
@@ -26,4 +25,10 @@ export class MatTimepickerIntl {
 
   /** A label for cancel button to close timepicker. */
   cancelButton = 'Cancel';
+
+  /** A label for am text. */
+  am = 'AM';
+
+  /** A label for am text. */
+  pm = 'PM';
 }
