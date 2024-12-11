@@ -1,3 +1,7 @@
+# 19.0.0
+
+- feat(timepicker): support angular and angular material v19 ([#193](https://github.com/dhutaryan/ngx-mat-timepicker/issues/193))
+
 # 18.0.4
 
 - fix(inlt): add intl update trigger ([#194](https://github.com/dhutaryan/ngx-mat-timepicker/issues/194))
