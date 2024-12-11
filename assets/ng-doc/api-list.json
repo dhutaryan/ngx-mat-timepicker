@@ -1,0 +1,327 @@
+[
+  {
+    "title": "ngx-mat-timepicker",
+    "items": [
+      {
+        "route": "/api/variables/api/enterLeaveAnimation",
+        "type": "Variable",
+        "name": "enterLeaveAnimation"
+      },
+      {
+        "route": "/api/type-aliases/api/MatDialView",
+        "type": "TypeAlias",
+        "name": "MatDialView"
+      },
+      {
+        "route": "/api/classes/api/MatClockDials",
+        "type": "Component",
+        "name": "MatClockDials"
+      },
+      {
+        "route": "/api/interfaces/api/ClockDialViewCell",
+        "type": "Interface",
+        "name": "ClockDialViewCell"
+      },
+      {
+        "route": "/api/variables/api/ALL_HOURS",
+        "type": "Variable",
+        "name": "ALL_HOURS"
+      },
+      {
+        "route": "/api/classes/api/MatHoursClockDial",
+        "type": "Component",
+        "name": "MatHoursClockDial"
+      },
+      {
+        "route": "/api/variables/api/ALL_MINUTES",
+        "type": "Variable",
+        "name": "ALL_MINUTES"
+      },
+      {
+        "route": "/api/classes/api/MatMinutesClockDial",
+        "type": "Component",
+        "name": "MatMinutesClockDial"
+      },
+      {
+        "route": "/api/type-aliases/api/TimepickerOrientation",
+        "type": "TypeAlias",
+        "name": "TimepickerOrientation"
+      },
+      {
+        "route": "/api/classes/api/MatTimeFaceBase",
+        "type": "Directive",
+        "name": "MatTimeFaceBase"
+      },
+      {
+        "route": "/api/functions/api/withZeroPrefix",
+        "type": "Function",
+        "name": "withZeroPrefix"
+      },
+      {
+        "route": "/api/functions/api/withZeroPrefixMeridiem",
+        "type": "Function",
+        "name": "withZeroPrefixMeridiem"
+      },
+      {
+        "route": "/api/classes/api/MatTimeInputBase",
+        "type": "Directive",
+        "name": "MatTimeInputBase"
+      },
+      {
+        "route": "/api/classes/api/MatHourInput",
+        "type": "Directive",
+        "name": "MatHourInput"
+      },
+      {
+        "route": "/api/classes/api/MatMinuteInput",
+        "type": "Directive",
+        "name": "MatMinuteInput"
+      },
+      {
+        "route": "/api/classes/api/MatTimeInputs",
+        "type": "Component",
+        "name": "MatTimeInputs"
+      },
+      {
+        "route": "/api/type-aliases/api/MatTimePeriodType",
+        "type": "TypeAlias",
+        "name": "MatTimePeriodType"
+      },
+      {
+        "route": "/api/classes/api/MatTimePeriod",
+        "type": "Component",
+        "name": "MatTimePeriod"
+      },
+      {
+        "route": "/api/functions/api/MAT_SINGLE_TIME_SELECTION_MODEL_FACTORY",
+        "type": "Function",
+        "name": "MAT_SINGLE_TIME_SELECTION_MODEL_FACTORY"
+      },
+      {
+        "route": "/api/type-aliases/api/ExtractTimeTypeFromSelection",
+        "type": "TypeAlias",
+        "name": "ExtractTimeTypeFromSelection"
+      },
+      {
+        "route": "/api/interfaces/api/TimeSelectionModelChange",
+        "type": "Interface",
+        "name": "TimeSelectionModelChange"
+      },
+      {
+        "route": "/api/classes/api/MatTimeSelectionModel",
+        "type": "Injectable",
+        "name": "MatTimeSelectionModel"
+      },
+      {
+        "route": "/api/classes/api/MatSingleTimeSelectionModel",
+        "type": "Injectable",
+        "name": "MatSingleTimeSelectionModel"
+      },
+      {
+        "route": "/api/variables/api/MAT_SINGLE_TIME_SELECTION_MODEL_PROVIDER",
+        "type": "Variable",
+        "name": "MAT_SINGLE_TIME_SELECTION_MODEL_PROVIDER"
+      },
+      {
+        "route": "/api/variables/api/MAT_DEFAULT_ACITONS",
+        "type": "Variable",
+        "name": "MAT_DEFAULT_ACITONS"
+      },
+      {
+        "route": "/api/classes/api/MatTimepickerApply",
+        "type": "Directive",
+        "name": "MatTimepickerApply"
+      },
+      {
+        "route": "/api/classes/api/MatTimepickerCancel",
+        "type": "Directive",
+        "name": "MatTimepickerCancel"
+      },
+      {
+        "route": "/api/classes/api/MatTimepickerActions",
+        "type": "Component",
+        "name": "MatTimepickerActions"
+      },
+      {
+        "route": "/api/classes/api/MatTimepickerDefaultActions",
+        "type": "Component",
+        "name": "MatTimepickerDefaultActions"
+      },
+      {
+        "route": "/api/variables/api/matTimepickerAnimations",
+        "type": "Variable",
+        "name": "matTimepickerAnimations"
+      },
+      {
+        "route": "/api/type-aliases/api/TimepickerOpenAs",
+        "type": "TypeAlias",
+        "name": "TimepickerOpenAs"
+      },
+      {
+        "route": "/api/type-aliases/api/TimepickerDropdownPositionX",
+        "type": "TypeAlias",
+        "name": "TimepickerDropdownPositionX"
+      },
+      {
+        "route": "/api/type-aliases/api/TimepickerDropdownPositionY",
+        "type": "TypeAlias",
+        "name": "TimepickerDropdownPositionY"
+      },
+      {
+        "route": "/api/type-aliases/api/TimepickerMode",
+        "type": "TypeAlias",
+        "name": "TimepickerMode"
+      },
+      {
+        "route": "/api/type-aliases/api/TimepickerFormat",
+        "type": "TypeAlias",
+        "name": "TimepickerFormat"
+      },
+      {
+        "route": "/api/interfaces/api/MatTimepickerControl",
+        "type": "Interface",
+        "name": "MatTimepickerControl"
+      },
+      {
+        "route": "/api/interfaces/api/MatTimepickerPanel",
+        "type": "Interface",
+        "name": "MatTimepickerPanel"
+      },
+      {
+        "route": "/api/interfaces/api/MatTimepickerDefaultOptions",
+        "type": "Interface",
+        "name": "MatTimepickerDefaultOptions"
+      },
+      {
+        "route": "/api/variables/api/MAT_TIMEPICKER_DEFAULT_OPTIONS",
+        "type": "Variable",
+        "name": "MAT_TIMEPICKER_DEFAULT_OPTIONS"
+      },
+      {
+        "route": "/api/classes/api/MatTimepickerBase",
+        "type": "Directive",
+        "name": "MatTimepickerBase"
+      },
+      {
+        "route": "/api/classes/api/MatTimepickerContentLayout",
+        "type": "Component",
+        "name": "MatTimepickerContentLayout"
+      },
+      {
+        "route": "/api/classes/api/MatTimepickerContent",
+        "type": "Component",
+        "name": "MatTimepickerContent"
+      },
+      {
+        "route": "/api/functions/api/timeInputsHaveChanged",
+        "type": "Function",
+        "name": "timeInputsHaveChanged"
+      },
+      {
+        "route": "/api/classes/api/MatTimepickerInputEvent",
+        "type": "Class",
+        "name": "MatTimepickerInputEvent"
+      },
+      {
+        "route": "/api/classes/api/MatTimepickerInputBase",
+        "type": "Directive",
+        "name": "MatTimepickerInputBase"
+      },
+      {
+        "route": "/api/variables/api/MAT_TIMEPICKER_VALUE_ACCESSOR",
+        "type": "Variable",
+        "name": "MAT_TIMEPICKER_VALUE_ACCESSOR"
+      },
+      {
+        "route": "/api/variables/api/MAT_TIMEPICKER_VALIDATORS",
+        "type": "Variable",
+        "name": "MAT_TIMEPICKER_VALIDATORS"
+      },
+      {
+        "route": "/api/classes/api/MatTimepickerInput",
+        "type": "Directive",
+        "name": "MatTimepickerInput"
+      },
+      {
+        "route": "/api/classes/api/MatTimepickerIntl",
+        "type": "Injectable",
+        "name": "MatTimepickerIntl"
+      },
+      {
+        "route": "/api/functions/api/MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY",
+        "type": "Function",
+        "name": "MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY"
+      },
+      {
+        "route": "/api/variables/api/MAT_TIMEPICKER_SCROLL_STRATEGY",
+        "type": "Variable",
+        "name": "MAT_TIMEPICKER_SCROLL_STRATEGY"
+      },
+      {
+        "route": "/api/variables/api/MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER",
+        "type": "Variable",
+        "name": "MAT_TIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER"
+      },
+      {
+        "route": "/api/classes/api/MatTimepickerToggleIcon",
+        "type": "Directive",
+        "name": "MatTimepickerToggleIcon"
+      },
+      {
+        "route": "/api/classes/api/MatTimepickerToggle",
+        "type": "Component",
+        "name": "MatTimepickerToggle"
+      },
+      {
+        "route": "/api/classes/api/MatTimepickerModule",
+        "type": "NgModule",
+        "name": "MatTimepickerModule"
+      },
+      {
+        "route": "/api/classes/api/MatTimepicker",
+        "type": "Component",
+        "name": "MatTimepicker"
+      },
+      {
+        "route": "/api/functions/api/provideNativeDateTimeAdapter",
+        "type": "Function",
+        "name": "provideNativeDateTimeAdapter"
+      },
+      {
+        "route": "/api/classes/api/NativeDateTimeModule",
+        "type": "NgModule",
+        "name": "NativeDateTimeModule"
+      },
+      {
+        "route": "/api/classes/api/MatNativeDateTimeModule",
+        "type": "NgModule",
+        "name": "MatNativeDateTimeModule"
+      },
+      {
+        "route": "/api/functions/api/MAT_DATE_TIME_LOCALE_FACTORY",
+        "type": "Function",
+        "name": "MAT_DATE_TIME_LOCALE_FACTORY"
+      },
+      {
+        "route": "/api/variables/api/MAT_TIME_LOCALE",
+        "type": "Variable",
+        "name": "MAT_TIME_LOCALE"
+      },
+      {
+        "route": "/api/variables/api/MAT_TIME_LOCALE_PROVIDER",
+        "type": "Variable",
+        "name": "MAT_TIME_LOCALE_PROVIDER"
+      },
+      {
+        "route": "/api/classes/api/TimeAdapter",
+        "type": "Class",
+        "name": "TimeAdapter"
+      },
+      {
+        "route": "/api/classes/api/NativeDateTimeAdapter",
+        "type": "Injectable",
+        "name": "NativeDateTimeAdapter"
+      }
+    ]
+  }
+]
