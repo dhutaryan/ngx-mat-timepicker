@@ -1864,6 +1864,7 @@ describe('MatTimepicker', () => {
       [touchUi]="touchUi"
     ></mat-timepicker>
   `,
+  standalone: false,
 })
 class StandardTimepicker {
   openAs: TimepickerOpenAs = 'popup';
@@ -1884,6 +1885,7 @@ class StandardTimepicker {
     <input [matTimepicker]="t" />
     <mat-timepicker #t></mat-timepicker>
   `,
+  standalone: false,
 })
 class MultiInputTimepicker {}
 
@@ -1892,6 +1894,7 @@ class MultiInputTimepicker {}
     <input [matTimepicker]="assignedTimepicker" [value]="date" />
     <mat-timepicker #t openAs="dialog"></mat-timepicker>
   `,
+  standalone: false,
 })
 class DelayedTimepicker {
   @ViewChild('t') timepicker: MatTimepicker<Date>;
@@ -1902,6 +1905,7 @@ class DelayedTimepicker {
 
 @Component({
   template: `<mat-timepicker #t></mat-timepicker>`,
+  standalone: false,
 })
 class NoInputTimepicker {
   @ViewChild('t') timepicker: MatTimepicker<Date>;
@@ -1915,6 +1919,7 @@ class NoInputTimepicker {
       <mat-timepicker #t></mat-timepicker>
     </mat-form-field>
   `,
+  standalone: false,
 })
 class FormFieldTimepicker {
   @ViewChild('t') timepicker: MatTimepicker<Date>;
@@ -1933,6 +1938,7 @@ class FormFieldTimepicker {
     />
     <mat-timepicker #t openAs="dialog"></mat-timepicker>
   `,
+  standalone: false,
 })
 class TimepickerWithChangeAndInputEvents {
   @ViewChild('t') timepicker: MatTimepicker<Date>;
@@ -1951,6 +1957,7 @@ class TimepickerWithChangeAndInputEvents {
     <input [matTimepicker]="t" [(ngModel)]="value" [min]="min" [max]="max" />
     <mat-timepicker #t></mat-timepicker>
   `,
+  standalone: false,
 })
 class TimepickerWithISOStrings {
   value = new Date(2017, 5, 1, 9, 13).toISOString();
@@ -1969,6 +1976,7 @@ class TimepickerWithISOStrings {
       #t
     ></mat-timepicker>
   `,
+  standalone: false,
 })
 class TimepickerWithEvents {
   selected: Date | null = null;
@@ -1982,6 +1990,7 @@ class TimepickerWithEvents {
     <input (focus)="t.open()" [matTimepicker]="t" />
     <mat-timepicker #t="matTimepicker"></mat-timepicker>
   `,
+  standalone: false,
 })
 class TimepickerOpeningOnFocus {
   @ViewChild(MatTimepicker) timepicker: MatTimepicker<Date>;
@@ -1998,6 +2007,7 @@ class TimepickerOpeningOnFocus {
     <mat-timepicker-toggle [for]="t"></mat-timepicker-toggle>
     <mat-timepicker #t></mat-timepicker>
   `,
+  standalone: false,
 })
 class TimepickerWithMinAndMaxValidation {
   @ViewChild('t') timepicker: MatTimepicker<Date>;
@@ -2021,6 +2031,7 @@ class TimepickerWithMinAndMaxValidation {
       [touchUi]="touchUi"
     ></mat-timepicker>
   `,
+  standalone: false,
 })
 class TimepickerWithToggle {
   @ViewChild('t') timepicker: MatTimepicker<Date>;
@@ -2045,5 +2056,6 @@ class TimepickerWithToggle {
       [restoreFocus]="restoreFocus"
     ></mat-timepicker>
   `,
+  standalone: false,
 })
 class TimepickerWithToggleInShadowDom extends TimepickerWithToggle {}

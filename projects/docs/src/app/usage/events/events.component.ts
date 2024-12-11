@@ -6,6 +6,7 @@ import { MatTimepickerInputEvent } from 'mat-timepicker';
   selector: 'docs-events',
   templateUrl: './events.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class EventsComponent {
   events: string[] = [];

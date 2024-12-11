@@ -2,36 +2,26 @@ import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
   Inject,
   OnInit,
-  Renderer2,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NG_DOC_NIGHT_THEME, NgDocTheme, NgDocThemeService } from '@ng-doc/app';
+import { NgDocThemeService } from '@ng-doc/app/services/theme';
 
 @Component({
   selector: 'docs-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class AppComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    private readonly themeService: NgDocThemeService,
-    private readonly _destroyRef: DestroyRef,
-    private readonly _renderer: Renderer2,
+    private readonly _themeService: NgDocThemeService,
   ) {}
 
   ngOnInit() {
-    this.handleTheme(this.themeService.currentTheme);
-    this.themeService
-      .themeChanges()
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe((theme) => {
-        this.handleTheme(theme);
-      });
+    this._themeService.set('auto');
   }
 
   toggleMaterialDesign() {
@@ -40,13 +30,5 @@ export class AppComponent implements OnInit {
 
   hasM2Class(): boolean {
     return this.document.documentElement.classList.contains('m2');
-  }
-
-  private handleTheme(theme: NgDocTheme | undefined) {
-    if (theme?.id === NG_DOC_NIGHT_THEME.id) {
-      this._renderer.addClass(this.document.documentElement, 'dark-theme');
-    } else {
-      this._renderer.removeClass(this.document.documentElement, 'dark-theme');
-    }
   }
 }

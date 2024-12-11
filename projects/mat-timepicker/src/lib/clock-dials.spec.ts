@@ -48,7 +48,7 @@ describe('MatClockDials', () => {
       testComponent = fixture.componentInstance;
       hostElement = fixture.nativeElement;
       clockDialValuesElements = fixture.debugElement.queryAll(
-        By.css('.mat-clock-dial-value')
+        By.css('.mat-clock-dial-value'),
       );
       hourElement = clockDialValuesElements[0].nativeElement;
       minuteElement = clockDialValuesElements[1].nativeElement;
@@ -61,13 +61,13 @@ describe('MatClockDials', () => {
 
       expect(container).not.toBeNull();
       expect(
-        container.query(By.css('.mat-timepicker-content-layout-hours'))
+        container.query(By.css('.mat-timepicker-content-layout-hours')),
       ).not.toBeNull();
       expect(
-        container.query(By.css('.mat-timepicker-content-layout-minutes'))
+        container.query(By.css('.mat-timepicker-content-layout-minutes')),
       ).not.toBeNull();
       expect(container.queryAll(By.css('.mat-clock-dial-value')).length).toBe(
-        2
+        2,
       );
     });
 
@@ -132,12 +132,12 @@ describe('MatClockDials', () => {
       expect(testComponent.onSelect).not.toHaveBeenCalled();
 
       const amElement = document.querySelectorAll<HTMLElement>(
-        '.mat-time-period-item'
+        '.mat-time-period-item',
       )[0];
       amElement.click();
 
       expect(testComponent.onSelect).toHaveBeenCalledOnceWith(
-        new Date(2023, 4, 8, 11, 16)
+        new Date(2023, 4, 8, 11, 16),
       );
     });
 
@@ -169,7 +169,7 @@ describe('MatClockDials', () => {
     it('should have intl string', () => {
       expect(
         hostElement.querySelector('.mat-timepicker-content-layout-title')
-          ?.textContent
+          ?.textContent,
       ).toBe('Select time');
     });
 
@@ -184,7 +184,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(20 / 5).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
     }));
 
@@ -213,7 +213,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
 
       for (let i = 0; i < 5; i++) {
@@ -223,7 +223,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(15)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
 
       for (let i = 0; i < 5; i++) {
@@ -233,7 +233,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
     }));
 
@@ -245,7 +245,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
 
       pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-minutes');
@@ -253,7 +253,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(15)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
 
       pressArrowOnDial(UP_ARROW, '.mat-clock-dial-minutes');
@@ -261,7 +261,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
     }));
   });
@@ -280,7 +280,7 @@ describe('MatClockDials', () => {
       testComponent = fixture.componentInstance;
       hostElement = fixture.nativeElement;
       clockDialValuesElements = fixture.debugElement.queryAll(
-        By.css('.mat-clock-dial-value')
+        By.css('.mat-clock-dial-value'),
       );
       hourElement = clockDialValuesElements[0].nativeElement;
       minuteElement = clockDialValuesElements[1].nativeElement;
@@ -311,10 +311,10 @@ describe('MatClockDials', () => {
       fixture.detectChanges();
 
       expect(getDialCell(6).classList).not.toContain(
-        'mat-clock-dial-cell-disabled'
+        'mat-clock-dial-cell-disabled',
       );
       expect(getDialCell(5).classList).toContain(
-        'mat-clock-dial-cell-disabled'
+        'mat-clock-dial-cell-disabled',
       );
     });
 
@@ -323,10 +323,10 @@ describe('MatClockDials', () => {
       fixture.detectChanges();
 
       expect(getDialCell(6).classList).not.toContain(
-        'mat-clock-dial-cell-disabled'
+        'mat-clock-dial-cell-disabled',
       );
       expect(getDialCell(7).classList).toContain(
-        'mat-clock-dial-cell-disabled'
+        'mat-clock-dial-cell-disabled',
       );
     });
 
@@ -338,10 +338,10 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(20)).classList).not.toContain(
-        'mat-clock-dial-cell-disabled'
+        'mat-clock-dial-cell-disabled',
       );
       expect(getDialCell(getMinuteCellIndex(15)).classList).toContain(
-        'mat-clock-dial-cell-disabled'
+        'mat-clock-dial-cell-disabled',
       );
 
       testComponent.selected = new Date(2023, 4, 18, 11, 30);
@@ -349,7 +349,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(
-        hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+        hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
       ).toBe(0);
     }));
 
@@ -361,10 +361,10 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(40)).classList).not.toContain(
-        'mat-clock-dial-cell-disabled'
+        'mat-clock-dial-cell-disabled',
       );
       expect(getDialCell(getMinuteCellIndex(45)).classList).toContain(
-        'mat-clock-dial-cell-disabled'
+        'mat-clock-dial-cell-disabled',
       );
 
       testComponent.selected = new Date(2023, 4, 18, 9, 30);
@@ -372,7 +372,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(
-        hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+        hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
       ).toBe(0);
     }));
 
@@ -384,14 +384,14 @@ describe('MatClockDials', () => {
       fixture.detectChanges();
 
       expect(
-        hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+        hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
       ).toBe(12);
 
       testComponent.selected = new Date(2023, 4, 18, 19, 30);
       fixture.detectChanges();
 
       expect(
-        hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+        hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
       ).toBe(12);
     });
 
@@ -401,10 +401,10 @@ describe('MatClockDials', () => {
       fixture.detectChanges();
 
       expect(getDialCell(12).classList).toContain(
-        'mat-clock-dial-cell-disabled'
+        'mat-clock-dial-cell-disabled',
       );
       expect(getDialCell(1).classList).toContain(
-        'mat-clock-dial-cell-disabled'
+        'mat-clock-dial-cell-disabled',
       );
     });
 
@@ -437,7 +437,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
 
       for (let i = 0; i < 5; i++) {
@@ -447,7 +447,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
 
       for (let i = 0; i < 5; i++) {
@@ -457,7 +457,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(20)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
     }));
 
@@ -489,7 +489,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(10)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
 
       pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-minutes');
@@ -497,7 +497,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(40)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
 
       pressArrowOnDial(UP_ARROW, '.mat-clock-dial-minutes');
@@ -505,7 +505,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(10)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
     }));
 
@@ -533,7 +533,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(10)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
 
       pressArrowOnDial(NUMPAD_EIGHT, '.mat-clock-dial-minutes');
@@ -541,7 +541,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(10)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
 
       pressArrowOnDial(NUMPAD_TWO, '.mat-clock-dial-minutes');
@@ -549,7 +549,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(10)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
     }));
 
@@ -563,7 +563,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(35)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
 
       pressArrowOnDial(UP_ARROW, '.mat-clock-dial-minutes');
@@ -571,7 +571,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(5)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
 
       testComponent.selected = new Date(2023, 4, 27, 22, 35);
@@ -582,7 +582,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(35)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
 
       pressArrowOnDial(UP_ARROW, '.mat-clock-dial-minutes');
@@ -590,7 +590,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(25)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
     }));
 
@@ -604,7 +604,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(5)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
 
       pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-minutes');
@@ -612,7 +612,7 @@ describe('MatClockDials', () => {
       flush();
 
       expect(getDialCell(getMinuteCellIndex(35)).classList).toContain(
-        'mat-clock-dial-cell-active'
+        'mat-clock-dial-cell-active',
       );
     }));
 
@@ -625,7 +625,7 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         const periodItems = fixture.debugElement.queryAll(
-          By.css('.mat-time-period-item')
+          By.css('.mat-time-period-item'),
         );
         amItem = periodItems[0].nativeElement;
         pmItem = periodItems[1].nativeElement;
@@ -638,13 +638,13 @@ describe('MatClockDials', () => {
 
         // index = hour - 1 (6 - 1)
         expect(getDialCell(6, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(5, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(12, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
       });
 
@@ -654,7 +654,7 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(
-          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
         ).toBe(0);
       });
 
@@ -664,13 +664,13 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(getDialCell(7, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(8, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(12, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
       });
 
@@ -680,7 +680,7 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(
-          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
         ).toBe(0);
       });
 
@@ -692,16 +692,16 @@ describe('MatClockDials', () => {
 
         // index = hour - 1 (6 - 1)
         expect(getDialCell(6, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(5, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(12, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(
-          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
         ).toBe(6);
 
         // emulates that new selected time has come, +12h from am to pm
@@ -709,16 +709,16 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(getDialCell(9, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(10, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(12, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(
-          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
         ).toBe(2);
       });
 
@@ -728,13 +728,13 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(getDialCell(2, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(1, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(12, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(amItem.classList).toContain('mat-time-period-item-disabled');
 
@@ -742,7 +742,7 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(
-          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
         ).toBe(12);
       });
 
@@ -752,13 +752,13 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(getDialCell(10, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(11, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(12, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(pmItem.classList).toContain('mat-time-period-item-disabled');
 
@@ -766,7 +766,7 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(
-          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
         ).toBe(12);
       });
 
@@ -777,19 +777,19 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(getDialCell(3, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(10, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(2, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(11, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(12, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(pmItem.classList).toContain('mat-time-period-item-disabled');
 
@@ -797,7 +797,7 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(
-          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
         ).toBe(12);
       });
 
@@ -808,19 +808,19 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(getDialCell(2, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(9, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(1, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(10, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(12, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(amItem.classList).toContain('mat-time-period-item-disabled');
 
@@ -828,7 +828,7 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(
-          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
         ).toBe(12);
       });
 
@@ -838,14 +838,14 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(
-          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
         ).toBe(0);
 
         testComponent.selected = new Date(2023, 4, 18, 15, 20);
         fixture.detectChanges();
 
         expect(
-          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
         ).toBe(0);
       });
 
@@ -855,7 +855,7 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(
-          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
         ).toBe(0);
         expect(amItem.classList).toContain('mat-time-period-item-disabled');
 
@@ -863,7 +863,7 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(
-          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
         ).toBe(12);
       });
 
@@ -874,13 +874,13 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(getDialCell(8, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(9, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(12, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(pmItem.classList).toContain('mat-time-period-item-disabled');
 
@@ -888,7 +888,7 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(
-          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
         ).toBe(12);
       });
 
@@ -899,7 +899,7 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(
-          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
         ).toBe(0);
         expect(pmItem.classList).not.toContain('mat-time-period-item-disabled');
 
@@ -907,13 +907,13 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(getDialCell(6, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(7, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(12, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
       });
 
@@ -923,10 +923,10 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(getDialCell(12, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(1, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(pmItem.classList).toContain('mat-time-period-item-disabled');
 
@@ -934,7 +934,7 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(
-          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
         ).toBe(12);
       });
 
@@ -944,7 +944,7 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(
-          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
         ).toBe(0);
         expect(pmItem.classList).not.toContain('mat-time-period-item-disabled');
 
@@ -952,10 +952,10 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(getDialCell(12, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(1, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
       });
 
@@ -966,13 +966,13 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(getDialCell(3, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(4, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(12, true).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(pmItem.classList).not.toContain('mat-time-period-item-disabled');
 
@@ -980,10 +980,10 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(getDialCell(12, true).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(
-          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length
+          hostElement.querySelectorAll('.mat-clock-dial-cell-disabled').length,
         ).toBe(11);
       });
 
@@ -996,10 +996,10 @@ describe('MatClockDials', () => {
         flush();
 
         expect(getDialCell(getMinuteCellIndex(40)).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(getMinuteCellIndex(35)).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
 
         testComponent.selected = new Date(2023, 4, 18, 19, 20);
@@ -1007,10 +1007,10 @@ describe('MatClockDials', () => {
         flush();
 
         expect(getDialCell(getMinuteCellIndex(25)).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(getMinuteCellIndex(30)).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
       }));
 
@@ -1022,10 +1022,10 @@ describe('MatClockDials', () => {
         flush();
 
         expect(getDialCell(getMinuteCellIndex(25)).classList).not.toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
         expect(getDialCell(getMinuteCellIndex(30)).classList).toContain(
-          'mat-clock-dial-cell-disabled'
+          'mat-clock-dial-cell-disabled',
         );
       }));
 
@@ -1036,21 +1036,21 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(getDialCell(6, true).classList).toContain(
-          'mat-clock-dial-cell-active'
+          'mat-clock-dial-cell-active',
         );
 
         pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-hours');
         fixture.detectChanges();
 
         expect(getDialCell(11, true).classList).toContain(
-          'mat-clock-dial-cell-active'
+          'mat-clock-dial-cell-active',
         );
 
         pressArrowOnDial(UP_ARROW, '.mat-clock-dial-hours');
         fixture.detectChanges();
 
         expect(getDialCell(6, true).classList).toContain(
-          'mat-clock-dial-cell-active'
+          'mat-clock-dial-cell-active',
         );
       });
 
@@ -1061,21 +1061,21 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(getDialCell(6, true).classList).toContain(
-          'mat-clock-dial-cell-active'
+          'mat-clock-dial-cell-active',
         );
 
         pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-hours');
         fixture.detectChanges();
 
         expect(getDialCell(10, true).classList).toContain(
-          'mat-clock-dial-cell-active'
+          'mat-clock-dial-cell-active',
         );
 
         pressArrowOnDial(UP_ARROW, '.mat-clock-dial-hours');
         fixture.detectChanges();
 
         expect(getDialCell(6, true).classList).toContain(
-          'mat-clock-dial-cell-active'
+          'mat-clock-dial-cell-active',
         );
       });
 
@@ -1086,21 +1086,21 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(getDialCell(13, true).classList).toContain(
-          'mat-clock-dial-cell-active'
+          'mat-clock-dial-cell-active',
         );
 
         pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-hours');
         fixture.detectChanges();
 
         expect(getDialCell(15, true).classList).toContain(
-          'mat-clock-dial-cell-active'
+          'mat-clock-dial-cell-active',
         );
 
         pressArrowOnDial(UP_ARROW, '.mat-clock-dial-hours');
         fixture.detectChanges();
 
         expect(getDialCell(13, true).classList).toContain(
-          'mat-clock-dial-cell-active'
+          'mat-clock-dial-cell-active',
         );
       });
 
@@ -1111,28 +1111,28 @@ describe('MatClockDials', () => {
         fixture.detectChanges();
 
         expect(getDialCell(13, true).classList).toContain(
-          'mat-clock-dial-cell-active'
+          'mat-clock-dial-cell-active',
         );
 
         pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-hours');
         fixture.detectChanges();
 
         expect(getDialCell(12, true).classList).toContain(
-          'mat-clock-dial-cell-active'
+          'mat-clock-dial-cell-active',
         );
 
         pressArrowOnDial(DOWN_ARROW, '.mat-clock-dial-hours');
         fixture.detectChanges();
 
         expect(getDialCell(17, true).classList).toContain(
-          'mat-clock-dial-cell-active'
+          'mat-clock-dial-cell-active',
         );
 
         pressArrowOnDial(UP_ARROW, '.mat-clock-dial-hours');
         fixture.detectChanges();
 
         expect(getDialCell(12, true).classList).toContain(
-          'mat-clock-dial-cell-active'
+          'mat-clock-dial-cell-active',
         );
       });
     });
@@ -1182,6 +1182,7 @@ function pressArrowOnDial(keyCode: number, dial: DialClass): void {
     [minuteInterval]="minuteInterval"
     (_userSelection)="onSelect($event)"
   ></mat-clock-dials>`,
+  standalone: false,
 })
 class StandardClockDials {
   isMeridiem = false;
@@ -1200,6 +1201,7 @@ class StandardClockDials {
       [minuteInterval]="minuteInterval"
     ></mat-clock-dials>
   `,
+  standalone: false,
 })
 class WithMinMaxClockDials {
   isMeridiem = false;

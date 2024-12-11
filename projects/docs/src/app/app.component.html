@@ -1,14 +1,11 @@
 <ng-doc-root>
-  <ng-doc-navbar
-    [search]="false"
-    [leftContent]="leftContent"
-    [rightContent]="controls"
-  >
-    <ng-template #leftContent>
+  <ng-doc-navbar [search]="false">
+    <ng-container ngDocNavbarLeft>
       <img class="angular" src="assets/icons/angular.svg" />
       <h3 style="margin: 0">ngx-mat-timepicker</h3>
-    </ng-template>
-    <ng-template #controls>
+    </ng-container>
+
+    <ng-container ngDocNavbarRight>
       <div class="right-content">
         <h4 class="material-version">{{ hasM2Class() ? 'M2' : 'M3' }}</h4>
         <button
@@ -29,7 +26,7 @@
           <ng-doc-icon customIcon="github" [size]="24"></ng-doc-icon>
         </a>
       </div>
-    </ng-template>
+    </ng-container>
   </ng-doc-navbar>
   <ng-doc-sidebar></ng-doc-sidebar>
   <router-outlet></router-outlet>

@@ -36,7 +36,7 @@ import { AppComponent } from './app.component';
         anchorScrolling: 'enabled',
         scrollOffset: [0, 70],
         useHash: true,
-      }
+      },
     ),
     NgDocRootComponent,
     NgDocNavbarComponent,
