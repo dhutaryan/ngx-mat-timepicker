@@ -7,6 +7,8 @@ import {
   RIGHT_ARROW,
   UP_ARROW,
 } from '@angular/cdk/keycodes';
+
+import { _supportsShadowDom } from '@angular/cdk/platform';
 import { Overlay, ScrollDispatcher } from '@angular/cdk/overlay';
 import {
   Component,
@@ -19,6 +21,7 @@ import {
   ComponentFixture,
   fakeAsync,
   flush,
+  inject,
   TestBed,
   tick,
 } from '@angular/core/testing';
@@ -46,7 +49,7 @@ import {
   getMinuteCellIndex,
 } from './clock-dials.spec';
 import { TimepickerOrientation } from './orientation';
-import { _supportsShadowDom } from '@angular/cdk/platform';
+import { MatTimepickerIntl } from './timepicker-intl';
 
 describe('MatTimepicker', () => {
   const SUPPORTS_INTL = typeof Intl != 'undefined';
@@ -1546,18 +1549,22 @@ describe('MatTimepicker', () => {
         subscription.unsubscribe();
       }));
 
-      // it('should re-render when the i18n labels change', inject(
-      //   [MatTimepickerIntl],
-      //   (intl: MatTimepickerIntl) => {
-      //     const toggle = fixture.debugElement.query(By.css('button'))!.nativeElement;
+      it('should re-render when the i18n labels change', inject(
+        [MatTimepickerIntl],
+        (intl: MatTimepickerIntl) => {
+          const toggle = fixture.debugElement.query(
+            By.css('button'),
+          )!.nativeElement;
 
-      //     intl.openTimepickerLabel = 'Open the timepicker, perhaps?';
-      //     intl.changes.next();
-      //     fixture.detectChanges();
+          intl.openTimepickerLabel = 'Open the timepicker, perhaps?';
+          intl.changes.next();
+          fixture.detectChanges();
 
-      //     expect(toggle.getAttribute('aria-label')).toBe('Open the timepicker, perhaps?');
-      //   },
-      // ));
+          expect(toggle.getAttribute('aria-label')).toBe(
+            'Open the timepicker, perhaps?',
+          );
+        },
+      ));
 
       it('should toggle the active state of the timepicker toggle', fakeAsync(() => {
         const toggle = fixture.debugElement.query(
