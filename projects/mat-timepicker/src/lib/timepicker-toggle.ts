@@ -108,6 +108,7 @@ export class MatTimepickerToggle<T> implements OnChanges, OnDestroy {
 
     this._stateChanges.unsubscribe();
     this._stateChanges = merge(
+      this._intl.changes,
       timepickerStateChanged as Observable<void>,
       inputStateChanged,
       timepickerToggled,
