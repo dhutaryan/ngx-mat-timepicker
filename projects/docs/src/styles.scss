@@ -2,6 +2,7 @@
 // For more information: https://material.angular.io/guide/theming
 @use 'sass:map';
 @use '@angular/material' as mat;
+@use '@ng-doc/app/styles/themes/dark.css';
 @use 'projects/mat-timepicker' as mat-timepicker;
 
 @use './styles/theme';
@@ -52,7 +53,7 @@
     @include components-theme(theme.$ngx-mat-timepicker-theme-m2);
   }
 
-  &.dark-theme {
+  &[data-theme='dark'] {
     &:not(.m2) {
       @include components-color(theme.$ngx-mat-timepicker-theme-dark);
       @include mat.color-variants-backwards-compatibility(theme.$ngx-mat-timepicker-theme-dark);

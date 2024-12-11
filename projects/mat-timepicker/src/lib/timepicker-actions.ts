@@ -5,14 +5,16 @@ import {
   Component,
   Directive,
   ElementRef,
+  input,
   OnDestroy,
   OnInit,
+  signal,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { mixinColor } from '@angular/material/core';
+import { ThemePalette } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 
 import { MatTimepickerBase, MatTimepickerControl } from './timepicker-base';
@@ -27,7 +29,9 @@ import { MatTimepickerIntl } from './timepicker-intl';
   },
 })
 export class MatTimepickerApply {
-  constructor(private _timepicker: MatTimepickerBase<MatTimepickerControl<any>, unknown>) {}
+  constructor(
+    private _timepicker: MatTimepickerBase<MatTimepickerControl<any>, unknown>,
+  ) {}
 
   _applySelection() {
     this._timepicker._applyPendingSelection();
@@ -44,7 +48,9 @@ export class MatTimepickerApply {
   },
 })
 export class MatTimepickerCancel {
-  constructor(private _timepicker: MatTimepickerBase<MatTimepickerControl<any>, unknown>) {}
+  constructor(
+    private _timepicker: MatTimepickerBase<MatTimepickerControl<any>, unknown>,
+  ) {}
 
   close() {
     this._timepicker.close();
@@ -97,13 +103,6 @@ export class MatTimepickerActions implements AfterViewInit, OnDestroy {
   }
 }
 
-// Boilerplate for applying mixins to MatTimepickerDefaultActions.
-const _MatTimepickerDefaultActions = mixinColor(
-  class {
-    constructor(public _elementRef: ElementRef) {}
-  },
-);
-
 /**
  * Default action buttons to the bottom of a timepicker.
  */
@@ -115,8 +114,12 @@ const _MatTimepickerDefaultActions = mixinColor(
   template: `
     <div class="mat-timepicker-actions">
       <ng-content></ng-content>
-      <button [color]="color" mat-button matTimepickerCancel>{{ _intl.cancelButton }}</button>
-      <button [color]="color" mat-button matTimepickerApply>{{ _intl.okButton }}</button>
+      <button [color]="color()" mat-button matTimepickerCancel>
+        {{ _intl.cancelButton }}
+      </button>
+      <button [color]="color()" mat-button matTimepickerApply>
+        {{ _intl.okButton }}
+      </button>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -125,16 +128,15 @@ const _MatTimepickerDefaultActions = mixinColor(
     class: 'mat-timepicker-actions-container',
   },
 })
-export class MatTimepickerDefaultActions extends _MatTimepickerDefaultActions implements OnInit {
+export class MatTimepickerDefaultActions implements OnInit {
+  color = signal<ThemePalette>(undefined);
+
   constructor(
-    elementRef: ElementRef,
     private _timepicker: MatTimepickerBase<MatTimepickerControl<any>, unknown>,
     public _intl: MatTimepickerIntl,
-  ) {
-    super(elementRef);
-  }
+  ) {}
 
   ngOnInit() {
-    this.color = this._timepicker.color;
+    this.color.set(this._timepicker.color);
   }
 }

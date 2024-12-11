@@ -51,7 +51,7 @@ describe('MatTimepickerActions', () => {
     flush();
 
     const actions = document.querySelector(
-      '.mat-timepicker-content .mat-timepicker-actions'
+      '.mat-timepicker-content .mat-timepicker-actions',
     );
     expect(actions).toBeTruthy();
   }));
@@ -65,7 +65,7 @@ describe('MatTimepickerActions', () => {
     flush();
 
     const actions = document.querySelector(
-      '.mat-timepicker-content .mat-timepicker-actions'
+      '.mat-timepicker-content .mat-timepicker-actions',
     );
     expect(actions).toBeTruthy();
     expect(actions?.querySelector('.cancel')).toBeTruthy();
@@ -82,7 +82,7 @@ describe('MatTimepickerActions', () => {
     flush();
 
     const actions = document.querySelector(
-      '.mat-timepicker-content .mat-timepicker-actions'
+      '.mat-timepicker-content .mat-timepicker-actions',
     );
     expect(actions).toBeTruthy();
     expect(actions?.querySelector('.cancel')).toBeTruthy();
@@ -99,7 +99,7 @@ describe('MatTimepickerActions', () => {
     tick();
 
     const minutesDial = document.querySelector<HTMLElement>(
-      '.mat-clock-dial-minutes'
+      '.mat-clock-dial-minutes',
     )!;
     const hourCell = getDialCell(6);
 
@@ -142,10 +142,10 @@ describe('MatTimepickerActions', () => {
     flush();
 
     const hoursDial = document.querySelector<HTMLElement>(
-      '.mat-clock-dial-hours'
+      '.mat-clock-dial-hours',
     )!;
     const minutesDial = document.querySelector<HTMLElement>(
-      '.mat-clock-dial-minutes'
+      '.mat-clock-dial-minutes',
     )!;
     const hourCell = getDialCell(6);
 
@@ -194,10 +194,10 @@ describe('MatTimepickerActions', () => {
     flush();
 
     const hoursDial = document.querySelector<HTMLElement>(
-      '.mat-clock-dial-hours'
+      '.mat-clock-dial-hours',
     )!;
     const minutesDial = document.querySelector<HTMLElement>(
-      '.mat-clock-dial-minutes'
+      '.mat-clock-dial-minutes',
     )!;
     const hourCell = getDialCell(6);
 
@@ -241,10 +241,10 @@ describe('MatTimepickerActions', () => {
 
     const content = document.querySelector('.mat-timepicker-content')!;
     const hoursDial = document.querySelector<HTMLElement>(
-      '.mat-clock-dial-hours'
+      '.mat-clock-dial-hours',
     )!;
     const minutesDial = document.querySelector<HTMLElement>(
-      '.mat-clock-dial-minutes'
+      '.mat-clock-dial-minutes',
     )!;
     const hourCell = getDialCell(6);
 
@@ -324,6 +324,7 @@ describe('MatTimepickerActions', () => {
       </mat-timepicker>
     </mat-form-field>
   `,
+  standalone: false,
 })
 class TimepickerWithActions {
   @ViewChild(MatTimepicker) timepicker: MatTimepicker<Date>;

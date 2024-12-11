@@ -4,5 +4,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'docs-custom-toggle-icon',
   templateUrl: './custom-toggle-icon.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class CustomToggleIconComponent {}

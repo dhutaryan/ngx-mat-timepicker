@@ -14,9 +14,10 @@ import {
   OnInit,
   AfterViewInit,
   ViewChild,
+  signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { mixinColor } from '@angular/material/core';
+import { ThemePalette } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Subject, Subscription } from 'rxjs';
 
@@ -30,13 +31,6 @@ import { MatTimepickerIntl } from './timepicker-intl';
 import { MatClockDials } from './clock-dials';
 import { MatTimeInputs } from './time-inputs';
 import { TimepickerOrientation } from './orientation';
-
-// Boilerplate for applying mixins to MatTimepickerContent.
-const _MatTimepickerContentBase = mixinColor(
-  class {
-    constructor(public _elementRef: ElementRef) {}
-  },
-);
 
 @Component({
   selector: 'mat-timepicker-content',
@@ -56,6 +50,7 @@ const _MatTimepickerContentBase = mixinColor(
   encapsulation: ViewEncapsulation.None,
   host: {
     class: 'mat-timepicker-content',
+    '[class]': 'color ? "mat-" + color : ""',
     '[@transformPanel]': '_animationState',
     '(@transformPanel.start)': '_handleAnimationEvent($event)',
     '(@transformPanel.done)': '_handleAnimationEvent($event)',
@@ -67,7 +62,6 @@ const _MatTimepickerContentBase = mixinColor(
   ],
 })
 export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
-  extends _MatTimepickerContentBase
   implements OnInit, AfterViewInit
 {
   /** Reference to the internal clock dials component. */
@@ -112,6 +106,12 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
   /** Whether there is an in-progress animation. */
   _isAnimating = false;
 
+  /**
+   * Theme color of the internal timepicker. This API is supported in M2 themes
+   * only, it has no effect in M3 themes.
+   */
+  color: ThemePalette;
+
   /** Emits when an animation has finished. */
   readonly _animationDone = new Subject<void>();
 
@@ -119,12 +119,10 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
   private _subscriptions = new Subscription();
 
   constructor(
-    elementRef: ElementRef,
     intl: MatTimepickerIntl,
     private _globalModel: MatTimeSelectionModel<S, T>,
     private _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(elementRef);
     this._closeButtonText = intl.closeTimepickerLabel;
   }
 
