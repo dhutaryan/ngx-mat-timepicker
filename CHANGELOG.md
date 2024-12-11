@@ -1,3 +1,7 @@
+# 15.4.3
+
+- fix(inlt): add intl update trigger ([#194](https://github.com/dhutaryan/ngx-mat-timepicker/issues/194))
+
 # 15.4.2
 
 - fix(intl): add strings for am/pm ([#190](https://github.com/dhutaryan/ngx-mat-timepicker/issues/190))
