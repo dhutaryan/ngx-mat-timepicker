@@ -1,3 +1,7 @@
+# 17.6.3
+
+- fix(inlt): add intl update trigger ([#194](https://github.com/dhutaryan/ngx-mat-timepicker/issues/194))
+
 # 17.6.2
 
 - fix(intl): add strings for am/pm ([#190](https://github.com/dhutaryan/ngx-mat-timepicker/issues/190))
@@ -59,6 +63,10 @@
 
 - build(deps): bump angular and angular material to v17 ([#106](https://github.com/dhutaryan/ngx-mat-timepicker/pull/106))
 
+# 16.4.3
+
+- fix(inlt): add intl update trigger ([#194](https://github.com/dhutaryan/ngx-mat-timepicker/issues/194))
+
 # 16.4.2
 
 - fix(intl): add strings for am/pm ([#190](https://github.com/dhutaryan/ngx-mat-timepicker/issues/190))
@@ -115,6 +123,10 @@
 # 16.0.0
 
 - build(deps): bump angular and angular material to v16 ([#95](https://github.com/dhutaryan/ngx-mat-timepicker/pull/95))
+
+# 15.4.3
+
+- fix(inlt): add intl update trigger ([#194](https://github.com/dhutaryan/ngx-mat-timepicker/issues/194))
 
 # 15.4.2
 
