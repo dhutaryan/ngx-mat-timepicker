@@ -113,6 +113,8 @@ Then you have to define a theme. [More details about theming](https://material.a
 @include mat.color-variants-backwards-compatibility($my-theme)
 ```
 
+You can also use `mat.theme` mixin instead.
+
 ## Usage
 
 ```html

@@ -1,7 +1,8 @@
 {
   "name": "@dhutaryan/ngx-mat-timepicker",
   "description": "Angular timepicker to add time which is based on material design and Angular material.",
-  "version": "19.0.0",
+  "homepage": "https://dhutaryan.github.io/ngx-mat-timepicker/",
+  "version": "19.1.0",
   "license": "MIT",
   "author": {
     "name": "Dzmitry Hutaryan"
