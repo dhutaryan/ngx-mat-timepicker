@@ -1,5 +1,3 @@
-# {{ NgDocPage.title }}
-
 ngx-mat-timepicker is a library which allow you to use timepicker for your Angular project. It's based on `@angular/material` and uses features from it.
 
 ## Motivation

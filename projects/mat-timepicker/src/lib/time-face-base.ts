@@ -27,7 +27,7 @@ export abstract class MatTimeFaceBase<T>
   }
   set selected(value: T | null) {
     this._selected = this._timeAdapter.getValidTimeOrNull(
-      this._timeAdapter.deserialize(value)
+      this._timeAdapter.deserialize(value),
     );
 
     if (!this._selected) {
@@ -62,7 +62,7 @@ export abstract class MatTimeFaceBase<T>
   }
   set minTime(value: T | null) {
     this._minTime = this._timeAdapter.getValidTimeOrNull(
-      this._timeAdapter.deserialize(value)
+      this._timeAdapter.deserialize(value),
     );
 
     if (value) {
@@ -80,7 +80,7 @@ export abstract class MatTimeFaceBase<T>
   }
   set maxTime(value: T | null) {
     this._maxTime = this._timeAdapter.getValidTimeOrNull(
-      this._timeAdapter.deserialize(value)
+      this._timeAdapter.deserialize(value),
     );
 
     if (value) {
@@ -133,7 +133,7 @@ export abstract class MatTimeFaceBase<T>
       this.selected = this._timeAdapter.clampTime(
         this._timeAdapter.now(),
         this.minTime,
-        this.maxTime
+        this.maxTime,
       );
       this._userSelection.emit(this.selected);
     }
@@ -174,7 +174,7 @@ export abstract class MatTimeFaceBase<T>
     this.selectedHour = hour;
     const selected = this._timeAdapter.updateHour(
       this.selected!,
-      this._getHourBasedOnPeriod(hour)
+      this._getHourBasedOnPeriod(hour),
     );
     this._timeSelected(selected);
   }
@@ -191,7 +191,7 @@ export abstract class MatTimeFaceBase<T>
     this.period = period;
     const selected = this._timeAdapter.updateHour(
       this.selected!,
-      this._getHourBasedOnPeriod(this.selectedHour)
+      this._getHourBasedOnPeriod(this.selectedHour),
     );
     this._timeSelected(selected);
   }
@@ -240,7 +240,7 @@ export abstract class MatTimeFaceBase<T>
   private _handleHourKeydown(event: KeyboardEvent): void {
     const hours = this._getAvailableHours();
     const selectedHourIndex = hours.findIndex(
-      (hour) => hour === this.selectedHour
+      (hour) => hour === this.selectedHour,
     );
 
     if (!hours.length) {
@@ -270,7 +270,7 @@ export abstract class MatTimeFaceBase<T>
   private _handleMinuteKeydown(event: KeyboardEvent): void {
     const minutes = this.availableMinutes;
     const selectedMinuteIndex = minutes.findIndex(
-      (minute) => minute === this.selectedMinute
+      (minute) => minute === this.selectedMinute,
     );
 
     if (!minutes.length) {
@@ -289,12 +289,12 @@ export abstract class MatTimeFaceBase<T>
           const differenceForValid = count * this.minuteInterval;
           const nextValidValue = this.selectedMinute + differenceForValid;
           const correctIndex = minutes.findIndex(
-            (minute) => minute === nextValidValue - 60 // amount of mins
+            (minute) => minute === nextValidValue - 60, // amount of mins
           );
           this._onMinuteSelected(minutes[correctIndex]);
         } else {
           this._onMinuteSelected(
-            minutes[selectedMinuteIndex + this.minuteInterval]
+            minutes[selectedMinuteIndex + this.minuteInterval],
           );
         }
         break;
@@ -309,12 +309,12 @@ export abstract class MatTimeFaceBase<T>
           const differenceForValid = count * this.minuteInterval;
           const nextValidValue = this.selectedMinute - differenceForValid;
           const correctIndex = minutes.findIndex(
-            (minute) => minute === nextValidValue + 60 // amount of mins
+            (minute) => minute === nextValidValue + 60, // amount of mins
           );
           this._onMinuteSelected(minutes[correctIndex]);
         } else {
           this._onMinuteSelected(
-            minutes[selectedMinuteIndex - this.minuteInterval]
+            minutes[selectedMinuteIndex - this.minuteInterval],
           );
         }
         break;
@@ -380,7 +380,7 @@ export abstract class MatTimeFaceBase<T>
       selectedHour > minHour ? 0 : this._timeAdapter.getMinute(this.minTime);
 
     this.availableMinutes = this.availableMinutes.filter(
-      (minute) => minute >= minMinute
+      (minute) => minute >= minMinute,
     );
 
     if (selectedHour < minHour) {
@@ -401,7 +401,7 @@ export abstract class MatTimeFaceBase<T>
       selectedHour < maxHour ? 59 : this._timeAdapter.getMinute(this.maxTime);
 
     this.availableMinutes = this.availableMinutes.filter(
-      (minute) => minute <= maxMinute
+      (minute) => minute <= maxMinute,
     );
 
     if (selectedHour > maxHour) {

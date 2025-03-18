@@ -1862,6 +1862,11 @@
   resolved "https://registry.npmjs.org/@lmdb/lmdb-win32-x64/-/lmdb-win32-x64-3.1.5.tgz"
   integrity sha512-KYar6W8nraZfSJspcK7Kp7hdj238X/FNauYbZyrqPBrtsXI1hvI4/KcRcRGP50aQoV7fkKDyJERlrQGMGTZUsA==
 
+"@microsoft/tsdoc@0.15.1":
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/@microsoft/tsdoc/-/tsdoc-0.15.1.tgz#d4f6937353bc4568292654efb0a0e0532adbcba2"
+  integrity sha512-4aErSrCR/On/e5G2hDP0wjooqDdauzEbIq8hIkIe5pXV0rtWJZvdCEKL0ykZxex+IxIwBp0eGeV48hQN07dXtw==
+
 "@msgpackr-extract/msgpackr-extract-darwin-arm64@3.0.3":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@msgpackr-extract/msgpackr-extract-darwin-arm64/-/msgpackr-extract-darwin-arm64-3.0.3.tgz#9edec61b22c3082018a79f6d1c30289ddf3d9d11"
@@ -1994,27 +1999,28 @@
     "@napi-rs/nice-win32-ia32-msvc" "1.0.1"
     "@napi-rs/nice-win32-x64-msvc" "1.0.1"
 
-"@ng-doc/app@^19.0.0":
-  version "19.0.1"
-  resolved "https://registry.npmjs.org/@ng-doc/app/-/app-19.0.1.tgz"
-  integrity sha512-LV7HK4xHUTBAQho6UGyY/ZurBWgf2w7v0jrOr/obwc2/jaK0Bjj4NdqekacKDY0xRZYFG0bnDtYPNuBbZZEfuQ==
+"@ng-doc/app@^19.1.0":
+  version "19.1.0"
+  resolved "https://registry.yarnpkg.com/@ng-doc/app/-/app-19.1.0.tgz#2ab4a8eff87abecd7ec6ef8895f19018599087f1"
+  integrity sha512-Mtwip7lPcf8JC8ibUQlz2cd13pPKt0gSqZeyk9jk/UBUkc6l7AUD4OerRFOVGeqv9qyu0S5S6sab0UfTU6L7dQ==
   dependencies:
-    "@ng-doc/core" "19.0.1"
-    "@ng-doc/ui-kit" "19.0.1"
+    "@ng-doc/core" "19.1.0"
+    "@ng-doc/ui-kit" "19.1.0"
     "@orama/plugin-match-highlight" "2.0.17"
     "@orama/stemmers" "2.0.17"
-    mermaid "10.9.1"
+    mermaid "10.9.3"
     tslib "^2.6.2"
 
-"@ng-doc/builder@^19.0.0":
-  version "19.0.1"
-  resolved "https://registry.npmjs.org/@ng-doc/builder/-/builder-19.0.1.tgz"
-  integrity sha512-8Fyw1ZoFBlQCc0IBK5nwz7NJUZ01Ok4exZbPguIdittRQg9EtNovZCsdY4S2oRwdyYTPkCR6oi4Um1yXJXXdhw==
+"@ng-doc/builder@^19.1.0":
+  version "19.1.0"
+  resolved "https://registry.yarnpkg.com/@ng-doc/builder/-/builder-19.1.0.tgz#ea4854af39aee2c31bfabe1f04cebdf80fc9f4e8"
+  integrity sha512-E+Hty8TflI4ZRrn3BwjlMFI8anB7V2C1hc92J+6D5oj1fBl1gTYHi/HfaxSTSBgzKMigi2QYqeh9g8uWtYiqaA==
   dependencies:
     "@angular-devkit/architect" ">=0.1900.0 < 0.2000.0"
     "@angular-devkit/build-angular" ">=19.0.0 < 20.0.0"
-    "@ng-doc/core" "19.0.1"
-    "@ng-doc/utils" "19.0.1"
+    "@microsoft/tsdoc" "0.15.1"
+    "@ng-doc/core" "19.1.0"
+    "@ng-doc/utils" "19.1.0"
     "@orama/orama" "2.0.17"
     "@orama/plugin-parsedoc" "2.0.17"
     "@parcel/watcher" "2.4.1"
@@ -2036,28 +2042,28 @@
     ts-morph "22.0.0"
     tslib "^2.6.2"
 
-"@ng-doc/core@19.0.1", "@ng-doc/core@^19.0.0":
-  version "19.0.1"
-  resolved "https://registry.npmjs.org/@ng-doc/core/-/core-19.0.1.tgz"
-  integrity sha512-bMy9Jd38SvpHZLHHfdNOLzI7vpeXeI0TN08V0rOutYtdwpr0M14SfxBTSI7zIf/GvyrtUne7CTN+2qzJbHy80Q==
+"@ng-doc/core@19.1.0", "@ng-doc/core@^19.1.0":
+  version "19.1.0"
+  resolved "https://registry.yarnpkg.com/@ng-doc/core/-/core-19.1.0.tgz#c5f6231e7cddd712712100f4235613c8aa0ba68d"
+  integrity sha512-kP48UXLlDjVGYmuUjWK0Rd2iAKBGzIw4Q+VCryXm1RzyRBlxKEJlpc50hrLiGnf3hM79QKB2Uf2uKlNcEdoz1A==
   dependencies:
     css-what "6.1.0"
     esthetic "0.5.6-beta.1"
     posthtml-parser "0.11.0"
     posthtml-render "3.0.0"
 
-"@ng-doc/ui-kit@19.0.1", "@ng-doc/ui-kit@^19.0.0":
-  version "19.0.1"
-  resolved "https://registry.npmjs.org/@ng-doc/ui-kit/-/ui-kit-19.0.1.tgz"
-  integrity sha512-D7mDWrLfYSL5tZzdpvc/Lzu2D+uD4HctmPmJ8HUqJuxHjhmNvIzKUlS6HQqEx6l4XZAHmRBeT/1G7cRSOiaPfw==
+"@ng-doc/ui-kit@19.1.0", "@ng-doc/ui-kit@^19.1.0":
+  version "19.1.0"
+  resolved "https://registry.yarnpkg.com/@ng-doc/ui-kit/-/ui-kit-19.1.0.tgz#98df027e123c5171847b30f31092e4dc5ef22bb6"
+  integrity sha512-UQPqRXnPE2os3NynExJg+Vm29d3oW/buWvilYUv/3CCnKofOVG/3+252MySwkzWwcemEDwyqgTgFoTTbglmnmQ==
   dependencies:
-    "@ng-doc/core" "19.0.1"
+    "@ng-doc/core" "19.1.0"
     tslib "^2.6.2"
 
-"@ng-doc/utils@19.0.1":
-  version "19.0.1"
-  resolved "https://registry.npmjs.org/@ng-doc/utils/-/utils-19.0.1.tgz"
-  integrity sha512-GHJfEBcH5pTuA55K0eJ5tPYYa1CwBXQDY5peL2RCu6qJDvg7P4mtixaiUzkOFYsxGZPXwGhjp9tnGaEIi/s3HQ==
+"@ng-doc/utils@19.1.0":
+  version "19.1.0"
+  resolved "https://registry.yarnpkg.com/@ng-doc/utils/-/utils-19.1.0.tgz#cb3d2bb404fc7c70d75c88bd343ef04853a29e10"
+  integrity sha512-7asJyBmDoAngYV754voh4EqGxVzvKDarYTao2p0uPjGt/27OJaODq9ZoyNJYTcUVWZKf47MFsuuyWdJWWlFacg==
   dependencies:
     "@shikijs/rehype" "1.10.3"
     chalk "5.2.0"
@@ -3026,11 +3032,6 @@
   integrity sha512-MK9V6NzAS1+Ud7JV9lJLFqW85VbC9dq3LmwZCuBe4wBDgKC0Kj/jd8Xl+nSviU+Qc3+m7umHHyHg//2KSa0a0Q==
   dependencies:
     "@types/node" "*"
-
-"@types/trusted-types@^2.0.7":
-  version "2.0.7"
-  resolved "https://registry.npmjs.org/@types/trusted-types/-/trusted-types-2.0.7.tgz"
-  integrity sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==
 
 "@types/unist@*", "@types/unist@^3.0.0":
   version "3.0.3"
@@ -4655,12 +4656,10 @@ domhandler@^5.0.2, domhandler@^5.0.3:
   dependencies:
     domelementtype "^2.3.0"
 
-dompurify@^3.0.5:
-  version "3.2.3"
-  resolved "https://registry.npmjs.org/dompurify/-/dompurify-3.2.3.tgz"
-  integrity sha512-U1U5Hzc2MO0oW3DF+G9qYN0aT7atAou4AgI0XjWz061nyBPbdxkfdhfy5uMgGn6+oLFCfn44ZGbdDqCzVmlOWA==
-  optionalDependencies:
-    "@types/trusted-types" "^2.0.7"
+"dompurify@^3.0.5 <3.1.7":
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-3.1.6.tgz#43c714a94c6a7b8801850f82e756685300a027e2"
+  integrity sha512-cTOAhc36AalkjtBpfG6O8JimdTMWNXjiePT2xQH/ppBGi/4uIpmj8eKyIkMJErXWARyINV/sB38yf8JCLF5pbQ==
 
 domutils@^2.8.0:
   version "2.8.0"
@@ -6811,10 +6810,10 @@ merge2@^1.3.0:
   resolved "https://registry.npmjs.org/merge2/-/merge2-1.4.1.tgz"
   integrity sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==
 
-mermaid@10.9.1:
-  version "10.9.1"
-  resolved "https://registry.npmjs.org/mermaid/-/mermaid-10.9.1.tgz"
-  integrity sha512-Mx45Obds5W1UkW1nv/7dHRsbfMM1aOKA2+Pxs/IGHNonygDHwmng8xTHyS9z4KWVi0rbko8gjiBmuwwXQ7tiNA==
+mermaid@10.9.3:
+  version "10.9.3"
+  resolved "https://registry.yarnpkg.com/mermaid/-/mermaid-10.9.3.tgz#90bc6f15c33dbe5d9507fed31592cc0d88fee9f7"
+  integrity sha512-V80X1isSEvAewIL3xhmz/rVmc27CVljcsbWxkxlWJWY/1kQa4XOABqpDl2qQLGKzpKm6WbTfUEKImBlUfFYArw==
   dependencies:
     "@braintree/sanitize-url" "^6.0.1"
     "@types/d3-scale" "^4.0.3"
@@ -6825,7 +6824,7 @@ mermaid@10.9.1:
     d3-sankey "^0.12.3"
     dagre-d3-es "7.0.10"
     dayjs "^1.11.7"
-    dompurify "^3.0.5"
+    dompurify "^3.0.5 <3.1.7"
     elkjs "^0.9.0"
     katex "^0.16.9"
     khroma "^2.0.0"

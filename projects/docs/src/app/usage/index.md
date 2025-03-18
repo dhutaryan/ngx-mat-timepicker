@@ -1,5 +1,3 @@
-# {{ NgDocPage.title }}
-
 ## Basic
 
 The timepicker allows users to enter a time either through text input, or by choosing a time from the dial or by inputs.
