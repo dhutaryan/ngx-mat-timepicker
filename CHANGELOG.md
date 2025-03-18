@@ -1,3 +1,7 @@
+# 19.1.0
+
+- feat(theme): support mat system colors ([#199](https://github.com/dhutaryan/ngx-mat-timepicker/issues/199))
+
 # 19.0.0
 
 - feat(timepicker): support angular and angular material v19 ([#193](https://github.com/dhutaryan/ngx-mat-timepicker/issues/193))
