@@ -1,5 +1,3 @@
-# {{ NgDocPage.title }}
-
 You have to install the Angular Material and set it up. [Learn more about the setup](https://material.angular.io/guide/getting-started).
 
 Install the ngx-mat-timepicker:

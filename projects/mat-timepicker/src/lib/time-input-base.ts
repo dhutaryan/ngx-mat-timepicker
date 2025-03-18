@@ -24,7 +24,7 @@ export function withZeroPrefixMeridiem(
   return withZeroPrefix(newValue);
 }
 
-const DIGIT_KEYS = Array.from({ length: 10 },  (_, i) => `${i}`);
+const DIGIT_KEYS = Array.from({ length: 10 }, (_, i) => `${i}`);
 const SPECIAL_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
 
 @Directive()

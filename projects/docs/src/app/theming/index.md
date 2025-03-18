@@ -1,5 +1,3 @@
-# {{ NgDocPage.title }}
-
 `ngx-mat-timepicker` supports both material 2 and material 3. Tokens API allows you to customize styles by easy way.
 
 ## Material 3
@@ -22,6 +20,8 @@ $my-theme: mat.define-theme(...);
 // if you want to support color attribute in M3 add compatibility mixin
 @include mat.color-variants-backwards-compatibility($my-theme)
 ```
+
+You can also use `mat.theme` mixin instead.
 
 Will be updated...
 
