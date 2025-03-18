@@ -27,15 +27,4 @@
       @include utils.create-token-values($error-tokens);
     }
   }
-
-  .mat-clock-dial-cell.mat-clock-dial-cell-active {
-    background-color: var(--mat-timepicker-clock-dial-cell-active-background-color);
-    color: var(--mat-timepicker-clock-dial-cell-active-text-color);
-  }
-
-  .mat-time-period {
-    .mat-divider {
-      border-top-color: var(--mat-timepicker-time-period-border-color);
-    }
-  }
 }

@@ -6,7 +6,7 @@
 @use '../variables';
 
 @function get-unthemable-tokens() {
-  @return (content-border-radius: 1rem, clock-dial-cell-border-radius: 50%);
+  @return (content-border-radius: 1rem);
 }
 
 @function get-color-tokens($theme, $palette-name: primary) {

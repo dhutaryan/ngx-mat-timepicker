@@ -9,12 +9,4 @@
   .mat-timepicker-content {
     @include mat.elevation(0);
   }
-
-  .mat-clock-dial-cell.mat-mdc-mini-fab {
-    border-radius: var(--mat-timepicker-clock-dial-cell-border-radius);
-
-    .mdc-fab__ripple {
-      border-radius: inherit;
-    }
-  }
 }

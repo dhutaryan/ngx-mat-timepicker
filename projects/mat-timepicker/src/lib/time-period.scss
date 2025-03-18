@@ -1,3 +1,5 @@
+@use '../../themes/utils';
+
 .mat-time-period {
   display: flex;
   text-align: center;
@@ -5,6 +7,12 @@
   border-style: solid;
   border-radius: 0.25rem;
   box-sizing: border-box;
+
+  @include utils.create-token-slot(
+    border-color,
+    time-period-border-color,
+    utils.create-system-var(outline)
+  );
 }
 
 .mat-time-period-vertical {
@@ -55,6 +63,30 @@
   cursor: pointer;
 }
 
+.mat-time-period-item-active {
+  @include utils.create-token-slot(
+    color,
+    time-period-active-text-color,
+    utils.create-system-var(on-tertiary-container)
+  );
+  @include utils.create-token-slot(
+    background-color,
+    time-period-active-background-color,
+    utils.create-system-var(tertiary-container)
+  );
+}
+
 .mat-time-period-item-disabled {
   pointer-events: none;
+
+  @include utils.create-token-slot(
+    color,
+    time-period-disabled-text-color,
+    utils.create-system-var(on-surface-variant)
+  );
+  @include utils.create-token-slot(
+    background-color,
+    time-period-disabled-background-color,
+    color-mix(in srgb, utils.create-system-var(on-surface) 20%, transparent)
+  );
 }

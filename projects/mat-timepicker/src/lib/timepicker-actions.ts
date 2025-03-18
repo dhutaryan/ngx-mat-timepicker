@@ -4,8 +4,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   Directive,
-  ElementRef,
-  input,
   OnDestroy,
   OnInit,
   signal,

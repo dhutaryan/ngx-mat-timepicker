@@ -1,3 +1,6 @@
+@use '../../themes/utils';
+@use '../../themes/variables';
+
 $form-field-padding: 1.5rem;
 
 .mat-time-inputs {
@@ -19,6 +22,12 @@ $form-field-padding: 1.5rem;
     .mat-mdc-text-field-wrapper {
       top: 0;
       margin: 0;
+
+      @include utils.create-token-slot(
+        background-color,
+        time-inputs-field-background-color,
+        utils.create-system-var(surface-container-highest)
+      );
     }
 
     &:not(.mat-focused) {
@@ -37,6 +46,15 @@ $form-field-padding: 1.5rem;
       .mat-mdc-form-field-hint-wrapper {
         padding-left: 0;
       }
+    }
+
+    input.mat-mdc-input-element {
+      @include utils.create-token-slot(
+        font-size,
+        time-inputs-field-font-size,
+        variables.$input-font-size
+      );
+      @include utils.create-token-slot(line-height, time-inputs-field-line-height, 1.25);
     }
   }
 

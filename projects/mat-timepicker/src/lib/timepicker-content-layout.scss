@@ -1,3 +1,24 @@
+@use '../../themes/utils';
+@use '../../themes/variables';
+
+.mat-timepicker-content-layout-title {
+  @include utils.create-token-slot(
+    color,
+    content-layout-title-color,
+    utils.create-system-var(on-surface-variant)
+  );
+  @include utils.create-token-slot(
+    font-size,
+    content-layout-title-font-size,
+    variables.$timepicker-content-title-font-size
+  );
+  @include utils.create-token-slot(
+    font-weight,
+    content-layout-title-font-weight,
+    utils.create-system-var(title-medium-weight)
+  );
+}
+
 h6.mat-timepicker-content-layout-title {
   margin-top: 0rem;
   margin-bottom: 1.25rem;
@@ -46,4 +67,15 @@ h6.mat-timepicker-content-layout-title {
   width: 1.5rem;
   height: 1.75rem;
   font-weight: 500;
+
+  @include utils.create-token-slot(
+    font-size,
+    content-layout-separator-font-size,
+    variables.$inputs-separator-font-size
+  );
+  @include utils.create-token-slot(
+    content-layout-separator-line-height,
+    content-layout-title-color,
+    variables.$inputs-separator-line-height
+  );
 }
