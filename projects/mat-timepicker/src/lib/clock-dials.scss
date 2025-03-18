@@ -1,3 +1,6 @@
+@use '../../themes/utils';
+@use '../../themes/variables';
+
 .mat-clock-dial-values {
   display: flex;
   width: 100%;
@@ -10,6 +13,36 @@
   height: 4.5rem;
   border-radius: 0.25rem;
   cursor: pointer;
+
+  @include utils.create-token-slot(
+    background-color,
+    clock-dial-value-background-color,
+    utils.create-system-var(surface-container-highest)
+  );
+  @include utils.create-token-slot(
+    font-family,
+    clock-dial-value-font-family,
+    var(--mat-sys-body-medium-font)
+  );
+  @include utils.create-token-slot(
+    font-size,
+    clock-dial-value-font-size,
+    variables.$input-font-size
+  );
+  @include utils.create-token-slot(letter-spacing, clock-dial-value-letter-spacing, 0.5px);
+
+  &.mat-clock-dial-value-active {
+    @include utils.create-token-slot(
+      color,
+      clock-dial-value-active-text-color,
+      utils.create-system-var(on-surface-variant)
+    );
+    @include utils.create-token-slot(
+      background-color,
+      clock-dial-value-active-background-color,
+      utils.create-system-var(primary-container)
+    );
+  }
 }
 
 .mat-clock-dial-faces {

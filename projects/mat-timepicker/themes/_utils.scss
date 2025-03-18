@@ -1,4 +1,7 @@
 @use 'sass:map';
+@use 'sass:string';
+
+$prefix: (mat, timepicker);
 
 @mixin declaration($property, $value) {
   --mat-timepicker-#{$property}: #{$value};
@@ -32,4 +35,40 @@
     $result: map.merge($result, $map);
   }
   @return $result;
+}
+
+@mixin create-token-slot($property, $token, $fallback: null) {
+  $token: _create-var-name($prefix, $token);
+
+  #{$property}: #{_create-var($token, $fallback)};
+}
+
+@function create-system-var($sys-token) {
+  $token: _create-var-name('mat-sys', $sys-token);
+
+  @return _create-var($token);
+}
+
+// Combines a prefix and a string to generate a CSS variable name for a token.
+@function _create-var-name($prefix, $token) {
+  @if $prefix == null or $token == null {
+    @error 'Must specify both prefix and name when generating token';
+  }
+
+  $string-prefix: '';
+
+  // Prefixes are lists so we need to combine them.
+  @each $part in $prefix {
+    $string-prefix: if($string-prefix == '', $part, '#{$string-prefix}-#{$part}');
+  }
+
+  @return string.unquote('--#{$string-prefix}-#{$token}');
+}
+
+@function _create-var($name, $fallback: null) {
+  @if ($fallback) {
+    @return var($name, $fallback);
+  } @else {
+    @return var($name);
+  }
 }

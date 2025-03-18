@@ -1,3 +1,5 @@
+@use '../../themes/utils';
+
 .mat-form-field {
   .mat-form-field-prefix,
   .mat-form-field-suffix {
@@ -11,4 +13,16 @@
       margin: auto;
     }
   }
+}
+
+.mat-timepicker-toggle {
+  @include utils.create-token-slot(
+    color,
+    toggle-color,
+    utils.create-system-var(on-surface-variant)
+  );
+}
+
+.mat-timepicker-toggle.mat-timepicker-toggle-active button {
+  @include utils.create-token-slot(color, toggle-active-color, utils.create-system-var(primary));
 }

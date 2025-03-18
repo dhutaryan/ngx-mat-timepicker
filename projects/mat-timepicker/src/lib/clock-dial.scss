@@ -1,3 +1,5 @@
+@use '../../themes/utils';
+
 $clock-dial-hand-width: 1px;
 $clock-dial-hand-dot-size: 0.5rem;
 
@@ -12,6 +14,12 @@ $clock-dial-cell-size: 2rem;
   margin: 0 auto;
   border-radius: 50%;
 
+  @include utils.create-token-slot(
+    background-color,
+    clock-dial-background-color,
+    utils.create-system-var(surface-container-highest)
+  );
+
   &::before {
     position: absolute;
     top: 50%;
@@ -20,7 +28,13 @@ $clock-dial-cell-size: 2rem;
     height: 0.4375rem;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    content: "";
+    content: '';
+
+    @include utils.create-token-slot(
+      background-color,
+      clock-dial-center-point-color,
+      utils.create-system-var(primary)
+    );
   }
 }
 
@@ -43,6 +57,52 @@ $clock-dial-cell-size: 2rem;
   &:active,
   &:focus:active {
     box-shadow: none;
+  }
+}
+
+[mat-mini-fab].mat-clock-dial-cell.mat-clock-dial-cell-disabled.mat-clock-dial-cell-active {
+  @include utils.create-token-slot(
+    background-color,
+    clock-dial-cell-active-disabled-color,
+    color-mix(in srgb, utils.create-system-var(primary) 40%, transparent)
+  );
+  @include utils.create-token-slot(
+    color,
+    clock-dial-cell-active-text-color,
+    utils.create-system-var(on-primary)
+  );
+}
+
+.mat-clock-dial-cell:not(.mat-primary):not(.mat-accent):not(.mat-warn) {
+  @include utils.create-token-slot(background, clock-dial-cell-unthemable-color, transparent);
+}
+
+.mat-clock-dial-cell.mat-clock-dial-cell-active {
+  @include utils.create-token-slot(
+    color,
+    clock-dial-cell-active-text-color,
+    utils.create-system-var(on-primary)
+  );
+  @include utils.create-token-slot(
+    background-color,
+    clock-dial-cell-active-background-color,
+    utils.create-system-var(primary)
+  );
+}
+
+.mat-clock-dial-cell.mat-clock-dial-cell-disabled {
+  @include utils.create-token-slot(
+    color,
+    clock-dial-cell-disabled-text-color,
+    color-mix(in srgb, utils.create-system-var(on-surface) 40%, transparent)
+  );
+
+  .mat-mdc-button-persistent-ripple::before {
+    @include utils.create-token-slot(
+      background-color,
+      clock-dial-cell-disabled-background-color,
+      transparent
+    );
   }
 }
 
@@ -76,7 +136,35 @@ $clock-dial-cell-size: 2rem;
     width: calc(#{$clock-dial-hand-dot-size} + #{$clock-dial-hand-width});
     height: calc(#{$clock-dial-hand-dot-size} + #{$clock-dial-hand-width});
     border-radius: 50%;
-    content: "";
+    content: '';
+  }
+
+  &.mat-clock-dial-hand-disabled {
+    @include utils.create-token-slot(background-color, clock-dial-hand-disabled-color, transparent);
+
+    &::before {
+      @include utils.create-token-slot(
+        background-color,
+        clock-dial-hand-value-point-disabled-color,
+        color-mix(in srgb, utils.create-system-var(primary) 40%, transparent)
+      );
+    }
+  }
+
+  &:not(.mat-clock-dial-hand-disabled) {
+    @include utils.create-token-slot(
+      background-color,
+      clock-dial-hand-color,
+      utils.create-system-var(primary)
+    );
+
+    &::before {
+      @include utils.create-token-slot(
+        background-color,
+        clock-dial-hand-value-point-color,
+        utils.create-system-var(primary)
+      );
+    }
   }
 }
 

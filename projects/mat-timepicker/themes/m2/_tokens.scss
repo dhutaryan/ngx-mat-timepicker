@@ -23,6 +23,7 @@
     $toggle-color,
     $content-color,
     (
+      clock-dial-cell-active-text-color: #fff,
       clock-dial-cell-disabled-text-color:
         mat.m2-get-color-from-palette($foreground, disabled-button),
       clock-dial-cell-disabled-background-color: transparent,
@@ -59,6 +60,7 @@
     clock-dial-hand-value-point-color: $color,
     clock-dial-hand-value-point-disabled-color: color.change($color, $alpha: 0.4),
     clock-dial-cell-unthemable-color: transparent,
+    clock-dial-cell-active-background-color: $color,
     clock-dial-cell-active-disabled-color: color.change($color, $alpha: 0.4)
   );
 }

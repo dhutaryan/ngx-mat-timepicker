@@ -1,7 +1,19 @@
+@use '../../themes/utils';
+
 $button-icon-size: 3.25rem;
 
 .mat-timepicker-content {
-  display: block;
+  @include utils.create-token-slot(color, content-text-color, utils.create-system-var(on-surface));
+  @include utils.create-token-slot(
+    background-color,
+    content-background-color,
+    utils.create-system-var(surface-container-high)
+  );
+  @include utils.create-token-slot(
+    border-radius,
+    content-border-radius,
+    utils.create-system-var(corner-large)
+  );
 }
 
 .mat-timepicker-content-container {
@@ -19,10 +31,21 @@ $button-icon-size: 3.25rem;
 }
 
 .mat-time-toggle-mode-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: $button-icon-size;
   height: $button-icon-size;
   margin-left: -0.75rem;
   margin-bottom: -0.25rem;
+
+  & svg {
+    @include utils.create-token-slot(
+      fill,
+      toggle-mode-button-color,
+      utils.create-system-var(on-surface-variant)
+    );
+  }
 }
 
 button.mat-timepicker-close-button {
