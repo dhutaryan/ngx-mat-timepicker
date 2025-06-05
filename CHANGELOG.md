@@ -1,3 +1,7 @@
+# 19.1.1
+
+- fix(theme): use correct css property for separator line height ([#207](https://github.com/dhutaryan/ngx-mat-timepicker/issues/207))
+
 # 19.1.0
 
 - feat(theme): support mat system colors ([#199](https://github.com/dhutaryan/ngx-mat-timepicker/issues/199))
