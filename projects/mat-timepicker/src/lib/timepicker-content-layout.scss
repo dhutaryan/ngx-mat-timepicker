@@ -74,8 +74,8 @@ h6.mat-timepicker-content-layout-title {
     variables.$inputs-separator-font-size
   );
   @include utils.create-token-slot(
+    line-height,
     content-layout-separator-line-height,
-    content-layout-title-color,
     variables.$inputs-separator-line-height
   );
 }
