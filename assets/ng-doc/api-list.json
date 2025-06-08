@@ -63,6 +63,16 @@
         "name": "withZeroPrefixMeridiem"
       },
       {
+        "route": "/api/functions/api/provideMatTimepickerInputsKeydownHandler",
+        "type": "Function",
+        "name": "provideMatTimepickerInputsKeydownHandler"
+      },
+      {
+        "route": "/api/variables/api/MAT_TIMEPICKER_INPUTS_KEYDOWN_HANDLER",
+        "type": "Variable",
+        "name": "MAT_TIMEPICKER_INPUTS_KEYDOWN_HANDLER"
+      },
+      {
         "route": "/api/classes/api/MatTimeInputBase",
         "type": "Directive",
         "name": "MatTimeInputBase"
