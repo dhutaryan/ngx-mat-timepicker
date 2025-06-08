@@ -13,6 +13,10 @@ export * from './lib/timepicker-input-base';
 export * from './lib/hours-clock-dial';
 export * from './lib/minutes-clock-dial';
 export * from './lib/time-inputs';
+export {
+  MAT_TIMEPICKER_INPUTS_KEYDOWN_HANDLER,
+  provideMatTimepickerInputsKeydownHandler,
+} from './lib/time-input-base';
 export * from './lib/clock-dials';
 export * from './lib/time-period';
 export * from './lib/timepicker-actions';

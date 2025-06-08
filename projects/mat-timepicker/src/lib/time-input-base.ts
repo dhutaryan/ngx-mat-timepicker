@@ -9,6 +9,8 @@ import {
   Inject,
   Self,
   HostListener,
+  InjectionToken,
+  inject,
 } from '@angular/core';
 
 export function withZeroPrefix(value: number): string {
@@ -24,8 +26,29 @@ export function withZeroPrefixMeridiem(
   return withZeroPrefix(newValue);
 }
 
-const DIGIT_KEYS = Array.from({ length: 10 }, (_, i) => `${i}`);
-const SPECIAL_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+const SPECIAL_KEYS = ['Backspace', 'Delete', 'Tab'];
+
+export const MAT_TIMEPICKER_INPUTS_KEYDOWN_HANDLER = new InjectionToken<
+  (event: KeyboardEvent) => void
+>('MatTimepickerInputKeydownHandler', {
+  factory: () => (event: KeyboardEvent) => {
+    const isDigit = /^[0-9]$/.test(event.key);
+    const isSpecial = SPECIAL_KEYS.includes(event.code);
+
+    if (!isDigit && !isSpecial) {
+      event.preventDefault();
+    }
+  },
+});
+
+export function provideMatTimepickerInputsKeydownHandler(
+  handler: (event: KeyboardEvent) => void,
+) {
+  return {
+    provide: MAT_TIMEPICKER_INPUTS_KEYDOWN_HANDLER,
+    useValue: handler,
+  };
+}
 
 @Directive()
 export abstract class MatTimeInputBase {
@@ -48,14 +71,12 @@ export abstract class MatTimeInputBase {
   @Output() timeChanged = new EventEmitter<number>();
 
   @HostListener('keydown', ['$event']) _keydown(event: KeyboardEvent) {
-    const isAllow =
-      (DIGIT_KEYS.includes(event.key) && !event.shiftKey) ||
-      SPECIAL_KEYS.includes(event.code);
-
-    if (!isAllow) {
-      event.preventDefault();
-    }
+    this._keydownHandler(event);
   }
+
+  private readonly _keydownHandler = inject(
+    MAT_TIMEPICKER_INPUTS_KEYDOWN_HANDLER,
+  );
 
   get inputElement() {
     return this.element.nativeElement as HTMLInputElement;

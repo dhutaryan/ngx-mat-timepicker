@@ -9,12 +9,12 @@ import {
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { TimeAdapter } from './adapter';
 import { MatTimePeriodType } from './time-period';
 import { ALL_MINUTES } from './minutes-clock-dial';
 import { ALL_HOURS } from './hours-clock-dial';
-import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 
 @Directive()
 export abstract class MatTimeFaceBase<T>
