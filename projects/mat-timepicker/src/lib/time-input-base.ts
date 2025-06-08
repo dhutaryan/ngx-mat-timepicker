@@ -26,7 +26,7 @@ export function withZeroPrefixMeridiem(
   return withZeroPrefix(newValue);
 }
 
-const SPECIAL_KEYS = ['Backspace', 'Delete', 'Tab'];
+const SPECIAL_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
 
 export const MAT_TIMEPICKER_INPUTS_KEYDOWN_HANDLER = new InjectionToken<
   (event: KeyboardEvent) => void
