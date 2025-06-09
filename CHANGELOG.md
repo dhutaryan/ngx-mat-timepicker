@@ -1,3 +1,7 @@
+# 19.2.0
+
+- feat(time-inputs): provide keydown handler token ([#209](https://github.com/dhutaryan/ngx-mat-timepicker/issues/209))
+
 # 19.1.1
 
 - fix(theme): use correct css property for separator line height ([#207](https://github.com/dhutaryan/ngx-mat-timepicker/issues/207))
