@@ -112,6 +112,29 @@ If you want to allow the user to select a time from the timepicker that is inlin
 
 {{ NgDocActions.demo("InlineComponent") }}
 
+## Inputs keydown handler
+
+The timepicker has `input` mode where user can type time. User can type only numbers and some special chars like Backspace, Delete, etc. This is a bit tricky because some other language keyboards (e.g. French) use a key combination to type numbers.
+
+So, this is why there is a `MAT_TIMEPICKER_INPUTS_KEYDOWN_HANDLER`. You can provide you implementation how you will handle it.
+
+```
+{
+  provide: MAT_TIMEPICKER_INPUTS_KEYDOWN_HANDLER,
+  useValue: (event: KeyboardEvent) => {
+    // your implementation
+  },
+}
+```
+
+or use function
+
+```
+provideMatTimepickerInputsKeydownHandler((event: KeyboardEvent) =>
+  // your implementation
+)
+```
+
 ## Internationalization
 
 By default, the `MAT_TIME_LOCALE` injection token will use the existing `LOCALE_ID` locale code from `@angular/core`. If you want to override it, you can provide a new value for the `MAT_TIME_LOCALE` token:
