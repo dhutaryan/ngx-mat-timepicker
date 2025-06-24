@@ -16,7 +16,7 @@ import {
   ViewChild,
   signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ThemePalette } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Subject, Subscription } from 'rxjs';
@@ -36,7 +36,6 @@ import { TimepickerOrientation } from './orientation';
   selector: 'mat-timepicker-content',
   standalone: true,
   imports: [
-    CommonModule,
     PortalModule,
     A11yModule,
     MatTimeInputs,

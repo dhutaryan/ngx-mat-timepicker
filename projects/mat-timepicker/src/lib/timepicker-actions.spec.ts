@@ -315,12 +315,16 @@ describe('MatTimepickerActions', () => {
         (timeChange)="onTimeChange()"
       />
       <mat-timepicker #t [openAs]="openAs">
-        <mat-timepicker-actions *ngIf="renderActions">
-          <button class="cancel" mat-button matTimepickerCancel>Cancel</button>
-          <button class="apply" mat-raised-button matTimepickerApply>
-            Apply
-          </button>
-        </mat-timepicker-actions>
+        @if (renderActions) {
+          <mat-timepicker-actions>
+            <button class="cancel" mat-button matTimepickerCancel>
+              Cancel
+            </button>
+            <button class="apply" mat-raised-button matTimepickerApply>
+              Apply
+            </button>
+          </mat-timepicker-actions>
+        }
       </mat-timepicker>
     </mat-form-field>
   `,
