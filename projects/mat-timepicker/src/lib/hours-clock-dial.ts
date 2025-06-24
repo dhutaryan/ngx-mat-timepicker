@@ -1,4 +1,4 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -10,6 +10,7 @@ import {
   OnInit,
   Output,
   ViewEncapsulation,
+  DOCUMENT,
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -182,8 +183,10 @@ export class MatHoursClockDial implements OnInit {
     const elementRect = element.getBoundingClientRect();
     const width = element.offsetWidth;
     const height = element.offsetHeight;
-    const pageX = event instanceof MouseEvent ? event.pageX : event.touches[0].pageX;
-    const pageY = event instanceof MouseEvent ? event.pageY : event.touches[0].pageY;
+    const pageX =
+      event instanceof MouseEvent ? event.pageX : event.touches[0].pageX;
+    const pageY =
+      event instanceof MouseEvent ? event.pageY : event.touches[0].pageY;
     const x = width / 2 - (pageX - elementRect.left - window.scrollX);
     const y = height / 2 - (pageY - elementRect.top - window.scrollY);
     const unit = Math.PI / 6;
@@ -191,7 +194,8 @@ export class MatHoursClockDial implements OnInit {
     const radian = atan2 < 0 ? Math.PI * 2 + atan2 : atan2;
     const initialValue = Math.round(radian / unit);
     const z = Math.sqrt(x * x + y * y);
-    const outer = z > getClockOuterRadius(this.touchUi) - getClockTickRadius(this.touchUi);
+    const outer =
+      z > getClockOuterRadius(this.touchUi) - getClockTickRadius(this.touchUi);
     const value = this._getHourValue(initialValue, outer);
 
     if (this.availableHours.includes(value)) {
@@ -244,7 +248,9 @@ export class MatHoursClockDial implements OnInit {
     }
 
     const outer = hour >= 0 && hour < 12;
-    const radius = outer ? getClockOuterRadius(this.touchUi) : getClockInnerRadius(this.touchUi);
+    const radius = outer
+      ? getClockOuterRadius(this.touchUi)
+      : getClockInnerRadius(this.touchUi);
 
     return radius;
   }

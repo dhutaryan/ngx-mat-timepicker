@@ -40,11 +40,13 @@
     <mat-hint>{{ _intl.minuteInputHint }}</mat-hint>
   </mat-form-field>
 
-  <ng-template mat-time-period [ngIf]="isMeridiem">
-    <mat-time-period
-      [period]="period"
-      [disabledPeriod]="disabledPeriod"
-      (periodChanged)="_onPeriodChanged($event)"
-    ></mat-time-period>
-  </ng-template>
+  @if (isMeridiem) {
+    <ng-template mat-time-period>
+      <mat-time-period
+        [period]="period"
+        [disabledPeriod]="disabledPeriod"
+        (periodChanged)="_onPeriodChanged($event)"
+      ></mat-time-period>
+    </ng-template>
+  }
 </mat-timepicker-content-layout>

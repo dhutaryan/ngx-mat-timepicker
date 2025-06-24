@@ -14,8 +14,9 @@ import {
   Optional,
   booleanAttribute,
   inject,
+  DOCUMENT,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+
 import { ThemePalette } from '@angular/material/core';
 import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
 import {

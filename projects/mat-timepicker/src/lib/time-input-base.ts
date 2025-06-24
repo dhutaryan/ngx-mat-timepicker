@@ -1,4 +1,3 @@
-import { DOCUMENT } from '@angular/common';
 import {
   Input,
   Output,
@@ -11,6 +10,7 @@ import {
   HostListener,
   InjectionToken,
   inject,
+  DOCUMENT,
 } from '@angular/core';
 
 export function withZeroPrefix(value: number): string {

@@ -11,7 +11,7 @@ import {
   OnDestroy,
   ChangeDetectorRef,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatButtonModule } from '@angular/material/button';
 import { Observable, Subscription, merge, of } from 'rxjs';
@@ -25,7 +25,7 @@ export class MatTimepickerToggleIcon {}
 @Component({
   selector: 'mat-timepicker-toggle',
   standalone: true,
-  imports: [CommonModule, MatButtonModule],
+  imports: [MatButtonModule],
   templateUrl: './timepicker-toggle.html',
   styleUrls: ['./timepicker-toggle.scss'],
   exportAs: 'matTimepickerToggle',

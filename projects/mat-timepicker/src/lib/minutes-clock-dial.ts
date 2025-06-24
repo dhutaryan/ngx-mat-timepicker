@@ -1,4 +1,4 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -10,6 +10,7 @@ import {
   OnInit,
   Output,
   ViewEncapsulation,
+  DOCUMENT,
 } from '@angular/core';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { ThemePalette } from '@angular/material/core';
@@ -17,7 +18,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { debounceTime, fromEvent, merge, take } from 'rxjs';
 
 import { ClockDialViewCell } from './hours-clock-dial';
-import { getClockCorrectedRadius, getClockOuterRadius, getClockRadius } from './clock-size';
+import {
+  getClockCorrectedRadius,
+  getClockOuterRadius,
+  getClockRadius,
+} from './clock-size';
 
 export const ALL_MINUTES = Array(60)
   .fill(null)
@@ -109,7 +114,8 @@ export class MatMinutesClockDial implements OnInit {
   _handStyles(): any {
     const deg = Math.round(this._selectedMinute * (360 / 60));
     const height = getClockOuterRadius(this.touchUi);
-    const marginTop = getClockRadius(this.touchUi) - getClockOuterRadius(this.touchUi);
+    const marginTop =
+      getClockRadius(this.touchUi) - getClockOuterRadius(this.touchUi);
 
     return {
       transform: `rotate(${deg}deg)`,
@@ -160,8 +166,10 @@ export class MatMinutesClockDial implements OnInit {
     const elementRect = element.getBoundingClientRect();
     const width = element.offsetWidth;
     const height = element.offsetHeight;
-    const pageX = event instanceof MouseEvent ? event.pageX : event.touches[0].pageX;
-    const pageY = event instanceof MouseEvent ? event.pageY : event.touches[0].pageY;
+    const pageX =
+      event instanceof MouseEvent ? event.pageX : event.touches[0].pageX;
+    const pageY =
+      event instanceof MouseEvent ? event.pageY : event.touches[0].pageY;
     const x = width / 2 - (pageX - elementRect.left - window.scrollX);
     const y = height / 2 - (pageY - elementRect.top - window.scrollY);
     const unit = Math.PI / (30 / this.interval);
@@ -170,7 +178,10 @@ export class MatMinutesClockDial implements OnInit {
     const initialValue = Math.round(radian / unit) * this.interval;
     const value = initialValue === 60 ? 0 : initialValue;
 
-    if (this.availableMinutes.includes(value) && this.availableMinutes.includes(value)) {
+    if (
+      this.availableMinutes.includes(value) &&
+      this.availableMinutes.includes(value)
+    ) {
       this.selectedMinute = value;
       this.selectedChange.emit(this.selectedMinute);
     }
@@ -180,22 +191,24 @@ export class MatMinutesClockDial implements OnInit {
 
   /** Creates list of minutes. */
   private _initMinutes(): void {
-    this.minutes = ALL_MINUTES.filter((minute) => minute % 5 === 0).map((minute) => {
-      const radian = (minute / 30) * Math.PI;
-      const displayValue = minute === 0 ? '00' : String(minute);
+    this.minutes = ALL_MINUTES.filter((minute) => minute % 5 === 0).map(
+      (minute) => {
+        const radian = (minute / 30) * Math.PI;
+        const displayValue = minute === 0 ? '00' : String(minute);
 
-      return {
-        value: minute,
-        displayValue,
-        left:
-          getClockCorrectedRadius(this.touchUi) +
-          Math.sin(radian) * getClockOuterRadius(this.touchUi),
-        top:
-          getClockCorrectedRadius(this.touchUi) -
-          Math.cos(radian) * getClockOuterRadius(this.touchUi),
-        disabled: !this.availableMinutes.includes(minute),
-      };
-    });
+        return {
+          value: minute,
+          displayValue,
+          left:
+            getClockCorrectedRadius(this.touchUi) +
+            Math.sin(radian) * getClockOuterRadius(this.touchUi),
+          top:
+            getClockCorrectedRadius(this.touchUi) -
+            Math.cos(radian) * getClockOuterRadius(this.touchUi),
+          disabled: !this.availableMinutes.includes(minute),
+        };
+      },
+    );
   }
 
   /** Use defaultView of injected document if available or fallback to global window reference */

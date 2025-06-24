@@ -1,4 +1,3 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   Component,
   ChangeDetectionStrategy,
@@ -10,6 +9,7 @@ import {
   ChangeDetectorRef,
   Inject,
   NgZone,
+  DOCUMENT,
 } from '@angular/core';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -169,7 +169,6 @@ export class MatMinuteInput extends MatTimeInputBase {
   selector: 'mat-time-inputs',
   standalone: true,
   imports: [
-    CommonModule,
     MatFormFieldModule,
     MatInputModule,
     MatTimepickerContentLayout,

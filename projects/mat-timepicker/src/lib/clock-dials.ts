@@ -10,7 +10,7 @@ import {
   Input,
   ChangeDetectorRef,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { BehaviorSubject, Subscription, take } from 'rxjs';
 
 import { TimeAdapter } from './adapter';
@@ -30,7 +30,6 @@ export type MatDialView = 'hours' | 'minutes';
   selector: 'mat-clock-dials',
   standalone: true,
   imports: [
-    CommonModule,
     MatTimepickerContentLayout,
     MatHoursClockDial,
     MatMinutesClockDial,
