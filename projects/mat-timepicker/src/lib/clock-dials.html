@@ -24,14 +24,14 @@
   </div>
 
   @if (isMeridiem) {
-    <ng-template mat-time-period>
+    <ng-container mat-time-period>
       <mat-time-period
         [period]="period"
         [disabledPeriod]="disabledPeriod"
         [vertical]="orientation === 'vertical'"
         (periodChanged)="_onPeriodChanged($event)"
       ></mat-time-period>
-    </ng-template>
+    </ng-container>
   }
 
   <div

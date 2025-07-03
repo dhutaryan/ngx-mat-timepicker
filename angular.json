@@ -162,7 +162,8 @@
           "options": {
             "main": "projects/mat-timepicker/src/test.ts",
             "tsConfig": "projects/mat-timepicker/tsconfig.spec.json",
-            "karmaConfig": "projects/mat-timepicker/karma.conf.js"
+            "karmaConfig": "projects/mat-timepicker/karma.conf.js",
+            "polyfills": ["zone.js", "zone.js/testing"]
           }
         }
       }
