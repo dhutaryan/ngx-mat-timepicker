@@ -1,3 +1,8 @@
+# 20.0.0
+
+- fix(clock-dials): use cell buttons color accordingly to material spec ([#214](https://github.com/dhutaryan/ngx-mat-timepicker/issues/214))
+- feat(timepicker): support angular and angular material v20 ([#213](https://github.com/dhutaryan/ngx-mat-timepicker/issues/213))
+
 # 19.2.0
 
 - feat(time-inputs): provide keydown handler token ([#209](https://github.com/dhutaryan/ngx-mat-timepicker/issues/209))
