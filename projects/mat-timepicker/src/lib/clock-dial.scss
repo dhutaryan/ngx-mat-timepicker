@@ -48,6 +48,12 @@ $clock-dial-cell-size: 2rem;
   border-radius: 50%;
   box-shadow: none;
 
+  @include utils.create-token-slot(
+    color,
+    clock-dial-cell-text-color,
+    utils.create-system-var(on-surface)
+  );
+
   &:disabled {
     pointer-events: none;
   }

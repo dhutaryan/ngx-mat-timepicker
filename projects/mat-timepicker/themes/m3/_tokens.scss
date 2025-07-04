@@ -21,6 +21,7 @@
     $toggle-color,
     $color-tokens,
     (
+      clock-dial-cell-text-color: mat.get-theme-color($theme, on-surface),
       clock-dial-cell-active-text-color: mat.get-theme-color($theme, on-primary),
       clock-dial-cell-disabled-text-color:
         color.change(mat.get-theme-color($theme, on-surface), $alpha: 0.4),
