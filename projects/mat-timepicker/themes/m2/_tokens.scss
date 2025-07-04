@@ -23,6 +23,7 @@
     $toggle-color,
     $content-color,
     (
+      clock-dial-cell-text-color: mat.m2-get-color-from-palette($foreground, text),
       clock-dial-cell-active-text-color: #fff,
       clock-dial-cell-disabled-text-color:
         mat.m2-get-color-from-palette($foreground, disabled-button),
