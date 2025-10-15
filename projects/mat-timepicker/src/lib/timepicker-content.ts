@@ -1,4 +1,3 @@
-import { AnimationEvent } from '@angular/animations';
 import {
   ComponentPortal,
   PortalModule,
@@ -10,11 +9,9 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   ViewEncapsulation,
-  ElementRef,
   OnInit,
   AfterViewInit,
   ViewChild,
-  signal,
 } from '@angular/core';
 
 import { ThemePalette } from '@angular/material/core';
@@ -25,7 +22,6 @@ import {
   ExtractTimeTypeFromSelection,
   MatTimeSelectionModel,
 } from './time-selection-model';
-import { matTimepickerAnimations } from './timepicker-animations';
 import { MatTimepickerBase, TimepickerMode } from './timepicker-base';
 import { MatTimepickerIntl } from './timepicker-intl';
 import { MatClockDials } from './clock-dials';
@@ -50,15 +46,13 @@ import { TimepickerOrientation } from './orientation';
   host: {
     class: 'mat-timepicker-content',
     '[class]': 'color ? "mat-" + color : ""',
-    '[@transformPanel]': '_animationState',
-    '(@transformPanel.start)': '_handleAnimationEvent($event)',
-    '(@transformPanel.done)': '_handleAnimationEvent($event)',
+    '[class.mat-enter-dropdown]': '_animationState === "enter-dropdown"',
+    '[class.mat-enter-dialog]': '_animationState === "enter-dialog"',
+    '[class.mat-void]': '_animationState === "void"',
+    '(animationstart)': '_handleAnimationEvent($event)',
+    '(animationend)': '_handleAnimationEvent($event)',
     '[class.mat-timepicker-content-touch]': 'timepicker.touchUi',
   },
-  animations: [
-    matTimepickerAnimations.transformPanel,
-    matTimepickerAnimations.fadeInTimepicker,
-  ],
 })
 export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
   implements OnInit, AfterViewInit
@@ -151,7 +145,11 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
   }
 
   _handleAnimationEvent(event: AnimationEvent) {
-    this._isAnimating = event.phaseName === 'start';
+    const availableAnimations = ['enter-dropdown', 'enter-dialog', 'void'];
+    if (!availableAnimations.includes(event.animationName)) {
+      return;
+    }
+    this._isAnimating = event.type === 'animationstart';
 
     if (!this._isAnimating) {
       this._animationDone.next();

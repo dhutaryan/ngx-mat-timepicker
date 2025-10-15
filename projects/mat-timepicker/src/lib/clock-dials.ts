@@ -18,7 +18,6 @@ import { MatTimeFaceBase } from './time-face-base';
 import { withZeroPrefixMeridiem } from './time-input-base';
 import { MatTimepickerIntl } from './timepicker-intl';
 import { TimepickerOrientation } from './orientation';
-import { enterLeaveAnimation } from './clock-dial-adnimation';
 import { MatTimepickerContentLayout } from './timepicker-content-layout';
 import { MatHoursClockDial } from './hours-clock-dial';
 import { MatMinutesClockDial } from './minutes-clock-dial';
@@ -44,7 +43,6 @@ export type MatDialView = 'hours' | 'minutes';
     role: 'dial',
     class: 'mat-clock-dials',
   },
-  animations: [enterLeaveAnimation],
 })
 export class MatClockDials<T>
   extends MatTimeFaceBase<T>

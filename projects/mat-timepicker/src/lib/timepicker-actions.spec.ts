@@ -11,7 +11,6 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
@@ -31,7 +30,6 @@ describe('MatTimepickerActions', () => {
         MatTimepickerModule,
         MatFormFieldModule,
         MatInputModule,
-        NoopAnimationsModule,
         ReactiveFormsModule,
         MatNativeDateTimeModule,
       ],

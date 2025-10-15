@@ -40,7 +40,8 @@
   >
     @if (isHoursView) {
       <mat-hours-clock-dial
-        [@enterLeaveAnimation]
+        animate.enter="mat-clock-dial-enter"
+        animate.leave="mat-clock-dial-leave"
         [color]="color"
         [selectedHour]="selectedHour"
         [isMeridiem]="isMeridiem"
@@ -53,7 +54,8 @@
 
     @if (!isHoursView) {
       <mat-minutes-clock-dial
-        [@enterLeaveAnimation]
+        animate.enter="mat-clock-dial-enter"
+        animate.leave="mat-clock-dial-leave"
         [color]="color"
         [selectedMinute]="selectedMinute"
         [interval]="minuteInterval"

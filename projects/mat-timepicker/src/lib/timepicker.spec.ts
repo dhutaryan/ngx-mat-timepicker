@@ -28,7 +28,6 @@ import {
 import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { Directionality } from '@angular/cdk/bidi';
 import { Subject } from 'rxjs';
@@ -67,7 +66,6 @@ describe('MatTimepicker', () => {
         MatTimepickerModule,
         MatFormFieldModule,
         MatInputModule,
-        NoopAnimationsModule,
         ReactiveFormsModule,
         ...imports,
       ],
