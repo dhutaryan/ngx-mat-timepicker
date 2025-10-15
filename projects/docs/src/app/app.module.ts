@@ -5,6 +5,7 @@ import {
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgDocButtonIconComponent, NgDocIconComponent } from '@ng-doc/ui-kit';
 import {
   NgDocRootComponent,
@@ -27,6 +28,7 @@ import { AppComponent } from './app.component';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(
       [...NG_DOC_ROUTING, { path: '**', redirectTo: 'what-is' }],
       {
