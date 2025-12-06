@@ -14,7 +14,6 @@ import {
   NUMPAD_TWO,
   UP_ARROW,
 } from '@angular/cdk/keycodes';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatNativeDateTimeModule } from './adapter';
 import { MatTimepickerModule } from './timepicker.module';
@@ -22,11 +21,7 @@ import { MatTimepickerModule } from './timepicker.module';
 // Creates a test component fixture.
 function createComponent<T>(component: Type<T>): ComponentFixture<T> {
   TestBed.configureTestingModule({
-    imports: [
-      MatTimepickerModule,
-      MatNativeDateTimeModule,
-      NoopAnimationsModule,
-    ],
+    imports: [MatTimepickerModule, MatNativeDateTimeModule],
     declarations: [component],
   });
 

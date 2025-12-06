@@ -9,7 +9,6 @@ import {
 } from '@angular/core/testing';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { By } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatTimepickerModule } from './timepicker.module';
 import { MatNativeDateTimeModule } from './adapter';
@@ -17,11 +16,7 @@ import { MatHourInput, MatMinuteInput } from './time-inputs';
 
 function createComponent<T>(component: Type<T>): ComponentFixture<T> {
   TestBed.configureTestingModule({
-    imports: [
-      MatTimepickerModule,
-      MatNativeDateTimeModule,
-      NoopAnimationsModule,
-    ],
+    imports: [MatTimepickerModule, MatNativeDateTimeModule],
     declarations: [component],
   });
 

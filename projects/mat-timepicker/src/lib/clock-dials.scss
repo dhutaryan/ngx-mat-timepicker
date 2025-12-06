@@ -56,3 +56,43 @@
 .mat-clock-dial-cell.mat-clock-dial-cell-disabled:hover {
   cursor: default;
 }
+
+.mat-clock-dial-enter {
+  animation: clock-dial-enter-animation 0.1s ease-out;
+}
+
+.mat-clock-dial-leave {
+  animation: clock-dial-leave-animation 0s ease-in;
+}
+
+@mixin clock-dial-hidden() {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.05);
+}
+
+@mixin clock-dial-visible() {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+@keyframes clock-dial-enter-animation {
+  from {
+    @include clock-dial-hidden();
+  }
+
+  to {
+    @include clock-dial-visible();
+  }
+}
+
+@keyframes clock-dial-leave-animation {
+  from {
+    @include clock-dial-visible();
+  }
+
+  to {
+    @include clock-dial-hidden();
+  }
+}
