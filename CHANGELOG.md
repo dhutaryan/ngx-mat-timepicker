@@ -1,3 +1,7 @@
+# 20.1.0
+
+- feat(timepicker): migrate from @angular/animations to native css ([#219](https://github.com/dhutaryan/ngx-mat-timepicker/issues/219))
+
 # 20.0.0
 
 - fix(clock-dials): use cell buttons color accordingly to material spec ([#214](https://github.com/dhutaryan/ngx-mat-timepicker/issues/214))
