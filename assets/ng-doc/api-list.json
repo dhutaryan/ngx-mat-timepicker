@@ -3,11 +3,6 @@
     "title": "ngx-mat-timepicker",
     "items": [
       {
-        "route": "/api/variables/api/enterLeaveAnimation",
-        "type": "Variable",
-        "name": "enterLeaveAnimation"
-      },
-      {
         "route": "/api/type-aliases/api/MatDialView",
         "type": "TypeAlias",
         "name": "MatDialView"
@@ -156,11 +151,6 @@
         "route": "/api/classes/api/MatTimepickerDefaultActions",
         "type": "Component",
         "name": "MatTimepickerDefaultActions"
-      },
-      {
-        "route": "/api/variables/api/matTimepickerAnimations",
-        "type": "Variable",
-        "name": "matTimepickerAnimations"
       },
       {
         "route": "/api/type-aliases/api/TimepickerOpenAs",
