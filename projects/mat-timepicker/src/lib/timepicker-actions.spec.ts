@@ -20,6 +20,7 @@ import { MatTimepicker } from './timepicker';
 import { TimepickerOpenAs } from './timepicker-base';
 import { MatNativeDateTimeModule } from './adapter';
 import { clickDialCell, getDialCell } from './clock-dials.spec';
+import { contentAnimationFinished } from './timepicker.spec';
 
 describe('MatTimepickerActions', () => {
   function createComponent<T>(component: Type<T>): ComponentFixture<T> {
@@ -87,14 +88,14 @@ describe('MatTimepickerActions', () => {
     expect(actions?.querySelector('.apply')).toBeTruthy();
   }));
 
-  it('should not assign the value or close the timepicker when a value is selected', fakeAsync(() => {
+  it('should not assign the value or close the timepicker when a value is selected', async () => {
     const fixture = createComponent(TimepickerWithActions);
     fixture.detectChanges();
     const { control, timepicker, onTimeChange, input } =
       fixture.componentInstance;
     timepicker.open();
     fixture.detectChanges();
-    tick();
+    await contentAnimationFinished();
 
     const minutesDial = document.querySelector<HTMLElement>(
       '.mat-clock-dial-minutes',
@@ -109,7 +110,6 @@ describe('MatTimepickerActions', () => {
 
     clickDialCell(hourCell);
     fixture.detectChanges();
-    flush();
 
     expect(timepicker.opened).toBe(true);
     expect(input.nativeElement.value).toBeFalsy();
@@ -127,17 +127,16 @@ describe('MatTimepickerActions', () => {
     // expect(control.value).toBeFalsy();
     // expect(onTimeChange).not.toHaveBeenCalled();
     // expect(minuteCell.classList).not.toContain('mat-primary');
-  }));
+  });
 
-  it('should close without changing the value when clicking on the cancel button', fakeAsync(() => {
+  it('should close without changing the value when clicking on the cancel button', async () => {
     const fixture = createComponent(TimepickerWithActions);
     fixture.detectChanges();
     const { control, timepicker, onTimeChange, input } =
       fixture.componentInstance;
     timepicker.open();
     fixture.detectChanges();
-    tick();
-    flush();
+    await contentAnimationFinished();
 
     const hoursDial = document.querySelector<HTMLElement>(
       '.mat-clock-dial-hours',
@@ -155,8 +154,6 @@ describe('MatTimepickerActions', () => {
 
     clickDialCell(hourCell);
     fixture.detectChanges();
-    tick();
-    flush();
 
     expect(timepicker.opened).toBe(true);
     expect(input.nativeElement.value).toBeFalsy();
@@ -171,13 +168,13 @@ describe('MatTimepickerActions', () => {
       .querySelector<HTMLButtonElement>('.cancel')
       ?.click();
     fixture.detectChanges();
-    flush();
+    await contentAnimationFinished();
 
     expect(timepicker.opened).toBe(false);
     expect(input.nativeElement.value).toBeFalsy();
     expect(control.value).toBeFalsy();
     expect(onTimeChange).not.toHaveBeenCalled();
-  }));
+  });
 
   it('should close while keeping the previous control value when clicking on cancel', fakeAsync(() => {
     const fixture = createComponent(TimepickerWithActions);

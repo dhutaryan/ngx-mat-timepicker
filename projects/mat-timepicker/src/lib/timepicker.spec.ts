@@ -50,6 +50,12 @@ import {
 import { TimepickerOrientation } from './orientation';
 import { MatTimepickerIntl } from './timepicker-intl';
 
+export function contentAnimationFinished(){
+  return new Promise(resolve => {
+    document.querySelector('mat-timepicker-content')!.addEventListener('animationend', resolve, { once: true });
+  });
+}
+
 describe('MatTimepicker', () => {
   const SUPPORTS_INTL = typeof Intl != 'undefined';
 
@@ -162,11 +168,10 @@ describe('MatTimepicker', () => {
         );
       }));
 
-      it('should open timepicker if opened input is set to true', fakeAsync(() => {
+      it('should open timepicker if opened input is set to true', async () => {
         testComponent.opened = true;
         fixture.detectChanges();
-        tick();
-        flush();
+        await contentAnimationFinished();
 
         expect(
           document.querySelector('.mat-timepicker-content'),
@@ -174,10 +179,10 @@ describe('MatTimepicker', () => {
 
         testComponent.opened = false;
         fixture.detectChanges();
-        flush();
+        await contentAnimationFinished();
 
         expect(document.querySelector('.mat-timepicker-content')).toBeNull();
-      }));
+      });
 
       it('open in disabled mode should not open the timepicker content', fakeAsync(() => {
         testComponent.disabled = true;
@@ -210,11 +215,10 @@ describe('MatTimepicker', () => {
         expect(document.querySelector('.cdk-overlay-pane')).not.toBeNull();
       }));
 
-      it('close should close popup', fakeAsync(() => {
+      it('close should close popup', async () => {
         testComponent.timepicker.open();
         fixture.detectChanges();
-        tick();
-        flush();
+        await contentAnimationFinished();
 
         const popup = document.querySelector('.cdk-overlay-pane')!;
         expect(popup).not.toBeNull();
@@ -222,10 +226,10 @@ describe('MatTimepicker', () => {
 
         testComponent.timepicker.close();
         fixture.detectChanges();
-        flush();
+        await contentAnimationFinished();
 
         expect(popup.getBoundingClientRect().height).toBe(0);
-      }));
+      });
 
       it('should close the popup when pressing ESCAPE', fakeAsync(() => {
         testComponent.timepicker.open();
@@ -304,22 +308,22 @@ describe('MatTimepicker', () => {
         expect(popup.getAttribute('aria-labelledby')).toBe('test-label');
       }));
 
-      it('close should close dialog', fakeAsync(() => {
+      it('close should close dialog', async () => {
         testComponent.openAs = 'dialog';
         fixture.detectChanges();
 
         testComponent.timepicker.open();
         fixture.detectChanges();
-        tick();
+        await contentAnimationFinished();
 
         expect(document.querySelector('.mat-timepicker-dialog')).not.toBeNull();
 
         testComponent.timepicker.close();
         fixture.detectChanges();
-        flush();
+        await contentAnimationFinished();
 
         expect(document.querySelector('.mat-timepicker-dialog')).toBeNull();
-      }));
+      });
 
       it('should show period buttons by default for inputs view', fakeAsync(() => {
         testComponent.timepicker.mode = 'input';
@@ -602,11 +606,9 @@ describe('MatTimepicker', () => {
         expect(button.classList).toContain('cdk-visually-hidden');
       }));
 
-      it('should close the overlay when clicking on the invisible close button', fakeAsync(() => {
+      it('should close the overlay when clicking on the invisible close button', async () => {
         testComponent.opened = true;
         fixture.detectChanges();
-        tick();
-        flush();
 
         const button = document.querySelector(
           '.mat-timepicker-close-button',
@@ -617,10 +619,10 @@ describe('MatTimepicker', () => {
 
         button.click();
         fixture.detectChanges();
-        flush();
+        await contentAnimationFinished();
 
         expect(document.querySelector('.mat-timepicker-content')).toBeNull();
-      }));
+      });
 
       xit('should prevent the default action of navigation keys before the focus timeout has elapsed', fakeAsync(() => {
         testComponent.timepicker.open();
@@ -1418,7 +1420,7 @@ describe('MatTimepicker', () => {
         expect(icon.getAttribute('focusable')).toBe('false');
       });
 
-      it('should restore focus to the toggle after the timepicker is closed', fakeAsync(() => {
+      it('should restore focus to the toggle after the timepicker is closed', async () => {
         let toggle = fixture.debugElement.query(
           By.css('button'),
         )!.nativeElement;
@@ -1432,7 +1434,7 @@ describe('MatTimepicker', () => {
 
         fixture.componentInstance.timepicker.open();
         fixture.detectChanges();
-        tick();
+        await contentAnimationFinished();
 
         let pane = document.querySelector('.cdk-overlay-pane')!;
 
@@ -1441,12 +1443,12 @@ describe('MatTimepicker', () => {
 
         fixture.componentInstance.timepicker.close();
         fixture.detectChanges();
-        flush();
+        await contentAnimationFinished();
 
         expect(document.activeElement).toBe(toggle);
-      }));
+      });
 
-      it('should restore focus when placed inside a shadow root', fakeAsync(() => {
+      it('should restore focus when placed inside a shadow root', async () => {
         if (!_supportsShadowDom()) {
           return;
         }
@@ -1470,15 +1472,15 @@ describe('MatTimepicker', () => {
         spyOn(toggle, 'focus').and.callThrough();
         fixture.componentInstance.timepicker.open();
         fixture.detectChanges();
-        tick();
+        await contentAnimationFinished();
         fixture.componentInstance.timepicker.close();
         fixture.detectChanges();
-        flush();
+        await contentAnimationFinished();
 
         // We have to assert by looking at the `focus` method, because
         // `document.activeElement` will return the shadow root.
         expect(toggle.focus).toHaveBeenCalled();
-      }));
+      });
 
       it('should allow for focus restoration to be disabled', fakeAsync(() => {
         let toggle = fixture.debugElement.query(
@@ -1786,7 +1788,7 @@ describe('MatTimepicker', () => {
         );
       }));
 
-      it('should be able to change the default minutes interval', fakeAsync(() => {
+      it('should be able to change the default minutes interval', async () => {
         const fixture = createComponent(
           StandardTimepicker,
           [MatNativeDateTimeModule],
@@ -1801,23 +1803,19 @@ describe('MatTimepicker', () => {
 
         fixture.componentInstance.timepicker.open();
         fixture.detectChanges();
-        tick();
+        await contentAnimationFinished();
         const minuteElement = document.querySelectorAll(
           '.mat-clock-dial-value',
         )[1] as HTMLDivElement;
         minuteElement?.click();
         fixture.detectChanges();
-        tick();
-        flush();
         clickDialCell(getDialCell(getMinuteCellIndex(25)));
         fixture.detectChanges();
-        tick();
-        flush();
 
         expect(getDialCell(getMinuteCellIndex(30)).classList).toContain(
           'mat-clock-dial-cell-active',
         );
-      }));
+      });
 
       it('should be able to change the default orientation', fakeAsync(() => {
         const fixture = createComponent(
