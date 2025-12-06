@@ -416,7 +416,6 @@ export abstract class MatTimepickerBase<
 
     if (this._componentRef) {
       const { instance, location } = this._componentRef;
-      instance._startExitAnimation();
       instance._animationDone.pipe(take(1)).subscribe(() => {
         const activeElement = this._document.activeElement;
 
@@ -435,11 +434,13 @@ export abstract class MatTimepickerBase<
         this._destroyOverlay();
       });
 
-      if (canRestoreFocus) {
-        setTimeout(completeClose);
-      } else {
-        completeClose();
-      }
+      instance._startExitAnimation();
+    }
+
+    if (canRestoreFocus) {
+      setTimeout(completeClose);
+    } else {
+      completeClose();
     }
   }
 

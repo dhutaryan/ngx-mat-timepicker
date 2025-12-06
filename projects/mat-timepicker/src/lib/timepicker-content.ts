@@ -1,4 +1,3 @@
-import { AnimationEvent } from '@angular/animations';
 import {
   ComponentPortal,
   PortalModule,
@@ -11,13 +10,14 @@ import {
   ChangeDetectorRef,
   ViewEncapsulation,
   ElementRef,
-  OnInit,
   AfterViewInit,
   ViewChild,
-  signal,
+  inject,
+  NgZone,
+  Renderer2,
 } from '@angular/core';
 
-import { ThemePalette } from '@angular/material/core';
+import { MATERIAL_ANIMATIONS, ThemePalette } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Subject, Subscription } from 'rxjs';
 
@@ -25,7 +25,6 @@ import {
   ExtractTimeTypeFromSelection,
   MatTimeSelectionModel,
 } from './time-selection-model';
-import { matTimepickerAnimations } from './timepicker-animations';
 import { MatTimepickerBase, TimepickerMode } from './timepicker-base';
 import { MatTimepickerIntl } from './timepicker-intl';
 import { MatClockDials } from './clock-dials';
@@ -50,18 +49,12 @@ import { TimepickerOrientation } from './orientation';
   host: {
     class: 'mat-timepicker-content',
     '[class]': 'color ? "mat-" + color : ""',
-    '[@transformPanel]': '_animationState',
-    '(@transformPanel.start)': '_handleAnimationEvent($event)',
-    '(@transformPanel.done)': '_handleAnimationEvent($event)',
     '[class.mat-timepicker-content-touch]': 'timepicker.touchUi',
+    '[class.mat-timepicker-content-animations-enabled]': '!_animationsDisabled',
   },
-  animations: [
-    matTimepickerAnimations.transformPanel,
-    matTimepickerAnimations.fadeInTimepicker,
-  ],
 })
 export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
-  implements OnInit, AfterViewInit
+  implements AfterViewInit
 {
   /** Reference to the internal clock dials component. */
   @ViewChild(MatClockDials) _dials: MatClockDials<T> | undefined;
@@ -75,8 +68,10 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
   /** Display mode. */
   mode: TimepickerMode;
 
-  /** Current state of the animation. */
-  _animationState: 'enter-dropdown' | 'enter-dialog' | 'void';
+  /** Whether the animation is disabled. */
+  protected _animationsDisabled = inject(MATERIAL_ANIMATIONS, {
+    optional: true,
+  })?.animationsDisabled;
 
   /** Whether the clock uses 12 hour format. */
   isMeridiem: boolean;
@@ -114,49 +109,86 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
   /** Emits when an animation has finished. */
   readonly _animationDone = new Subject<void>();
 
+  protected _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
+  private _ngZone = inject(NgZone);
   private _model: MatTimeSelectionModel<S, T>;
-  private _subscriptions = new Subscription();
+  private _stateChanges: Subscription | undefined;
+  private _eventCleanups: (() => void)[] | undefined;
+  private _animationFallback: ReturnType<typeof setTimeout> | undefined;
 
   constructor(
-    intl: MatTimepickerIntl,
     private _globalModel: MatTimeSelectionModel<S, T>,
     private _changeDetectorRef: ChangeDetectorRef,
   ) {
-    this._closeButtonText = intl.closeTimepickerLabel;
-  }
+    this._closeButtonText = inject(MatTimepickerIntl).closeTimepickerLabel;
 
-  ngOnInit() {
-    this._animationState =
-      this.timepicker.openAs === 'dialog' ? 'enter-dialog' : 'enter-dropdown';
+    if (!this._animationsDisabled) {
+      const element = this._elementRef.nativeElement;
+      const renderer = inject(Renderer2);
+
+      this._eventCleanups = this._ngZone.runOutsideAngular(() => [
+        renderer.listen(element, 'animationstart', this._handleAnimationEvent),
+        renderer.listen(element, 'animationend', this._handleAnimationEvent),
+        renderer.listen(element, 'animationcancel', this._handleAnimationEvent),
+      ]);
+    }
   }
 
   ngAfterViewInit() {
-    this._subscriptions.add(
-      this.timepicker.stateChanges.subscribe(() => {
-        this._changeDetectorRef.markForCheck();
-      }),
-    );
+    this._stateChanges = this.timepicker.stateChanges.subscribe(() => {
+      this._changeDetectorRef.markForCheck();
+    });
     (this._dials || this._inputs)?.focusActiveCell();
   }
 
   ngOnDestroy() {
-    this._subscriptions.unsubscribe();
+    clearTimeout(this._animationFallback);
+    this._eventCleanups?.forEach((cleanup) => cleanup());
+    this._stateChanges?.unsubscribe();
     this._animationDone.complete();
   }
 
   /** Changes animation state while closing timepicker content. */
   _startExitAnimation() {
-    this._animationState = 'void';
-    this._changeDetectorRef.markForCheck();
+    this._elementRef.nativeElement.classList.add('mat-timepicker-content-exit');
+
+    if (this._animationsDisabled) {
+      this._animationDone.next();
+    } else {
+      // Some internal apps disable animations in tests using `* {animation: none !important}`.
+      // If that happens, the animation events won't fire and we'll never clean up the overlay.
+      // Add a fallback that will fire if the animation doesn't run in a certain amount of time.
+      clearTimeout(this._animationFallback);
+      this._animationFallback = setTimeout(() => {
+        if (!this._isAnimating) {
+          this._animationDone.next();
+        }
+      }, 200);
+    }
   }
 
-  _handleAnimationEvent(event: AnimationEvent) {
-    this._isAnimating = event.phaseName === 'start';
+  private _handleAnimationEvent = (event: AnimationEvent) => {
+    const element = this._elementRef.nativeElement;
+
+    if (
+      event.target !== element ||
+      !event.animationName.startsWith('_mat-timepicker-content')
+    ) {
+      return;
+    }
+
+    clearTimeout(this._animationFallback);
+    this._isAnimating = event.type === 'animationstart';
+    element.classList.toggle(
+      'mat-timepicker-content-animating',
+      this._isAnimating,
+    );
 
     if (!this._isAnimating) {
       this._animationDone.next();
     }
-  }
+  };
 
   onToggleMode(mode: TimepickerMode): void {
     this.mode = mode;

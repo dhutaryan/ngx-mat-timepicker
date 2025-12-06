@@ -7,7 +7,6 @@ import {
   RIGHT_ARROW,
   UP_ARROW,
 } from '@angular/cdk/keycodes';
-
 import { _supportsShadowDom } from '@angular/cdk/platform';
 import { Overlay, ScrollDispatcher } from '@angular/cdk/overlay';
 import {
@@ -28,7 +27,6 @@ import {
 import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { Directionality } from '@angular/cdk/bidi';
 import { Subject } from 'rxjs';
@@ -50,6 +48,7 @@ import {
 } from './clock-dials.spec';
 import { TimepickerOrientation } from './orientation';
 import { MatTimepickerIntl } from './timepicker-intl';
+import { MATERIAL_ANIMATIONS } from '@angular/material/core';
 
 describe('MatTimepicker', () => {
   const SUPPORTS_INTL = typeof Intl != 'undefined';
@@ -67,11 +66,16 @@ describe('MatTimepicker', () => {
         MatTimepickerModule,
         MatFormFieldModule,
         MatInputModule,
-        NoopAnimationsModule,
         ReactiveFormsModule,
         ...imports,
       ],
-      providers,
+      providers: [
+        ...providers,
+        {
+          provide: MATERIAL_ANIMATIONS,
+          useValue: { animationsDisabled: true },
+        },
+      ],
       declarations: [component, ...declarations],
     });
 
@@ -437,17 +441,13 @@ describe('MatTimepicker', () => {
         for (let i = 0; i < 3; i++) {
           testComponent.timepicker.open();
           fixture.detectChanges();
-          tick();
 
           testComponent.timepicker.close();
           fixture.detectChanges();
-          tick();
         }
 
         testComponent.timepicker.open();
         fixture.detectChanges();
-        tick();
-        flush();
 
         const spy = jasmine.createSpy('close event spy');
         const subscription =
@@ -458,7 +458,6 @@ describe('MatTimepicker', () => {
 
         backdrop.click();
         fixture.detectChanges();
-        flush();
 
         expect(spy).toHaveBeenCalledTimes(1);
         expect(testComponent.timepicker.opened).toBe(false);

@@ -14,6 +14,16 @@ $button-icon-size: 3.25rem;
     content-border-radius,
     utils.create-system-var(corner-large)
   );
+
+  &.mat-timepicker-content-animations-enabled {
+    animation: _mat-timepicker-content-dropdown-enter 120ms cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.mat-timepicker-content-touch {
+  &.mat-timepicker-content-animations-enabled {
+    animation: _mat-timepicker-content-dialog-enter 150ms cubic-bezier(0, 0, 0.2, 1);
+  }
 }
 
 .mat-timepicker-content-container {
@@ -56,7 +66,45 @@ button.mat-timepicker-close-button {
 
   // Hide the button while the overlay is animating, because it's rendered
   // outside of it and it seems to cause scrollbars in some cases.
-  .ng-animating & {
+  .mat-timepicker-content-animating & {
     display: none;
+  }
+}
+
+.mat-timepicker-content-exit.mat-timepicker-content-animations-enabled {
+  animation: _mat-timepicker-content-exit 100ms linear;
+}
+
+@keyframes _mat-timepicker-content-dropdown-enter {
+  from {
+    opacity: 0;
+    transform: scaleY(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes _mat-timepicker-content-dialog-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes _mat-timepicker-content-exit {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
   }
 }

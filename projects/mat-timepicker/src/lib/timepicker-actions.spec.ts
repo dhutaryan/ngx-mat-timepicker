@@ -11,7 +11,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MATERIAL_ANIMATIONS } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
@@ -31,11 +31,16 @@ describe('MatTimepickerActions', () => {
         MatTimepickerModule,
         MatFormFieldModule,
         MatInputModule,
-        NoopAnimationsModule,
         ReactiveFormsModule,
         MatNativeDateTimeModule,
       ],
       declarations: [component],
+      providers: [
+        {
+          provide: MATERIAL_ANIMATIONS,
+          useValue: { animationsDisabled: true },
+        },
+      ],
     });
 
     return TestBed.createComponent(component);
