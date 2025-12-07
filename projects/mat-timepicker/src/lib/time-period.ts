@@ -1,10 +1,11 @@
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  model,
   ViewEncapsulation,
-  Input,
-  Output,
-  EventEmitter,
 } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatDividerModule } from '@angular/material/divider';
@@ -24,55 +25,33 @@ export type MatTimePeriodType = 'am' | 'pm';
   encapsulation: ViewEncapsulation.None,
   host: {
     class: 'mat-time-period',
-    '[class.mat-time-period-vertical]': 'vertical',
-    '[class.mat-time-period-horizontal]': '!vertical',
-    '[attr.aria-orientation]': 'vertical ? "vertical" : "horizontal"',
+    '[class.mat-time-period-vertical]': 'vertical()',
+    '[class.mat-time-period-horizontal]': '!vertical()',
+    '[attr.aria-orientation]': 'vertical() ? "vertical" : "horizontal"',
   },
 })
 export class MatTimePeriod {
+  protected readonly intl = inject(MatTimepickerIntl);
+
+  protected readonly disabledAM = computed(
+    () => this.disabledPeriod() === 'am',
+  );
+
+  protected readonly disabledPM = computed(
+    () => this.disabledPeriod() === 'pm',
+  );
+
   /** Whether the time period is vertically aligned. */
-  @Input()
-  get vertical(): boolean {
-    return this._vertical;
-  }
-  set vertical(value: BooleanInput) {
-    this._vertical = coerceBooleanProperty(value);
-  }
-  private _vertical: boolean = true;
+  readonly vertical = input<BooleanInput, boolean>(true, {
+    transform: coerceBooleanProperty,
+  });
 
-  @Input()
-  get period(): MatTimePeriodType {
-    return this._period;
-  }
-  set period(value: MatTimePeriodType) {
-    this._period = value || 'am';
-  }
-  private _period: MatTimePeriodType = 'am';
+  readonly period = model<MatTimePeriodType>('am');
 
-  @Input()
-  get disabledPeriod(): MatTimePeriodType | null {
-    return this._disabledPeriod;
-  }
-  set disabledPeriod(value: MatTimePeriodType | null) {
-    this._disabledPeriod = value;
-  }
-  private _disabledPeriod: MatTimePeriodType | null = null;
-
-  @Output() periodChanged = new EventEmitter<MatTimePeriodType>();
-
-  constructor(public _intl: MatTimepickerIntl) {}
+  readonly disabledPeriod = input<MatTimePeriodType | null>();
 
   setPeriod(event: Event, period: MatTimePeriodType): void {
     event.preventDefault();
-    this.period = period;
-    this.periodChanged.emit(period);
-  }
-
-  _isPeriodDisabled(period: MatTimePeriodType): boolean {
-    if (!this.disabledPeriod) {
-      return false;
-    }
-
-    return this.disabledPeriod === period;
+    this.period.set(period);
   }
 }

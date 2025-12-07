@@ -1,6 +1,6 @@
 <mat-timepicker-content-layout
   [title]="_intl.dialsTitle"
-  [orientation]="orientation"
+  [orientation]="orientation()"
 >
   <div
     tabindex="0"
@@ -28,15 +28,15 @@
       <mat-time-period
         [period]="period"
         [disabledPeriod]="disabledPeriod"
-        [vertical]="orientation === 'vertical'"
-        (periodChanged)="_onPeriodChanged($event)"
-      ></mat-time-period>
+        [vertical]="orientation() === 'vertical'"
+        (periodChange)="_onPeriodChanged($event)"
+      />
     </ng-container>
   }
 
   <div
     class="mat-clock-dial-faces"
-    [class.mat-clock-dial-faces-horizontal]="orientation === 'horizontal'"
+    [class.mat-clock-dial-faces-horizontal]="orientation() === 'horizontal'"
   >
     @if (isHoursView()) {
       <mat-hours-clock-dial
@@ -46,13 +46,11 @@
         [selectedHour]="selectedHour"
         [isMeridiem]="isMeridiem"
         [availableHours]="_getAvailableHours()"
-        [touchUi]="touchUi"
+        [touchUi]="touchUi()"
         (selectedChange)="_onHourChanged($event)"
         (keydown)="_onKeydown($event, 'hour')"
-      ></mat-hours-clock-dial>
-    }
-
-    @if (!isHoursView()) {
+      />
+    } @else {
       <mat-minutes-clock-dial
         animate.enter="mat-clock-dial-enter"
         animate.leave="mat-clock-dial-leave"
@@ -60,10 +58,10 @@
         [selectedMinute]="selectedMinute"
         [interval]="minuteInterval"
         [availableMinutes]="availableMinutes"
-        [touchUi]="touchUi"
+        [touchUi]="touchUi()"
         (selectedChange)="_onMinuteSelected($event)"
         (keydown)="_onKeydown($event, 'minute')"
-      ></mat-minutes-clock-dial>
+      />
     }
   </div>
 </mat-timepicker-content-layout>

@@ -1,18 +1,17 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  ViewEncapsulation,
-  OnInit,
-  OnDestroy,
-  Optional,
-  NgZone,
-  ElementRef,
-  Input,
   ChangeDetectorRef,
+  Component,
+  computed,
+  ElementRef,
+  input,
+  NgZone,
+  Optional,
   signal,
+  ViewEncapsulation,
 } from '@angular/core';
 
-import { BehaviorSubject, Subscription, take } from 'rxjs';
+import { take } from 'rxjs';
 
 import { TimeAdapter } from './adapter';
 import { MatTimeFaceBase } from './time-face-base';
@@ -45,21 +44,17 @@ export type MatDialView = 'hours' | 'minutes';
     class: 'mat-clock-dials',
   },
 })
-export class MatClockDials<T>
-  extends MatTimeFaceBase<T>
-  implements OnInit, OnDestroy
-{
+export class MatClockDials<T> extends MatTimeFaceBase<T> {
+  /** Specifies the view of clock dial. */
+  private readonly _view = signal<MatDialView>('hours');
+
+  protected readonly isHoursView = computed(() => this._view() === 'hours');
+
   /** Layout orientation. */
-  @Input() orientation: TimepickerOrientation;
+  readonly orientation = input<TimepickerOrientation>('vertical');
 
   /** Whether the timepicker UI is in touch mode. */
-  @Input() touchUi: boolean;
-
-  isHoursView = signal(true);
-
-  /** Specifies the view of clock dial. */
-  private readonly _view = new BehaviorSubject<MatDialView>('hours');
-  private _viewSubscription: Subscription | null = Subscription.EMPTY;
+  readonly touchUi = input<boolean>(false);
 
   constructor(
     public _intl: MatTimepickerIntl,
@@ -71,21 +66,10 @@ export class MatClockDials<T>
     super(_timeAdapter);
   }
 
-  ngOnInit(): void {
-    this._viewSubscription = this._view.subscribe((view) =>
-      this.isHoursView.set(view === 'hours'),
-    );
-  }
-
-  ngOnDestroy(): void {
-    this._viewSubscription?.unsubscribe();
-    this._viewSubscription = null;
-  }
-
   /** Changes clock dial view. */
   onViewChange(event: Event, view: MatDialView): void {
     event.preventDefault();
-    this._view.next(view);
+    this._view.set(view);
   }
 
   focusActiveCell(): void {
@@ -136,7 +120,7 @@ export class MatClockDials<T>
     changeView?: boolean;
   }): void {
     if (changeView) {
-      this._view.next('minutes');
+      this._view.set('minutes');
     }
     this._onHourSelected(hour);
     this._cdr.detectChanges();

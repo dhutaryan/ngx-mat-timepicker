@@ -2,22 +2,22 @@
   tabindex="0"
   class="mat-time-period-item"
   matRipple
-  [class.mat-time-period-item-active]="period === 'am'"
-  [class.mat-time-period-item-disabled]="_isPeriodDisabled('am')"
+  [class.mat-time-period-item-active]="period() === 'am'"
+  [class.mat-time-period-item-disabled]="disabledAM()"
   (click)="setPeriod($event, 'am')"
   (keydown.space)="setPeriod($event, 'am')"
 >
-  {{ _intl.am }}
+  {{ intl.am }}
 </div>
-<mat-divider [vertical]="!vertical"></mat-divider>
+<mat-divider [vertical]="!vertical()"></mat-divider>
 <div
   tabindex="0"
   class="mat-time-period-item"
   matRipple
-  [class.mat-time-period-item-active]="period === 'pm'"
-  [class.mat-time-period-item-disabled]="_isPeriodDisabled('pm')"
+  [class.mat-time-period-item-active]="period() === 'pm'"
+  [class.mat-time-period-item-disabled]="disabledPM()"
   (click)="setPeriod($event, 'pm')"
   (keydown.space)="setPeriod($event, 'pm')"
 >
-  {{ _intl.pm }}
+  {{ intl.pm }}
 </div>
