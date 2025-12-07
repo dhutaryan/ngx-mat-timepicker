@@ -15,7 +15,11 @@ import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import { ThemePalette } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { debounceTime, fromEvent, merge, take } from 'rxjs';
-import { getClockCorrectedRadius, getClockOuterRadius, getClockRadius, } from './clock-size';
+import {
+  getClockCorrectedRadius,
+  getClockOuterRadius,
+  getClockRadius,
+} from './clock-size';
 import { ClockDialViewCell } from './hours-clock-dial';
 
 export const ALL_MINUTES = Array(60)
