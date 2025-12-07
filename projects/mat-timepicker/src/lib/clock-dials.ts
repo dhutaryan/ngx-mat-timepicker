@@ -54,7 +54,7 @@ export class MatClockDials<T> extends MatTimeFaceBase<T> {
   readonly orientation = input<TimepickerOrientation>('vertical');
 
   /** Whether the timepicker UI is in touch mode. */
-  readonly touchUi = input<boolean>(false);
+  readonly touchUi = input(false);
 
   constructor(
     public _intl: MatTimepickerIntl,

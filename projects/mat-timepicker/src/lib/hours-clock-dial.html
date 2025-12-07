@@ -1,10 +1,10 @@
 <div
   class="mat-clock-dial-hand"
-  [class.mat-clock-dial-hand-pointless]="isHour"
-  [class.mat-clock-dial-hand-disabled]="disabledHand"
-  [ngStyle]="_handStyles()"
+  [class.mat-clock-dial-hand-pointless]="isHour()"
+  [class.mat-clock-dial-hand-disabled]="disabledHand()"
+  [ngStyle]="handStyles()"
 ></div>
-@for (hour of hours; track hour.value) {
+@for (hour of hours(); track hour.value) {
   <button
     class="mat-clock-dial-cell"
     mat-mini-fab
