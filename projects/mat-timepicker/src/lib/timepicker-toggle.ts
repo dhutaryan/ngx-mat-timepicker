@@ -1,20 +1,22 @@
 import {
-  Component,
-  ChangeDetectionStrategy,
-  Directive,
-  ViewEncapsulation,
-  Input,
-  ContentChild,
   Attribute,
-  SimpleChanges,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  contentChild,
+  Directive,
+  Input,
+  input,
+  model,
   OnChanges,
   OnDestroy,
-  ChangeDetectorRef,
+  SimpleChanges,
+  ViewEncapsulation,
 } from '@angular/core';
 
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatButtonModule } from '@angular/material/button';
-import { Observable, Subscription, merge, of } from 'rxjs';
+import { merge, Observable, of, Subscription } from 'rxjs';
 
 import { MatTimepicker } from './timepicker';
 import { MatTimepickerIntl } from './timepicker-intl';
@@ -32,9 +34,9 @@ export class MatTimepickerToggleIcon {}
   host: {
     class: 'mat-timepicker-toggle',
     '[attr.tabindex]': 'null',
-    '[class.mat-timepicker-toggle-active]': 'timepicker && timepicker.opened',
-    '[class.mat-accent]': 'timepicker && timepicker.color === "accent"',
-    '[class.mat-warn]': 'timepicker && timepicker.color === "warn"',
+    '[class.mat-timepicker-toggle-active]': 'timepicker()?.opened',
+    '[class.mat-accent]': 'timepicker()?.color === "accent"',
+    '[class.mat-warn]': 'timepicker()?.color === "warn"',
     '(click)': 'open($event)',
   },
   encapsulation: ViewEncapsulation.None,
@@ -42,13 +44,15 @@ export class MatTimepickerToggleIcon {}
 })
 export class MatTimepickerToggle<T> implements OnChanges, OnDestroy {
   /** Timepicker instance. */
-  @Input('for') timepicker: MatTimepicker<T>;
+  readonly timepicker = input<MatTimepicker<T>>(undefined, {
+    alias: 'for',
+  });
 
   /** Whether the toggle button is disabled. */
   @Input()
   get disabled(): boolean {
-    if (this._disabled === undefined && this.timepicker) {
-      return this.timepicker.disabled;
+    if (this._disabled === undefined && this.timepicker()) {
+      return !!this.timepicker()?.disabled;
     }
 
     return !!this._disabled;
@@ -59,16 +63,16 @@ export class MatTimepickerToggle<T> implements OnChanges, OnDestroy {
   private _disabled: boolean;
 
   /** Whether ripples on the toggle should be disabled. */
-  @Input() disableRipple: boolean;
+  readonly disableRipple = input<boolean>();
 
   /** Tabindex for the toggle. */
-  @Input() tabIndex: number | null;
+  readonly tabIndex = model<number | null>();
 
   /** Custom icon set by the consumer. */
-  @ContentChild(MatTimepickerToggleIcon) customIcon: MatTimepickerToggleIcon;
+  readonly customIcon = contentChild(MatTimepickerToggleIcon);
 
   /** Screen-reader label for the button. */
-  @Input('aria-label') ariaLabel: string;
+  readonly ariaLabel = input<string>('', { alias: 'aria-label' });
 
   private _stateChanges = Subscription.EMPTY;
 
@@ -78,8 +82,9 @@ export class MatTimepickerToggle<T> implements OnChanges, OnDestroy {
     private _cdr: ChangeDetectorRef,
   ) {
     const parsedTabIndex = Number(defaultTabIndex);
-    this.tabIndex =
-      parsedTabIndex || parsedTabIndex === 0 ? parsedTabIndex : null;
+    this.tabIndex.set(
+      parsedTabIndex || parsedTabIndex === 0 ? parsedTabIndex : null,
+    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -94,22 +99,21 @@ export class MatTimepickerToggle<T> implements OnChanges, OnDestroy {
 
   /** Opens timepicker. */
   open(event: Event): void {
-    if (this.timepicker && !this.disabled) {
-      this.timepicker.open();
+    const timepicker = this.timepicker();
+    if (timepicker && !this.disabled) {
+      timepicker.open();
       event.stopPropagation();
     }
   }
 
   private _watchStateChanges() {
-    const timepickerStateChanged = this.timepicker
-      ? this.timepicker.stateChanges
+    const timepicker = this.timepicker();
+    const timepickerStateChanged = timepicker ? timepicker.stateChanges : of();
+    const inputStateChanged = timepicker?.timepickerInput
+      ? timepicker.timepickerInput.stateChanges
       : of();
-    const inputStateChanged =
-      this.timepicker && this.timepicker.timepickerInput
-        ? this.timepicker.timepickerInput.stateChanges
-        : of();
-    const timepickerToggled = this.timepicker
-      ? merge(this.timepicker.openedStream, this.timepicker.closedStream)
+    const timepickerToggled = timepicker
+      ? merge(timepicker.openedStream, timepicker.closedStream)
       : of();
 
     this._stateChanges.unsubscribe();

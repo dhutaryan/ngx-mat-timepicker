@@ -3,14 +3,15 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef,
-  EventEmitter,
-  Inject,
-  Input,
-  OnInit,
-  Output,
-  ViewEncapsulation,
   DOCUMENT,
+  ElementRef,
+  Inject,
+  input,
+  Input,
+  model,
+  OnInit,
+  output,
+  ViewEncapsulation,
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -53,24 +54,10 @@ export const ALL_HOURS = Array(24)
 })
 export class MatHoursClockDial implements OnInit {
   /** Selected hour. */
-  @Input()
-  get selectedHour(): number {
-    return this._selectedHour;
-  }
-  set selectedHour(value: number) {
-    this._selectedHour = value;
-  }
-  private _selectedHour: number;
+  readonly selectedHour = model.required<number>();
 
   /** Whether the clock uses 12 hour format. */
-  @Input()
-  get isMeridiem(): boolean {
-    return this._isMeridiem;
-  }
-  set isMeridiem(value: boolean) {
-    this._isMeridiem = value;
-  }
-  private _isMeridiem: boolean;
+  readonly isMeridiem = input<boolean>();
 
   @Input()
   get availableHours(): number[] {
@@ -83,7 +70,7 @@ export class MatHoursClockDial implements OnInit {
   private _availableHours: number[] = [];
 
   /** Color palette. */
-  @Input() color: ThemePalette;
+  readonly color = input<ThemePalette>();
 
   /** Whether the timepicker UI is in touch mode. */
   @Input()
@@ -97,7 +84,7 @@ export class MatHoursClockDial implements OnInit {
   private _touchUi: boolean;
 
   /** Emits selected hour. */
-  @Output() selectedChange = new EventEmitter<{
+  readonly selectedChange = output<{
     hour: number;
     changeView?: boolean;
   }>();
@@ -105,11 +92,11 @@ export class MatHoursClockDial implements OnInit {
   hours: ClockDialViewCell[] = [];
 
   get disabledHand(): boolean {
-    return !this.availableHours.includes(this.selectedHour);
+    return !this.availableHours.includes(this.selectedHour());
   }
 
   get isHour(): boolean {
-    return !!this.hours.find((hour) => hour.value === this.selectedHour);
+    return !!this.hours.find((hour) => hour.value === this.selectedHour());
   }
 
   constructor(
@@ -124,8 +111,8 @@ export class MatHoursClockDial implements OnInit {
 
   /** Hand styles based on selected hour. */
   _handStyles(): any {
-    const deg = Math.round(this.selectedHour * (360 / (24 / 2)));
-    const radius = this._getRadius(this.selectedHour);
+    const deg = Math.round(this.selectedHour() * (360 / (24 / 2)));
+    const radius = this._getRadius(this.selectedHour());
     const height = radius;
     const marginTop = getClockRadius(this.touchUi) - radius;
 
@@ -165,7 +152,7 @@ export class MatHoursClockDial implements OnInit {
         next: () => {
           eventsSubscription.unsubscribe();
           this.selectedChange.emit({
-            hour: this.selectedHour,
+            hour: this.selectedHour(),
             changeView: true,
           });
         },
@@ -173,7 +160,7 @@ export class MatHoursClockDial implements OnInit {
   }
 
   _isActiveCell(hour: number): boolean {
-    return this.selectedHour === hour;
+    return this.selectedHour() === hour;
   }
 
   /** Changes selected hour based on coordinates. */
@@ -199,10 +186,7 @@ export class MatHoursClockDial implements OnInit {
     const value = this._getHourValue(initialValue, outer);
 
     if (this.availableHours.includes(value)) {
-      this.selectedHour = value;
-      this.selectedChange.emit({
-        hour: this.selectedHour,
-      });
+      this.selectedHour.set(value);
     }
 
     this._cdr.detectChanges();
@@ -212,7 +196,7 @@ export class MatHoursClockDial implements OnInit {
   private _getHourValue(value: number, outer: boolean): number {
     const edgeValue = value === 0 || value === 12;
 
-    if (this.isMeridiem) {
+    if (this.isMeridiem()) {
       return edgeValue ? 12 : value;
     }
 
@@ -225,7 +209,7 @@ export class MatHoursClockDial implements OnInit {
 
   /** Creates list of hours. */
   private _initHours(): void {
-    const initialHours = this.isMeridiem ? ALL_HOURS.slice(1, 13) : ALL_HOURS;
+    const initialHours = this.isMeridiem() ? ALL_HOURS.slice(1, 13) : ALL_HOURS;
 
     this.hours = initialHours.map((hour) => {
       const radian = (hour / 6) * Math.PI;
@@ -243,7 +227,7 @@ export class MatHoursClockDial implements OnInit {
 
   /** Returns radius based on hour */
   private _getRadius(hour: number): number {
-    if (this.isMeridiem) {
+    if (this.isMeridiem()) {
       return getClockOuterRadius(this.touchUi);
     }
 

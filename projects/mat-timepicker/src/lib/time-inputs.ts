@@ -1,15 +1,16 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  ViewEncapsulation,
-  Optional,
-  Directive,
-  Input,
-  ElementRef,
   ChangeDetectorRef,
-  Inject,
-  NgZone,
+  Component,
+  Directive,
   DOCUMENT,
+  ElementRef,
+  Inject,
+  Input,
+  input,
+  NgZone,
+  Optional,
+  ViewEncapsulation,
 } from '@angular/core';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -47,7 +48,7 @@ export class MatHourInput extends MatTimeInputBase {
   }
   private _availableHours: number[] = [];
 
-  @Input() isMeridiem: boolean;
+  readonly isMeridiem = input<boolean>(false);
 
   constructor(
     element: ElementRef<HTMLInputElement>,
@@ -58,12 +59,12 @@ export class MatHourInput extends MatTimeInputBase {
   }
 
   _withZeroPrefix(value: number): string {
-    return withZeroPrefixMeridiem(value, this.isMeridiem);
+    return withZeroPrefixMeridiem(value, this.isMeridiem());
   }
 
   _formatValue(hour: number): number {
     const getValue = () => {
-      if (this.isMeridiem) {
+      if (this.isMeridiem()) {
         if (hour === 0 || hour === 24) {
           return 12;
         }
@@ -73,12 +74,12 @@ export class MatHourInput extends MatTimeInputBase {
         return 0;
       }
 
-      return this.isMeridiem && hour > 12 ? hour - 12 : hour;
+      return this.isMeridiem() && hour > 12 ? hour - 12 : hour;
     };
 
     const value = getValue();
 
-    if (this.isMeridiem) {
+    if (this.isMeridiem()) {
       if (!this.availableHours.length) {
         return this.value;
       }

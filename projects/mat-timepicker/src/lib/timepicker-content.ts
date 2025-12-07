@@ -5,16 +5,17 @@ import {
 } from '@angular/cdk/portal';
 import { A11yModule } from '@angular/cdk/a11y';
 import {
-  Component,
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  ViewEncapsulation,
+  Component,
   ElementRef,
-  AfterViewInit,
-  ViewChild,
   inject,
   NgZone,
+  OnDestroy,
   Renderer2,
+  ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 
 import { MATERIAL_ANIMATIONS, ThemePalette } from '@angular/material/core';
@@ -54,7 +55,7 @@ import { TimepickerOrientation } from './orientation';
   },
 })
 export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
-  implements AfterViewInit
+  implements AfterViewInit, OnDestroy
 {
   /** Reference to the internal clock dials component. */
   @ViewChild(MatClockDials) _dials: MatClockDials<T> | undefined;

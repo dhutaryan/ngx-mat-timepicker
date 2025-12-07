@@ -14,7 +14,7 @@
     [style.top.px]="hour.top"
     [class.mat-clock-dial-cell-active]="_isActiveCell(hour.value)"
     [class.mat-clock-dial-cell-disabled]="hour.disabled"
-    [color]="_isActiveCell(hour.value) ? color : undefined"
+    [color]="_isActiveCell(hour.value) ? color() : undefined"
     [attr.aria-disabled]="hour.disabled || null"
   >
     {{ hour.displayValue }}
