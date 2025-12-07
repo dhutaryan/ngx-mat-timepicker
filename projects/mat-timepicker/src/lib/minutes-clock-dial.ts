@@ -3,26 +3,24 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef,
-  EventEmitter,
-  Inject,
-  Input,
-  OnInit,
-  Output,
-  ViewEncapsulation,
+  computed,
   DOCUMENT,
+  ElementRef,
+  inject,
+  input,
+  model,
+  ViewEncapsulation,
 } from '@angular/core';
-import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import { ThemePalette } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { debounceTime, fromEvent, merge, take } from 'rxjs';
-
-import { ClockDialViewCell } from './hours-clock-dial';
 import {
   getClockCorrectedRadius,
   getClockOuterRadius,
   getClockRadius,
 } from './clock-size';
+import { ClockDialViewCell } from './hours-clock-dial';
 
 export const ALL_MINUTES = Array(60)
   .fill(null)
@@ -43,86 +41,42 @@ export const ALL_MINUTES = Array(60)
     '(touchstart)': '_onUserAction($event)',
   },
 })
-export class MatMinutesClockDial implements OnInit {
+export class MatMinutesClockDial {
+  private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly _document = inject(DOCUMENT);
+  private readonly _element = inject<ElementRef<HTMLElement>>(ElementRef);
+
+  protected readonly isMinutePoint = computed(
+    () => !!this.minutes().find((hour) => hour.value === this.selectedMinute()),
+  );
+
+  protected readonly minutes = computed(() =>
+    this._initMinutes(this.availableMinutes(), this.touchUi()),
+  );
+
+  protected readonly disabled = computed(
+    () => !this.availableMinutes().includes(this.selectedMinute()),
+  );
+
+  protected handStyles = computed(() =>
+    this._handStyles(this.selectedMinute(), this.touchUi()),
+  );
+
   /** Selected minute. */
-  @Input()
-  get selectedMinute(): number {
-    return this._selectedMinute;
-  }
-  set selectedMinute(value: number) {
-    this._selectedMinute = value;
-  }
-  private _selectedMinute = 0;
+  readonly selectedMinute = model(0);
 
   /** Step over minutes. */
-  @Input()
-  get interval(): number {
-    return this._interval;
-  }
-  set interval(value: number) {
-    this._interval = coerceNumberProperty(value) || 1;
-  }
-  private _interval: number = 1;
+  readonly interval = input(1, {
+    transform: (value: NumberInput) => coerceNumberProperty(value) || 1,
+  });
 
-  @Input()
-  get availableMinutes(): number[] {
-    return this._availableMinutes;
-  }
-  set availableMinutes(value: number[]) {
-    this._availableMinutes = value;
-    this._initMinutes();
-  }
-  private _availableMinutes: number[] = [];
+  readonly availableMinutes = input<number[]>([]);
 
   /** Color palette. */
-  @Input() color: ThemePalette;
+  readonly color = input<ThemePalette>();
 
   /** Whether the timepicker UI is in touch mode. */
-  @Input()
-  get touchUi(): boolean {
-    return this._touchUi;
-  }
-  set touchUi(value: boolean) {
-    this._touchUi = value;
-  }
-  private _touchUi: boolean;
-
-  /** Emits selected minute. */
-  @Output() selectedChange = new EventEmitter<number>();
-
-  minutes: ClockDialViewCell[] = [];
-
-  get disabled(): boolean {
-    return !this.availableMinutes.includes(this.selectedMinute);
-  }
-
-  get isMinutePoint(): boolean {
-    return !!this.minutes.find((hour) => hour.value === this.selectedMinute);
-  }
-
-  constructor(
-    private _element: ElementRef<HTMLElement>,
-    private _cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) private _document: Document,
-  ) {}
-
-  ngOnInit(): void {
-    this._initMinutes();
-  }
-
-  /** Hand styles based on selected minute. */
-  _handStyles(): any {
-    const deg = Math.round(this._selectedMinute * (360 / 60));
-    const height = getClockOuterRadius(this.touchUi);
-    const marginTop =
-      getClockRadius(this.touchUi) - getClockOuterRadius(this.touchUi);
-
-    return {
-      transform: `rotate(${deg}deg)`,
-      height: `${height}px`,
-      'margin-top': `${marginTop}px`,
-    };
-  }
+  readonly touchUi = input(false);
 
   /** Handles mouse and touch events on dial and document. */
   _onUserAction(event: MouseEvent | TouchEvent): void {
@@ -157,7 +111,7 @@ export class MatMinutesClockDial implements OnInit {
   }
 
   _isActiveCell(minute: number): boolean {
-    return this.selectedMinute === minute;
+    return this.selectedMinute() === minute;
   }
 
   private _setMinute(event: MouseEvent | TouchEvent): void {
@@ -172,47 +126,58 @@ export class MatMinutesClockDial implements OnInit {
       event instanceof MouseEvent ? event.pageY : event.touches[0].pageY;
     const x = width / 2 - (pageX - elementRect.left - window.scrollX);
     const y = height / 2 - (pageY - elementRect.top - window.scrollY);
-    const unit = Math.PI / (30 / this.interval);
+    const unit = Math.PI / (30 / this.interval());
     const atan2 = Math.atan2(-x, y);
     const radian = atan2 < 0 ? Math.PI * 2 + atan2 : atan2;
-    const initialValue = Math.round(radian / unit) * this.interval;
+    const initialValue = Math.round(radian / unit) * this.interval();
     const value = initialValue === 60 ? 0 : initialValue;
 
-    if (
-      this.availableMinutes.includes(value) &&
-      this.availableMinutes.includes(value)
-    ) {
-      this.selectedMinute = value;
-      this.selectedChange.emit(this.selectedMinute);
+    if (this.availableMinutes().includes(value)) {
+      this.selectedMinute.set(value);
     }
 
     this._cdr.detectChanges();
   }
 
   /** Creates list of minutes. */
-  private _initMinutes(): void {
-    this.minutes = ALL_MINUTES.filter((minute) => minute % 5 === 0).map(
-      (minute) => {
-        const radian = (minute / 30) * Math.PI;
-        const displayValue = minute === 0 ? '00' : String(minute);
-
-        return {
-          value: minute,
-          displayValue,
-          left:
-            getClockCorrectedRadius(this.touchUi) +
-            Math.sin(radian) * getClockOuterRadius(this.touchUi),
-          top:
-            getClockCorrectedRadius(this.touchUi) -
-            Math.cos(radian) * getClockOuterRadius(this.touchUi),
-          disabled: !this.availableMinutes.includes(minute),
-        };
-      },
-    );
+  private _initMinutes(
+    availableMinutes: number[],
+    touchUi: boolean,
+  ): ClockDialViewCell[] {
+    return ALL_MINUTES.filter((minute) => minute % 5 === 0).map((minute) => {
+      const radian = (minute / 30) * Math.PI;
+      const displayValue = minute === 0 ? '00' : String(minute);
+      const correctedRadius = getClockCorrectedRadius(touchUi);
+      const outerRadius = getClockOuterRadius(touchUi);
+      return {
+        value: minute,
+        displayValue,
+        left: correctedRadius + Math.sin(radian) * outerRadius,
+        top: correctedRadius - Math.cos(radian) * outerRadius,
+        disabled: !availableMinutes.includes(minute),
+      };
+    });
   }
 
   /** Use defaultView of injected document if available or fallback to global window reference */
   private _getWindow(): Window {
     return this._document.defaultView || window;
+  }
+
+  /** Hand styles based on selected minute. */
+  private _handStyles(
+    selected: number,
+    touchUi: boolean,
+  ): Record<string, string> {
+    const deg = Math.round(this.selectedMinute() * (360 / 60));
+    const height = getClockOuterRadius(this.touchUi());
+    const marginTop =
+      getClockRadius(this.touchUi()) - getClockOuterRadius(this.touchUi());
+
+    return {
+      transform: `rotate(${deg}deg)`,
+      height: `${height}px`,
+      'margin-top': `${marginTop}px`,
+    };
   }
 }

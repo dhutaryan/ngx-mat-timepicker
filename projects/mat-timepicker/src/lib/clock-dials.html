@@ -59,7 +59,7 @@
         [interval]="minuteInterval"
         [availableMinutes]="availableMinutes"
         [touchUi]="touchUi()"
-        (selectedChange)="_onMinuteSelected($event)"
+        (selectedMinuteChange)="_onMinuteSelected($event)"
         (keydown)="_onKeydown($event, 'minute')"
       />
     }

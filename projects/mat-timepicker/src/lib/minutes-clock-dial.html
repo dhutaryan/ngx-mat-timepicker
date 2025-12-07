@@ -1,12 +1,12 @@
 <div
   class="mat-clock-dial-hand"
-  [class.mat-clock-dial-hand-pointless]="isMinutePoint"
-  [class.mat-clock-dial-hand-disabled]="disabled"
-  [ngStyle]="_handStyles()"
+  [class.mat-clock-dial-hand-pointless]="isMinutePoint()"
+  [class.mat-clock-dial-hand-disabled]="disabled()"
+  [ngStyle]="handStyles()"
 >
   <div class="mat-clock-dial-hand-point" tabindex="0"></div>
 </div>
-@for (minute of minutes; track minute.value) {
+@for (minute of minutes(); track minute.value) {
   <button
     class="mat-clock-dial-cell"
     mat-mini-fab
@@ -16,7 +16,7 @@
     [style.top.px]="minute.top"
     [class.mat-clock-dial-cell-active]="_isActiveCell(minute.value)"
     [class.mat-clock-dial-cell-disabled]="minute.disabled"
-    [color]="_isActiveCell(minute.value) ? color : undefined"
+    [color]="_isActiveCell(minute.value) ? color() : undefined"
     [attr.aria-disabled]="minute.disabled || null"
   >
     {{ minute.displayValue }}
