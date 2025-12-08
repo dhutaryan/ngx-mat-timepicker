@@ -1,18 +1,18 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  ViewEncapsulation,
-  OnInit,
-  OnDestroy,
-  Optional,
-  NgZone,
-  ElementRef,
-  Input,
   ChangeDetectorRef,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  input,
+  NgZone,
+  Optional,
   signal,
+  ViewEncapsulation,
 } from '@angular/core';
 
-import { BehaviorSubject, Subscription, take } from 'rxjs';
+import { take } from 'rxjs';
 
 import { TimeAdapter } from './adapter';
 import { MatTimeFaceBase } from './time-face-base';
@@ -45,47 +45,39 @@ export type MatDialView = 'hours' | 'minutes';
     class: 'mat-clock-dials',
   },
 })
-export class MatClockDials<T>
-  extends MatTimeFaceBase<T>
-  implements OnInit, OnDestroy
-{
-  /** Layout orientation. */
-  @Input() orientation: TimepickerOrientation;
-
-  /** Whether the timepicker UI is in touch mode. */
-  @Input() touchUi: boolean;
-
-  isHoursView = signal(true);
+export class MatClockDials<T> extends MatTimeFaceBase<T> {
+  private readonly _ngZone = inject(NgZone);
+  private readonly _elementRef = inject(ElementRef);
+  private readonly _cdr = inject(ChangeDetectorRef);
 
   /** Specifies the view of clock dial. */
-  private readonly _view = new BehaviorSubject<MatDialView>('hours');
-  private _viewSubscription: Subscription | null = Subscription.EMPTY;
+  private readonly _view = signal<MatDialView>('hours');
 
-  constructor(
-    public _intl: MatTimepickerIntl,
-    @Optional() _timeAdapter: TimeAdapter<T>,
-    private _ngZone: NgZone,
-    private _elementRef: ElementRef,
-    private _cdr: ChangeDetectorRef,
-  ) {
+  protected readonly _intl = inject(MatTimepickerIntl);
+
+  protected readonly isHoursView = computed(() => this._view() === 'hours');
+
+  protected selectedHourDisplay = computed(() =>
+    this._withZeroPrefix(this.selectedHour(), this.isMeridiem()),
+  );
+  protected selectedMinuteDisplay = computed(() =>
+    this._withZeroPrefix(this.selectedMinute(), this.isMeridiem()),
+  );
+
+  /** Layout orientation. */
+  readonly orientation = input<TimepickerOrientation>('vertical');
+
+  /** Whether the timepicker UI is in touch mode. */
+  readonly touchUi = input(false);
+
+  constructor(@Optional() _timeAdapter: TimeAdapter<T>) {
     super(_timeAdapter);
-  }
-
-  ngOnInit(): void {
-    this._viewSubscription = this._view.subscribe((view) =>
-      this.isHoursView.set(view === 'hours'),
-    );
-  }
-
-  ngOnDestroy(): void {
-    this._viewSubscription?.unsubscribe();
-    this._viewSubscription = null;
   }
 
   /** Changes clock dial view. */
   onViewChange(event: Event, view: MatDialView): void {
     event.preventDefault();
-    this._view.next(view);
+    this._view.set(view);
   }
 
   focusActiveCell(): void {
@@ -114,14 +106,6 @@ export class MatClockDials<T>
     });
   }
 
-  _withZeroPrefix(value: number): string {
-    if (value === 0) {
-      return '00';
-    }
-
-    return withZeroPrefixMeridiem(value, this.isMeridiem);
-  }
-
   override _onMinuteSelected(minute: number): void {
     super._onMinuteSelected(minute);
     this._cdr.detectChanges();
@@ -136,9 +120,17 @@ export class MatClockDials<T>
     changeView?: boolean;
   }): void {
     if (changeView) {
-      this._view.next('minutes');
+      this._view.set('minutes');
     }
     this._onHourSelected(hour);
     this._cdr.detectChanges();
+  }
+
+  private _withZeroPrefix(value: number, isMeridiem: boolean): string {
+    if (value === 0) {
+      return '00';
+    }
+
+    return withZeroPrefixMeridiem(value, isMeridiem);
   }
 }

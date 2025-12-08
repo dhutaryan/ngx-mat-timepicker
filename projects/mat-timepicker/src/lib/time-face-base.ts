@@ -1,14 +1,17 @@
 import {
   AfterContentInit,
   AfterViewChecked,
+  computed,
   Directive,
-  EventEmitter,
-  Input,
+  input,
+  linkedSignal,
+  model,
   Optional,
-  Output,
+  output,
+  untracked,
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
-import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { TimeAdapter } from './adapter';
@@ -21,127 +24,123 @@ export abstract class MatTimeFaceBase<T>
   implements AfterContentInit, AfterViewChecked
 {
   /** The currently selected time. */
-  @Input()
-  get selected(): T | null {
-    return this._selected;
-  }
-  set selected(value: T | null) {
-    this._selected = this._timeAdapter.getValidTimeOrNull(
-      this._timeAdapter.deserialize(value),
-    );
-
-    if (!this._selected) {
-      return;
-    }
-
-    const hour = this._timeAdapter.getHour(this._selected);
-    this.selectedHour = hour > 12 && this.isMeridiem ? hour - 12 : hour;
-    if (hour === 0 && this.isMeridiem) {
-      this.selectedHour = 12;
-    }
-    this.selectedMinute = this._timeAdapter.getMinute(this._selected);
-    this.availableHours = ALL_HOURS;
-
-    if (this.isMeridiem) {
-      this.period = this._timeAdapter.getPeriod(this._selected);
-    }
-
-    this.availableMinutes = ALL_MINUTES;
-    this._setMinHour();
-    this._setMaxHour();
-    this._setMinMinute();
-    this._setMaxMinute();
-    this._moveFocusOnNextTick = this.isMeridiem;
-  }
-  private _selected: T | null;
+  readonly selected = model<T | null>();
+  readonly selectedInternal = computed(
+    () =>
+      this._timeAdapter.getValidTimeOrNull(
+        this._timeAdapter.deserialize(this.selected()),
+      ),
+    { equal: (a, b) => this._timeAdapter.sameTime(a, b) },
+  );
 
   /** The minimum selectable time. */
-  @Input()
-  get minTime(): T | null {
-    return this._minTime;
-  }
-  set minTime(value: T | null) {
-    this._minTime = this._timeAdapter.getValidTimeOrNull(
-      this._timeAdapter.deserialize(value),
-    );
-
-    if (value) {
-      this._setMinHour();
-      this._setMinMinute();
-      this._setDisabledPeriod();
-    }
-  }
-  private _minTime: T | null;
+  readonly minTime = input(null, {
+    transform: (value: T | null) =>
+      this._timeAdapter.getValidTimeOrNull(
+        this._timeAdapter.deserialize(value),
+      ),
+  });
 
   /** The maximum selectable time. */
-  @Input()
-  get maxTime(): T | null {
-    return this._maxTime;
-  }
-  set maxTime(value: T | null) {
-    this._maxTime = this._timeAdapter.getValidTimeOrNull(
-      this._timeAdapter.deserialize(value),
-    );
-
-    if (value) {
-      this._setMaxHour();
-      this._setMaxMinute();
-      this._setDisabledPeriod();
-    }
-  }
-  private _maxTime: T | null;
+  readonly maxTime = input(null, {
+    transform: (value: T | null) =>
+      this._timeAdapter.getValidTimeOrNull(
+        this._timeAdapter.deserialize(value),
+      ),
+  });
 
   /** Step over minutes. */
-  @Input()
-  get minuteInterval(): number {
-    return this._minuteInterval;
-  }
-  set minuteInterval(value: number) {
-    this._minuteInterval = coerceNumberProperty(value) || 1;
-  }
-  private _minuteInterval: number = 1;
+  readonly minuteInterval = input(1, {
+    transform: (value: NumberInput) => coerceNumberProperty(value) || 1,
+  });
 
   /** Whether the clock uses 12 hour format. */
-  @Input() isMeridiem: boolean;
+  readonly isMeridiem = input<boolean>(false);
 
   /** Color palette. */
-  @Input() color: ThemePalette = 'primary';
+  readonly color = input<ThemePalette>('primary');
 
   /** Emits when any hour, minute or period is selected. */
-  @Output() _userSelection = new EventEmitter<T>();
+  readonly _userSelection = output<T>();
 
-  @Output() selectedChange = new EventEmitter<T>();
+  readonly selectedHour = linkedSignal(() => {
+    const selected = this.selectedInternal();
+    if (!selected) {
+      return 0;
+    }
+    const hour = this._timeAdapter.getHour(selected);
+    if (hour === 0 && this.isMeridiem()) {
+      return 12;
+    }
+    return hour > 12 && this.isMeridiem() ? hour - 12 : hour;
+  });
 
-  selectedHour: number = 0;
-  selectedMinute: number = 0;
-  period: MatTimePeriodType;
-  disabledPeriod: MatTimePeriodType | null = null;
-  availableMinutes = ALL_MINUTES;
-  availableHours = ALL_HOURS;
+  readonly selectedMinute = linkedSignal(() => {
+    const selected = this.selectedInternal();
+    if (!selected) {
+      return 0;
+    }
+    return this._timeAdapter.getMinute(selected);
+  });
+
+  readonly period = linkedSignal(() => {
+    const isMeridiem = this.isMeridiem();
+    const selected = this.selectedInternal();
+    return isMeridiem && selected
+      ? this._timeAdapter.getPeriod(selected)
+      : 'am';
+  });
+
+  readonly disabledPeriod = computed(() =>
+    this._getDisabledPeriod(this.minTime(), this.maxTime()),
+  );
+
+  readonly availableMinutes = computed(() =>
+    this._prepareAvailableMinutes(
+      this.selectedInternal(),
+      this.minTime(),
+      this.maxTime(),
+    ),
+  );
+
+  readonly availableHours = computed(() =>
+    this._prepareAvailableHours(this.minTime(), this.maxTime()),
+  );
+
+  readonly availableHoursWithMeridiem = computed(() => {
+    const availableHours = this.availableHours();
+    return this.isMeridiem()
+      ? this._getAvailableHoursForPeriod(availableHours, this.period())
+      : availableHours;
+  });
 
   /**
    * Used for scheduling that focus should be moved to the active cell on the next tick.
    * We need to schedule it, rather than do it immediately, because we have to wait
    * for Angular to re-evaluate the view children.
    */
-  private _moveFocusOnNextTick = false;
+  private readonly _moveFocusOnNextTick = linkedSignal({
+    source: this.selectedInternal,
+    computation: (selected) => (selected ? untracked(this.isMeridiem) : false),
+  });
 
-  constructor(@Optional() protected _timeAdapter: TimeAdapter<T>) {}
+  protected constructor(@Optional() protected _timeAdapter: TimeAdapter<T>) {}
 
   ngAfterContentInit() {
-    if (!this.selected) {
-      this.selected = this._timeAdapter.clampTime(
+    if (!this.selected()) {
+      const time = this._timeAdapter.clampTime(
         this._timeAdapter.now(),
-        this.minTime,
-        this.maxTime,
+        this.minTime(),
+        this.maxTime(),
       );
-      this._userSelection.emit(this.selected);
+      this.selected.set(time);
+      this._userSelection.emit(time);
     }
   }
 
   ngAfterViewChecked() {
-    if (this._moveFocusOnNextTick) {
-      this._moveFocusOnNextTick = false;
+    if (this._moveFocusOnNextTick()) {
+      this._moveFocusOnNextTick.set(false);
       this.focusActiveCell();
     }
   }
@@ -171,9 +170,9 @@ export abstract class MatTimeFaceBase<T>
 
   /** Handles hour selection. */
   _onHourSelected(hour: number): void {
-    this.selectedHour = hour;
+    this.selectedHour.set(hour);
     const selected = this._timeAdapter.updateHour(
-      this.selected!,
+      this.selectedInternal()!,
       this._getHourBasedOnPeriod(hour),
     );
     this._timeSelected(selected);
@@ -181,49 +180,22 @@ export abstract class MatTimeFaceBase<T>
 
   /** Handles minute selection. */
   _onMinuteSelected(minute: number): void {
-    this.selectedMinute = minute;
-    const selected = this._timeAdapter.updateMinute(this.selected!, minute);
+    this.selectedMinute.set(minute);
+    const selected = this._timeAdapter.updateMinute(
+      this.selectedInternal()!,
+      minute,
+    );
     this._timeSelected(selected);
   }
 
   /** Handles period changing. */
   _onPeriodChanged(period: MatTimePeriodType): void {
-    this.period = period;
+    this.period.set(period);
     const selected = this._timeAdapter.updateHour(
-      this.selected!,
-      this._getHourBasedOnPeriod(this.selectedHour),
+      this.selectedInternal()!,
+      this._getHourBasedOnPeriod(this.selectedHour()),
     );
     this._timeSelected(selected);
-  }
-
-  _getAvailableHours(): number[] {
-    if (this.isMeridiem) {
-      return this.availableHours
-        .filter((h) => {
-          if (this.period === 'am') {
-            return h < 12;
-          }
-
-          if (this.period === 'pm') {
-            return h >= 12;
-          }
-
-          return h;
-        })
-        .map((h) => {
-          if (h > 12) {
-            return h - 12;
-          }
-
-          if (h === 0) {
-            return 12;
-          }
-
-          return h;
-        });
-    }
-
-    return this.availableHours;
   }
 
   _onKeydown(event: KeyboardEvent, view: 'hour' | 'minute'): void {
@@ -237,10 +209,39 @@ export abstract class MatTimeFaceBase<T>
     }
   }
 
+  private _getAvailableHoursForPeriod(
+    availableHours: number[],
+    period: MatTimePeriodType,
+  ): number[] {
+    return availableHours
+      .filter((h) => {
+        if (period === 'am') {
+          return h < 12;
+        }
+
+        if (period === 'pm') {
+          return h >= 12;
+        }
+
+        return h;
+      })
+      .map((h) => {
+        if (h > 12) {
+          return h - 12;
+        }
+
+        if (h === 0) {
+          return 12;
+        }
+
+        return h;
+      });
+  }
+
   private _handleHourKeydown(event: KeyboardEvent): void {
-    const hours = this._getAvailableHours();
+    const hours = this.availableHoursWithMeridiem();
     const selectedHourIndex = hours.findIndex(
-      (hour) => hour === this.selectedHour,
+      (hour) => hour === this.selectedHour(),
     );
 
     if (!hours.length) {
@@ -268,9 +269,9 @@ export abstract class MatTimeFaceBase<T>
   }
 
   private _handleMinuteKeydown(event: KeyboardEvent): void {
-    const minutes = this.availableMinutes;
+    const minutes = this.availableMinutes();
     const selectedMinuteIndex = minutes.findIndex(
-      (minute) => minute === this.selectedMinute,
+      (minute) => minute === this.selectedMinute(),
     );
 
     if (!minutes.length) {
@@ -280,41 +281,41 @@ export abstract class MatTimeFaceBase<T>
     switch (event.keyCode) {
       case UP_ARROW:
         if (
-          selectedMinuteIndex + this.minuteInterval >= minutes.length ||
+          selectedMinuteIndex + this.minuteInterval() >= minutes.length ||
           selectedMinuteIndex < 0
         ) {
           const difference =
-            60 - this.selectedMinute + Math.min(...this.availableMinutes);
-          const count = Math.ceil(difference / this.minuteInterval);
-          const differenceForValid = count * this.minuteInterval;
-          const nextValidValue = this.selectedMinute + differenceForValid;
+            60 - this.selectedMinute() + Math.min(...this.availableMinutes());
+          const count = Math.ceil(difference / this.minuteInterval());
+          const differenceForValid = count * this.minuteInterval();
+          const nextValidValue = this.selectedMinute() + differenceForValid;
           const correctIndex = minutes.findIndex(
             (minute) => minute === nextValidValue - 60, // amount of mins
           );
           this._onMinuteSelected(minutes[correctIndex]);
         } else {
           this._onMinuteSelected(
-            minutes[selectedMinuteIndex + this.minuteInterval],
+            minutes[selectedMinuteIndex + this.minuteInterval()],
           );
         }
         break;
       case DOWN_ARROW:
         if (
-          selectedMinuteIndex - this.minuteInterval < 0 ||
+          selectedMinuteIndex - this.minuteInterval() < 0 ||
           selectedMinuteIndex < 0
         ) {
           const difference =
-            60 + this.selectedMinute - Math.max(...this.availableMinutes);
-          const count = Math.ceil(difference / this.minuteInterval);
-          const differenceForValid = count * this.minuteInterval;
-          const nextValidValue = this.selectedMinute - differenceForValid;
+            60 + this.selectedMinute() - Math.max(...this.availableMinutes());
+          const count = Math.ceil(difference / this.minuteInterval());
+          const differenceForValid = count * this.minuteInterval();
+          const nextValidValue = this.selectedMinute() - differenceForValid;
           const correctIndex = minutes.findIndex(
             (minute) => minute === nextValidValue + 60, // amount of mins
           );
           this._onMinuteSelected(minutes[correctIndex]);
         } else {
           this._onMinuteSelected(
-            minutes[selectedMinuteIndex - this.minuteInterval],
+            minutes[selectedMinuteIndex - this.minuteInterval()],
           );
         }
         break;
@@ -325,8 +326,8 @@ export abstract class MatTimeFaceBase<T>
 
   /** Gets a correct hours based on meridiem and period. */
   private _getHourBasedOnPeriod(hour: number): number {
-    const afterNoon = this.isMeridiem && this.period === 'pm';
-    const beforeNoon = this.isMeridiem && this.period === 'am';
+    const afterNoon = this.isMeridiem() && this.period() === 'pm';
+    const beforeNoon = this.isMeridiem() && this.period() === 'am';
 
     if (afterNoon) {
       return hour === 12 ? hour : hour + 12;
@@ -340,92 +341,102 @@ export abstract class MatTimeFaceBase<T>
   }
 
   private _timeSelected(value: T): void {
-    if (value && !this._timeAdapter.sameTime(value, this.selected)) {
-      this.selectedChange.emit(value);
+    if (value && !this._timeAdapter.sameTime(value, this.selectedInternal())) {
+      this.selected.set(value);
     }
 
     this._userSelection.emit(value);
   }
 
-  /** Sets min hour. */
-  private _setMinHour(): void {
-    if (!this.minTime) {
-      return;
+  /**
+   * Retrieves a filtered list of available hours within the specified minimum and maximum bounds.
+   *
+   * @param min - The minimum time bound or null if no minimum is specified.
+   * @param max - The maximum time bound or null if no maximum is specified.
+   * @return {number[]} An array of available hours that satisfy the specified constraints.
+   */
+  private _prepareAvailableHours(min: T | null, max: T | null): number[] {
+    const filters: ((hour: number) => boolean)[] = [];
+    if (min) {
+      const minHour = this._timeAdapter.getHour(min);
+      filters.push((hour) => hour >= minHour);
     }
-
-    const minHour = this._timeAdapter.getHour(this.minTime);
-    this.availableHours = this.availableHours.filter((h) => h >= minHour);
+    if (max) {
+      const maxHour = this._timeAdapter.getHour(max);
+      filters.push((hour) => hour <= maxHour);
+    }
+    return ALL_HOURS.filter((v) => filters.every((f) => f(v)));
   }
 
-  /** Sets max hour. */
-  private _setMaxHour(): void {
-    if (!this.maxTime) {
-      return;
+  /**
+   * Prepares and filters the available minutes based on the selected time,
+   * minimum time, and maximum time constraints.
+   *
+   * @param selected The currently selected time, or null if not set.
+   * @param min The minimum time to constrain the available minutes, or null if no minimum constraint.
+   * @param max The maximum time to constrain the available minutes, or null if no maximum constraint.
+   * @return {number[]} The array of minutes that are available based on the applied constraints.
+   */
+  private _prepareAvailableMinutes(
+    selected: T | null,
+    min: T | null,
+    max: T | null,
+  ): number[] {
+    const filters: ((hour: number) => boolean)[] = [];
+
+    if (selected && min) {
+      const selectedHour = this._timeAdapter.getHour(selected);
+      const minHour = this._timeAdapter.getHour(min);
+
+      const minMinute =
+        selectedHour > minHour ? 0 : this._timeAdapter.getMinute(min);
+
+      if (selectedHour < minHour) {
+        return [];
+      }
+
+      filters.push((minute) => minute >= minMinute);
     }
 
-    const maxHour = this._timeAdapter.getHour(this.maxTime);
-    this.availableHours = this.availableHours.filter((h) => h <= maxHour);
-  }
+    if (selected && max) {
+      const selectedHour = this._timeAdapter.getHour(selected);
+      const maxHour = this._timeAdapter.getHour(max);
 
-  /** Sets min minute. */
-  private _setMinMinute(): void {
-    if (!this.selected || !this.minTime) {
-      return;
+      const maxMinute =
+        selectedHour < maxHour ? 59 : this._timeAdapter.getMinute(max);
+
+      if (selectedHour > maxHour) {
+        return [];
+      }
+
+      filters.push((minute) => minute <= maxMinute);
     }
 
-    const selectedHour = this._timeAdapter.getHour(this.selected);
-    const minHour = this._timeAdapter.getHour(this.minTime);
-
-    const minMinute =
-      selectedHour > minHour ? 0 : this._timeAdapter.getMinute(this.minTime);
-
-    this.availableMinutes = this.availableMinutes.filter(
-      (minute) => minute >= minMinute,
-    );
-
-    if (selectedHour < minHour) {
-      this.availableMinutes = [];
-    }
-  }
-
-  /** Sets max minute. */
-  private _setMaxMinute(): void {
-    if (!this.selected || !this.maxTime) {
-      return;
-    }
-
-    const selectedHour = this._timeAdapter.getHour(this.selected);
-    const maxHour = this._timeAdapter.getHour(this.maxTime);
-
-    const maxMinute =
-      selectedHour < maxHour ? 59 : this._timeAdapter.getMinute(this.maxTime);
-
-    this.availableMinutes = this.availableMinutes.filter(
-      (minute) => minute <= maxMinute,
-    );
-
-    if (selectedHour > maxHour) {
-      this.availableMinutes = [];
-    }
+    return ALL_MINUTES.filter((v) => filters.every((f) => f(v)));
   }
 
   /** Sets disabled period. */
-  private _setDisabledPeriod(): void {
-    if (this.minTime) {
-      const minHour = this._timeAdapter.getHour(this.minTime);
+  private _getDisabledPeriod(
+    minTime: T | null,
+    maxTime: T | null,
+  ): MatTimePeriodType | null {
+    if (minTime) {
+      const minHour = this._timeAdapter.getHour(minTime);
 
       if (minHour >= 12) {
-        this.disabledPeriod = 'am';
+        return 'am';
       }
     }
 
-    if (this.maxTime) {
-      const maxHour = this._timeAdapter.getHour(this.maxTime);
-      const maxMinute = this._timeAdapter.getHour(this.maxTime);
+    if (maxTime) {
+      const maxHour = this._timeAdapter.getHour(maxTime);
+      const maxMinute = this._timeAdapter.getHour(maxTime);
 
       if (maxHour < 12 || (maxHour === 12 && maxMinute === 0)) {
-        this.disabledPeriod = 'pm';
+        return 'pm';
       }
     }
+
+    return null;
   }
 }

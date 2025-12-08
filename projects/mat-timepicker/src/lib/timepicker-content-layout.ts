@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  ViewEncapsulation,
+} from '@angular/core';
 
 import { TimepickerOrientation } from './orientation';
 
@@ -12,14 +18,21 @@ import { TimepickerOrientation } from './orientation';
   encapsulation: ViewEncapsulation.None,
   host: {
     class: 'mat-timepicker-content-layout',
-    '[class.mat-timepicker-content-layout-horizontal]': 'orientation === "horizontal"',
-    '[class.mat-timepicker-content-layout-vertical]': 'orientation === "vertical"',
+    '[class.mat-timepicker-content-layout-horizontal]': 'horizontal()',
+    '[class.mat-timepicker-content-layout-vertical]': 'vertical()',
   },
 })
 export class MatTimepickerContentLayout {
+  protected readonly horizontal = computed(
+    () => this.orientation() === 'horizontal',
+  );
+  protected readonly vertical = computed(
+    () => this.orientation() === 'vertical',
+  );
+
   /** Content title. */
-  @Input() title: string;
+  readonly title = input.required<string>();
 
   /** Layout orientation. */
-  @Input() orientation: TimepickerOrientation = 'vertical';
+  readonly orientation = input<TimepickerOrientation>('vertical');
 }

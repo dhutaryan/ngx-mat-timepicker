@@ -3,7 +3,7 @@
     class="mat-time-inputs-field"
     appearance="outline"
     hours
-    [color]="color"
+    [color]="color()"
   >
     <input
       type="text"
@@ -11,9 +11,9 @@
       maxlength="2"
       matInput
       matHourInput
-      [isMeridiem]="isMeridiem"
-      [value]="selectedHour"
-      [availableHours]="_getAvailableHours()"
+      [isMeridiem]="isMeridiem()"
+      [value]="selectedHour()"
+      [availableHours]="availableHoursWithMeridiem()"
       (timeChanged)="_onHourSelected($event)"
       (keydown)="_onKeydown($event, 'hour')"
     />
@@ -23,7 +23,7 @@
     class="mat-time-inputs-field"
     appearance="outline"
     minutes
-    [color]="color"
+    [color]="color()"
   >
     <input
       type="text"
@@ -31,21 +31,21 @@
       maxlength="2"
       matInput
       matMinuteInput
-      [value]="selectedMinute"
-      [interval]="minuteInterval"
-      [availableMinutes]="availableMinutes"
+      [value]="selectedMinute()"
+      [interval]="minuteInterval()"
+      [availableMinutes]="availableMinutes()"
       (timeChanged)="_onMinuteSelected($event)"
       (keydown)="_onKeydown($event, 'minute')"
     />
     <mat-hint>{{ _intl.minuteInputHint }}</mat-hint>
   </mat-form-field>
 
-  @if (isMeridiem) {
+  @if (isMeridiem()) {
     <ng-container mat-time-period>
       <mat-time-period
-        [period]="period"
-        [disabledPeriod]="disabledPeriod"
-        (periodChanged)="_onPeriodChanged($event)"
+        [period]="period()"
+        [disabledPeriod]="disabledPeriod()"
+        (periodChange)="_onPeriodChanged($event)"
       ></mat-time-period>
     </ng-container>
   }

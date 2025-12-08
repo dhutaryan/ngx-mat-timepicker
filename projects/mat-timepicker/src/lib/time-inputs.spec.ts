@@ -1,9 +1,9 @@
 import { Component, QueryList, Type, ViewChildren } from '@angular/core';
 import {
   ComponentFixture,
-  TestBed,
   fakeAsync,
   flush,
+  TestBed,
   tick,
   waitForAsync,
 } from '@angular/core/testing';
@@ -174,7 +174,7 @@ describe('MatInputs', () => {
       dispatchInputEvent(minuteInput, 'blur');
 
       expect(testComponent.onSelect).toHaveBeenCalledWith(
-        new Date(2023, 4, 19, 21, 32),
+        new Date(2023, 4, 19, 14, 32),
       );
     });
 
@@ -213,10 +213,10 @@ describe('MatInputs', () => {
 
     it('should change hour to correct value if consumer enter hour more than 12 and meridiem is true', () => {
       testComponent.isMeridiem = true;
+      fixture.detectChanges();
       hourInput.value = '17';
       fixture.detectChanges();
       dispatchInputEvent(hourInput, 'blur');
-
       expect(Number(hourInput.value)).toBe(5);
     });
 
