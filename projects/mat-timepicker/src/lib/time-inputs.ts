@@ -1,18 +1,15 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   Directive,
-  DOCUMENT,
   ElementRef,
-  Inject,
-  Input,
+  inject,
   input,
   NgZone,
   Optional,
   ViewEncapsulation,
 } from '@angular/core';
-import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { take } from 'rxjs';
@@ -34,29 +31,14 @@ import { MatTimepickerContentLayout } from './timepicker-content-layout';
   exportAs: 'matTimeInput',
   host: {
     class: 'mat-time-input',
-    '(focus)': 'focus($event)',
-    '(blur)': 'blur($event)',
+    '(focus)': 'focus()',
+    '(blur)': 'blur()',
   },
 })
 export class MatHourInput extends MatTimeInputBase {
-  @Input()
-  get availableHours(): number[] {
-    return this._availableHours;
-  }
-  set availableHours(value: number[]) {
-    this._availableHours = value;
-  }
-  private _availableHours: number[] = [];
+  readonly availableHours = input<number[]>([]);
 
   readonly isMeridiem = input<boolean>(false);
-
-  constructor(
-    element: ElementRef<HTMLInputElement>,
-    _cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) _document: Document,
-  ) {
-    super(element, _cdr, _document);
-  }
 
   _withZeroPrefix(value: number): string {
     return withZeroPrefixMeridiem(value, this.isMeridiem());
@@ -78,34 +60,32 @@ export class MatHourInput extends MatTimeInputBase {
     };
 
     const value = getValue();
+    const availableHours = this.availableHours();
 
     if (this.isMeridiem()) {
-      if (!this.availableHours.length) {
+      if (!availableHours.length) {
         return this.value;
       }
 
-      if (value === 12 && this.availableHours.includes(12)) {
+      if (value === 12 && availableHours.includes(12)) {
         return 12;
       }
 
-      if (value === 12 && !this.availableHours.includes(12)) {
-        return Math.min(...this.availableHours);
+      if (value === 12 && !availableHours.includes(12)) {
+        return Math.min(...availableHours);
       }
 
       if (value >= 1 && value < 12) {
         // the last item is max becuase 12 at the beginning is kinda "min"
-        const maxHour = this.availableHours[this.availableHours.length - 1];
+        const maxHour = availableHours[availableHours.length - 1];
 
-        return Math.min(
-          Math.max(value, Math.min(...this.availableHours)),
-          maxHour,
-        );
+        return Math.min(Math.max(value, Math.min(...availableHours)), maxHour);
       }
     }
 
     return Math.min(
-      Math.max(value, Math.min(...this.availableHours)),
-      Math.max(...this.availableHours),
+      Math.max(value, Math.min(...availableHours)),
+      Math.max(...availableHours),
     );
   }
 }
@@ -116,37 +96,17 @@ export class MatHourInput extends MatTimeInputBase {
   exportAs: 'matTimeInput',
   host: {
     class: 'mat-time-input',
-    '(focus)': 'focus($event)',
-    '(blur)': 'blur($event)',
+    '(focus)': 'focus()',
+    '(blur)': 'blur()',
   },
 })
 export class MatMinuteInput extends MatTimeInputBase {
   /** Step over minutes. */
-  @Input()
-  get interval(): number {
-    return this._interval;
-  }
-  set interval(value: number) {
-    this._interval = coerceNumberProperty(value) || 1;
-  }
-  private _interval: number = 1;
+  readonly interval = input(1, {
+    transform: (value: NumberInput) => coerceNumberProperty(value) || 1,
+  });
 
-  @Input()
-  get availableMinutes(): number[] {
-    return this._availableMinutes;
-  }
-  set availableMinutes(value: number[]) {
-    this._availableMinutes = value;
-  }
-  private _availableMinutes: number[] = [];
-
-  constructor(
-    element: ElementRef<HTMLInputElement>,
-    _cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) _document: Document,
-  ) {
-    super(element, _cdr, _document);
-  }
+  readonly availableMinutes = input<number[]>([]);
 
   _withZeroPrefix(value: number): string {
     return withZeroPrefix(value);
@@ -157,11 +117,11 @@ export class MatMinuteInput extends MatTimeInputBase {
       return this.value;
     }
 
-    const roundedValue = Math.round(value / this.interval) * this.interval;
+    const roundedValue = Math.round(value / this.interval()) * this.interval();
 
     return Math.min(
-      Math.max(roundedValue, Math.min(...this.availableMinutes)),
-      Math.max(...this.availableMinutes),
+      Math.max(roundedValue, Math.min(...this.availableMinutes())),
+      Math.max(...this.availableMinutes()),
     );
   }
 }
@@ -186,12 +146,11 @@ export class MatMinuteInput extends MatTimeInputBase {
   },
 })
 export class MatTimeInputs<T> extends MatTimeFaceBase<T> {
-  constructor(
-    public _intl: MatTimepickerIntl,
-    @Optional() _timeAdapter: TimeAdapter<T>,
-    private _ngZone: NgZone,
-    private _elementRef: ElementRef,
-  ) {
+  public readonly _intl = inject(MatTimepickerIntl);
+  private readonly _ngZone = inject(NgZone);
+  private readonly _elementRef = inject(ElementRef);
+
+  constructor(@Optional() _timeAdapter: TimeAdapter<T>) {
     super(_timeAdapter);
   }
 

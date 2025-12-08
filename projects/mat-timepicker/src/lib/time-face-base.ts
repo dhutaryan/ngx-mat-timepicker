@@ -2,13 +2,13 @@ import {
   AfterContentInit,
   AfterViewChecked,
   Directive,
-  EventEmitter,
+  input,
   Input,
   Optional,
-  Output,
+  output,
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
-import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { TimeAdapter } from './adapter';
@@ -35,14 +35,14 @@ export abstract class MatTimeFaceBase<T>
     }
 
     const hour = this._timeAdapter.getHour(this._selected);
-    this.selectedHour = hour > 12 && this.isMeridiem ? hour - 12 : hour;
-    if (hour === 0 && this.isMeridiem) {
+    this.selectedHour = hour > 12 && this.isMeridiem() ? hour - 12 : hour;
+    if (hour === 0 && this.isMeridiem()) {
       this.selectedHour = 12;
     }
     this.selectedMinute = this._timeAdapter.getMinute(this._selected);
     this.availableHours = ALL_HOURS;
 
-    if (this.isMeridiem) {
+    if (this.isMeridiem()) {
       this.period = this._timeAdapter.getPeriod(this._selected);
     }
 
@@ -51,7 +51,7 @@ export abstract class MatTimeFaceBase<T>
     this._setMaxHour();
     this._setMinMinute();
     this._setMaxMinute();
-    this._moveFocusOnNextTick = this.isMeridiem;
+    this._moveFocusOnNextTick = this.isMeridiem();
   }
   private _selected: T | null;
 
@@ -92,25 +92,20 @@ export abstract class MatTimeFaceBase<T>
   private _maxTime: T | null;
 
   /** Step over minutes. */
-  @Input()
-  get minuteInterval(): number {
-    return this._minuteInterval;
-  }
-  set minuteInterval(value: number) {
-    this._minuteInterval = coerceNumberProperty(value) || 1;
-  }
-  private _minuteInterval: number = 1;
+  readonly minuteInterval = input(1, {
+    transform: (value: NumberInput) => coerceNumberProperty(value) || 1,
+  });
 
   /** Whether the clock uses 12 hour format. */
-  @Input() isMeridiem: boolean;
+  readonly isMeridiem = input<boolean>(false);
 
   /** Color palette. */
-  @Input() color: ThemePalette = 'primary';
+  readonly color = input<ThemePalette>('primary');
 
   /** Emits when any hour, minute or period is selected. */
-  @Output() _userSelection = new EventEmitter<T>();
+  readonly _userSelection = output<T>();
 
-  @Output() selectedChange = new EventEmitter<T>();
+  readonly selectedChange = output<T>();
 
   selectedHour: number = 0;
   selectedMinute: number = 0;
@@ -197,7 +192,7 @@ export abstract class MatTimeFaceBase<T>
   }
 
   _getAvailableHours(): number[] {
-    if (this.isMeridiem) {
+    if (this.isMeridiem()) {
       return this.availableHours
         .filter((h) => {
           if (this.period === 'am') {
@@ -280,13 +275,13 @@ export abstract class MatTimeFaceBase<T>
     switch (event.keyCode) {
       case UP_ARROW:
         if (
-          selectedMinuteIndex + this.minuteInterval >= minutes.length ||
+          selectedMinuteIndex + this.minuteInterval() >= minutes.length ||
           selectedMinuteIndex < 0
         ) {
           const difference =
             60 - this.selectedMinute + Math.min(...this.availableMinutes);
-          const count = Math.ceil(difference / this.minuteInterval);
-          const differenceForValid = count * this.minuteInterval;
+          const count = Math.ceil(difference / this.minuteInterval());
+          const differenceForValid = count * this.minuteInterval();
           const nextValidValue = this.selectedMinute + differenceForValid;
           const correctIndex = minutes.findIndex(
             (minute) => minute === nextValidValue - 60, // amount of mins
@@ -294,19 +289,19 @@ export abstract class MatTimeFaceBase<T>
           this._onMinuteSelected(minutes[correctIndex]);
         } else {
           this._onMinuteSelected(
-            minutes[selectedMinuteIndex + this.minuteInterval],
+            minutes[selectedMinuteIndex + this.minuteInterval()],
           );
         }
         break;
       case DOWN_ARROW:
         if (
-          selectedMinuteIndex - this.minuteInterval < 0 ||
+          selectedMinuteIndex - this.minuteInterval() < 0 ||
           selectedMinuteIndex < 0
         ) {
           const difference =
             60 + this.selectedMinute - Math.max(...this.availableMinutes);
-          const count = Math.ceil(difference / this.minuteInterval);
-          const differenceForValid = count * this.minuteInterval;
+          const count = Math.ceil(difference / this.minuteInterval());
+          const differenceForValid = count * this.minuteInterval();
           const nextValidValue = this.selectedMinute - differenceForValid;
           const correctIndex = minutes.findIndex(
             (minute) => minute === nextValidValue + 60, // amount of mins
@@ -314,7 +309,7 @@ export abstract class MatTimeFaceBase<T>
           this._onMinuteSelected(minutes[correctIndex]);
         } else {
           this._onMinuteSelected(
-            minutes[selectedMinuteIndex - this.minuteInterval],
+            minutes[selectedMinuteIndex - this.minuteInterval()],
           );
         }
         break;
@@ -325,8 +320,8 @@ export abstract class MatTimeFaceBase<T>
 
   /** Gets a correct hours based on meridiem and period. */
   private _getHourBasedOnPeriod(hour: number): number {
-    const afterNoon = this.isMeridiem && this.period === 'pm';
-    const beforeNoon = this.isMeridiem && this.period === 'am';
+    const afterNoon = this.isMeridiem() && this.period === 'pm';
+    const beforeNoon = this.isMeridiem() && this.period === 'am';
 
     if (afterNoon) {
       return hour === 12 ? hour : hour + 12;

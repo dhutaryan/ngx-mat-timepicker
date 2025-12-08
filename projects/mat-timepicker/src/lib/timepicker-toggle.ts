@@ -72,7 +72,7 @@ export class MatTimepickerToggle<T> implements OnChanges, OnDestroy {
   readonly customIcon = contentChild(MatTimepickerToggleIcon);
 
   /** Screen-reader label for the button. */
-  readonly ariaLabel = input<string>('', { alias: 'aria-label' });
+  readonly ariaLabel = input('', { alias: 'aria-label' });
 
   private _stateChanges = Subscription.EMPTY;
 

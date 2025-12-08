@@ -23,7 +23,7 @@
     {{ _withZeroPrefix(selectedMinute) }}
   </div>
 
-  @if (isMeridiem) {
+  @if (isMeridiem()) {
     <ng-container mat-time-period>
       <mat-time-period
         [period]="period"
@@ -42,9 +42,9 @@
       <mat-hours-clock-dial
         animate.enter="mat-clock-dial-enter"
         animate.leave="mat-clock-dial-leave"
-        [color]="color"
+        [color]="color()"
         [selectedHour]="selectedHour"
-        [isMeridiem]="isMeridiem"
+        [isMeridiem]="isMeridiem()"
         [availableHours]="_getAvailableHours()"
         [touchUi]="touchUi()"
         (selectedChange)="_onHourChanged($event)"
@@ -54,9 +54,9 @@
       <mat-minutes-clock-dial
         animate.enter="mat-clock-dial-enter"
         animate.leave="mat-clock-dial-leave"
-        [color]="color"
+        [color]="color()"
         [selectedMinute]="selectedMinute"
-        [interval]="minuteInterval"
+        [interval]="minuteInterval()"
         [availableMinutes]="availableMinutes"
         [touchUi]="touchUi()"
         (selectedMinuteChange)="_onMinuteSelected($event)"

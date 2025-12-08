@@ -103,7 +103,7 @@ export class MatClockDials<T> extends MatTimeFaceBase<T> {
       return '00';
     }
 
-    return withZeroPrefixMeridiem(value, this.isMeridiem);
+    return withZeroPrefixMeridiem(value, this.isMeridiem());
   }
 
   override _onMinuteSelected(minute: number): void {

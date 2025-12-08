@@ -1,16 +1,13 @@
 import {
-  Input,
-  Output,
-  EventEmitter,
-  Directive,
-  ElementRef,
   ChangeDetectorRef,
-  Inject,
-  Self,
-  HostListener,
-  InjectionToken,
-  inject,
+  Directive,
   DOCUMENT,
+  ElementRef,
+  HostListener,
+  inject,
+  InjectionToken,
+  Input,
+  output,
 } from '@angular/core';
 
 export function withZeroPrefix(value: number): string {
@@ -68,7 +65,7 @@ export abstract class MatTimeInputBase {
   }
   private _value: number;
 
-  @Output() timeChanged = new EventEmitter<number>();
+  readonly timeChanged = output<number>();
 
   @HostListener('keydown', ['$event']) _keydown(event: KeyboardEvent) {
     this._keydownHandler(event);
@@ -77,20 +74,17 @@ export abstract class MatTimeInputBase {
   private readonly _keydownHandler = inject(
     MAT_TIMEPICKER_INPUTS_KEYDOWN_HANDLER,
   );
+  private readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef);
+  private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly _document = inject(DOCUMENT);
 
   get inputElement() {
-    return this.element.nativeElement as HTMLInputElement;
+    return this.element.nativeElement;
   }
 
   get hasFocus() {
-    return this.element?.nativeElement === this._document.activeElement;
+    return this.element.nativeElement === this._document.activeElement;
   }
-
-  constructor(
-    private element: ElementRef<HTMLInputElement>,
-    private _cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) private _document: Document,
-  ) {}
 
   focus() {
     this.setInputValue(null);
