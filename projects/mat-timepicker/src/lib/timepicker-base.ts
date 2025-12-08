@@ -1,20 +1,21 @@
 import {
-  Input,
-  ComponentRef,
-  ViewContainerRef,
-  Directive,
-  NgZone,
-  Inject,
-  Output,
-  EventEmitter,
-  OnChanges,
-  SimpleChanges,
-  ElementRef,
-  InjectionToken,
-  Optional,
   booleanAttribute,
-  inject,
+  ComponentRef,
+  Directive,
   DOCUMENT,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  inject,
+  InjectionToken,
+  Input,
+  input,
+  NgZone,
+  OnChanges,
+  Optional,
+  Output,
+  SimpleChanges,
+  ViewContainerRef,
 } from '@angular/core';
 
 import { ThemePalette } from '@angular/material/core';
@@ -266,12 +267,10 @@ export abstract class MatTimepickerBase<
   private _touchUi: boolean = false;
 
   /** Preferred position of the timepicker in the X axis. */
-  @Input()
-  xPosition: TimepickerDropdownPositionX = 'start';
+  readonly xPosition = input<TimepickerDropdownPositionX>('start');
 
   /** Preferred position of the timepicker in the Y axis. */
-  @Input()
-  yPosition: TimepickerDropdownPositionY = 'below';
+  readonly yPosition = input<TimepickerDropdownPositionY>('below');
 
   /**
    * Whether to restore focus to the previously-focused element when the timepicker is closed.
@@ -604,9 +603,9 @@ export abstract class MatTimepickerBase<
   private _setConnectedPositions(
     strategy: FlexibleConnectedPositionStrategy,
   ): FlexibleConnectedPositionStrategy {
-    const primaryX = this.xPosition === 'end' ? 'end' : 'start';
+    const primaryX = this.xPosition() === 'end' ? 'end' : 'start';
     const secondaryX = primaryX === 'start' ? 'end' : 'start';
-    const primaryY = this.yPosition === 'above' ? 'bottom' : 'top';
+    const primaryY = this.yPosition() === 'above' ? 'bottom' : 'top';
     const secondaryY = primaryY === 'top' ? 'bottom' : 'top';
 
     return strategy.withPositions([

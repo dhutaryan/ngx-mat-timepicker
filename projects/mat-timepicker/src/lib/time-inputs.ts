@@ -31,6 +31,7 @@ import { MatTimepickerContentLayout } from './timepicker-content-layout';
   exportAs: 'matTimeInput',
   host: {
     class: 'mat-time-input',
+    '[placeholder]': 'placeholder()',
     '(focus)': 'focus()',
     '(blur)': 'blur()',
   },
@@ -64,7 +65,7 @@ export class MatHourInput extends MatTimeInputBase {
 
     if (this.isMeridiem()) {
       if (!availableHours.length) {
-        return this.value;
+        return this.value();
       }
 
       if (value === 12 && availableHours.includes(12)) {
@@ -96,6 +97,7 @@ export class MatHourInput extends MatTimeInputBase {
   exportAs: 'matTimeInput',
   host: {
     class: 'mat-time-input',
+    '[placeholder]': 'placeholder()',
     '(focus)': 'focus()',
     '(blur)': 'blur()',
   },
@@ -115,7 +117,7 @@ export class MatMinuteInput extends MatTimeInputBase {
   _formatValue(value: number): number {
     const availableMinutes = this.availableMinutes();
     if (!availableMinutes.length) {
-      return this.value;
+      return this.value();
     }
 
     const roundedValue = Math.round(value / this.interval()) * this.interval();

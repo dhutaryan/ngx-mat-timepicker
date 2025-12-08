@@ -50,12 +50,19 @@ export class MatClockDials<T> extends MatTimeFaceBase<T> {
   private readonly _elementRef = inject(ElementRef);
   private readonly _cdr = inject(ChangeDetectorRef);
 
-  protected readonly _intl = inject(MatTimepickerIntl);
-
   /** Specifies the view of clock dial. */
   private readonly _view = signal<MatDialView>('hours');
 
+  protected readonly _intl = inject(MatTimepickerIntl);
+
   protected readonly isHoursView = computed(() => this._view() === 'hours');
+
+  protected selectedHourDisplay = computed(() =>
+    this._withZeroPrefix(this.selectedHour(), this.isMeridiem()),
+  );
+  protected selectedMinuteDisplay = computed(() =>
+    this._withZeroPrefix(this.selectedMinute(), this.isMeridiem()),
+  );
 
   /** Layout orientation. */
   readonly orientation = input<TimepickerOrientation>('vertical');
@@ -99,14 +106,6 @@ export class MatClockDials<T> extends MatTimeFaceBase<T> {
     });
   }
 
-  _withZeroPrefix(value: number): string {
-    if (value === 0) {
-      return '00';
-    }
-
-    return withZeroPrefixMeridiem(value, this.isMeridiem());
-  }
-
   override _onMinuteSelected(minute: number): void {
     super._onMinuteSelected(minute);
     this._cdr.detectChanges();
@@ -125,5 +124,13 @@ export class MatClockDials<T> extends MatTimeFaceBase<T> {
     }
     this._onHourSelected(hour);
     this._cdr.detectChanges();
+  }
+
+  private _withZeroPrefix(value: number, isMeridiem: boolean): string {
+    if (value === 0) {
+      return '00';
+    }
+
+    return withZeroPrefixMeridiem(value, isMeridiem);
   }
 }

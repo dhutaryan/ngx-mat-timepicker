@@ -10,7 +10,7 @@
     (click)="onViewChange($event, 'hours')"
     (keydown.space)="onViewChange($event, 'hours')"
   >
-    {{ _withZeroPrefix(selectedHour()) }}
+    {{ selectedHourDisplay() }}
   </div>
   <div
     tabindex="0"
@@ -20,7 +20,7 @@
     (click)="onViewChange($event, 'minutes')"
     (keydown.space)="onViewChange($event, 'minutes')"
   >
-    {{ _withZeroPrefix(selectedMinute()) }}
+    {{ selectedMinuteDisplay() }}
   </div>
 
   @if (isMeridiem()) {
@@ -45,7 +45,7 @@
         [color]="color()"
         [selectedHour]="selectedHour()"
         [isMeridiem]="isMeridiem()"
-        [availableHours]="_getAvailableHours()"
+        [availableHours]="availableHoursWithMeridiem()"
         [touchUi]="touchUi()"
         (selectedChange)="_onHourChanged($event)"
         (keydown)="_onKeydown($event, 'hour')"

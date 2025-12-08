@@ -2,11 +2,13 @@ import {
   ChangeDetectorRef,
   Directive,
   DOCUMENT,
+  effect,
   ElementRef,
   HostListener,
   inject,
   InjectionToken,
-  Input,
+  input,
+  linkedSignal,
   output,
 } from '@angular/core';
 
@@ -49,23 +51,22 @@ export function provideMatTimepickerInputsKeydownHandler(
 
 @Directive()
 export abstract class MatTimeInputBase {
-  @Input()
-  get value(): number {
-    return this._value;
-  }
-  set value(value: number) {
-    this._value = value;
-    if (!this.hasFocus) {
-      this.setInputValue(this._value);
-    }
-    // we need timeout here to set placeholder first time
-    setTimeout(() => {
-      this.setInputPlaceholder(this._value);
-    }, 0);
-  }
-  private _value: number;
+  readonly value = input.required<number>();
 
   readonly timeChanged = output<number>();
+
+  protected readonly placeholder = linkedSignal(() =>
+    this._withZeroPrefix(this.value()),
+  );
+
+  constructor() {
+    effect(() => {
+      const value = this.value();
+      if (!this.hasFocus) {
+        this.setInputValue(value);
+      }
+    });
+  }
 
   @HostListener('keydown', ['$event']) _keydown(event: KeyboardEvent) {
     this._keydownHandler(event);
@@ -92,12 +93,12 @@ export abstract class MatTimeInputBase {
 
   blur() {
     const isNumber = !isNaN(Number(this.inputElement.value));
-    const value = this._formatValue(
-      isNumber ? Number(this.inputElement.value || this._value) : this.value,
+    const value = this.value();
+    const newValue = this._formatValue(
+      isNumber ? Number(this.inputElement.value || value) : value,
     );
-    this.setInputValue(value);
-    this.setInputPlaceholder(value);
-    this.timeChanged.emit(value);
+    this.setInputValue(newValue);
+    this.timeChanged.emit(newValue);
   }
 
   setInputValue(value: number | null) {
@@ -107,11 +108,6 @@ export abstract class MatTimeInputBase {
       this.inputElement.value = '';
     }
 
-    this._cdr.markForCheck();
-  }
-
-  setInputPlaceholder(value: number) {
-    this.inputElement.placeholder = this._withZeroPrefix(value);
     this._cdr.markForCheck();
   }
 

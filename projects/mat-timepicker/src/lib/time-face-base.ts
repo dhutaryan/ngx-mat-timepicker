@@ -107,6 +107,13 @@ export abstract class MatTimeFaceBase<T>
     this._prepareAvailableHours(this.minTime(), this.maxTime()),
   );
 
+  readonly availableHoursWithMeridiem = computed(() => {
+    const availableHours = this.availableHours();
+    return this.isMeridiem()
+      ? this._getAvailableHoursForPeriod(availableHours, this.period())
+      : availableHours;
+  });
+
   /**
    * Used for scheduling that focus should be moved to the active cell on the next tick.
    * We need to schedule it, rather than do it immediately, because we have to wait
@@ -191,36 +198,6 @@ export abstract class MatTimeFaceBase<T>
     this._timeSelected(selected);
   }
 
-  _getAvailableHours(): number[] {
-    if (this.isMeridiem()) {
-      return this.availableHours()
-        .filter((h) => {
-          if (this.period() === 'am') {
-            return h < 12;
-          }
-
-          if (this.period() === 'pm') {
-            return h >= 12;
-          }
-
-          return h;
-        })
-        .map((h) => {
-          if (h > 12) {
-            return h - 12;
-          }
-
-          if (h === 0) {
-            return 12;
-          }
-
-          return h;
-        });
-    }
-
-    return this.availableHours();
-  }
-
   _onKeydown(event: KeyboardEvent, view: 'hour' | 'minute'): void {
     switch (view) {
       case 'hour':
@@ -232,8 +209,37 @@ export abstract class MatTimeFaceBase<T>
     }
   }
 
+  private _getAvailableHoursForPeriod(
+    availableHours: number[],
+    period: MatTimePeriodType,
+  ): number[] {
+    return availableHours
+      .filter((h) => {
+        if (period === 'am') {
+          return h < 12;
+        }
+
+        if (period === 'pm') {
+          return h >= 12;
+        }
+
+        return h;
+      })
+      .map((h) => {
+        if (h > 12) {
+          return h - 12;
+        }
+
+        if (h === 0) {
+          return 12;
+        }
+
+        return h;
+      });
+  }
+
   private _handleHourKeydown(event: KeyboardEvent): void {
-    const hours = this._getAvailableHours();
+    const hours = this.availableHoursWithMeridiem();
     const selectedHourIndex = hours.findIndex(
       (hour) => hour === this.selectedHour(),
     );

@@ -13,7 +13,7 @@
       matHourInput
       [isMeridiem]="isMeridiem()"
       [value]="selectedHour()"
-      [availableHours]="_getAvailableHours()"
+      [availableHours]="availableHoursWithMeridiem()"
       (timeChanged)="_onHourSelected($event)"
       (keydown)="_onKeydown($event, 'hour')"
     />
