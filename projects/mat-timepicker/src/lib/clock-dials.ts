@@ -4,6 +4,7 @@ import {
   Component,
   computed,
   ElementRef,
+  inject,
   input,
   NgZone,
   Optional,
@@ -45,6 +46,12 @@ export type MatDialView = 'hours' | 'minutes';
   },
 })
 export class MatClockDials<T> extends MatTimeFaceBase<T> {
+  private readonly _ngZone = inject(NgZone);
+  private readonly _elementRef = inject(ElementRef);
+  private readonly _cdr = inject(ChangeDetectorRef);
+
+  protected readonly _intl = inject(MatTimepickerIntl);
+
   /** Specifies the view of clock dial. */
   private readonly _view = signal<MatDialView>('hours');
 
@@ -56,13 +63,7 @@ export class MatClockDials<T> extends MatTimeFaceBase<T> {
   /** Whether the timepicker UI is in touch mode. */
   readonly touchUi = input(false);
 
-  constructor(
-    public _intl: MatTimepickerIntl,
-    @Optional() _timeAdapter: TimeAdapter<T>,
-    private _ngZone: NgZone,
-    private _elementRef: ElementRef,
-    private _cdr: ChangeDetectorRef,
-  ) {
+  constructor(@Optional() _timeAdapter: TimeAdapter<T>) {
     super(_timeAdapter);
   }
 

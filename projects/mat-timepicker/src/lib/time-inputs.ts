@@ -113,15 +113,16 @@ export class MatMinuteInput extends MatTimeInputBase {
   }
 
   _formatValue(value: number): number {
-    if (!this.availableMinutes.length) {
+    const availableMinutes = this.availableMinutes();
+    if (!availableMinutes.length) {
       return this.value;
     }
 
     const roundedValue = Math.round(value / this.interval()) * this.interval();
 
     return Math.min(
-      Math.max(roundedValue, Math.min(...this.availableMinutes())),
-      Math.max(...this.availableMinutes()),
+      Math.max(roundedValue, Math.min(...availableMinutes)),
+      Math.max(...availableMinutes),
     );
   }
 }

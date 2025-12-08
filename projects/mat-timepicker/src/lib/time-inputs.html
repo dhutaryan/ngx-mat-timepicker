@@ -12,7 +12,7 @@
       matInput
       matHourInput
       [isMeridiem]="isMeridiem()"
-      [value]="selectedHour"
+      [value]="selectedHour()"
       [availableHours]="_getAvailableHours()"
       (timeChanged)="_onHourSelected($event)"
       (keydown)="_onKeydown($event, 'hour')"
@@ -31,9 +31,9 @@
       maxlength="2"
       matInput
       matMinuteInput
-      [value]="selectedMinute"
+      [value]="selectedMinute()"
       [interval]="minuteInterval()"
-      [availableMinutes]="availableMinutes"
+      [availableMinutes]="availableMinutes()"
       (timeChanged)="_onMinuteSelected($event)"
       (keydown)="_onKeydown($event, 'minute')"
     />
@@ -43,8 +43,8 @@
   @if (isMeridiem()) {
     <ng-container mat-time-period>
       <mat-time-period
-        [period]="period"
-        [disabledPeriod]="disabledPeriod"
+        [period]="period()"
+        [disabledPeriod]="disabledPeriod()"
         (periodChange)="_onPeriodChanged($event)"
       ></mat-time-period>
     </ng-container>

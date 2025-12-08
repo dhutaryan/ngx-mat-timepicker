@@ -10,7 +10,7 @@
     (click)="onViewChange($event, 'hours')"
     (keydown.space)="onViewChange($event, 'hours')"
   >
-    {{ _withZeroPrefix(selectedHour) }}
+    {{ _withZeroPrefix(selectedHour()) }}
   </div>
   <div
     tabindex="0"
@@ -20,14 +20,14 @@
     (click)="onViewChange($event, 'minutes')"
     (keydown.space)="onViewChange($event, 'minutes')"
   >
-    {{ _withZeroPrefix(selectedMinute) }}
+    {{ _withZeroPrefix(selectedMinute()) }}
   </div>
 
   @if (isMeridiem()) {
     <ng-container mat-time-period>
       <mat-time-period
-        [period]="period"
-        [disabledPeriod]="disabledPeriod"
+        [period]="period()"
+        [disabledPeriod]="disabledPeriod()"
         [vertical]="orientation() === 'vertical'"
         (periodChange)="_onPeriodChanged($event)"
       />
@@ -43,7 +43,7 @@
         animate.enter="mat-clock-dial-enter"
         animate.leave="mat-clock-dial-leave"
         [color]="color()"
-        [selectedHour]="selectedHour"
+        [selectedHour]="selectedHour()"
         [isMeridiem]="isMeridiem()"
         [availableHours]="_getAvailableHours()"
         [touchUi]="touchUi()"
@@ -55,9 +55,9 @@
         animate.enter="mat-clock-dial-enter"
         animate.leave="mat-clock-dial-leave"
         [color]="color()"
-        [selectedMinute]="selectedMinute"
+        [selectedMinute]="selectedMinute()"
         [interval]="minuteInterval()"
-        [availableMinutes]="availableMinutes"
+        [availableMinutes]="availableMinutes()"
         [touchUi]="touchUi()"
         (selectedMinuteChange)="_onMinuteSelected($event)"
         (keydown)="_onKeydown($event, 'minute')"
