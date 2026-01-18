@@ -5,8 +5,11 @@ import {
   Input,
   Output,
   EventEmitter,
+  input,
+  booleanAttribute,
+  output,
+  linkedSignal,
 } from '@angular/core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatRippleModule } from '@angular/material/core';
 
@@ -24,55 +27,32 @@ export type MatTimePeriodType = 'am' | 'pm';
   encapsulation: ViewEncapsulation.None,
   host: {
     class: 'mat-time-period',
-    '[class.mat-time-period-vertical]': 'vertical',
-    '[class.mat-time-period-horizontal]': '!vertical',
-    '[attr.aria-orientation]': 'vertical ? "vertical" : "horizontal"',
+    '[class.mat-time-period-vertical]': 'vertical()',
+    '[class.mat-time-period-horizontal]': '!vertical()',
+    '[attr.aria-orientation]': 'vertical() ? "vertical" : "horizontal"',
   },
 })
 export class MatTimePeriod {
-  /** Whether the time period is vertically aligned. */
-  @Input()
-  get vertical(): boolean {
-    return this._vertical;
-  }
-  set vertical(value: BooleanInput) {
-    this._vertical = coerceBooleanProperty(value);
-  }
-  private _vertical: boolean = true;
+  readonly vertical = input(true, { transform: booleanAttribute });
+  readonly period = input<MatTimePeriodType>('am');
+  readonly disabledPeriod = input<MatTimePeriodType | null>(null);
+  readonly periodChanged = output<MatTimePeriodType>();
 
-  @Input()
-  get period(): MatTimePeriodType {
-    return this._period;
-  }
-  set period(value: MatTimePeriodType) {
-    this._period = value || 'am';
-  }
-  private _period: MatTimePeriodType = 'am';
-
-  @Input()
-  get disabledPeriod(): MatTimePeriodType | null {
-    return this._disabledPeriod;
-  }
-  set disabledPeriod(value: MatTimePeriodType | null) {
-    this._disabledPeriod = value;
-  }
-  private _disabledPeriod: MatTimePeriodType | null = null;
-
-  @Output() periodChanged = new EventEmitter<MatTimePeriodType>();
+  readonly _currentPeriod = linkedSignal(() => this.period());
 
   constructor(public _intl: MatTimepickerIntl) {}
 
   setPeriod(event: Event, period: MatTimePeriodType): void {
     event.preventDefault();
-    this.period = period;
+    this._currentPeriod.set(period);
     this.periodChanged.emit(period);
   }
 
   _isPeriodDisabled(period: MatTimePeriodType): boolean {
-    if (!this.disabledPeriod) {
+    if (!this.disabledPeriod()) {
       return false;
     }
 
-    return this.disabledPeriod === period;
+    return this.disabledPeriod() === period;
   }
 }
