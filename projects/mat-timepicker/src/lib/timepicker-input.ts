@@ -1,5 +1,17 @@
-import { Directive, ElementRef, forwardRef, Inject, Input, Optional } from '@angular/core';
-import { NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidatorFn, Validators } from '@angular/forms';
+import {
+  Directive,
+  ElementRef,
+  forwardRef,
+  Inject,
+  Input,
+  Optional,
+} from '@angular/core';
+import {
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MatFormField, MAT_FORM_FIELD } from '@angular/material/form-field';
 import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material/input';
@@ -39,7 +51,7 @@ export const MAT_TIMEPICKER_VALIDATORS: any = {
     '[attr.min]': 'min || null',
     '[attr.max]': 'max || null',
     '[disabled]': 'disabled',
-    '(input)': '_onInput($event.target.value)',
+    '(input)': '_onInput($event)',
     '(change)': '_onChange()',
     '(blur)': '_onBlur()',
   },
@@ -50,7 +62,9 @@ export class MatTimepickerInput<T>
 {
   /** The timepicker that this input is associated with. */
   @Input()
-  set matTimepicker(timepicker: MatTimepickerPanel<MatTimepickerControl<T>, T | null, T>) {
+  set matTimepicker(
+    timepicker: MatTimepickerPanel<MatTimepickerControl<T>, T | null, T>,
+  ) {
     if (timepicker) {
       this._timepicker = timepicker;
       this._registerModel(timepicker.registerInput(this));
@@ -67,7 +81,9 @@ export class MatTimepickerInput<T>
     return this._min;
   }
   set min(value: T | null) {
-    const validValue = this._timeAdapter.getValidTimeOrNull(this._timeAdapter.deserialize(value));
+    const validValue = this._timeAdapter.getValidTimeOrNull(
+      this._timeAdapter.deserialize(value),
+    );
 
     if (!this._timeAdapter.sameTime(validValue, this._min)) {
       this._min = validValue;
@@ -82,7 +98,9 @@ export class MatTimepickerInput<T>
     return this._max;
   }
   set max(value: T | null) {
-    const validValue = this._timeAdapter.getValidTimeOrNull(this._timeAdapter.deserialize(value));
+    const validValue = this._timeAdapter.getValidTimeOrNull(
+      this._timeAdapter.deserialize(value),
+    );
 
     if (!this._timeAdapter.sameTime(validValue, this._max)) {
       this._max = validValue;
@@ -105,7 +123,9 @@ export class MatTimepickerInput<T>
    * @return The element to connect the popup to.
    */
   getConnectedOverlayOrigin(): ElementRef {
-    return this._formField ? this._formField.getConnectedOverlayOrigin() : this._elementRef;
+    return this._formField
+      ? this._formField.getConnectedOverlayOrigin()
+      : this._elementRef;
   }
 
   /** Returns the palette used by the input's form field, if any. */

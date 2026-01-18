@@ -28,7 +28,7 @@
             "index": "projects/docs/src/index.html",
             "browser": "projects/docs/src/main.ts",
             "polyfills": ["projects/docs/src/polyfills.ts"],
-            "tsConfig": "projects/docs/tsconfig.app.json",
+            "tsConfig": "projects/docs/tsconfig.json",
             "inlineStyleLanguage": "scss",
             "stylePreprocessorOptions": {
               "includePaths": [""]
