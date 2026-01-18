@@ -12,6 +12,7 @@ import { Overlay, ScrollDispatcher } from '@angular/cdk/overlay';
 import {
   Component,
   Provider,
+  provideZoneChangeDetection,
   Type,
   ViewChild,
   ViewEncapsulation,
@@ -75,6 +76,7 @@ describe('MatTimepicker', () => {
           provide: MATERIAL_ANIMATIONS,
           useValue: { animationsDisabled: true },
         },
+        provideZoneChangeDetection(),
       ],
       declarations: [component, ...declarations],
     });

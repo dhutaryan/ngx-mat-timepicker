@@ -1,4 +1,10 @@
-import { Component, QueryList, Type, ViewChildren } from '@angular/core';
+import {
+  Component,
+  provideZoneChangeDetection,
+  QueryList,
+  Type,
+  ViewChildren,
+} from '@angular/core';
 import {
   ComponentFixture,
   TestBed,
@@ -18,6 +24,7 @@ function createComponent<T>(component: Type<T>): ComponentFixture<T> {
   TestBed.configureTestingModule({
     imports: [MatTimepickerModule, MatNativeDateTimeModule],
     declarations: [component],
+    providers: [provideZoneChangeDetection()],
   });
 
   return TestBed.createComponent<T>(component);

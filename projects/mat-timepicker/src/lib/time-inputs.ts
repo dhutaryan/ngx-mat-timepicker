@@ -33,8 +33,8 @@ import { MatTimepickerContentLayout } from './timepicker-content-layout';
   exportAs: 'matTimeInput',
   host: {
     class: 'mat-time-input',
-    '(focus)': 'focus($event)',
-    '(blur)': 'blur($event)',
+    '(focus)': 'focus()',
+    '(blur)': 'blur()',
   },
 })
 export class MatHourInput extends MatTimeInputBase {
@@ -115,8 +115,8 @@ export class MatHourInput extends MatTimeInputBase {
   exportAs: 'matTimeInput',
   host: {
     class: 'mat-time-input',
-    '(focus)': 'focus($event)',
-    '(blur)': 'blur($event)',
+    '(focus)': 'focus()',
+    '(blur)': 'blur()',
   },
 })
 export class MatMinuteInput extends MatTimeInputBase {

@@ -173,7 +173,8 @@ export abstract class MatTimepickerInputBase<
     );
   }
 
-  _onInput(value: string) {
+  _onInput(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
     const lastValueWasValid = this._lastValueValid;
     let time = this._timeAdapter.parse(value, TIME_FORMATS);
     this._lastValueValid = this._isValidValue(time);

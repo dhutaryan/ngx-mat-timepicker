@@ -1,4 +1,10 @@
-import { Component, ElementRef, Type, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  provideZoneChangeDetection,
+  Type,
+  ViewChild,
+} from '@angular/core';
 import {
   ComponentFixture,
   TestBed,
@@ -40,6 +46,7 @@ describe('MatTimepickerActions', () => {
           provide: MATERIAL_ANIMATIONS,
           useValue: { animationsDisabled: true },
         },
+        provideZoneChangeDetection(),
       ],
     });
 

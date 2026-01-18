@@ -90,3 +90,7 @@
     color-mix(in srgb, utils.create-system-var(on-surface) 20%, transparent)
   );
 }
+
+.mat-divider {
+  border-top-color: inherit;
+}

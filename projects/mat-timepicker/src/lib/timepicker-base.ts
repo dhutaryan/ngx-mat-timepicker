@@ -87,6 +87,10 @@ export interface MatTimepickerPanel<
   S,
   T = ExtractTimeTypeFromSelection<S>,
 > {
+  /** The id for the timepicker's. */
+  id: string;
+  /** Whether the timepicker is open. */
+  opened: boolean;
   /** Stream that emits whenever the timepicker is opened. */
   openedStream: EventEmitter<void>;
   /** Stream that emits whenever the timepicker is closed. */
