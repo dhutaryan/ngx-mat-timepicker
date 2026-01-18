@@ -15,6 +15,7 @@ import {
   UP_ARROW,
 } from '@angular/cdk/keycodes';
 
+import { MatDialView } from 'mat-timepicker';
 import { MatNativeDateTimeModule } from './adapter';
 import { MatTimepickerModule } from './timepicker.module';
 
@@ -49,6 +50,7 @@ describe('MatClockDials', () => {
       minuteElement = clockDialValuesElements[1].nativeElement;
 
       spyOn(testComponent, 'onSelect');
+      spyOn(testComponent, 'onViewChanged');
     }));
 
     it('should render default clock dials', () => {
@@ -135,6 +137,15 @@ describe('MatClockDials', () => {
         new Date(2023, 4, 8, 11, 16),
       );
     });
+
+    it('should emit viewChanged when view has changed', fakeAsync(() => {
+      minuteElement.click();
+      fixture.detectChanges();
+      tick();
+      flush();
+
+      expect(testComponent.onViewChanged).toHaveBeenCalledWith('minutes');
+    }));
 
     // TODO: doesn't work as expected
     // broken UI for some reason
@@ -1172,18 +1183,22 @@ function pressArrowOnDial(keyCode: number, dial: DialClass): void {
 
 @Component({
   template: `<mat-clock-dials
+    [currentView]="currentView"
     [isMeridiem]="isMeridiem"
     [selected]="selected"
     [minuteInterval]="minuteInterval"
     (_userSelection)="onSelect($event)"
+    (viewChanged)="onViewChanged($event)"
   ></mat-clock-dials>`,
   standalone: false,
 })
 class StandardClockDials {
+  currentView = 'hours';
   isMeridiem = false;
   selected: Date | null = null;
   minuteInterval: number = 1;
   onSelect(value: Date) {}
+  onViewChanged(view: MatDialView) {}
 }
 
 @Component({
