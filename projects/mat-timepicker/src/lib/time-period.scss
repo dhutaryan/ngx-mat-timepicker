@@ -93,4 +93,8 @@
 
 .mat-divider {
   border-top-color: inherit;
+
+  &.mat-divider-vertical {
+    border-right-color: inherit;
+  }
 }
