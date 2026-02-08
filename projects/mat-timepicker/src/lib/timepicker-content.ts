@@ -19,7 +19,7 @@ import {
 
 import { MATERIAL_ANIMATIONS, ThemePalette } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
-import { Subject, Subscription } from 'rxjs';
+import { Subject, Subscription, take } from 'rxjs';
 
 import {
   ExtractTimeTypeFromSelection,
@@ -139,7 +139,15 @@ export class MatTimepickerContent<S, T = ExtractTimeTypeFromSelection<S>>
     this._stateChanges = this.timepicker.stateChanges.subscribe(() => {
       this._changeDetectorRef.markForCheck();
     });
-    (this._dials || this._inputs)?.focusActiveCell();
+
+    if (this._animationsDisabled) {
+      (this._dials || this._inputs)?.focusActiveCell();
+      return;
+    }
+
+    this._animationDone.pipe(take(1)).subscribe(() => {
+      (this._dials || this._inputs)?.focusActiveCell();
+    });
   }
 
   ngOnDestroy() {

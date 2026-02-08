@@ -3,7 +3,6 @@ import {
   ComponentRef,
   ViewContainerRef,
   Directive,
-  NgZone,
   Inject,
   Output,
   EventEmitter,
@@ -15,6 +14,8 @@ import {
   booleanAttribute,
   inject,
   DOCUMENT,
+  afterNextRender,
+  Injector,
 } from '@angular/core';
 
 import { ThemePalette } from '@angular/material/core';
@@ -333,7 +334,7 @@ export abstract class MatTimepickerBase<
   constructor(
     private _viewContainerRef: ViewContainerRef,
     private _overlay: Overlay,
-    private _ngZone: NgZone,
+    private readonly _injector: Injector,
     @Inject(MAT_TIMEPICKER_SCROLL_STRATEGY) scrollStrategy: any,
     @Inject(MAT_DEFAULT_ACITONS)
     private _defaultActionsComponent: ComponentType<any>,
@@ -568,9 +569,12 @@ export abstract class MatTimepickerBase<
 
     // Update the position once the timepicker has rendered. Only relevant in dropdown mode.
     if (!isDialog) {
-      this._ngZone.onStable
-        .pipe(first())
-        .subscribe(() => overlayRef.updatePosition());
+      afterNextRender(
+        () => {
+          overlayRef.updatePosition();
+        },
+        { injector: this._injector },
+      );
     }
   }
 
