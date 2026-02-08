@@ -1,3 +1,14 @@
+# 21.0.0
+
+- feat(time-period): migrate to signals
+- fix(timepicker): set focus after timepicker opened ([#229](https://github.com/dhutaryan/ngx-mat-timepicker/issues/229))
+- feat(clock-dials): add view changed event and migrate to signals ([#224](https://github.com/dhutaryan/ngx-mat-timepicker/issues/224))
+
+# 20.2.0
+
+- fix(timepicker): set focus after timepicker opened ([#229](https://github.com/dhutaryan/ngx-mat-timepicker/issues/229))
+- feat(clock-dials): add view changed event and migrate to signals ([#224](https://github.com/dhutaryan/ngx-mat-timepicker/issues/224))
+
 # 20.1.0
 
 - feat(timepicker): migrate from @angular/animations to native css ([#219](https://github.com/dhutaryan/ngx-mat-timepicker/issues/219))
