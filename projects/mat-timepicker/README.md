@@ -11,6 +11,7 @@ The timepicker module using Angular material.
 
 | mat-timepicker | Angular             |
 | -------------- | ------------------- |
+| 21.x.x         | >=21.0.0            |
 | 20.1.x         | >=20.2.0            |
 | 20.0.x         | >=20.0.0            |
 | 19.x.x         | >=19.0.0            |
@@ -47,7 +48,7 @@ $ yarn add @dhutaryan/ngx-mat-timepicker
 Import `MatTimepickerModule` to your project.
 
 ```typescript
-import { MatTimepickerModule } from "@dhutaryan/ngx-mat-timepicker";
+import { MatTimepickerModule } from '@dhutaryan/ngx-mat-timepicker';
 
 @NgModule({
   imports: [
@@ -64,7 +65,10 @@ export class MyModule {}
 Add a timepicker adapter.
 
 ```typescript
-import { MatTimepickerModule, provideNativeDateTimeAdapter } from "@dhutaryan/ngx-mat-timepicker";
+import {
+  MatTimepickerModule,
+  provideNativeDateTimeAdapter,
+} from '@dhutaryan/ngx-mat-timepicker';
 
 @NgModule({
   imports: [
@@ -72,7 +76,7 @@ import { MatTimepickerModule, provideNativeDateTimeAdapter } from "@dhutaryan/ng
     MatTimepickerModule,
     // ...
   ],
-  providers: [provideNativeDateTimeAdapter()]
+  providers: [provideNativeDateTimeAdapter()],
 })
 export class MyModule {}
 ```
@@ -80,7 +84,7 @@ export class MyModule {}
 or create your own
 
 ```typescript
-import { MatTimepickerModule } from "@dhutaryan/ngx-mat-timepicker";
+import { MatTimepickerModule } from '@dhutaryan/ngx-mat-timepicker';
 
 @NgModule({
   imports: [
@@ -98,7 +102,7 @@ export class MyModule {}
 Then you have to define a theme. [More details about theming](https://material.angular.io/guide/theming).
 
 ```scss
-@use "@dhutaryan/ngx-mat-timepicker" as mat-timepicker;
+@use '@dhutaryan/ngx-mat-timepicker' as mat-timepicker;
 
 // timepicker uses these component
 @include mat.form-field-theme(theme.$ngx-mat-timepicker-theme);
@@ -112,7 +116,7 @@ Then you have to define a theme. [More details about theming](https://material.a
 @include mat-timepicker.timepicker-theme($theme);
 
 // if you want to support color attribute in M3 add compatibility mixin
-@include mat.color-variants-backwards-compatibility($my-theme)
+@include mat.color-variants-backwards-compatibility($my-theme);
 ```
 
 You can also use `mat.theme` mixin instead.
@@ -133,13 +137,13 @@ Default locale is `en-US`. You can set your locale as:
 
 ```typescript
 import { NgModule } from '@angular/core';
-import { MAT_TIME_LOCALE } from "@dhutaryan/ngx-mat-timepicker";
+import { MAT_TIME_LOCALE } from '@dhutaryan/ngx-mat-timepicker';
 
 @NgModule({
   imports: [
     // ...
   ],
-  providers: [{ provide: MAT_TIME_LOCALE, useValue: "en-GB" }],
+  providers: [{ provide: MAT_TIME_LOCALE, useValue: 'en-GB' }],
 })
 export class MyModule {}
 ```

@@ -2,7 +2,7 @@
   "name": "@dhutaryan/ngx-mat-timepicker",
   "description": "Angular timepicker to add time which is based on material design and Angular material.",
   "homepage": "https://dhutaryan.github.io/ngx-mat-timepicker/",
-  "version": "20.1.0",
+  "version": "21.0.0",
   "license": "MIT",
   "author": {
     "name": "Dzmitry Hutaryan"
@@ -27,9 +27,9 @@
     "timepicker input"
   ],
   "peerDependencies": {
-    "@angular/common": ">=20.2.0",
-    "@angular/core": ">=20.2.0",
-    "@angular/material": ">=20.0.0"
+    "@angular/common": ">=21.0.0",
+    "@angular/core": ">=21.0.0",
+    "@angular/material": ">=21.0.0"
   },
   "dependencies": {
     "tslib": ">=2.0.0"
