@@ -3,15 +3,12 @@ import {
   ChangeDetectionStrategy,
   ViewEncapsulation,
   Optional,
-  NgZone,
   ElementRef,
   ChangeDetectorRef,
-  signal,
   input,
   effect,
   output,
   computed,
-  untracked,
   linkedSignal,
 } from '@angular/core';
 
@@ -69,7 +66,6 @@ export class MatClockDials<T> extends MatTimeFaceBase<T> {
   constructor(
     public _intl: MatTimepickerIntl,
     @Optional() _timeAdapter: TimeAdapter<T>,
-    private _ngZone: NgZone,
     private _elementRef: ElementRef,
     private _cdr: ChangeDetectorRef,
   ) {
@@ -84,29 +80,25 @@ export class MatClockDials<T> extends MatTimeFaceBase<T> {
   }
 
   focusActiveCell(): void {
-    this._ngZone.runOutsideAngular(() => {
-      this._ngZone.onStable.pipe(take(1)).subscribe(() => {
-        const activeCell: HTMLElement | null =
-          this._elementRef.nativeElement.querySelector(
-            '.mat-timepicker-content .mat-clock-dial-cell-active', // to avoid focus for inline mode
-          );
+    const activeCell: HTMLElement | null =
+      this._elementRef.nativeElement.querySelector(
+        '.mat-timepicker-content .mat-clock-dial-cell-active', // to avoid focus for inline mode
+      );
 
-        if (activeCell) {
-          activeCell.focus();
-          return;
-        }
+    if (activeCell) {
+      activeCell.focus();
+      return;
+    }
 
-        const activePoint: HTMLElement | null =
-          this._elementRef.nativeElement.querySelector(
-            '.mat-timepicker-content .mat-clock-dial-hand-point', // to avoid focus for inline mode
-          );
+    const activePoint: HTMLElement | null =
+      this._elementRef.nativeElement.querySelector(
+        '.mat-timepicker-content .mat-clock-dial-hand-point', // to avoid focus for inline mode
+      );
 
-        if (activePoint) {
-          // if no active cell we need to focus a small dot
-          activePoint.focus();
-        }
-      });
-    });
+    if (activePoint) {
+      // if no active cell we need to focus a small dot
+      activePoint.focus();
+    }
   }
 
   _withZeroPrefix(value: number): string {
