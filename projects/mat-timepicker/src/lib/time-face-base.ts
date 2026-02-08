@@ -51,7 +51,6 @@ export abstract class MatTimeFaceBase<T>
     this._setMaxHour();
     this._setMinMinute();
     this._setMaxMinute();
-    this._moveFocusOnNextTick = this.isMeridiem;
   }
   private _selected: T | null;
 
@@ -120,11 +119,9 @@ export abstract class MatTimeFaceBase<T>
   availableHours = ALL_HOURS;
 
   /**
-   * Used for scheduling that focus should be moved to the active cell on the next tick.
-   * We need to schedule it, rather than do it immediately, because we have to wait
-   * for Angular to re-evaluate the view children.
+   * Used to focus the active cell after change detection has run.
    */
-  private _moveFocusOnNextTick = false;
+  private _focusActiveCellAfterViewChecked = false;
 
   constructor(@Optional() protected _timeAdapter: TimeAdapter<T>) {}
 
@@ -140,9 +137,9 @@ export abstract class MatTimeFaceBase<T>
   }
 
   ngAfterViewChecked() {
-    if (this._moveFocusOnNextTick) {
-      this._moveFocusOnNextTick = false;
+    if (this._focusActiveCellAfterViewChecked) {
       this.focusActiveCell();
+      this._focusActiveCellAfterViewChecked = false;
     }
   }
 
@@ -265,6 +262,8 @@ export abstract class MatTimeFaceBase<T>
       default:
         break;
     }
+
+    this._scheduleFocusActiveCellAfterViewChecked();
   }
 
   private _handleMinuteKeydown(event: KeyboardEvent): void {
@@ -427,5 +426,10 @@ export abstract class MatTimeFaceBase<T>
         this.disabledPeriod = 'pm';
       }
     }
+  }
+
+  /** Schedules focus to be moved to the active cell on the next tick. */
+  private _scheduleFocusActiveCellAfterViewChecked() {
+    this._focusActiveCellAfterViewChecked = true;
   }
 }

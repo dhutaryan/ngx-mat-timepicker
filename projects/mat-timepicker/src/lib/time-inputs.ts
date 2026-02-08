@@ -8,13 +8,11 @@ import {
   ElementRef,
   ChangeDetectorRef,
   Inject,
-  NgZone,
   DOCUMENT,
 } from '@angular/core';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { take } from 'rxjs';
 
 import { TimeAdapter } from './adapter';
 import { MatTimeFaceBase } from './time-face-base';
@@ -188,7 +186,6 @@ export class MatTimeInputs<T> extends MatTimeFaceBase<T> {
   constructor(
     public _intl: MatTimepickerIntl,
     @Optional() _timeAdapter: TimeAdapter<T>,
-    private _ngZone: NgZone,
     private _elementRef: ElementRef,
   ) {
     super(_timeAdapter);
@@ -201,17 +198,13 @@ export class MatTimeInputs<T> extends MatTimeFaceBase<T> {
   private _skipNextTickFocus = false;
 
   focusActiveCell(): void {
-    this._ngZone.runOutsideAngular(() => {
-      this._ngZone.onStable.pipe(take(1)).subscribe(() => {
-        const activeCell: HTMLElement | null =
-          this._elementRef.nativeElement.querySelector(
-            '.mat-timepicker-content input', // to avoid focus for inline mode
-          );
-        if (activeCell && !this._skipNextTickFocus) {
-          activeCell.focus();
-          this._skipNextTickFocus = true;
-        }
-      });
-    });
+    const activeCell: HTMLElement | null =
+      this._elementRef.nativeElement.querySelector(
+        '.mat-timepicker-content input', // to avoid focus for inline mode
+      );
+    if (activeCell && !this._skipNextTickFocus) {
+      activeCell.focus();
+      this._skipNextTickFocus = true;
+    }
   }
 }

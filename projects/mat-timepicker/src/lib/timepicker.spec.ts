@@ -1420,7 +1420,7 @@ describe('MatTimepicker', () => {
       });
 
       it('should restore focus to the toggle after the timepicker is closed', fakeAsync(() => {
-        let toggle = fixture.debugElement.query(
+        const toggle = fixture.debugElement.query(
           By.css('button'),
         )!.nativeElement;
 
@@ -1435,7 +1435,7 @@ describe('MatTimepicker', () => {
         fixture.detectChanges();
         tick();
 
-        let pane = document.querySelector('.cdk-overlay-pane')!;
+        const pane = document.querySelector('.cdk-overlay-pane')!;
 
         expect(pane).toBeTruthy();
         expect(pane.contains(document.activeElement)).toBe(true);
@@ -1482,7 +1482,7 @@ describe('MatTimepicker', () => {
       }));
 
       it('should allow for focus restoration to be disabled', fakeAsync(() => {
-        let toggle = fixture.debugElement.query(
+        const toggle = fixture.debugElement.query(
           By.css('button'),
         )!.nativeElement;
 
@@ -1498,13 +1498,14 @@ describe('MatTimepicker', () => {
         fixture.detectChanges();
         tick();
 
-        let pane = document.querySelector('.cdk-overlay-pane')!;
+        const pane = document.querySelector('.cdk-overlay-pane')!;
 
         expect(pane).toBeTruthy();
         expect(pane.contains(document.activeElement)).toBe(true);
 
         fixture.componentInstance.timepicker.close();
         fixture.detectChanges();
+        flush();
 
         expect(document.activeElement).not.toBe(toggle);
       }));
