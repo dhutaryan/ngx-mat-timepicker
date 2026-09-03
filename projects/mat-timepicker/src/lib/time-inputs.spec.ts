@@ -4,6 +4,7 @@ import {
   QueryList,
   Type,
   ViewChildren,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import {
   ComponentFixture,
@@ -1092,6 +1093,7 @@ function dispatchKeyEvent(input: HTMLInputElement, keyCode: number) {
       (_userSelection)="onSelect($event)"
     ></mat-time-inputs>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class StandardTimeInputs {
@@ -1113,6 +1115,7 @@ class StandardTimeInputs {
       (_userSelection)="onSelect($event)"
     ></mat-time-inputs>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class TimeInputsWithMeridiem {
@@ -1134,6 +1137,7 @@ class TimeInputsWithMeridiem {
       (_userSelection)="onSelect($event)"
     ></mat-time-inputs>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class WithMinMaxTimeInputs {

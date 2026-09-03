@@ -4,6 +4,7 @@ import {
   provideZoneChangeDetection,
   Type,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import {
   ComponentFixture,
@@ -340,6 +341,7 @@ describe('MatTimepickerActions', () => {
       </mat-timepicker>
     </mat-form-field>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class TimepickerWithActions {

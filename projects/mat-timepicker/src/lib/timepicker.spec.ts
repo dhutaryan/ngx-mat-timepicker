@@ -16,6 +16,7 @@ import {
   Type,
   ViewChild,
   ViewEncapsulation,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import {
   ComponentFixture,
@@ -1866,6 +1867,7 @@ describe('MatTimepicker', () => {
       [touchUi]="touchUi"
     ></mat-timepicker>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class StandardTimepicker {
@@ -1887,6 +1889,7 @@ class StandardTimepicker {
     <input [matTimepicker]="t" />
     <mat-timepicker #t></mat-timepicker>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class MultiInputTimepicker {}
@@ -1896,6 +1899,7 @@ class MultiInputTimepicker {}
     <input [matTimepicker]="assignedTimepicker" [value]="date" />
     <mat-timepicker #t openAs="dialog"></mat-timepicker>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class DelayedTimepicker {
@@ -1907,6 +1911,7 @@ class DelayedTimepicker {
 
 @Component({
   template: `<mat-timepicker #t></mat-timepicker>`,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class NoInputTimepicker {
@@ -1921,6 +1926,7 @@ class NoInputTimepicker {
       <mat-timepicker #t></mat-timepicker>
     </mat-form-field>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class FormFieldTimepicker {
@@ -1940,6 +1946,7 @@ class FormFieldTimepicker {
     />
     <mat-timepicker #t openAs="dialog"></mat-timepicker>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class TimepickerWithChangeAndInputEvents {
@@ -1959,6 +1966,7 @@ class TimepickerWithChangeAndInputEvents {
     <input [matTimepicker]="t" [(ngModel)]="value" [min]="min" [max]="max" />
     <mat-timepicker #t></mat-timepicker>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class TimepickerWithISOStrings {
@@ -1978,6 +1986,7 @@ class TimepickerWithISOStrings {
       #t
     ></mat-timepicker>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class TimepickerWithEvents {
@@ -1992,6 +2001,7 @@ class TimepickerWithEvents {
     <input (focus)="t.open()" [matTimepicker]="t" />
     <mat-timepicker #t="matTimepicker"></mat-timepicker>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class TimepickerOpeningOnFocus {
@@ -2009,6 +2019,7 @@ class TimepickerOpeningOnFocus {
     <mat-timepicker-toggle [for]="t"></mat-timepicker-toggle>
     <mat-timepicker #t></mat-timepicker>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class TimepickerWithMinAndMaxValidation {
@@ -2033,6 +2044,7 @@ class TimepickerWithMinAndMaxValidation {
       [touchUi]="touchUi"
     ></mat-timepicker>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class TimepickerWithToggle {
@@ -2058,6 +2070,7 @@ class TimepickerWithToggle {
       [restoreFocus]="restoreFocus"
     ></mat-timepicker>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class TimepickerWithToggleInShadowDom extends TimepickerWithToggle {}

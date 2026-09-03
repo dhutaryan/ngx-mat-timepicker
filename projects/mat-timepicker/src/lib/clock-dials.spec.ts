@@ -3,6 +3,7 @@ import {
   DebugElement,
   provideZoneChangeDetection,
   Type,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import {
   ComponentFixture,
@@ -1196,6 +1197,7 @@ function pressArrowOnDial(keyCode: number, dial: DialClass): void {
     (_userSelection)="onSelect($event)"
     (viewChanged)="onViewChanged($event)"
   ></mat-clock-dials>`,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class StandardClockDials {
@@ -1217,6 +1219,7 @@ class StandardClockDials {
       [minuteInterval]="minuteInterval"
     ></mat-clock-dials>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 class WithMinMaxClockDials {
