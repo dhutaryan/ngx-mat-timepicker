@@ -2,7 +2,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
@@ -19,15 +18,9 @@
     "target": "ES2022",
     "module": "es2020",
     "paths": {
-      "@ng-doc/generated": [
-        "./ng-doc/docs/index.ts"
-      ],
-      "@ng-doc/generated/*": [
-        "./ng-doc/docs/*"
-      ],
-      "mat-timepicker": [
-        "projects/mat-timepicker/src/public-api.ts"
-      ]
+      "@ng-doc/generated": ["./ng-doc/docs/index.ts"],
+      "@ng-doc/generated/*": ["./ng-doc/docs/*"],
+      "mat-timepicker": ["./projects/mat-timepicker/src/public-api.ts"]
     },
     "useDefineForClassFields": false
   },
