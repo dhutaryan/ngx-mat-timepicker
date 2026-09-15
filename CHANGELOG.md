@@ -1,3 +1,7 @@
+# 22.0.0
+
+- feat(timepicker): support angular and angular material v22 ([#232](https://github.com/dhutaryan/ngx-mat-timepicker/issues/232))
+
 # 21.0.0
 
 - feat(time-period): migrate to signals
