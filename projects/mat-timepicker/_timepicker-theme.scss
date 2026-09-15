@@ -1,9 +1,16 @@
+@use 'sass:map';
 @use '@angular/material' as mat;
 
+@use './themes/tokens';
+@use './themes/utils';
+@use './themes/m2/base' as m2-base;
 @use './themes/m2/theme' as m2-theme;
 @use './themes/m2/color' as m2-color;
+@use './themes/m2/typography' as m2-typography;
+@use './themes/m3/base' as m3-base;
 @use './themes/m3/theme' as m3-theme;
 @use './themes/m3/color' as m3-color;
+@use './themes/m3/typography' as m3-typography;
 
 @mixin theme($theme) {
   @if (mat.get-theme-version($theme) == 1) {
@@ -13,10 +20,45 @@
   }
 }
 
+@mixin base($theme) {
+  @if (mat.get-theme-version($theme) == 1) {
+    @include m3-base.m3-base();
+  } @else {
+    @include m2-base.m2-base();
+  }
+}
+
 @mixin color($theme) {
   @if (mat.get-theme-version($theme) == 1) {
     @include m3-color.m3-color($theme);
   } @else {
     @include m2-color.m2-color($theme);
   }
+}
+
+@mixin typography($theme) {
+  @if (mat.get-theme-version($theme) == 1) {
+    @include m3-typography.m3-typography($theme);
+  } @else {
+    @include m2-typography.m2-typography(
+      mat.m2-get-typography-config($theme) or mat.m2-define-typography-config()
+    );
+  }
+}
+
+@mixin overrides($tokens: ()) {
+  $all-tokens: tokens.get-all-tokens();
+  $values: ();
+
+  @each $name, $value in $tokens {
+    @if not map.has-key($all-tokens, $name) {
+      @error 'Invalid token name `#{$name}`. Valid tokens are: #{map.keys($all-tokens)}';
+    }
+
+    @if $value != null {
+      $values: map.set($values, $name, $value);
+    }
+  }
+
+  @include utils.create-token-values($values);
 }
