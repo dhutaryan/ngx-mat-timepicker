@@ -1,1 +1,2 @@
-@forward './timepicker-theme' as timepicker-* show timepicker-theme, timepicker-color;
+@forward './timepicker-theme' as timepicker-* show timepicker-theme, timepicker-base,
+  timepicker-color, timepicker-typography, timepicker-overrides;
